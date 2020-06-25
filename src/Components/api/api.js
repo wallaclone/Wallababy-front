@@ -18,9 +18,15 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           'password': password,
           'email': email }),
         })
+        
+        if (!response.ok) {
+          throw new Error('Error ')
+        }
+       
        
         const data = await response.json();
         return data;
+
       } catch (err) {
         console.error(err.message);
         throw err;
@@ -28,5 +34,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
     }
   }
 };
+  
 
 export default apiCall;

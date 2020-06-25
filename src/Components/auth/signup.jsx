@@ -1,14 +1,12 @@
 // sign up form. required fields: username, password, email
 import React, { useState } from 'react';
 
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
+import { Button, Form } from 'react-bootstrap';
 
 
 import apiCall from '../api/api';
 
-const { register } = apiCall(); 
-
+const { register } = apiCall();
 
 
 export default function SignUp(props) {
@@ -24,33 +22,34 @@ export default function SignUp(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    register()
+    register(username, password, email);
   }
 
-    return (
-      <>
-        <Form onSubmit={handleSubmit}>
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" onChange={handleChange(setEmail)}/>
-    <Form.Text className="text-muted">
-      We'll never share your email with anyone else.
+  return (
+    <>
+      <h1>Sign up to Wallaclone!</h1>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control required type="email" placeholder="Email" onChange={handleChange(setEmail)} />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
     </Form.Text>
-  </Form.Group>
+        </Form.Group>
+        <Form.Group controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control  icon="user" required type="text" placeholder="Username" onChange={handleChange(setUsername)} />
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control required type="password" placeholder="Password" onChange={handleChange(setPassword)} />
+        </Form.Group>
 
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label>Username</Form.Label>
-    <Form.Control type="username" placeholder="Enter username" onChange={handleChange(setUsername)}/>
-  </Form.Group>
-  <Form.Group controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" onChange={handleChange(setPassword)} />
-  </Form.Group>
-
-  <Button variant="primary" type="submit">
-    Submit
+        <Button variant="primary" type="submit">
+          Sign up
   </Button>
-</Form>
-      </>
-    )
-  };
+  <p>Already registered? Click here to login!</p>
+      </Form>
+    </>
+  )
+};
