@@ -36,6 +36,7 @@ export default function Login(props) {
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control required type="password"  onChange={handleChange(setPassword)} />
+         <Link to='/' className='forgot-pass'><p>Forgot password?</p></Link>
         </Form.Group>
 
         <Button variant="primary" type="submit">

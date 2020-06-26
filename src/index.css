@@ -59,3 +59,10 @@ button:hover {
   background-color: #f7b6a0 !important;
   border: 1px solid #f7b6a0 !important;
 }
+
+.forgot-pass {
+  color: #83C5BE ;
+  font-weight: 500;
+  text-align: end;
+  padding: 1px;
+}
