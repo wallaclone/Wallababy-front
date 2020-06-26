@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Card } from 'react-bootstrap';
 
 
 import apiCall from '../api/api';
@@ -24,22 +24,26 @@ export default function Login(props) {
 
   return (
     <>
-      <h1>Login to Wallaclone!</h1>
+    <div class='card-border'>
+    <Card>
+      <h1 class='auth-title'>Login to Wallaclone!</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
-          <Form.Control  icon="user" required type="text" placeholder="Username" onChange={handleChange(setUsername)} />
+          <Form.Control  icon="user" required type="text" onChange={handleChange(setUsername)} />
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control required type="password" placeholder="Password" onChange={handleChange(setPassword)} />
+          <Form.Control required type="password"  onChange={handleChange(setPassword)} />
         </Form.Group>
 
         <Button variant="primary" type="submit">
           Login
   </Button>
-  <p>New to Wallaclone? Sign up!</p>
       </Form>
+      <Card.Footer>New to Wallaclone? Sign up!</Card.Footer>
+      </Card>
+      </div>
     </>
   )
 };

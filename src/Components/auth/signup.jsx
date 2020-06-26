@@ -1,7 +1,7 @@
 // sign up form. required fields: username, password, email
 import React, { useState } from 'react';
 
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Card } from 'react-bootstrap';
 
 
 import apiCall from '../api/api';
@@ -27,29 +27,33 @@ export default function SignUp(props) {
 
   return (
     <>
-      <h1>Sign up to Wallaclone!</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control required type="email" placeholder="Email" onChange={handleChange(setEmail)} />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-    </Form.Text>
-        </Form.Group>
-        <Form.Group controlId="formBasicUsername">
-          <Form.Label>Username</Form.Label>
-          <Form.Control  icon="user" required type="text" placeholder="Username" onChange={handleChange(setUsername)} />
-        </Form.Group>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control required type="password" placeholder="Password" onChange={handleChange(setPassword)} />
-        </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Sign up
-  </Button>
-  <p>Already registered? Click here to login!</p>
-      </Form>
+      <div class='card-border'>
+        <Card>
+          <h1 class='auth-title'>Sign up to Wallaclone!</h1>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control required type="email" onChange={handleChange(setEmail)} />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
+            <Form.Group controlId="formBasicUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control required type="text" onChange={handleChange(setUsername)} />
+            </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control required type="password" onChange={handleChange(setPassword)} />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Sign up
+            </Button>
+          </Form>
+          <Card.Footer>Already registered? Login!</Card.Footer>
+        </Card>
+      </div>
     </>
   )
 };
