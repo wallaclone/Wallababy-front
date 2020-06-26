@@ -1,3 +1,6 @@
+@import "./css/reset.css";
+@import "./css/variables.css";
+@import "./css/forms.css";
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
 
 * {
@@ -19,50 +22,16 @@ body, html, .App, #root, .auth-wrapper {
   background-color: #EDF6F9;
 }
 
-.card {
-  width: 40%;
-  margin: 0 auto;
+
+
+#root {
+  /* margin:5px; */
+  background-color: var(--main-bg-color);
+} 
+
+html {
+  background-color: var(--main-bg-color);
 }
 
-.card-border {
-  margin-top: 30px;
-}
 
-.card-footer {
-  text-align: center;
-}
 
-.auth-title {
-  color: #006D77;
-  margin: 0 auto;
-  padding: 30px;
-}
-
-form {
-  margin: 0 auto;
-  width: 80%
-}
-
-.form-control {
-  border: 1px solid #83C5BE !important;
-}
-
-button {
-  width: 100%;
-  background-color: #E29578 !important;
-  border: 1px solid #E29578 !important;
-  padding: 10px !important;
-  margin-bottom: 20px !important;
-}
-
-button:hover {
-  background-color: #f7b6a0 !important;
-  border: 1px solid #f7b6a0 !important;
-}
-
-.forgot-pass {
-  color: #83C5BE ;
-  font-weight: 500;
-  text-align: end;
-  padding: 1px;
-}
