@@ -24,7 +24,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
               icon: 'error',
               title: 'Username or email already in use',
               timer: 8000,
-              confirmButtonColor:  '#E29578',
+              confirmButtonColor:  '#E29578'
           });
       } else {
           Swal.fire({
@@ -32,7 +32,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
               title: `Welcome ${username}!`,
               text: ``,
               timer: 15000,
-              confirmButtonColor:  '#E29578',
+              confirmButtonColor:  '#E29578'
           })
       };
        
@@ -63,7 +63,8 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           Swal.fire({
               icon: 'error',
               title: 'Ops. Wrong credentials',
-              timer: 8000
+              timer: 8000,
+              confirmButtonColor:  '#E29578'
           });
       } else {
           Swal.fire({
