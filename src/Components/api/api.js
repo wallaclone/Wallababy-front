@@ -52,6 +52,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
        
        
         const data = await response.json();
+        window.localStorage.setItem('token', data.token);
         return data;
 
       } catch (err) {
