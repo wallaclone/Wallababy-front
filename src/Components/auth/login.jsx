@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Button, Form, Card } from 'react-bootstrap';
 
@@ -24,9 +25,9 @@ export default function Login(props) {
 
   return (
     <>
-    <div class='card-border'>
+    <div className='card-border'>
     <Card>
-      <h1 class='auth-title'>Login to Wallaclone!</h1>
+      <h1 className='auth-title'>Login to Wallaclone!</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
@@ -41,7 +42,7 @@ export default function Login(props) {
           Login
   </Button>
       </Form>
-      <Card.Footer>New to Wallaclone? Sign up!</Card.Footer>
+      <Card.Footer>New to Wallaclone?  <Link to='/signup'>Sign up!</Link></Card.Footer>
       </Card>
       </div>
     </>

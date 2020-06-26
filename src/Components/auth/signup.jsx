@@ -1,8 +1,8 @@
 // sign up form. required fields: username, password, email
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Button, Form, Card } from 'react-bootstrap';
-
 
 import apiCall from '../api/api';
 
@@ -23,14 +23,15 @@ export default function SignUp(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     register(username, password, email);
+    props.history.push('/login')
   }
 
   return (
     <>
 
-      <div class='card-border'>
+      <div className='card-border'>
         <Card>
-          <h1 class='auth-title'>Sign up to Wallaclone!</h1>
+          <h1 className='auth-title'>Sign up to Wallaclone!</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
@@ -51,7 +52,7 @@ export default function SignUp(props) {
               Sign up
             </Button>
           </Form>
-          <Card.Footer>Already registered? Login!</Card.Footer>
+          <Card.Footer>Already registered? <Link to='/login'>Login!</Link></Card.Footer>
         </Card>
       </div>
     </>
