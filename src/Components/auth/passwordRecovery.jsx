@@ -75,7 +75,7 @@ function PasswordRecovery(props) {
     return (
         <div className='padre-logIn-SignUp'>
         <div className='hijo-logIn-SignUp'>
-            <form onSubmit={recoverPassword}>
+            <Form onSubmit={recoverPassword}>
             <Form.Group >
             <Card key='1'>
                 <Card.Body>
@@ -97,11 +97,11 @@ function PasswordRecovery(props) {
                             />
                         </InputGroup>
                         <InputGroup className='mb-3'>
-                            <Button type='submit' variant='primary' size='lg' className='button' block>
+                            <Button type='submit' variant='primary' className='button' block>
                             {/* <Button type='submit' size='lg' bsClass="button-ok" block> */}
                                 Password Recovery
                             </Button>
-                            <Button variant='warning' size='lg' onClick={handleClearButton} block>
+                            <Button variant='warning' onClick={handleClearButton} block>
                                 Clear
                             </Button>   
                         </InputGroup>
@@ -110,11 +110,11 @@ function PasswordRecovery(props) {
                 <Card.Footer className='centrado'>
                     <span className='text-muted'>New to Wallaclone?</span>
                     &nbsp;
-                    <Card.Link href='/register'>Sign Up</Card.Link>
+                    <Card.Link href='/signup'>Sign Up</Card.Link>
                 </Card.Footer>
             </Card>
             </Form.Group>
-            </form>
+            </Form>
         </div>
         </div>
     );

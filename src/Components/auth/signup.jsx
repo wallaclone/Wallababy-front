@@ -30,9 +30,9 @@ export default function SignUp(props) {
     <>
 
       <div className='card-border'>
-        <Card>
-          <h1 className='auth-title'>Sign up to Wallaclone!</h1>
-          <Form onSubmit={handleSubmit}>
+        <Card className='mycard'>
+          <h2 className='auth-title'>Sign up to Wallaclone!</h2>
+          <Form className='myform' onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control required type="email" onChange={handleChange(setEmail)} />
@@ -48,11 +48,11 @@ export default function SignUp(props) {
               <Form.Label>Password</Form.Label>
               <Form.Control required type="password" onChange={handleChange(setPassword)} />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button className='mybutton' variant="primary" type="submit">
               Sign up
             </Button>
           </Form>
-          <Card.Footer>Already registered? <Link to='/login'>Login!</Link></Card.Footer>
+          <Card.Footer><span className='text-muted'>Already registered?</span> <Link to='/login'>Login!</Link></Card.Footer>
         </Card>
       </div>
     </>
