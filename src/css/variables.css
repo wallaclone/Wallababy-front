@@ -1,0 +1,13 @@
+:root {
+  /* --navbar-main-bg-color: goldenrod; */
+  /* --navbar-main-bg-color: rgb(240, 28, 92); */
+
+  /* --navbar-main-bg-color: rgb(209, 0, 63); */
+  /* --main-bg-color: rgb(99, 153, 252); */
+
+  --navbar-main-bg-color: rgb(209, 0, 63);
+  --main-bg-color: #edf6f9;
+  
+  --button-color-ok: #e29578;
+  --button-color-ok-over: #f7b6a0;
+}
