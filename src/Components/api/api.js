@@ -1,4 +1,4 @@
-// api calls with fetch
+import Swal from 'sweetalert2';
 
 const apiCall = (API = 'http://localhost:3000/api') => {
   
@@ -19,9 +19,22 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           'email': email }),
         })
         
-        if (!response.ok) {
-          throw new Error('Error ')
-        }
+        if (response.status !== 201) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Username or email already in use',
+              timer: 8000,
+              confirmButtonColor:  '#E29578',
+          });
+      } else {
+          Swal.fire({
+              icon: 'success',
+              title: `Welcome ${username}!`,
+              text: ``,
+              timer: 15000,
+              confirmButtonColor:  '#E29578',
+          })
+      };
        
        
         const data = await response.json();
@@ -46,14 +59,26 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           }),
         })
         
-        if (!response.ok) {
-          throw new Error('Error ')
-        }
-       
-       
+        if (response.status !== 201) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Ops. Wrong credentials',
+              timer: 8000
+          });
+      } else {
+          Swal.fire({
+              icon: 'success',
+              title: `Welcome ${username}!`,
+              text: ``,
+              timer: 15000,
+              confirmButtonColor:  '#E29578',
+          });
+      }
+
+  
         const data = await response.json();
         window.localStorage.setItem('token', data.token);
-        return data;
+         return data;
 
       } catch (err) {
         console.error(err.message);
