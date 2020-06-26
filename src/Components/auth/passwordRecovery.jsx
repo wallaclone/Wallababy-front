@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Card, InputGroup, Form, Button }  from 'react-bootstrap';
 import Swal from 'sweetalert2';
 // import { Link } from 'react-router-dom';
-// import passwordIco from '../img/password.png'
-import loginIco from '../img/login.png'
+// import passwordIco from '../img/password.png';
+import loginIco from '../../img/login.png';
 
 function PasswordRecovery(props) {
 
@@ -38,37 +38,37 @@ function PasswordRecovery(props) {
             // credentials: 'include',
         });
 
-        Swal.fire({
-            //position: 'top-end',
-            icon: 'success',
-            title: `Password recovery`,
-            text: `If there is an account associated with ${objectForm.email}, you will receive an email with a link to reset your password.`,
-            // text: `If there is an account associated with the entered email, you will receive an email with a link to reset your password.`,
-            //footer: '<a href>Why do I have this issue?</a>'
-            //showConfirmButton: false,
-            timer: 6000
-        });
-        props.history.push('/login');
+        // Swal.fire({
+        //     //position: 'top-end',
+        //     icon: 'success',
+        //     title: `Password recovery`,
+        //     text: `If there is an account associated with ${objectForm.email}, you will receive an email with a link to reset your password.`,
+        //     // text: `If there is an account associated with the entered email, you will receive an email with a link to reset your password.`,
+        //     //footer: '<a href>Why do I have this issue?</a>'
+        //     //showConfirmButton: false,
+        //     timer: 6000
+        // });
+        // props.history.push('/login');
 
-        // if (response.status !== 201) {
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: 'Incorrect email',
-        //         text: `The email is incorrect. `,
-        //         timer: 4000
-        //     });
-        // } else {
-        //     Swal.fire({
-        //         //position: 'top-end',
-        //         icon: 'success',
-        //         title: `Correct email`,
-        //         text: `We have sent you an email with your password`,
-        //         //footer: '<a href>Why do I have this issue?</a>'
-        //         //showConfirmButton: false,
-        //         timer: 5000
-        //     });
-        //     //props.history.push('/login');
-        // }
+        if (response.status !== 201) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Incorrect email',
+                text: `The email is incorrect. `,
+                timer: 8000
+            });
+        } else {
+            Swal.fire({
+                //position: 'top-end',
+                icon: 'success',
+                title: `Correct email`,
+                text: `We have sent you an email with your password`,
+                //footer: '<a href>Why do I have this issue?</a>'
+                //showConfirmButton: false,
+                timer: 15000
+            });
+            props.history.push('/login');
+        }
 
     };
     

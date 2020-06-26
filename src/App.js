@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import PasswordRecovery from './components/PasswordRecovery.jsx';
-import Signup from './Components/auth/signup';
-import Login from './Components/auth/login'
+import PasswordRecovery from './components/auth/passwordRecovery';
+import Signup from './components/auth/signup';
+import Login from './components/auth/login';
+import ChangePassword from './components/auth/changePassword';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         <Route path="/signup" exact component={Signup} />
         <Route path="/login" component={Login} />
         <Route exact path="/passwordRecovery" component={PasswordRecovery} />
-        <Redirect to="/passwordRecovery" />
+        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
+        <Redirect to="/login" />
       </Switch>
     </Router>
   );
