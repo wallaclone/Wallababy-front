@@ -4,6 +4,7 @@ import PasswordRecovery from './components/auth/passwordRecovery';
 import Signup from './components/auth/signup';
 import Login from './components/auth/login';
 import ChangePassword from './components/auth/changePassword';
+import CreateAd from './components/createAd/createAd';
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
         <Route path="/login" component={Login} />
         <Route exact path="/passwordRecovery" component={PasswordRecovery} />
         <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
-        <Redirect to="/login" />
+        <Route path="/createAd" component={CreateAd} />
+        <Redirect to="/createAd" />
       </Switch>
     </Router>
   );
