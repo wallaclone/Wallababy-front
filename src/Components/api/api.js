@@ -75,13 +75,11 @@ const apiCall = (API = 'http://localhost:3000/api') => {
             timer: 15000,
             confirmButtonColor: '#E29578',
           });
-        }
 
         const data = await response.json();
         window.localStorage.setItem('token', data.token);
-        return data;
-
-
+        }
+        return response;
       } catch (err) {
         console.error(err.message);
         throw err;
@@ -94,13 +92,12 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        },
+        }
       })
       if (!response.ok) {
         throw new Error('Error ')
       }
       const data = await response.json();
-      console.log(data.user)
       return data.user
     }
   }
