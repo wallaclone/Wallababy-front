@@ -35,3 +35,6 @@ html {
 
 
 
+Navbar, .navbar {
+  background-color: var(--bg-color-header) !important
+}
