@@ -20,9 +20,9 @@ export default function SignUp(props) {
   }
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    register(username, password, email);
+    await register(username, password, email);
     props.history.push('/login')
   }
 
