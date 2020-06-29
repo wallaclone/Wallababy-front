@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { Button, Form, Card } from 'react-bootstrap';
 
-
 import apiCall from '../api/api';
 
 const { login } = apiCall();
@@ -18,9 +17,10 @@ export default function Login(props) {
   }
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(username, password);
+    await login(username, password);
+    props.history.push('/test')
   }
 
   return (
