@@ -1,5 +1,4 @@
 // testing useContext - navbar with logged user
-// ! don't merge with develop
 
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';

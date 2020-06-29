@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { Card, InputGroup, Form, Button }  from 'react-bootstrap';
-import Swal from 'sweetalert2';
+import { Card, Form, Button }  from 'react-bootstrap';
+// import { Card, InputGroup, Form, Button }  from 'react-bootstrap';
+
+// import Swal from 'sweetalert2';
 // import { Link } from 'react-router-dom';
 // import passwordIco from '../img/password.png';
-import loginIco from '../../img/login.png';
+// import loginIco from '../../img/login.png';
+
+import apiCall from '../api/api';
+
+// const { passwordRecovery } = apiCall('http://localhost:4000/api');
+const { passwordRecovery } = apiCall();
 
 function PasswordRecovery(props) {
 
@@ -26,17 +33,20 @@ function PasswordRecovery(props) {
 
     const recoverPassword = async (event) => {
         event.preventDefault();
-        const url = `http://localhost:4000/api/recoverpassword`;
-        const response = await fetch (url, {
-            method: 'POST',
-            body: JSON.stringify({
-                'email' : objectForm.email.toString(),
-            }),
-            headers: {
-                'content-type': 'application/json'
-            },
-            // credentials: 'include',
-        });
+
+        const response = await passwordRecovery(objectForm.email.toString());
+        
+        // const url = `http://localhost:4000/api/recoverpassword`;
+        // const response = await fetch (url, {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         'email' : objectForm.email.toString(),
+        //     }),
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     // credentials: 'include',
+        // });
 
         // Swal.fire({
         //     //position: 'top-end',
@@ -50,23 +60,27 @@ function PasswordRecovery(props) {
         // });
         // props.history.push('/login');
 
-        if (response.status !== 201) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Incorrect email',
-                text: `The email is incorrect. `,
-                timer: 8000
-            });
-        } else {
-            Swal.fire({
-                //position: 'top-end',
-                icon: 'success',
-                title: `Correct email`,
-                text: `We have sent you an email with your password`,
-                //footer: '<a href>Why do I have this issue?</a>'
-                //showConfirmButton: false,
-                timer: 15000
-            });
+        // if (response.status !== 201) {
+        //     Swal.fire({
+        //         icon: 'error',
+        //         title: 'Incorrect email',
+        //         text: `The email is incorrect. `,
+        //         timer: 5000
+        //     });
+        // } else {
+        //     Swal.fire({
+        //         //position: 'top-end',
+        //         icon: 'success',
+        //         title: `Correct email`,
+        //         text: `We have sent you an email with your password`,
+        //         //footer: '<a href>Why do I have this issue?</a>'
+        //         //showConfirmButton: false,
+        //         timer: 10000
+        //     });
+        //     props.history.push('/login');
+        // }
+
+        if (response.status === 201) {
             props.history.push('/login');
         }
 
@@ -81,13 +95,13 @@ function PasswordRecovery(props) {
                 <Card.Body>
                     <Card.Title className='centrado'>Password recovery for your account</Card.Title>
                     <Card.Text>
-                        <InputGroup className='mb-3'>
+                        {/* <InputGroup className='mb-3'>
                             <InputGroup.Prepend>
                                 <InputGroup.Text id='emailText'>
                                     <Card.Img variant='top' src={loginIco} />
                                 </InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <Form.Control type='email'
+                            </InputGroup.Prepend> */}
+                            <Form.Control type='email' className='mb-2'
                                 placeholder='Enter Email'
                                 name='email'
                                 // onChange={e => setObjectForm({ ...objectForm, [e.target.name] : e.target.value }) }
@@ -95,8 +109,8 @@ function PasswordRecovery(props) {
                                 value={objectForm.email}
                                 required
                             />
-                        </InputGroup>
-                        <InputGroup className='mb-3'>
+                        {/* </InputGroup> */}
+                        {/* <InputGroup className='mb-3'> */}
                             <Button type='submit' variant='primary' className='button' block>
                             {/* <Button type='submit' size='lg' bsClass="button-ok" block> */}
                                 Password Recovery
@@ -104,7 +118,7 @@ function PasswordRecovery(props) {
                             <Button variant='warning' onClick={handleClearButton} block>
                                 Clear
                             </Button>   
-                        </InputGroup>
+                        {/* </InputGroup> */}
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer className='centrado'>

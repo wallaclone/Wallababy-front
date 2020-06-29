@@ -7,7 +7,8 @@ import Signup from './components/auth/signup';
 import Login from './components/auth/login';
 import ContextTest from './components/auth/contextTest';
 import AuthContextProvider from './contexts/authContext';
-//import ChangePassword from './components/auth/changePassword';
+import ChangePassword from './components/auth/changePassword';
+import CreateAd from './components/createAd/createAd';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/signup" exact component={Signup} />
         <Route path="/login" component={Login} />
         <Route exact path="/passwordRecovery" component={PasswordRecovery} />
+
         <Route path="/test" component={() =>
           <AuthContextProvider>
             <ContextTest />
@@ -34,6 +36,9 @@ function App() {
        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
        <Redirect to="/login" />
        */}
+        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
+        <Route path="/createAd" component={CreateAd} />
+        <Redirect to="/createAd" />
       </Switch>
     </Router>
   );
