@@ -18,11 +18,11 @@ const AuthContextProvider = ({ children }) => {
         const user = await currentUser();
         setUser(user);
       } catch (error) {
-        setUser(null);
+        setUser('guest');
         console.error(error.message);
       } 
     })();
-  }, []);
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user, setUser}}>{children}</AuthContext.Provider>
