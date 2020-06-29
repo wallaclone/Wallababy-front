@@ -1,14 +1,12 @@
 import Swal from 'sweetalert2';
 
 const apiCall = (API = 'http://localhost:3000/api') => {
-  
   const registerEndPoint = `${API}/users`;
   const loginEndPoint = `${API}/login`;
   const passwordRecoveryEndPoint = `${API}/recoverpassword`;
   const advertEndPoint = `${API}/adverts`;
 
   return {
-
     register: async (username, password, email) => {
       try {
         const response = await fetch(registerEndPoint, {
@@ -21,28 +19,28 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           'password': password,
           'email': email }),
         })
-        
+          
         if (response.status !== 201) {
           Swal.fire({
-              icon: 'error',
-              title: 'Username or email already in use',
-              timer: 8000,
-              confirmButtonColor:  '#E29578'
+            icon: 'error',
+            title: 'Username or email already in use',
+            timer: 8000,
+            confirmButtonColor:  '#E29578',
           });
-      } else {
+        } else {
           Swal.fire({
-              icon: 'success',
-              title: `Welcome ${username}!`,
-              text: ``,
-              timer: 15000,
-              confirmButtonColor:  '#E29578'
-          })
-      };
+            icon: 'success',
+            title: `Welcome ${username}!`,
+            text: ``,
+            timer: 15000,
+            confirmButtonColor:  '#E29578',
+          });
+        }
         const data = await response.json();
         return data;
       } catch (err) {
-        console.error(err.message);
-        throw err;
+          console.error(err.message);
+          throw err;
       }
     },
 
@@ -58,7 +56,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
             'password': password,
           }),
         })
-        
+          
         if (response.status !== 201) {
           Swal.fire({
             icon: 'error',
@@ -89,9 +87,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     passwordRecovery: async (email) => {
       try {
-
-        console.log("passwordRecoveryEndPoint:", passwordRecoveryEndPoint);
-
         const response = await fetch(passwordRecoveryEndPoint, {
           method: 'POST',
           headers: {
@@ -103,50 +98,28 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           // credentials: 'include',
         });
 
-        // console.log("response:", response);
-
         if (response.status !== 201) {
           Swal.fire({
-              icon: 'error',
-              title: 'Incorrect email',
-              text: `The email is incorrect. `,
-              timer: 5000
+            icon: 'error',
+            title: 'Incorrect email',
+            text: `The email is incorrect. `,
+            timer: 5000,
+            confirmButtonColor:  '#E29578',
           });
-      } else {
+        } else {
           Swal.fire({
-              //position: 'top-end',
-              icon: 'success',
-              title: `Correct email`,
-              text: `We have sent you an email with your password`,
-              //footer: '<a href>Why do I have this issue?</a>'
-              //showConfirmButton: false,
-              timer: 10000
+            //position: 'top-end',
+            icon: 'success',
+            title: `Correct email`,
+            text: `We have sent you an email with your password`,
+            //footer: '<a href>Why do I have this issue?</a>',
+            //showConfirmButton: false,
+            timer: 10000,
+            confirmButtonColor:  '#E29578',
           });
           // props.history.push('/login');
-      }
-
+        }
         return response;
-
-        
-        // if (response.status !== 201) {
-        //   Swal.fire({
-        //       icon: 'error',
-        //       title: 'Ops. Wrong credentials',
-        //       timer: 8000,
-        //       confirmButtonColor:  '#E29578'
-        //   });
-        // } else {
-        //     Swal.fire({
-        //         icon: 'success',
-        //         title: `Welcome ${username}!`,
-        //         text: ``,
-        //         timer: 15000,
-        //         confirmButtonColor:  '#E29578',
-        //     });
-        // }
-        // const data = await response.json();
-        // window.localStorage.setItem('token', data.token);
-        // return data;
       } catch (err) {
         console.error(err.message);
         throw err;
@@ -155,20 +128,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     createAd: async (name, description, image, status, price, owner, tags) => {
       try {
-
-
-        // image = 'https://i.ebayimg.com/images/g/i4UAAOSwZCBdrbuV/s-l1600.jpg';
-        //image = '';
-
-        console.log("advertEndPoint:", advertEndPoint);
-        console.log("name:", name);
-        console.log("description:", description);
-        console.log("image:", image);
-        console.log("status:", status);
-        console.log("price:", price);
-        console.log("owner:", owner);
-        console.log("tags:", tags);
-
         const response = await fetch(advertEndPoint, {
           method: 'POST',
           headers: {
@@ -182,16 +141,11 @@ const apiCall = (API = 'http://localhost:3000/api') => {
             'price' : parseInt(price),
             'owner' : owner,
             'tags' : tags,
+            'token' : window.localStorage.getItem('token'),
           }),
-          credentials: 'include',
+          // credentials: 'include',
         });
-
-        console.log("response:", response);
-
         const data = await response.json();
-
-        console.log("data:", data);
-
         return data;
       } catch (err) {
         console.error(err.message);
@@ -199,7 +153,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
-  }
-};
-
+  } //Close Return
+}; //Close const apiCall
 export default apiCall;

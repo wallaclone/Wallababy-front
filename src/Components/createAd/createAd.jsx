@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 //import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
-// import { createAd, getAds, getTags } from '../js/api.js';
-// import Navbarr from './navbar';
 import { Form, Col, Button }  from 'react-bootstrap';
-
 import apiCall from '../api/api';
+import Swal from 'sweetalert2';
+
 const { createAd } = apiCall();
 
 function CreateAd(props) {
@@ -58,14 +57,7 @@ function CreateAd(props) {
 
     const sendCreateAd = async (event) => {
         event.preventDefault();
-        console.log("...Comenzar con el CreateAD");
-
-        const { name, description, image, status, price, owner, tags, tag1, tag2, tag3, tag4 } = objectForm;
-
-        // console.log("tag1:", tag1);
-        // console.log("tag2:", tag2);
-        // console.log("tag3:", tag3);
-        // console.log("tag4:", tag4);
+        const { name, description, image, status, price, owner, tag1, tag2, tag3, tag4 } = objectForm;
 
         let myTags = [];
         if (tag1)
@@ -77,23 +69,39 @@ function CreateAd(props) {
         if (tag4)
             myTags.push('tag4');
         
-        // console.log("myTags:", myTags);
-
         const adCreated = await createAd (name, description, image, status, price, owner, myTags);
 
-        if (adCreated.error === 'Error: Not logged in') {
-            alert('You are not logged in, or your session has been expired. \n\nWe redirect you to Log In to do it again.');
+        if (adCreated.error === 'Error: Not logged in' || adCreated.error === 'Error: No token provided') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Not logged in',
+                text: `You are not logged in, or your session has been expired. We redirect you to Log In to do it again.`,
+                timer: 5000,
+                confirmButtonColor:  '#E29578',
+            });
             // this.props.history.push('/login');
-        }
-        else if (adCreated.error) {
-        // // if (adCreated.error === 'Error: Not logged in') {
-            console.log(adCreated.error);
-            alert('The ad could not be created (try again or later).');
+        } else if (adCreated.error) {
+            console.error("adCreated.error:", adCreated.error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Problems creating the advertisement',
+                text: `The advertisement could not be created (try again or later).`,
+                timer: 5000,
+                confirmButtonColor:  '#E29578',
+            });
         } else {
-            alert('The ad was created successfully.');
+            Swal.fire({
+                //position: 'top-end',
+                icon: 'success',
+                title: `Correct advertisement`,
+                text: `The advertisement was created successfully.`,
+                //footer: '<a href>Why do I have this issue?</a>',
+                //showConfirmButton: false,
+                timer: 10000,
+                confirmButtonColor:  '#E29578',
+            });
             // this.props.history.push('/dashboard?');
         }
-
     };
 
     return (
@@ -101,17 +109,8 @@ function CreateAd(props) {
 
             {/* <Navbarr /> */}
             <h1 className='titleName'>Create Advertisement</h1>
-            {/* <form onSubmit={this.sendCreateAd}> */}
-            <form onSubmit={sendCreateAd}>
 
-                {/* <Form.Control as="select" 
-                    name="type"
-                    onChange={this.handleChange}
-                    value={this.state.venta} required>
-                    <option value="" defaultValue>Select the type of ad (Buy/Sell)</option>
-                    <option value="false">Buy</option>
-                    <option value="true">Sell</option>
-                </Form.Control> */}
+            <form onSubmit={sendCreateAd}>
 
                 <Form.Group controlId="formGridTitle">
                     <Form.Label className='label'>Title of the ad:</Form.Label>
@@ -124,19 +123,21 @@ function CreateAd(props) {
                 </Form.Group>
 
                 <Form.Group controlId='formBasicCheckbox'> 
-                <Form.Label className='label'>Tags of the ad:</Form.Label>
+                    <Form.Label className='label'>Tags of the ad:</Form.Label>
                     <Form.Check type='switch' name='tag1' id='tag1' key='tag1' value='tag1' label='tag1' onChange={handleChange} />
                     <Form.Check type='switch' name='tag2' id='tag2' key='tag2' value='tag2' label='tag2' onChange={handleChange} />
                     <Form.Check type='switch' name='tag3' id='tag3' key='tag3' value='tag3' label='tag3' onChange={handleChange} />
                     <Form.Check type='switch' name='tag4' id='tag4' key='tag4' value='tag4' label='tag4' onChange={handleChange} />
-                {/* {this.state.optionsTag.map(item => {
-                    if (item !== null) {
-                        return (
-                            <Form.Check type="switch" name={item} id={item} key={item} value={item} label={item} onChange={this.handleChange} />
-                        )
-                    }
-                })} */}
+                    {/* {this.state.optionsTag.map(item => {
+                        if (item !== null) {
+                            return (
+                                <Form.Check type="switch" name={item} id={item} key={item} value={item} label={item} onChange={this.handleChange} />
+                            )
+                        }
+                    })} */}
                 </Form.Group>
+
+                
 
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridMinPrice">
@@ -163,24 +164,35 @@ function CreateAd(props) {
                 </Form.Row>
                 
                 <Form.Group controlId="formGridPhoto">
-                    <Form.Label className='label'>Ad photo link:</Form.Label>
+                    <Form.Label className='label'>Search photo to upload:</Form.Label>
                     {/* <Form.Control type="text" 
                         name="photo" 
                         maxLength="120"
                         placeholder="Add the link to the ad photo" 
                         // onChange={handleChange}
                         required /> */}
-                    <Form.Control type="file" 
-                        name="image" 
-                        // maxLength="120"
-                        // placeholder="Add the link to the ad photo" 
+                    
+                    {/* <Form.File 
+                        id='image'
+                        name='image'
+                        // label='Search photo to upload'
+                        label=''
                         onChange={handleChange}
-                        
+                        custom
+                    /> */}
+
+
+
+
+                    <Form.Control type="file" 
+                        name="image"
+                        onChange={handleChange}
                         required />
-
+                        
                     {/* <input type="file" id="myfile" name="myfile" enctype="multipart/form-data"></input> */}
-
                 </Form.Group>
+
+                
 
                 <Form.Group controlId="formGridDescription">
                     <Form.Label className='label'>Description of the ad:</Form.Label>
@@ -215,7 +227,6 @@ function CreateAd(props) {
             </form>
             <br />
         </div>
-
-        )
+    )
 }
 export default CreateAd;
