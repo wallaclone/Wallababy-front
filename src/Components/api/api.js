@@ -84,6 +84,21 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         throw err;
       }
     },
+    
+    currentUser: async () => {  
+      const loggedUserEndPoint = `${API}/currentuser?token=${window.localStorage.getItem('token')}`;
+      const response = await fetch(loggedUserEndPoint, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      if (!response.ok) {
+        throw new Error('Error ')
+      }
+      const data = await response.json();
+      return data.user
+    },
 
     passwordRecovery: async (email) => {
       try {
