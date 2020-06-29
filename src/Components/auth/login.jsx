@@ -18,9 +18,12 @@ export default function Login(props) {
   }
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(username, password);
+    const response = await login(username, password);
+    if (response.status !== 201) {
+      props.history.push('/login');
+    }
   }
 
   return (
