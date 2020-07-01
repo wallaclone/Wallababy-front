@@ -141,24 +141,17 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
-    createAd: async (name, description, image, status, price, owner, tags) => {
+    getAds: async (search) => {
       try {
-        const response = await fetch(advertEndPoint, {
-          method: 'POST',
+        // console.log("EndPoint:", `${advertEndPoint}?${search}`);
+        const response = await fetch(`${advertEndPoint}?${search}`, {
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
           },
-          body: JSON.stringify({
-            'name' : name,
-            'description' : description,
-            'image' : image,
-            'status' : status,
-            'price' : parseInt(price),
-            'owner' : owner,
-            'tags' : tags,
-            'token' : window.localStorage.getItem('token'),
-          }),
-          // credentials: 'include',
+          //'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
+          credentials: 'include',
         });
         const data = await response.json();
         return data;
@@ -167,6 +160,94 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         throw err;
       }
     },
+
+    getAd: async (idAd) => {
+      try {
+        // console.log("EndPoint:", `${advertEndPoint}/${idAd}`);
+        const response = await fetch(`${advertEndPoint}/${idAd}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          //'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
+          credentials: 'include',
+        });
+        const data = await response.json();
+        return data;
+      } catch (err) {
+        console.error(err.message);
+        throw err;
+      }
+    },
+
+    createAd: async (name, description, image, status, price, owner, tags) => {
+      try {
+        let fd = new FormData();
+        fd.append('name', name);
+        fd.append('description', description);
+        fd.append('image', image);
+        fd.append('status', status);
+        fd.append('price', parseInt(price));
+        fd.append('owner', owner);
+        fd.append('tags', tags);
+        const response = await fetch(advertEndPoint, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json', //'Content-Type': 'application/json', // 'Content-Type': 'multipart/form-data',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: fd,
+          // body: JSON.stringify({
+          //   'name' : name,
+          //   'description' : description,
+          //   'image' : image,
+          //   'status' : status,
+          //   'price' : parseInt(price),
+          //   'owner' : owner,
+          //   'tags' : tags,
+          //   //'token' : window.localStorage.getItem('token'),
+          // }),
+          credentials: 'include',
+        });
+        const data = await response.json();
+
+        console.log("data:", data);
+
+        return data;
+      } catch (err) {
+        console.error(err.message);
+        throw err;
+      }
+    },
+
+
+    deleteAd: async (idAd) => {
+      try {
+        
+        console.log("EndPoint:", `${advertEndPoint}/${idAd}`);
+
+        const response = await fetch(`${advertEndPoint}/${idAd}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          credentials: 'include',
+        });
+
+        console.log("response:", response);
+        return response;
+
+        //const data = await response.json();
+        //return data;
+      } catch (err) {
+        console.error(err.message);
+        throw err;
+      }
+    },
+
+
 
   } //Close Return
 }; //Close const apiCall
