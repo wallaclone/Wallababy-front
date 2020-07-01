@@ -144,12 +144,17 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     changePassword: async (id, password) => {
       try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
         const response = await fetch(changePasswordEndPoint+id, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ password })
+          body: JSON.stringify({ 
+            password,
+            token
+               })
         });
         await response.json();
 
