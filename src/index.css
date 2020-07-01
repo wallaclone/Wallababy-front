@@ -13,6 +13,11 @@ body {
   font-family: 'Fira Sans', sans-serif;
 }
 
+/* Don't show scrollbar -chrome */
+::-webkit-scrollbar {
+  display: none;
+}
+
 h1, h2, h3, h4, h5, h6, label, span {
   font-weight: 500;
   font-family: 'Fira Sans', sans-serif;
@@ -22,6 +27,8 @@ body, html, .App, #root, .auth-wrapper {
   width: 100%;
   height: 100%;
   background-color: #EDF6F9;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 
