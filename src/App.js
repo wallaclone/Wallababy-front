@@ -36,7 +36,6 @@ function App() {
        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
        <Redirect to="/login" />
        */}
-        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
         <Route path="/createAd" component={CreateAd} />
         <Redirect to="/createAd" />
       </Switch>
