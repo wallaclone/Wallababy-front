@@ -1,7 +1,9 @@
 @import "./css/reset.css";
 @import "./css/variables.css";
 @import "./css/forms.css";
+@import "./css/header.css";
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
+@import url('https://fonts.googleapis.com/css2?family=Euphoria+Script&display=swap');
 
 * {
   box-sizing: border-box;

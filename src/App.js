@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import PasswordRecovery from './components/auth/passwordRecovery';
 import Signup from './components/auth/signup';
 import Login from './components/auth/login';
-import ContextTest from './components/auth/contextTest';
+import Header from './components/layout/header';
 import AuthContextProvider from './contexts/authContext';
 import ChangePassword from './components/auth/changePassword';
 import CreateAd from './components/createAd/createAd';
@@ -29,7 +29,7 @@ function App() {
 
         <Route path="/test" component={() =>
           <AuthContextProvider>
-            <ContextTest />
+            <Header />
           </AuthContextProvider>
         } />
         {/* 
