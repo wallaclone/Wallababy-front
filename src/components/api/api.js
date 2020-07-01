@@ -4,6 +4,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
   const registerEndPoint = `${API}/users`;
   const loginEndPoint = `${API}/login`;
   const passwordRecoveryEndPoint = `${API}/recoverpassword`;
+  const changePasswordEndPoint = `${passwordRecoveryEndPoint}/forgotpassword/`;
   const advertEndPoint = `${API}/adverts`;
 
   return {
@@ -141,6 +142,28 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
+    changePassword: async (id, password) => {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        const response = await fetch(changePasswordEndPoint+id, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            password,
+            token
+          })
+        });
+        await response.json();
+
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    
     createAd: async (name, description, image, status, price, owner, tags) => {
       try {
         const response = await fetch(advertEndPoint, {
