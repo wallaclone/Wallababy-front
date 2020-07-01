@@ -85,7 +85,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
     
-     currentUser: async () => {  
+    currentUser: async () => {  
       const loggedUserEndPoint = `${API}/currentuser?token=${window.localStorage.getItem('token')}`;
       const response = await fetch(loggedUserEndPoint, {
         method: 'GET',
