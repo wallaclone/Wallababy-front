@@ -19,6 +19,7 @@ export default function Header(props) {
   
   return (
     <>
+    <div className='navbar-wrapper'>
     <Navbar fixed="top" collapseOnSelect expand="lg">
   <Navbar.Brand className='title' href="/dashbnoard">Wallaclone!</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -44,6 +45,7 @@ export default function Header(props) {
     }
   </Navbar.Collapse>
   </Navbar>
+  </div>
 
     </>
   )
