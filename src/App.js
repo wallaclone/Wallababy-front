@@ -62,7 +62,14 @@ function App() {
        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
        <Redirect to="/login" />
        */}
-        <Route path="/createAd" component={CreateAd} />
+        <Route path="/createAd" component={() =>
+         <>
+          <AuthContextProvider>
+            <Header />
+          </AuthContextProvider>
+        <CreateAd />
+        </>
+        } />
         {/* <Route path="/dashboard" component={Dashboard} /> */}
 
         {/* <Route exact path="/dashboard/:_id" component={SeeAd} /> */}
@@ -71,10 +78,15 @@ function App() {
 
         <Route exact path="/dashboard"
           render = { () => (
+            <>
+            <AuthContextProvider>
+            <Header />
+          </AuthContextProvider>
             <Dashboard
               advertisements = { advertisements }
               setReloadAdvertisements = { setReloadAdvertisements }
             />
+            </>
           ) }  
         />
 

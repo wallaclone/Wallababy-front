@@ -15,6 +15,7 @@ export default function Header(props) {
   }
   const handleClick =  () => {
       logout()
+      props.history.push('/login')
     }
   
   return (

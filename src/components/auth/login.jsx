@@ -24,6 +24,8 @@ export default function Login(props) {
     if (response.status !== 201) {
       props.history.push('/login');
     }
+    props.history.push('/dashboard');
+
 
   }
 
