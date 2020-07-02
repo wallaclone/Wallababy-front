@@ -16,10 +16,7 @@ export default function Login(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await login(username, password);
-    if (response.status !== 201) {
-      props.history.push('/login');
-    }
-    props.history.push('/dashboard');
+    (response.status !== 201) ? props.history.push('/login') : props.history.push('/dashboard');
   }
 
   return (

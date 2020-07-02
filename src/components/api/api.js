@@ -38,7 +38,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
             confirmButtonColor:  '#E29578',
           });
         }
-        const data = await response.json();
+        const data = await response;
         return data;
       } catch (err) {
           console.error(err.message);

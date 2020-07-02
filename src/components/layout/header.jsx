@@ -10,26 +10,26 @@ export default function Header(props) {
   
   async function logout() {
     window.localStorage.removeItem('token')
-    setUser(null)
-
+    setUser(null)      
   }
+
   const handleClick =  () => {
       logout()
-      props.history.push('/login')
     }
   
   return (
     <>
+    <div className='navbar-wrapper'>
     <Navbar fixed="top" collapseOnSelect expand="lg">
-  <Navbar.Brand className='title' href="#home">Wallaclone!</Navbar.Brand>
+  <Navbar.Brand className='title' href="/dashbnoard">Wallaclone!</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     {
       (user === 'guest') ? <Nav className='end-section'> <Nav.Link href="/login">login!</Nav.Link></Nav> :
     <>
     <Nav className="mr-auto"> 
-      <Nav.Link>ad list</Nav.Link>
-      <Nav.Link>create ad</Nav.Link>
+      <Nav.Link href="dashboard">ad list</Nav.Link>
+      <Nav.Link href="/createad">create ad</Nav.Link>
     </Nav>
 
     <Nav className='right-section'>
@@ -39,12 +39,13 @@ export default function Header(props) {
         <NavDropdown.Divider />
         <NavDropdown.Item>Edit your profile</NavDropdown.Item>
       </NavDropdown>
-      <Nav.Link className='logout' onClick={handleClick}>log out</Nav.Link>
+      <Nav.Link className='logout' onClick={handleClick} href="/login">log out</Nav.Link>
     </Nav>
     </>
     }
   </Navbar.Collapse>
   </Navbar>
+  </div>
 
     </>
   )

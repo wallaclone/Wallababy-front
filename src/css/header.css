@@ -3,7 +3,7 @@
 
 Navbar, .navbar {
   background-color: var(--bg-color-header) !important;
-  padding: 10px !important;
+  margin-bottom: 30px !important;
 }
 
 
@@ -27,4 +27,8 @@ Navbar, .navbar {
 .end-section {
   margin-left: auto !important;
   margin-right: 20px !important;
+}
+
+.navbar-wrapper {
+  margin-bottom: 100px;
 }
