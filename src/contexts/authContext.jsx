@@ -2,7 +2,7 @@
 
 import React, { createContext, useState, useEffect } from 'react';
 
-import apiCall from '../../src/components/api/api';
+import apiCall from '../components/api/api';
 
 const { currentUser } = apiCall();
 

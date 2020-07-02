@@ -10,7 +10,7 @@ function Dashboard(props) {
         // <CardColumns className='m-2'> 
         <div className="m-3">
             <Link to={`/createAd`} >
-                <Button variant='primary' size='lg' className='mb-3' block>
+                <Button variant='primary' size='lg' className='mb-3' style={{ marginTop: '6rem' }} block>
                     Create advertisement
                 </Button>
             </Link>

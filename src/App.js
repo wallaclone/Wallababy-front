@@ -25,7 +25,7 @@ function App() {
     if( reloadAdvertisements ){
       const loadAds = async () => {
         // realizamos la consulta al API
-        const resultAds = await getAds ('page=1');
+        const resultAds = await getAds ('?limit=12&sort=-date_creation');
         // console.log('resultAds:', resultAds.rows);
         setAdvertisements( resultAds.rows );
       }
@@ -62,30 +62,68 @@ function App() {
        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
        <Redirect to="/login" />
        */}
-        <Route path="/createAd" component={() =>
+
+        {/* <Route path="/createAd" component={() =>
          <>
           <AuthContextProvider>
             <Header />
           </AuthContextProvider>
         <CreateAd />
         </>
+        } /> */}
+
+        <Route path="/createAd" component={() =>
+         <>
+          <AuthContextProvider>
+            <Header />
+          </AuthContextProvider>
+        <CreateAd 
+          setReloadAdvertisements = { setReloadAdvertisements }
+        />
+        </>
         } />
+
+
+        {/* <Route path="/createAd"
+          render = { () => (
+            <>
+              <AuthContextProvider>
+                <Header />
+              </AuthContextProvider>
+              <createAd
+                setReloadAdvertisements = { setReloadAdvertisements }
+              />
+            </>
+          ) }  
+        /> */}
+
+
         {/* <Route path="/dashboard" component={Dashboard} /> */}
 
         {/* <Route exact path="/dashboard/:_id" component={SeeAd} /> */}
 
-        <Route exact path="/seeAd/:_id" component={SeeAd} />
+        {/* <Route exact path="/seeAd/:_id" component={SeeAd} /> */}
+
+        <Route exact path="/seeAd/:_id" component={() =>
+          <>
+            <AuthContextProvider>
+              <Header />
+            </AuthContextProvider>
+            <SeeAd 
+            />
+          </>
+        } />
 
         <Route exact path="/dashboard"
           render = { () => (
             <>
-            <AuthContextProvider>
-            <Header />
-          </AuthContextProvider>
-            <Dashboard
-              advertisements = { advertisements }
-              setReloadAdvertisements = { setReloadAdvertisements }
-            />
+              <AuthContextProvider>
+                <Header />
+              </AuthContextProvider>
+              <Dashboard
+                advertisements = { advertisements }
+                setReloadAdvertisements = { setReloadAdvertisements }
+              />
             </>
           ) }  
         />
