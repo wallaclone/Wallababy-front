@@ -6,6 +6,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
   const passwordRecoveryEndPoint = `${API}/recoverpassword`;
   const changePasswordEndPoint = `${passwordRecoveryEndPoint}/forgotpassword/`;
   const advertEndPoint = `${API}/adverts`;
+  const tagEndPoint = `${API}/tags`;
 
   return {
     register: async (username, password, email) => {
@@ -142,6 +143,28 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
+    changePassword: async (id, password) => {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        const response = await fetch(changePasswordEndPoint+id, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            password,
+            token
+          })
+        });
+        await response.json();
+
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    
     getAds: async (search) => {
       try {
         // console.log("EndPoint:", `${advertEndPoint}?${search}`);
@@ -182,28 +205,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
-    changePassword: async (id, password) => {
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-        const response = await fetch(changePasswordEndPoint+id, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ 
-            password,
-            token
-          })
-        });
-        await response.json();
-
-        return response;
-      } catch (error) {
-        throw error;
-      }
-    },
-    
     createAd: async (name, description, image, status, price, owner, tags) => {
       try {
         let fd = new FormData();
@@ -270,7 +271,25 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
-
+    getTags: async () => {
+      try {
+        // console.log("EndPoint:", `${tagEndPoint}`);
+        const response = await fetch(`${tagEndPoint}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          //'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
+          credentials: 'include',
+        });
+        const data = await response.json();
+        return data;
+      } catch (err) {
+        console.error(err.message);
+        throw err;
+      }
+    },
 
   } //Close Return
 }; //Close const apiCall

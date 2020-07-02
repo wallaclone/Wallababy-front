@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import PasswordRecovery from './components/auth/passwordRecovery';
 import Signup from './components/auth/signup';
 import Login from './components/auth/login';
-import ContextTest from './components/auth/contextTest';
+import Header from './components/layout/header';
 import AuthContextProvider from './contexts/authContext';
 import ChangePassword from './components/auth/changePassword';
 
@@ -25,7 +25,7 @@ function App() {
     if( reloadAdvertisements ){
       const loadAds = async () => {
         // realizamos la consulta al API
-        const resultAds = await getAds ('page=1');
+        const resultAds = await getAds ('?limit=12&sort=-date_creation');
         // console.log('resultAds:', resultAds.rows);
         setAdvertisements( resultAds.rows );
       }
@@ -55,15 +55,49 @@ function App() {
 
         <Route path="/test" component={() =>
           <AuthContextProvider>
-            <ContextTest />
+            <Header />
           </AuthContextProvider>
         } />
         {/* 
        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
        <Redirect to="/login" />
        */}
-        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
-        <Route path="/createAd" component={CreateAd} />
+
+        {/* <Route path="/createAd" component={() =>
+         <>
+          <AuthContextProvider>
+            <Header />
+          </AuthContextProvider>
+        <CreateAd />
+        </>
+        } /> */}
+
+        <Route path="/createAd" component={() =>
+         <>
+          <AuthContextProvider>
+            <Header />
+          </AuthContextProvider>
+        <CreateAd 
+          setReloadAdvertisements = { setReloadAdvertisements }
+        />
+        </>
+        } />
+
+
+        {/* <Route path="/createAd"
+          render = { () => (
+            <>
+              <AuthContextProvider>
+                <Header />
+              </AuthContextProvider>
+              <createAd
+                setReloadAdvertisements = { setReloadAdvertisements }
+              />
+            </>
+          ) }  
+        /> */}
+
+
         {/* <Route path="/dashboard" component={Dashboard} /> */}
 
         {/* <Route exact path="/dashboard/:_id" component={SeeAd} /> */}
@@ -72,10 +106,15 @@ function App() {
 
         <Route exact path="/dashboard"
           render = { () => (
+            <>
+            <AuthContextProvider>
+            <Header />
+          </AuthContextProvider>
             <Dashboard
               advertisements = { advertisements }
               setReloadAdvertisements = { setReloadAdvertisements }
             />
+            </>
           ) }  
         />
 
