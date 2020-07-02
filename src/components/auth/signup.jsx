@@ -22,8 +22,8 @@ export default function SignUp(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await register(username, password, email);
-    props.history.push('/login')
+    const response = await register(username, password, email);
+    (response.status !== 201) ? props.history.push('/signup') : props.history.push('/login')
   }
 
   return (
