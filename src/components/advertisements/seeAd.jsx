@@ -33,7 +33,7 @@ export default function SeeAd(props) {
     }, [ reloadAdvertisement, props.match.params._id ]);
     
     return (
-        <div class="m-3">
+        <div className="m-3">
         <Card key={advertisement._id}>
             <Card.Img variant='top' src={`${BACK_IMAGE_PATH}${advertisement.image}`} />
             <Card.Body>

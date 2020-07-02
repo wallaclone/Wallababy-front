@@ -67,10 +67,11 @@ const advertisement = ({ advertisement, setReloadAdvertisements }) => {
     }
 
     return (
-
         <div className="col mb-4" key={_id}>
             <div className="card h-100">
-                <img src={`${BACK_IMAGE_PATH}${image}`} className="card-img-top" alt={name} />
+                {/* <img src={`${BACK_IMAGE_PATH}${image}`} className="card-img-top" alt={name} /> */}
+                <img src={`${BACK_IMAGE_PATH}${image}`} className="card-img-top" style={{objectFit: "cover", width: "100%", height:"50vh"}} alt={name} />
+                
                 <div className="card-body">
                     <h5 className="card-title">
                         <Link to={`/dashboard/${_id}`}>
@@ -119,7 +120,6 @@ const advertisement = ({ advertisement, setReloadAdvertisements }) => {
                 </div>
             </div>
         </div>
- 
     );
 }
 
