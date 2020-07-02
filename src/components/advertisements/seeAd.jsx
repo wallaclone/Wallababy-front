@@ -20,14 +20,15 @@ export default function SeeAd(props) {
                 const resultAd = await getAd(id);
                 setAdvertisement(resultAd.result);
             };
-            loadAd(props.match.params._id);
+            //loadAd(props.match.params._id);
+            loadAd(_id);
             setReloadAdvertisement( false );
         }
-    }, [ reloadAdvertisement, props.match.params._id ]);
+    }, [ reloadAdvertisement, _id ]); //[ reloadAdvertisement, props.match.params._id ]);
     
     return (
         <div className="m-3">
-        <Card key={advertisement._id}>
+        <Card key={advertisement._id} style={{ marginTop: '6rem' }}>
             <Card.Img variant='top' src={`${BACK_IMAGE_PATH}${advertisement.image}`} />
             <Card.Body>
                 <Link to={`/dashboard/${_id}`}>
@@ -51,6 +52,7 @@ export default function SeeAd(props) {
                         url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
                         <FacebookIcon size={32} round={true}></FacebookIcon>
                     </FacebookShareButton>
+                    &nbsp;
                     <TwitterShareButton
                         url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
                         <TwitterIcon size={32} round={true}></TwitterIcon>

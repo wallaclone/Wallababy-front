@@ -102,18 +102,28 @@ function App() {
 
         {/* <Route exact path="/dashboard/:_id" component={SeeAd} /> */}
 
-        <Route exact path="/seeAd/:_id" component={SeeAd} />
+        {/* <Route exact path="/seeAd/:_id" component={SeeAd} /> */}
+
+        <Route exact path="/seeAd/:_id" component={() =>
+          <>
+            <AuthContextProvider>
+              <Header />
+            </AuthContextProvider>
+            <SeeAd 
+            />
+          </>
+        } />
 
         <Route exact path="/dashboard"
           render = { () => (
             <>
-            <AuthContextProvider>
-            <Header />
-          </AuthContextProvider>
-            <Dashboard
-              advertisements = { advertisements }
-              setReloadAdvertisements = { setReloadAdvertisements }
-            />
+              <AuthContextProvider>
+                <Header />
+              </AuthContextProvider>
+              <Dashboard
+                advertisements = { advertisements }
+                setReloadAdvertisements = { setReloadAdvertisements }
+              />
             </>
           ) }  
         />
