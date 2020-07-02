@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory, Link } from "react-router-dom";
 //import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import { Form, Col, Button }  from 'react-bootstrap';
 import apiCall from '../api/api';
@@ -8,10 +9,13 @@ const { createAd } = apiCall();
 
 function CreateAd(props) {
 
+    const history = useHistory();
+
     const initialValues = {
         name: '',
         description: '',
-        image: '',
+        // image: '',
+        image: null,
         status: '',
         price: 0,
         owner: '',
@@ -46,7 +50,7 @@ function CreateAd(props) {
     // };
 
     const returnToDashboard = () => {
-        //props.history.push(`/dashboard?`);
+        history.goBack();
     };
     
     const returnToLogin = () => {
@@ -59,6 +63,11 @@ function CreateAd(props) {
         event.preventDefault();
         const { name, description, image, status, price, owner, tag1, tag2, tag3, tag4 } = objectForm;
 
+        const imgAux = document.getElementById('image-file').files[0];
+
+        // console.log('imgAux:', imgAux);
+        // console.log('image:', image);
+
         let myTags = [];
         if (tag1)
             myTags.push('tag1');
@@ -69,9 +78,12 @@ function CreateAd(props) {
         if (tag4)
             myTags.push('tag4');
         
-        const adCreated = await createAd (name, description, image, status, price, owner, myTags);
+        //const adCreated = await createAd (name, description, image, status, price, owner, myTags);
+        const adCreated = await createAd (name, description, imgAux, status, price, owner, myTags);
 
-        if (adCreated.error === 'Error: Not logged in' || adCreated.error === 'Error: No token provided') {
+        // console.log("adCreated.error", adCreated.error);
+
+        if (adCreated.error === 'Error: Not logged in' || adCreated.error === 'Error: No token provided' || adCreated === 'No token provided') {
             Swal.fire({
                 icon: 'error',
                 title: 'Not logged in',
@@ -105,12 +117,13 @@ function CreateAd(props) {
     };
 
     return (
-        <div>
+        <div class="m-3">
 
             {/* <Navbarr /> */}
             <h1 className='titleName'>Create Advertisement</h1>
 
-            <form onSubmit={sendCreateAd}>
+            {/* <form encType='multipart/form-data' onSubmit={sendCreateAd}> */}
+            <form enctype="multipart/form-data" onSubmit={sendCreateAd}>
 
                 <Form.Group controlId="formGridTitle">
                     <Form.Label className='label'>Title of the ad:</Form.Label>
@@ -136,8 +149,6 @@ function CreateAd(props) {
                         }
                     })} */}
                 </Form.Group>
-
-                
 
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridMinPrice">
@@ -181,18 +192,15 @@ function CreateAd(props) {
                         custom
                     /> */}
 
+                    <input type='file' id='image-file' name='image' onChange={handleChange} accept='image/*' required />
 
-
-
-                    <Form.Control type="file" 
+                    {/* <Form.Control type="file" 
                         name="image"
                         onChange={handleChange}
-                        required />
+                        required /> */}
                         
                     {/* <input type="file" id="myfile" name="myfile" enctype="multipart/form-data"></input> */}
                 </Form.Group>
-
-                
 
                 <Form.Group controlId="formGridDescription">
                     <Form.Label className='label'>Description of the ad:</Form.Label>
@@ -225,7 +233,6 @@ function CreateAd(props) {
                     </Form.Group>
                 </Form.Row>
             </form>
-            <br />
         </div>
     )
 }

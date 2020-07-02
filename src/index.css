@@ -42,7 +42,11 @@ html {
   background-color: var(--main-bg-color);
 }
 
-
+a {
+  /* color: #00B7FF; */
+  /* color: rgb(20, 193, 173); */
+  text-decoration: none !important;
+}
 
 Navbar, .navbar {
   background-color: var(--bg-color-header) !important

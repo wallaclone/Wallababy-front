@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 //import { useIntl } from 'react-intl';
 
@@ -8,9 +8,34 @@ import Login from './components/auth/login';
 import Header from './components/layout/header';
 import AuthContextProvider from './contexts/authContext';
 import ChangePassword from './components/auth/changePassword';
-import CreateAd from './components/createAd/createAd';
+
+import CreateAd from './components/advertisements/createAd';
+import Dashboard from './components/advertisements/dashboard';
+import SeeAd from './components/advertisements/seeAd';
+
+import apiCall from './components/api/api';
+const { getAds } = apiCall();
 
 function App() {
+
+  const [ advertisements, setAdvertisements ] = useState([]);
+  const [ reloadAdvertisements, setReloadAdvertisements ] = useState( true );
+
+  useEffect(() => {
+    if( reloadAdvertisements ){
+      const loadAds = async () => {
+        // realizamos la consulta al API
+        const resultAds = await getAds ('page=1');
+        // console.log('resultAds:', resultAds.rows);
+        setAdvertisements( resultAds.rows );
+      }
+      loadAds();
+
+      // We change to false the recharge of articles so that it isn't recharging continuously
+      setReloadAdvertisements( false );
+    }
+  }, [ reloadAdvertisements ]);
+  
   return (
     <Router>
       <Switch>
@@ -38,7 +63,22 @@ function App() {
        <Redirect to="/login" />
        */}
         <Route path="/createAd" component={CreateAd} />
-        <Redirect to="/createAd" />
+        {/* <Route path="/dashboard" component={Dashboard} /> */}
+
+        {/* <Route exact path="/dashboard/:_id" component={SeeAd} /> */}
+
+        <Route exact path="/seeAd/:_id" component={SeeAd} />
+
+        <Route exact path="/dashboard"
+          render = { () => (
+            <Dashboard
+              advertisements = { advertisements }
+              setReloadAdvertisements = { setReloadAdvertisements }
+            />
+          ) }  
+        />
+
+        <Redirect to="/dashboard" />
       </Switch>
     </Router>
   );
