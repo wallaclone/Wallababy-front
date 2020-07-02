@@ -25,6 +25,7 @@ function App() {
 
         <Route path="/signup" exact component={Signup} />
         <Route path="/login" component={Login} />
+        <Route path="/changePassword/:id" component={ChangePassword} />
         <Route exact path="/passwordRecovery" component={PasswordRecovery} />
 
         <Route path="/test" component={() =>
