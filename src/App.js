@@ -9,6 +9,7 @@ import ContextTest from './components/auth/contextTest';
 import AuthContextProvider from './contexts/authContext';
 import ChangePassword from './components/auth/changePassword';
 import CreateAd from './components/createAd/createAd';
+import AdvertDetail from './components/advertDetail/advertDetail';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/signup" exact component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/changePassword/:id" component={ChangePassword} />
+        <Route path="/detail/:id" component={AdvertDetail} />
         <Route exact path="/passwordRecovery" component={PasswordRecovery} />
 
         <Route path="/test" component={() =>

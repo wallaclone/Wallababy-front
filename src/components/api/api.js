@@ -191,6 +191,25 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
+    adDetail: async (id) => {
+      try {
+        const response = await fetch(`${advertEndPoint}/${id}` , {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': window.localStorage.token
+          },
+        });
+        const data = await response.json();
+        if (!data || !data.result){
+          return new Error('The advert doesnt exists');
+        }
+        return data.result;
+      } catch (error) {
+        throw error;
+      }
+    }
+
   } //Close Return
 }; //Close const apiCall
 export default apiCall;
