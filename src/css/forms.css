@@ -1,14 +1,14 @@
 /* BUTTONS */
 .button,
 .confirm-button-class {
-  background-color: var(--button-color-ok) !important;
+  background-color: var(--button-color) !important;
   color: #ffffff !important;
   border: 1px solid !important;
 }
 
 .button:hover,
 .confirm-button-class {
-  background-color: var(--button-color-ok-over) !important;
+  background-color: var(--button-color-hover) !important;
   color: #ffffff !important;
   border: 1px solid !important;
 }
@@ -17,13 +17,13 @@
   width: 100%;
   padding: 10px !important;
   margin-bottom: 20px !important;
-  background-color: var(--button-color-ok) !important;
+  background-color: var(--button-color) !important;
   color: #ffffff !important;
   border: 1px solid !important;
 }
 
 .mybutton:hover {
-  background-color: var(--button-color-ok-over) !important;
+  background-color: var(--button-color-hover) !important;
 }
 
 /* FORM CONTAINERS (cards) */
@@ -64,7 +64,7 @@
 
 /* FORM */
 .auth-title {
-  color: #006D77;
+  color: var(--dark-color-title);
   margin: 0 auto;
   padding: 30px;
 }
