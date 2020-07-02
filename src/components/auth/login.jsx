@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Button, Form, Card } from 'react-bootstrap';
-
 import apiCall from '../api/api';
 
 const { login } = apiCall();
-
 
 export default function Login(props) {
   const [username, setUsername] = useState();
@@ -16,17 +13,13 @@ export default function Login(props) {
     setter(e.target.value);
   }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
     const response = await login(username, password);
     if (response.status !== 201) {
       props.history.push('/login');
     }
     props.history.push('/dashboard');
-
-
   }
 
   return (

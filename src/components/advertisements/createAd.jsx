@@ -98,7 +98,7 @@ function CreateAd(props) {
                 timer: 5000,
                 confirmButtonColor:  '#E29578',
             });
-            this.props.history.push('/login');
+            history.push('/login');
         } else if (adCreated.error) {
             console.error("adCreated.error:", adCreated.error);
             Swal.fire({

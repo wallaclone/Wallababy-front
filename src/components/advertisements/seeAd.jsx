@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
-
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share';
 import apiCall from '../api/api';
+
 const { getAd } = apiCall();
 
 export default function SeeAd(props) {
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
-
-    // const date = new Date(date_creation);
-    // const day = date.getDate().toString();
-    // const month = date.getMonth().toString();
-    // const year = date.getFullYear().toString();
-    // let dateFormatted = `${day}-${month}-${year}`.toString();
-
     const [ reloadAdvertisement, setReloadAdvertisement ] = useState(true);
-
     const history = useHistory();
     const { _id } = useParams();
     const [ advertisement, setAdvertisement ] = useState({});
-    console.log('id:', _id);
+    //console.log('id:', _id);
 
     useEffect(() => {
         if( reloadAdvertisement ){
@@ -53,6 +46,16 @@ export default function SeeAd(props) {
                     <p><strong>Description:</strong>
                     <br />
                     {advertisement.description}</p>
+
+                    <FacebookShareButton 
+                        url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
+                        <FacebookIcon size={32} round={true}></FacebookIcon>
+                    </FacebookShareButton>
+                    <TwitterShareButton
+                        url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
+                        <TwitterIcon size={32} round={true}></TwitterIcon>
+                    </TwitterShareButton>
+
                     <Button variant='primary' size='lg' className='mt-2' block onClick={() => history.goBack()}>
                         Return to advertisements
                     </Button>
