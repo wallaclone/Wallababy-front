@@ -5,6 +5,8 @@ import { Form, Col, Button }  from 'react-bootstrap';
 import apiCall from '../api/api';
 import Swal from 'sweetalert2';
 
+import {FormattedMessage, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
+
 const { getTags, createAd } = apiCall();
 
 function CreateAd(props) {
@@ -129,6 +131,17 @@ function CreateAd(props) {
     return (
         <div className="m-3">
             <h1 className='titleName' style={{ marginTop: '6rem' }}>Create Advertisement</h1>
+
+            <h1 style={{ color: 'red' }} >
+            <FormattedMessage id="app.title" value={(message) => ({message})} />
+            </h1>
+            <br />
+            <select>
+                    <option value="es-ES">ES</option>
+                    <option value="en-US">EN</option>
+                    <option value="de-DE">DE</option>
+            </select>
+            <br /><br />
 
             {/* <form encType='multipart/form-data' onSubmit={sendCreateAd}> */}
             <form encType="multipart/form-data" onSubmit={sendCreateAd}>
