@@ -25,7 +25,7 @@ function App() {
     if( reloadAdvertisements ){
       const loadAds = async () => {
         // realizamos la consulta al API
-        const resultAds = await getAds ('?limit=12&sort=-date_creation');
+        const resultAds = await getAds ();
         // console.log('resultAds:', resultAds.rows);
         setAdvertisements( resultAds.rows );
       }
