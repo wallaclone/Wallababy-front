@@ -7,6 +7,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
   const changePasswordEndPoint = `${passwordRecoveryEndPoint}/forgotpassword/`;
   const advertEndPoint = `${API}/adverts`;
   const tagEndPoint = `${API}/tags`;
+  const favoritesEndPoint = `${API}/favorites`;
 
   return {
     register: async (username, password, email) => {
@@ -292,6 +293,103 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         throw err;
       }
     },
+
+    addFavorite: async (adId) => {
+      try {
+        const response = await fetch(favoritesEndPoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+          
+        if (response.status !== 201) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Username or email already in use',
+            timer: 8000,
+            confirmButtonColor:  '#E29578',
+          });
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: `!`,
+            text: ``,
+            timer: 15000,
+            confirmButtonColor:  '#E29578',
+          });
+        }
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
+      }
+    },
+    
+    deleteFavorite: async (adId) => {
+        try {
+        const response = await fetch(`{$favoritesEndPoint/${adId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          credentials: 'include',
+
+        })
+          
+        if (response.status !== 201) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Username or email already in use',
+            timer: 8000,
+            confirmButtonColor:  '#E29578',
+          });
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: `Welcome `,
+            text: ``,
+            timer: 15000,
+            confirmButtonColor:  '#E29578',
+          });
+        }
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
+      }
+    },
+
+    getFavorites: async () => {
+      try {
+        const response = await fetch(favoritesEndPoint, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          credentials: 'include',
+        });
+        const data = await response.json();
+        return data;
+      } catch (err) {
+       console.error(err.message);
+        throw err;
+      }
+    },
+
+
+
+
+
 
   } //Close Return
 }; //Close const apiCall
