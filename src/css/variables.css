@@ -9,8 +9,9 @@
   --main-bg-color: #edf6f9;
 
   --bg-color-header: #83C5BE;
+  --dark-color-title: #006D77; 
   
-  --button-color-ok: #e29578;
-  /* --button-color-ok-over: #f7b6a0; */
-  --button-color-ok-over: #d4613b;
+  --button-color: #f7b6a0;
+  --button-color-hover: #e29578;
+
 }

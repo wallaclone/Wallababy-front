@@ -38,7 +38,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
             confirmButtonColor:  '#E29578',
           });
         }
-        const data = await response.json();
+        const data = await response;
         return data;
       } catch (err) {
           console.error(err.message);
@@ -143,10 +143,34 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
-    getAds: async (search) => {
+    changePassword: async (id, password) => {
       try {
-        // console.log("EndPoint:", `${advertEndPoint}?${search}`);
-        const response = await fetch(`${advertEndPoint}?${search}`, {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        const response = await fetch(changePasswordEndPoint+id, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            password,
+            token
+          })
+        });
+        await response.json();
+
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    
+    getAds: async (search = '') => {
+      try {
+        const DEFAULT_VALUE = '?limit=12&sort=-date_creation';
+        console.log("EndPoint getAds:", `${advertEndPoint}${DEFAULT_VALUE}${search}`);
+        // console.log("EndPoint getAds:", `${advertEndPoint}?${search}`);
+        const response = await fetch(`${advertEndPoint}${DEFAULT_VALUE}${search}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -183,28 +207,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
-    changePassword: async (id, password) => {
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-        const response = await fetch(changePasswordEndPoint+id, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ 
-            password,
-            token
-          })
-        });
-        await response.json();
-
-        return response;
-      } catch (error) {
-        throw error;
-      }
-    },
-    
     createAd: async (name, description, image, status, price, owner, tags) => {
       try {
         let fd = new FormData();

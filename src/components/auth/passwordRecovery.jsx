@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Form, Button }  from 'react-bootstrap';
-// import { Card, InputGroup, Form, Button }  from 'react-bootstrap';
-
 // import Swal from 'sweetalert2';
-// import { Link } from 'react-router-dom';
-// import passwordIco from '../img/password.png';
-// import loginIco from '../../img/login.png';
-
 import apiCall from '../api/api';
 
-// const { passwordRecovery } = apiCall('http://localhost:4000/api');
 const { passwordRecovery } = apiCall();
 
 function PasswordRecovery(props) {
@@ -87,49 +81,33 @@ function PasswordRecovery(props) {
     };
     
     return (
-        <div className='padre-logIn-SignUp'>
-        <div className='hijo-logIn-SignUp'>
-            <Form onSubmit={recoverPassword}>
-            <Form.Group >
-            <Card key='1'>
-                <Card.Body>
-                    <Card.Title className='centrado'>Password recovery for your account</Card.Title>
-                    <Card.Text>
-                        {/* <InputGroup className='mb-3'>
-                            <InputGroup.Prepend>
-                                <InputGroup.Text id='emailText'>
-                                    <Card.Img variant='top' src={loginIco} />
-                                </InputGroup.Text>
-                            </InputGroup.Prepend> */}
-                            <Form.Control type='email' className='mb-2'
-                                placeholder='Enter Email'
-                                name='email'
-                                // onChange={e => setObjectForm({ ...objectForm, [e.target.name] : e.target.value }) }
-                                onChange={handleChange}
-                                value={objectForm.email}
-                                required
-                            />
-                        {/* </InputGroup> */}
-                        {/* <InputGroup className='mb-3'> */}
-                            <Button type='submit' variant='primary' className='button' block>
-                            {/* <Button type='submit' size='lg' bsClass="button-ok" block> */}
-                                Password Recovery
-                            </Button>
-                            <Button variant='warning' onClick={handleClearButton} block>
-                                Clear
-                            </Button>   
-                        {/* </InputGroup> */}
-                    </Card.Text>
-                </Card.Body>
-                <Card.Footer className='centrado'>
-                    <span className='text-muted'>New to Wallaclone?</span>
-                    &nbsp;
-                    <Card.Link href='/signup'>Sign Up</Card.Link>
-                </Card.Footer>
-            </Card>
-            </Form.Group>
+        <div className='card-border'>
+            <Card className='mycard'>
+                <h2 className='auth-title'>Password recovery</h2>
+                <Form className='myform' onSubmit={recoverPassword}>
+                    <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control required type="email" 
+                        placeholder='Enter Email'
+                        name='email'
+                        value={objectForm.email}
+                        onChange={handleChange} 
+                    />
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                    </Form.Text>
+                </Form.Group>
+                
+                <Button className='mybutton' variant="primary" type="submit">
+                    Password Recovery
+                </Button>
+
+                <Button variant='warning' onClick={handleClearButton} className='mb-4' block>
+                    Clear
+                </Button>
             </Form>
-        </div>
+            <Card.Footer><span className='text-muted'>New to Wallaclone?</span> <Link to='/signup'>Sign Up</Link></Card.Footer>
+            </Card>
         </div>
     );
 }

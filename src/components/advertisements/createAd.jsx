@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 //import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import { Form, Col, Button }  from 'react-bootstrap';
 import apiCall from '../api/api';
 import Swal from 'sweetalert2';
 
-const { createAd } = apiCall();
+const { getTags, createAd } = apiCall();
 
 function CreateAd(props) {
 
+    const {setReloadAdvertisements} = props;
     const history = useHistory();
 
     const initialValues = {
@@ -19,35 +20,48 @@ function CreateAd(props) {
         status: '',
         price: 0,
         owner: '',
-        // tags: [],
-        tag1: false,
-        tag2: false,
-        tag3: false,
-        tag4: false,
+        tags: [],
     };
 
     const [ objectForm, setObjectForm ] = useState (initialValues);
+    const [ reloadTags, setReloadTags ] = useState( true );
+    // let arrayTags = [];
+
+    useEffect(() => {
+        if( reloadTags ){
+        const loadTags = async () => {
+            // realizamos la consulta al API
+            const resultTags = await getTags ();
+            // console.log('resultAds:', resultAds.rows);
+            //setObjectForm.tags( resultTags );
+
+            setObjectForm( { ...objectForm, tags : resultTags } );
+
+            // resultTags.forEach(tag => {
+            //     arrayTags.push({name:tag.name, status:false});
+            // });
+            // console.log("arrayTags:", arrayTags);
+        }
+        loadTags();
+
+        // We change to false the recharge of articles so that it isn't recharging continuously
+        setReloadTags( false );
+        }
+    }, [ reloadTags, objectForm ]);
 
     const handleChange = (event) => {
-        setObjectForm({
-            ...objectForm,
-            [event.target.name] : event.target.value,
-        });
-
-        const name = event.target.name;
-        if(name==='tag1' || name==='tag2' || name==='tag3' || name==='tag4') {
+        if(event.target.type !== 'checkbox') {
             setObjectForm({
                 ...objectForm,
-                [name] : event.target.checked,
+                [event.target.name] : event.target.value
+            });
+        } else { //if(event.target.type === 'checkbox') {
+            setObjectForm({
+                ...objectForm,
+                [event.target.name] : event.target.checked,
             });
         }
     };
-
-    // const handleClearButton = () => {
-    //     setObjectForm({
-    //         email : '',
-    //     });
-    // };
 
     const returnToDashboard = () => {
         history.goBack();
@@ -61,26 +75,19 @@ function CreateAd(props) {
 
     const sendCreateAd = async (event) => {
         event.preventDefault();
-        const { name, description, status, price, owner, tag1, tag2, tag3, tag4 } = objectForm;
-
+        const { name, description, status, price, owner, tags } = objectForm;
         const imgAux = document.getElementById('image-file').files[0];
-
-        // console.log('imgAux:', imgAux);
-        // console.log('image:', image);
-
         let myTags = [];
-        if (tag1)
-            myTags.push('tag1');
-        if (tag2)
-            myTags.push('tag2');
-        if (tag3)
-            myTags.push('tag3');
-        if (tag4)
-            myTags.push('tag4');
+
+        tags.forEach(tag => {
+            // console.log(document.getElementById(tag.name).value, "->", document.getElementById(tag.name).checked)
+            if(document.getElementById(tag.name).checked)
+                myTags.push(document.getElementById(tag.name).value);
+        });
+        // console.log("myTags:", myTags);
         
         //const adCreated = await createAd (name, description, image, status, price, owner, myTags);
         const adCreated = await createAd (name, description, imgAux, status, price, owner, myTags);
-
         // console.log("adCreated.error", adCreated.error);
 
         if (adCreated.error === 'Error: Not logged in' || adCreated.error === 'Error: No token provided' || adCreated === 'No token provided') {
@@ -91,7 +98,7 @@ function CreateAd(props) {
                 timer: 5000,
                 confirmButtonColor:  '#E29578',
             });
-            // this.props.history.push('/login');
+            history.push('/login');
         } else if (adCreated.error) {
             console.error("adCreated.error:", adCreated.error);
             Swal.fire({
@@ -112,18 +119,19 @@ function CreateAd(props) {
                 timer: 10000,
                 confirmButtonColor:  '#E29578',
             });
-            // this.props.history.push('/dashboard?');
+            // Redirect to dashboard (List of Advertisements)
+            // this.props.history.push('/dashboard');
+            setReloadAdvertisements(true);
+            history.push('/dashboard');
         }
     };
 
     return (
-        <div class="m-3">
-
-            {/* <Navbarr /> */}
-            <h1 className='titleName'>Create Advertisement</h1>
+        <div className="m-3">
+            <h1 className='titleName' style={{ marginTop: '6rem' }}>Create Advertisement</h1>
 
             {/* <form encType='multipart/form-data' onSubmit={sendCreateAd}> */}
-            <form enctype="multipart/form-data" onSubmit={sendCreateAd}>
+            <form encType="multipart/form-data" onSubmit={sendCreateAd}>
 
                 <Form.Group controlId="formGridTitle">
                     <Form.Label className='label'>Title of the ad:</Form.Label>
@@ -137,17 +145,18 @@ function CreateAd(props) {
 
                 <Form.Group controlId='formBasicCheckbox'> 
                     <Form.Label className='label'>Tags of the ad:</Form.Label>
-                    <Form.Check type='switch' name='tag1' id='tag1' key='tag1' value='tag1' label='tag1' onChange={handleChange} />
-                    <Form.Check type='switch' name='tag2' id='tag2' key='tag2' value='tag2' label='tag2' onChange={handleChange} />
-                    <Form.Check type='switch' name='tag3' id='tag3' key='tag3' value='tag3' label='tag3' onChange={handleChange} />
-                    <Form.Check type='switch' name='tag4' id='tag4' key='tag4' value='tag4' label='tag4' onChange={handleChange} />
-                    {/* {this.state.optionsTag.map(item => {
+                    {/* {objectForm.tags.map(item => {
                         if (item !== null) {
                             return (
-                                <Form.Check type="switch" name={item} id={item} key={item} value={item} label={item} onChange={this.handleChange} />
+                                <Form.Check type="switch" name={item.name} id={item.name} key={item.name} value={item.name} label={item.name} onChange={handleChange} />
                             )
                         }
                     })} */}
+                    {objectForm.tags.map(item => {
+                        return (
+                            <Form.Check type="switch" name={item.name} id={item.name} key={item.name} value={item.name} label={item.name} onChange={handleChange} />
+                        )
+                    })}
                 </Form.Group>
 
                 <Form.Row>
@@ -192,6 +201,7 @@ function CreateAd(props) {
                         custom
                     /> */}
 
+                    <br />
                     <input type='file' id='image-file' name='image' onChange={handleChange} accept='image/*' required />
 
                     {/* <Form.Control type="file" 
