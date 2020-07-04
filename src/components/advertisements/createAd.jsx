@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 //import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import { Form, Col, Button }  from 'react-bootstrap';
 import apiCall from '../api/api';
@@ -61,7 +61,7 @@ function CreateAd(props) {
 
     const sendCreateAd = async (event) => {
         event.preventDefault();
-        const { name, description, image, status, price, owner, tag1, tag2, tag3, tag4 } = objectForm;
+        const { name, description, status, price, owner, tag1, tag2, tag3, tag4 } = objectForm;
 
         const imgAux = document.getElementById('image-file').files[0];
 

@@ -6,6 +6,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
   const passwordRecoveryEndPoint = `${API}/recoverpassword`;
   const changePasswordEndPoint = `${passwordRecoveryEndPoint}/forgotpassword/`;
   const advertEndPoint = `${API}/adverts`;
+  const tagEndPoint = `${API}/tags`;
 
   return {
     register: async (username, password, email) => {
@@ -244,6 +245,38 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
+    editAdvert: async (idAd, advert) => {
+      try {
+        let fd = new FormData();
+        fd.append('name', advert.name);
+        fd.append('description', advert.description);
+        fd.append('image', advert.image);
+        fd.append('status', advert.status);
+        fd.append('price', parseInt(advert.price));
+        fd.append('owner', advert.owner);
+        fd.append('tags', advert.tags);
+        const response = await fetch(`${advertEndPoint}/${idAd}`, {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': window.localStorage.getItem('token'),
+          },
+          body: fd,
+          credentials: 'include',
+        });
+        await response.json();
+        
+        return response;
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: `Error`,
+          text: `There has been an error updating the advert, please try again.`,
+          timer: 10000,
+          confirmButtonColor:  '#E29578',
+        });
+      }
+    },
 
     deleteAd: async (idAd) => {
       try {
@@ -270,7 +303,25 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
-
+    getTags: async () => {
+      try {
+        // console.log("EndPoint:", `${tagEndPoint}`);
+        const response = await fetch(`${tagEndPoint}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          //'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
+          credentials: 'include',
+        });
+        const data = await response.json();
+        return data;
+      } catch (err) {
+        console.error(err.message);
+        throw err;
+      }
+    },
 
   } //Close Return
 }; //Close const apiCall

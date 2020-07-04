@@ -12,7 +12,7 @@ import ChangePassword from './components/auth/changePassword';
 import CreateAd from './components/advertisements/createAd';
 import Dashboard from './components/advertisements/dashboard';
 import SeeAd from './components/advertisements/seeAd';
-
+import EditAd from './components/advertisements/editAd';
 import apiCall from './components/api/api';
 const { getAds } = apiCall();
 
@@ -69,7 +69,7 @@ function App() {
         {/* <Route exact path="/dashboard/:_id" component={SeeAd} /> */}
 
         <Route exact path="/seeAd/:_id" component={SeeAd} />
-
+        <Route path="/editAd/:id" component={EditAd} />
         <Route exact path="/dashboard"
           render = { () => (
             <Dashboard
