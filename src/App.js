@@ -13,6 +13,7 @@ import CreateAd from './components/advertisements/createAd';
 import Dashboard from './components/advertisements/dashboard';
 import SeeAd from './components/advertisements/seeAd';
 import EditAd from './components/advertisements/editAd';
+import MyAdverts from './components/advertisements/myAdverts';
 import apiCall from './components/api/api';
 const { getAds } = apiCall();
 
@@ -113,6 +114,14 @@ function App() {
             <SeeAd 
             />
           </>
+        } />
+        <Route path='/myads/:username' component={() =>
+        <>
+          <AuthContextProvider>
+            <Header />
+          </AuthContextProvider>
+          <MyAdverts />
+        </>
         } />
         <Route exact path="/dashboard"
           render = { () => (

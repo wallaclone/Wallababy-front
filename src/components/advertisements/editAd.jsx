@@ -131,8 +131,6 @@ export default function EditAd(props) {
                 <Form.Group controlId='formBasicCheckbox'> 
                     <Form.Label className='label'>Tags of the ad:</Form.Label>
                     {objectForm.tags.map(item => {
-                        console.log("advertForn", advertForm);
-                        console.log("advertForm.tags", advertForm.tags);
                         if (advertForm.tags[0].includes(item.name)){
                             return (
                                 <Form.Check type="switch" name={item.name} id={item.name} key={item.name} value={item.name} label={item.name} onChange={handleChange} checked />
