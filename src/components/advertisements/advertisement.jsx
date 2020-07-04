@@ -106,7 +106,10 @@ const advertisement = ({ advertisement, setReloadAdvertisements }) => {
                         </Form.Group>
 
                         <Form.Group as={Col}  controlId="formGridCreateAd">
-                            <Link to={`/editAd/id=${_id}`}>
+                            <Link to={{
+                                pathname: `/editAd/id=${_id}`,
+                                query: advertisement
+                                }}>
                                 <Button variant='info' size='lg' block>
                                     Edit
                                 </Button>
