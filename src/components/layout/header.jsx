@@ -21,7 +21,7 @@ export default function Header(props) {
     <>
     <div className='navbar-wrapper'>
     <Navbar fixed="top" collapseOnSelect expand="lg">
-  <Navbar.Brand className='title' href="/dashbnoard">Wallaclone!</Navbar.Brand>
+  <Navbar.Brand className='title' href="/dashboard">Wallaclone!</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     {
@@ -34,7 +34,7 @@ export default function Header(props) {
 
     <Nav className='right-section'>
     <NavDropdown title={user} id="collasible-nav-dropdown">
-        <NavDropdown.Item>Your favorites</NavDropdown.Item>
+        <NavDropdown.Item href="/favorites">Your favorites</NavDropdown.Item>
         <NavDropdown.Item>Your ads</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item>Edit your profile</NavDropdown.Item>

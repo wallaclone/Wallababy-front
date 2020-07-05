@@ -12,30 +12,32 @@ import ChangePassword from './components/auth/changePassword';
 import CreateAd from './components/advertisements/createAd';
 import Dashboard from './components/advertisements/dashboard';
 import SeeAd from './components/advertisements/seeAd';
+import MyFavs from './components/advertisements/favorites';
+
 
 import apiCall from './components/api/api';
 const { getAds } = apiCall();
 
 function App() {
 
-  const [ advertisements, setAdvertisements ] = useState([]);
-  const [ reloadAdvertisements, setReloadAdvertisements ] = useState( true );
+  const [advertisements, setAdvertisements] = useState([]);
+  const [reloadAdvertisements, setReloadAdvertisements] = useState(true);
 
   useEffect(() => {
-    if( reloadAdvertisements ){
+    if (reloadAdvertisements) {
       const loadAds = async () => {
         // realizamos la consulta al API
-        const resultAds = await getAds ();
+        const resultAds = await getAds();
         // console.log('resultAds:', resultAds.rows);
-        setAdvertisements( resultAds.rows );
+        setAdvertisements(resultAds.rows);
       }
       loadAds();
 
       // We change to false the recharge of articles so that it isn't recharging continuously
-      setReloadAdvertisements( false );
+      setReloadAdvertisements(false);
     }
-  }, [ reloadAdvertisements ]);
-  
+  }, [reloadAdvertisements]);
+
   return (
     <Router>
       <Switch>
@@ -54,9 +56,11 @@ function App() {
         <Route exact path="/passwordRecovery" component={PasswordRecovery} />
 
         <Route path="/test" component={() =>
-          <AuthContextProvider>
-            <Header />
-          </AuthContextProvider>
+          <>
+            <AuthContextProvider>
+              <Header />
+            </AuthContextProvider>
+          </>
         } />
         {/* 
        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
@@ -73,14 +77,14 @@ function App() {
         } /> */}
 
         <Route path="/createAd" component={() =>
-         <>
-          <AuthContextProvider>
-            <Header />
-          </AuthContextProvider>
-        <CreateAd 
-          setReloadAdvertisements = { setReloadAdvertisements }
-        />
-        </>
+          <>
+            <AuthContextProvider>
+              <Header />
+            </AuthContextProvider>
+            <CreateAd
+              setReloadAdvertisements={setReloadAdvertisements}
+            />
+          </>
         } />
 
 
@@ -109,24 +113,33 @@ function App() {
             <AuthContextProvider>
               <Header />
             </AuthContextProvider>
-            <SeeAd 
+            <SeeAd
             />
           </>
         } />
 
         <Route exact path="/dashboard"
-          render = { () => (
+          render={() => (
             <>
               <AuthContextProvider>
                 <Header />
               </AuthContextProvider>
               <Dashboard
-                advertisements = { advertisements }
-                setReloadAdvertisements = { setReloadAdvertisements }
+                advertisements={advertisements}
+                setReloadAdvertisements={setReloadAdvertisements}
               />
             </>
-          ) }  
+          )}
         />
+
+        <Route path="/favorites" component={() =>
+          <>
+            <AuthContextProvider>
+              <Header />
+            </AuthContextProvider>
+            <MyFavs />
+          </>
+        } />
 
         <Redirect to="/dashboard" />
       </Switch>
