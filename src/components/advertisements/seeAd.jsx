@@ -4,9 +4,11 @@ import { Card, Button } from "react-bootstrap";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share';
 import apiCall from '../api/api';
 
+import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
+
 const { getAd } = apiCall();
 
-export default function SeeAd(props) {
+function SeeAd(props) {
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
     const [ reloadAdvertisement, setReloadAdvertisement ] = useState(true);
     const history = useHistory();
@@ -29,6 +31,9 @@ export default function SeeAd(props) {
     return (
         <div className="m-3">
         <Card key={advertisement._id} style={{ marginTop: '6rem' }}>
+
+            {props.intl.formatMessage({ id: 'createAd.titleAdPlaceholder' })}
+
             <Card.Img variant='top' src={`${BACK_IMAGE_PATH}${advertisement.image}`} />
             <Card.Body>
                 <Link to={`/dashboard/${_id}`}>
@@ -71,3 +76,6 @@ export default function SeeAd(props) {
         </div>
     );
 };
+const seeAd = injectIntl(SeeAd);
+export { seeAd };
+// export default SeeAd;

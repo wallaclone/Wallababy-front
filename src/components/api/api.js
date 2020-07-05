@@ -104,6 +104,9 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     passwordRecovery: async (email) => {
       try {
+
+        console.log("ENTRO EN passwordRecovery");
+
         const response = await fetch(passwordRecoveryEndPoint, {
           method: 'POST',
           headers: {
@@ -114,6 +117,9 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           }),
           // credentials: 'include',
         });
+
+        console.log('response:', response);
+        console.log('response.status:', response.status);
 
         if (response.status !== 201) {
           Swal.fire({

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Card, Form, Button }  from 'react-bootstrap';
 // import Swal from 'sweetalert2';
 import apiCall from '../api/api';
+
+import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
 const { passwordRecovery } = apiCall();
 
@@ -11,6 +13,8 @@ function PasswordRecovery(props) {
     const [ objectForm, setObjectForm ] = useState ({
         email : '',
     });
+
+    const history = useHistory();
 
     const handleChange = (event) => {
         setObjectForm({
@@ -75,7 +79,8 @@ function PasswordRecovery(props) {
         // }
 
         if (response.status === 201) {
-            props.history.push('/login');
+            // props.history.push('/login');
+            history.push('/login');
         }
 
     };
@@ -83,32 +88,38 @@ function PasswordRecovery(props) {
     return (
         <div className='card-border'>
             <Card className='mycard'>
-                <h2 className='auth-title'>Password recovery</h2>
+                <h2 className='auth-title'>{props.intl.formatMessage({ id: 'passwordRecovery.title' })}</h2>
                 <Form className='myform' onSubmit={recoverPassword}>
                     <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
                     <Form.Control required type="email" 
-                        placeholder='Enter Email'
+                        placeholder={props.intl.formatMessage({ id: 'passwordRecovery.emailPlaceholder' })}
                         name='email'
                         value={objectForm.email}
                         onChange={handleChange} 
                     />
                     <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
+                        {props.intl.formatMessage({ id: 'passwordRecovery.phrase' })}
                     </Form.Text>
                 </Form.Group>
                 
                 <Button className='mybutton' variant="primary" type="submit">
-                    Password Recovery
+                    {props.intl.formatMessage({ id: 'passwordRecovery.title' })}
                 </Button>
 
                 <Button variant='warning' onClick={handleClearButton} className='mb-4' block>
-                    Clear
+                    {props.intl.formatMessage({ id: 'all.clear' })}
                 </Button>
             </Form>
-            <Card.Footer><span className='text-muted'>New to Wallaclone?</span> <Link to='/signup'>Sign Up</Link></Card.Footer>
+            <Card.Footer>
+                <span className='text-muted'>{props.intl.formatMessage({ id: 'all.newAPP' })}</span> 
+                &nbsp;
+                <Link to='/signup'>{props.intl.formatMessage({ id: 'all.signUp' })}</Link>
+            </Card.Footer>
             </Card>
         </div>
     );
 }
-export default PasswordRecovery;
+const Passwordrecovery = injectIntl(PasswordRecovery);
+export { Passwordrecovery };
+// export default PasswordRecovery;

@@ -5,15 +5,23 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import {IntlProvider} from 'react-intl';
 import {messages as allMessages} from './messages/messages';
 
-import PasswordRecovery from './components/auth/passwordRecovery';
-import Signup from './components/auth/signup';
-import Login from './components/auth/login';
-import Header from './components/layout/header';
+//import PasswordRecovery from './components/auth/passwordRecovery';
+import {Passwordrecovery as PasswordRecovery} from './components/auth/passwordRecovery';
+// import Signup from './components/auth/signup';
+import {SignUp as Signup} from './components/auth/signup';
+// import Login from './components/auth/login';
+import {LogIn as Login} from './components/auth/login';
+// import Header from './components/layout/header';
+import {header as Header} from './components/layout/header';
 import AuthContextProvider from './contexts/authContext';
-import ChangePassword from './components/auth/changePassword';
-import CreateAd from './components/advertisements/createAd';
-import Dashboard from './components/advertisements/dashboard';
-import SeeAd from './components/advertisements/seeAd';
+// import ChangePassword from './components/auth/changePassword';
+import {Changepassword as ChangePassword} from './components/auth/changePassword';
+//import CreateAd from './components/advertisements/createAd';
+import {createAD as CreateAd} from './components/advertisements/createAd';
+// import Dashboard from './components/advertisements/dashboard';
+import {dashboard as Dashboard} from './components/advertisements/dashboard';
+// import SeeAd from './components/advertisements/seeAd';
+import {seeAd as SeeAd} from './components/advertisements/seeAd';
 
 import apiCall from './components/api/api';
 const { getAds } = apiCall();
@@ -77,10 +85,58 @@ function App() {
         <Route path="/createAd" component={CreateAd} />
         */}
 
-        <Route path="/signup" exact component={Signup} />
-        <Route path="/login" component={Login} />
-        <Route path="/changePassword/:id" component={ChangePassword} />
-        <Route exact path="/passwordRecovery" component={PasswordRecovery} />
+        {/* <Route path="/signup" exact component={Signup} /> */}
+        <Route exact path="/signup"
+          render = { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              {/* <AuthContextProvider>
+                <Header setReloadLanguage = { setReloadLanguage } />
+              </AuthContextProvider> */}
+ 
+              <Signup />
+            </IntlProvider>
+          ) }  
+        />
+
+        {/* <Route path="/login" component={Login} /> */}
+        <Route exact path="/login"
+          render = { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              {/* <AuthContextProvider>
+                <Header setReloadLanguage = { setReloadLanguage } />
+              </AuthContextProvider> */}
+ 
+              <Login />
+            </IntlProvider>
+          ) }  
+        />
+
+        
+        {/* <Route path="/changePassword/:id" component={ChangePassword} /> */}
+        <Route path="/changePassword/:id"
+          render = { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              {/* <AuthContextProvider>
+                <Header setReloadLanguage = { setReloadLanguage } />
+              </AuthContextProvider> */}
+ 
+              <ChangePassword />
+            </IntlProvider>
+          ) }  
+        />
+
+        {/* <Route exact path="/passwordRecovery" component={PasswordRecovery} /> */}
+        <Route exact path="/passwordRecovery"
+          render = { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              {/* <AuthContextProvider>
+                <Header setReloadLanguage = { setReloadLanguage } />
+              </AuthContextProvider> */}
+ 
+              <PasswordRecovery />
+            </IntlProvider>
+          ) }  
+        />
 
         <Route path="/test" component={() =>
           <AuthContextProvider>
@@ -101,8 +157,7 @@ function App() {
         </>
         } /> */}
 
-        <Route path="/createAd" component={() =>
-         
+        {/* <Route path="/createAd" component={() =>
           <IntlProvider locale={currentLocale} messages={messages}>
             <AuthContextProvider>
               <Header setReloadLanguage = { setReloadLanguage } />
@@ -112,23 +167,21 @@ function App() {
               setReloadAdvertisements = { setReloadAdvertisements }
             />
           </IntlProvider>
-         
-        } />
+        } /> */}
 
-
-        {/* <Route path="/createAd"
+        <Route path="/createAd"
           render = { () => (
-            <>
+            <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
-                <Header />
+                <Header setReloadLanguage = { setReloadLanguage } />
               </AuthContextProvider>
-              <createAd
+ 
+              <CreateAd 
                 setReloadAdvertisements = { setReloadAdvertisements }
               />
-            </>
+            </IntlProvider>
           ) }  
-        /> */}
-
+        />
 
         {/* <Route path="/dashboard" component={Dashboard} /> */}
 
@@ -136,27 +189,39 @@ function App() {
 
         {/* <Route exact path="/seeAd/:_id" component={SeeAd} /> */}
 
-        <Route exact path="/seeAd/:_id" component={() =>
-          <>
+        {/* <Route exact path="/seeAd/:_id" component={() =>
+          <IntlProvider locale={currentLocale} messages={messages}>
             <AuthContextProvider>
-              <Header />
+              <Header setReloadLanguage = { setReloadLanguage } />
             </AuthContextProvider>
-            <SeeAd 
-            />
-          </>
-        } />
+            <SeeAd />
+          </IntlProvider>
+        } /> */}
+
+        <Route exact path="/seeAd/:_id"
+          render = { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              <AuthContextProvider>
+                <Header setReloadLanguage = { setReloadLanguage } />
+              </AuthContextProvider>
+ 
+              <SeeAd />
+            </IntlProvider>
+          ) }  
+        />
 
         <Route exact path="/dashboard"
           render = { () => (
-            <>
+            <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
-                <Header />
+                <Header setReloadLanguage = { setReloadLanguage } />
               </AuthContextProvider>
+ 
               <Dashboard
                 advertisements = { advertisements }
                 setReloadAdvertisements = { setReloadAdvertisements }
               />
-            </>
+            </IntlProvider>
           ) }  
         />
 

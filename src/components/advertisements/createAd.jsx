@@ -5,7 +5,7 @@ import { Form, Col, Button }  from 'react-bootstrap';
 import apiCall from '../api/api';
 import Swal from 'sweetalert2';
 
-import {FormattedMessage, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
+import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
 const { getTags, createAd } = apiCall();
 
@@ -69,11 +69,11 @@ function CreateAd(props) {
         history.goBack();
     };
     
-    const returnToLogin = () => {
-        //sessionStorage.clear();
-        localStorage.clear();
-        props.history.push(`/login`);
-    };
+    // const returnToLogin = () => {
+    //     //sessionStorage.clear();
+    //     localStorage.clear();
+    //     props.history.push(`/login`);
+    // };
 
     const sendCreateAd = async (event) => {
         event.preventDefault();
@@ -130,41 +130,22 @@ function CreateAd(props) {
 
     return (
         <div className="m-3">
-            <h1 className='titleName' style={{ marginTop: '6rem' }}>Create Advertisement</h1>
+            <h1 className='titleName' style={{ marginTop: '6rem' }}><FormattedMessage id="createAd.title" value={(message) => ({message})} /></h1>
 
-            <h1 style={{ color: 'red' }} >
-            <FormattedMessage id="app.title" value={(message) => ({message})} />
-            </h1>
-            <br />
-            <select>
-                    <option value="es-ES">ES</option>
-                    <option value="en-US">EN</option>
-                    <option value="de-DE">DE</option>
-            </select>
-            <br /><br />
-
-            {/* <form encType='multipart/form-data' onSubmit={sendCreateAd}> */}
             <form encType="multipart/form-data" onSubmit={sendCreateAd}>
 
                 <Form.Group controlId="formGridTitle">
-                    <Form.Label className='label'>Title of the ad:</Form.Label>
+                    <Form.Label className='label'><FormattedMessage id="createAd.titleAd" value={(message) => ({message})}/></Form.Label>
                     <Form.Control type="text" 
                         name="name" 
                         maxLength="50"
-                        placeholder="Add the title of the ad" 
+                        placeholder={props.intl.formatMessage({ id: 'createAd.titleAdPlaceholder' })} 
                         onChange={handleChange}
                         required />
                 </Form.Group>
 
                 <Form.Group controlId='formBasicCheckbox'> 
-                    <Form.Label className='label'>Tags of the ad:</Form.Label>
-                    {/* {objectForm.tags.map(item => {
-                        if (item !== null) {
-                            return (
-                                <Form.Check type="switch" name={item.name} id={item.name} key={item.name} value={item.name} label={item.name} onChange={handleChange} />
-                            )
-                        }
-                    })} */}
+                    <Form.Label className='label'><FormattedMessage id="createAd.tagsAd" value={(message) => ({message})}/></Form.Label>
                     {objectForm.tags.map(item => {
                         return (
                             <Form.Check type="switch" name={item.name} id={item.name} key={item.name} value={item.name} label={item.name} onChange={handleChange} />
@@ -174,89 +155,68 @@ function CreateAd(props) {
 
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridMinPrice">
-                        <Form.Label className='label'>Type of ad:</Form.Label>
+                        <Form.Label className='label'><FormattedMessage id="createAd.typeAd" value={(message) => ({message})}/></Form.Label>
                         <Form.Control as="select" 
                             name="status"
                             onChange={handleChange}
                             // value={this.state.venta} 
                             required>
-                            <option value="" defaultValue>Select the type of ad (Buy/Sell)</option>
-                            <option value="true">Buy</option>
-                            <option value="false">Sell</option>
+                            <option value="" defaultValue>{props.intl.formatMessage({ id: 'createAd.selectTypeAd' })}</option>
+                            <option value="true">{props.intl.formatMessage({ id: 'createAd.buy' })}</option>
+                            <option value="false">{props.intl.formatMessage({ id: 'createAd.sell' })}</option>
                         </Form.Control>
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridMaxPrice">
-                        <Form.Label className='label'>Price of the ad:</Form.Label>
+                        <Form.Label className='label'><FormattedMessage id="createAd.priceAd" value={(message) => ({message})}/></Form.Label>
                         <Form.Control type="number" 
                             name="price" 
-                            placeholder="Add the price of the ad" 
+                            placeholder={props.intl.formatMessage({ id: 'createAd.priceAdPlaceholder' })} 
                             onChange={handleChange}
                             required />
                     </Form.Group>
                 </Form.Row>
                 
                 <Form.Group controlId="formGridPhoto">
-                    <Form.Label className='label'>Search photo to upload:</Form.Label>
-                    {/* <Form.Control type="text" 
-                        name="photo" 
-                        maxLength="120"
-                        placeholder="Add the link to the ad photo" 
-                        // onChange={handleChange}
-                        required /> */}
-                    
-                    {/* <Form.File 
-                        id='image'
-                        name='image'
-                        // label='Search photo to upload'
-                        label=''
-                        onChange={handleChange}
-                        custom
-                    /> */}
-
+                    <Form.Label className='label'><FormattedMessage id="createAd.uploadAd" value={(message) => ({message})}/></Form.Label>
                     <br />
                     <input type='file' id='image-file' name='image' onChange={handleChange} accept='image/*' required />
-
-                    {/* <Form.Control type="file" 
-                        name="image"
-                        onChange={handleChange}
-                        required /> */}
-                        
-                    {/* <input type="file" id="myfile" name="myfile" enctype="multipart/form-data"></input> */}
                 </Form.Group>
 
                 <Form.Group controlId="formGridDescription">
-                    <Form.Label className='label'>Description of the ad:</Form.Label>
+                    <Form.Label className='label'><FormattedMessage id="createAd.descriptionAd" value={(message) => ({message})}/></Form.Label>
                     <Form.Control as="textarea" 
                         name="description"
                         rows="3"
                         maxLength="85"
-                        placeholder="Add the description of the ad"
+                        placeholder={props.intl.formatMessage({ id: 'createAd.descriptionAdPlaceholder' })}  
                         onChange={handleChange}
                         required />
                 </Form.Group>
 
                 <Form.Row>
-                    <Form.Group as={Col} md="7" controlId="formGridCreateAd">
+                    <Form.Group as={Col} md="8" controlId="formGridCreateAd">
                         <Button type="submit" variant="primary" size="lg" block>
-                            Create advertisement
+                            <FormattedMessage id="createAd.buttonCreateAd" value={(message) => ({message})}/>
                         </Button>
                     </Form.Group>
 
-                    <Form.Group as={Col} md="3" controlId="formGridReturnAds">
+                    <Form.Group as={Col} md="4" controlId="formGridReturnAds">
                         <Button variant="warning" size="lg" block onClick={returnToDashboard}>
-                            Return to Ads 
+                            <FormattedMessage id="createAd.buttonReturnAd" value={(message) => ({message})}/>
                         </Button>
                     </Form.Group>
 
-                    <Form.Group as={Col} md="2" controlId="formGridLogOut">
+                    {/* <Form.Group as={Col} md="2" controlId="formGridLogOut">
                         <Button variant="danger" size="lg" block onClick={returnToLogin}>
                             Log Out
                         </Button>
-                    </Form.Group>
+                    </Form.Group> */}
                 </Form.Row>
             </form>
         </div>
     )
 }
-export default CreateAd;
+const createAD = injectIntl(CreateAd);
+export { createAD };
+// export default CreateAd;
