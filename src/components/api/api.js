@@ -308,22 +308,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           credentials: 'include',
         })
           
-        if (response.status !== 201) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Username or email already in use',
-            timer: 8000,
-            confirmButtonColor:  '#E29578',
-          });
-        } else {
-          Swal.fire({
-            icon: 'success',
-            title: `!`,
-            text: ``,
-            timer: 15000,
-            confirmButtonColor:  '#E29578',
-          });
-        }
+    
         const data = await response;
         return data;
       } catch (err) {
@@ -344,22 +329,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
         })
           
-        if (response.status !== 201) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Username or email already in use',
-            timer: 8000,
-            confirmButtonColor:  '#E29578',
-          });
-        } else {
-          Swal.fire({
-            icon: 'success',
-            title: `Welcome `,
-            text: ``,
-            timer: 15000,
-            confirmButtonColor:  '#E29578',
-          });
-        }
+      
         const data = await response;
         return data;
       } catch (err) {
