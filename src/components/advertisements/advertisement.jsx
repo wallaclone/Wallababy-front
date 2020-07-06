@@ -115,7 +115,10 @@ function Advertisement (props) {
                         </Form.Group>
 
                         <Form.Group as={Col}  controlId="formGridCreateAd">
-                            <Link to={`/editAd/id=${_id}`}>
+                            <Link to={{
+                                pathname: `/editAd/id=${_id}`,
+                                query: advertisement
+                                }}>
                                 <Button variant='info' size='lg' block>
                                 {props.intl.formatMessage({ id: 'advertisement.edit' })}
                                 </Button>
