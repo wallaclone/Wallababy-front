@@ -23,7 +23,8 @@ import {dashboard as Dashboard} from './components/advertisements/dashboard';
 // import SeeAd from './components/advertisements/seeAd';
 import {seeAd as SeeAd} from './components/advertisements/seeAd';
 import EditAd from './components/advertisements/editAd';
-
+import MyAdverts from './components/advertisements/myAdverts';
+import EditProfile from './components/user/editProfile';
 import apiCall from './components/api/api';
 const { getAds } = apiCall();
 
@@ -31,6 +32,7 @@ function App() {
 
   const [ advertisements, setAdvertisements ] = useState([]);
   const [ reloadAdvertisements, setReloadAdvertisements ] = useState( true );
+
 
   // const [ reloadLanguage, setReloadLanguage ] = useState('es-ES');
   // const [ messages, setMessages ] = useState(allMessages[reloadLanguage]);
@@ -42,7 +44,6 @@ function App() {
   // console.log('--------currentLocale:', currentLocale);
   // console.log('--------messages:', messages);
   const [ reloadLanguage, setReloadLanguage ] = useState(currentLocale);
-  
 
   useEffect(() => {
     
@@ -190,17 +191,28 @@ function App() {
 
         <Route path="/editAd/:id" component={EditAd} />
         {/* <Route exact path="/seeAd/:_id" component={SeeAd} /> */}
+  
+        <Route path='/myads/:username' component={() =>
+        <>
+          <AuthContextProvider>
+            <Header />
+          </AuthContextProvider>
+          <MyAdverts 
+          setReloadAdvertisements = { setReloadAdvertisements }
+          />
+        </>
+        } />
+        <Route path='/myprofile' component={() =>
+        <>
+          <AuthContextProvider>
+            <Header />
+            <EditProfile />
+          </AuthContextProvider>
+          
+        </>
+        } />
 
-        {/* <Route exact path="/seeAd/:_id" component={() =>
-          <IntlProvider locale={currentLocale} messages={messages}>
-            <AuthContextProvider>
-              <Header setReloadLanguage = { setReloadLanguage } />
-            </AuthContextProvider>
-            <SeeAd />
-          </IntlProvider>
-        } /> */}
-
-        <Route exact path="/seeAd/:_id"
+        <Route exact path="/seeAd/:_id/:name"
           render = { () => (
             <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>

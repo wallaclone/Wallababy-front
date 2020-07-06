@@ -330,6 +330,62 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         throw err;
       }
     },
+    /* You can get the user by Id or name */
+    getUser: async (id) => {
+      try {
+        const response = await fetch(`${registerEndPoint}/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          credentials: 'include'
+        });
+        const data = await response.json();
+        if (!data){
+          return new Error('The user does not exist');
+        }
+        return data.result;
+      } catch (error) {
+        throw error;
+      }
+    },
+
+    editUser: async (id, userData) => {
+      try {
+        const response = await fetch(`${registerEndPoint}/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          credentials: 'include', 
+          body: JSON.stringify(userData)
+        });
+        const message = await response.json();
+        return { response, message };
+      } catch (error) {
+        throw error;
+      }
+    },
+
+    deleteUser: async (id) => {
+      try {
+        const response = await fetch(`${registerEndPoint}/${id}`, {
+          method: 'DELETE',
+          header: {
+            'Authorization': `${ window.localStorage.getItem('token') }`
+          },
+          credentials: 'include'
+        });
+
+        await response.json();
+        return response;
+      } catch (error) {
+        throw(error);
+      }
+    }
+
 
   } //Close Return
 }; //Close const apiCall

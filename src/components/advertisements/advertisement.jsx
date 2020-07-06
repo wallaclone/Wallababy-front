@@ -99,7 +99,7 @@ function Advertisement (props) {
                 </div>
 
                 <div className="card-footer text-center">
-                    <Link to={`/seeAd/${_id}`}> 
+                    <Link to={`/seeAd/${_id}/${name}`}> 
                         <Button variant='success' size='lg' className='mt-2 button' block>
                             {props.intl.formatMessage({ id: 'advertisement.seeFullAd' })}
                         </Button>
