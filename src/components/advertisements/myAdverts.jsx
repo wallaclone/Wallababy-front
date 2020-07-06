@@ -2,11 +2,13 @@ import React, {useState, useEffect} from 'react';
 import { Link, useParams } from 'react-router-dom';
 import apiCall from '../api/api';
 import { Button, Form, Col } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
-const { getAds, deleteAD } = apiCall();
+const { getAds, deleteAd } = apiCall();
 
 export default function MyAdverts(props) {
-    const {username} = useParams();
+    const { setReloadAdvertisements } = props;
+    const { username } = useParams();
     const [adverts, setAdverts] = useState([]);
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
 
@@ -18,6 +20,42 @@ export default function MyAdverts(props) {
         }
         getUserAdverts();
     }, [])
+
+    const deleteAD = async (e, idAd) => {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel',
+        }).then( async (result) => {
+            if (result.value) {
+                
+                try {
+                    const adDeleted = await deleteAd (idAd);
+                    if(adDeleted.status === 200) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your advertisement has been deleted.',
+                            'success'
+                        )
+                        // We reload ads to make the removed ad disappear
+                        setReloadAdvertisements(true);
+                    }
+                } catch (error) {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Error',
+                        text: 'There was a mistake. Try again.'
+                    })
+                }
+            }
+        })
+    }
 
     return (
         <div>
@@ -45,7 +83,7 @@ export default function MyAdverts(props) {
                         </div>
 
                         <div className="card-footer text-center">
-                            <Link to={`/seeAd/${advert._id}`}> 
+                            <Link to={`/seeAd/${advert._id}/${advert.name}`}>
                                 <Button variant='success' size='lg' className='mt-2 button' block>
                                     See full Advertisement
                                 </Button>
@@ -54,7 +92,7 @@ export default function MyAdverts(props) {
                             <Form.Row className='mt-2'>
                                 <Form.Group as={Col}  controlId="formGridCreateAd">
                                     <Link to={`/dashboard/${advert._id}`}>
-                                        <Button variant='danger' size='lg' onClick={ ()=> deleteAD(advert._id) } block>
+                                        <Button variant='danger' size='lg' onClick={ event=> deleteAD(event, advert._id) } block>
                                             Delete
                                         </Button>
                                     </Link>

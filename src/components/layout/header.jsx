@@ -36,7 +36,7 @@ export default function Header(props) {
               <NavDropdown.Item>Your favorites</NavDropdown.Item>
               <NavDropdown.Item><Link to={'/myads/'+user}>Your ads</Link></NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item>Edit your profile</NavDropdown.Item>
+              <NavDropdown.Item><Link to={'/myprofile'}>Edit your profile</Link></NavDropdown.Item>
             </NavDropdown>
             <Nav.Link className='logout' onClick={handleClick} href="/login">log out</Nav.Link>
           </Nav>

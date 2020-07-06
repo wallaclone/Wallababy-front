@@ -9,7 +9,7 @@ const { getTags, createAd } = apiCall();
 
 function CreateAd(props) {
 
-    const {setReloadAdvertisements} = props;
+    const { setReloadAdvertisements } = props;
     const history = useHistory();
 
     const initialValues = {

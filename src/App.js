@@ -14,6 +14,7 @@ import Dashboard from './components/advertisements/dashboard';
 import SeeAd from './components/advertisements/seeAd';
 import EditAd from './components/advertisements/editAd';
 import MyAdverts from './components/advertisements/myAdverts';
+import EditProfile from './components/user/editProfile';
 import apiCall from './components/api/api';
 const { getAds } = apiCall();
 
@@ -21,7 +22,7 @@ function App() {
 
   const [ advertisements, setAdvertisements ] = useState([]);
   const [ reloadAdvertisements, setReloadAdvertisements ] = useState( true );
-
+  
   useEffect(() => {
     if( reloadAdvertisements ){
       const loadAds = async () => {
@@ -106,7 +107,7 @@ function App() {
         <Route path="/editAd/:id" component={EditAd} />
         {/* <Route exact path="/seeAd/:_id" component={SeeAd} /> */}
 
-        <Route exact path="/seeAd/:_id" component={() =>
+        <Route exact path="/seeAd/:_id/:name" component={() =>
           <>
             <AuthContextProvider>
               <Header />
@@ -120,7 +121,18 @@ function App() {
           <AuthContextProvider>
             <Header />
           </AuthContextProvider>
-          <MyAdverts />
+          <MyAdverts 
+          setReloadAdvertisements = { setReloadAdvertisements }
+          />
+        </>
+        } />
+        <Route path='/myprofile' component={() =>
+        <>
+          <AuthContextProvider>
+            <Header />
+            <EditProfile />
+          </AuthContextProvider>
+          
         </>
         } />
         <Route exact path="/dashboard"

@@ -1,10 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, Col } from "react-bootstrap";
-import Swal from 'sweetalert2';
-import apiCall from '../api/api';
-
-const { deleteAd } = apiCall();
 
 const advertisement = ({ advertisement, setReloadAdvertisements }) => {
     const { 
@@ -27,44 +23,6 @@ const advertisement = ({ advertisement, setReloadAdvertisements }) => {
     const month = date.getMonth().toString();
     const year = date.getFullYear().toString();
     let dateFormatted = `${day}-${month}-${year}`.toString();
-    
-    const deleteAD = async (idAd) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'Cancel',
-        }).then( async (result) => {
-            if (result.value) {
-                try {
-                    const adDeleted = await deleteAd (idAd);
-                    // console.log("adDeleted", adDeleted);
-                    // console.log("result.value:", result.value);
-                    if(adDeleted.status === 200) {
-                        Swal.fire(
-                            'Deleted!',
-                            'Your advertisement has been deleted.',
-                            'success'
-                        )
-
-                        // We reload ads to make the removed ad disappear
-                        setReloadAdvertisements(true);
-                    }
-                } catch (error) {
-                    console.log(error);
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Error',
-                        text: 'There was a mistake. Try again.'
-                    })
-                }
-            }
-        })
-    }
 
     return (
         <div className="col mb-4" key={_id}>
@@ -90,32 +48,11 @@ const advertisement = ({ advertisement, setReloadAdvertisements }) => {
                 </div>
 
                 <div className="card-footer text-center">
-                    <Link to={`/seeAd/${_id}`}> 
+                    <Link to={`/seeAd/${_id}/${name}`}> 
                         <Button variant='success' size='lg' className='mt-2 button' block>
                             See full Advertisement
                         </Button>
                     </Link>
-
-                    <Form.Row className='mt-2'> {/* 'ml-1 mr-1' */}
-                        <Form.Group as={Col}  controlId="formGridCreateAd">
-                            <Link to={`/dashboard/${_id}`}>
-                                <Button variant='danger' size='lg' onClick={ ()=> deleteAD(_id) } block>
-                                    Delete
-                                </Button>
-                            </Link>
-                        </Form.Group>
-
-                        <Form.Group as={Col}  controlId="formGridCreateAd">
-                            <Link to={{
-                                pathname: `/editAd/id=${_id}`,
-                                query: advertisement
-                                }}>
-                                <Button variant='info' size='lg' block>
-                                    Edit
-                                </Button>
-                            </Link>
-                        </Form.Group>
-                    </Form.Row>
                 </div>
 
                 <div className="card-footer text-center">
