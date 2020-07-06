@@ -3,10 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import apiCall from '../api/api';
 import { Button, Form, Col } from "react-bootstrap";
 import Swal from 'sweetalert2';
+import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
 const { getAds, deleteAd } = apiCall();
 
-export default function MyAdverts(props) {
+function MyAdverts(props) {
     const { setReloadAdvertisements } = props;
     const { username } = useParams();
     const [adverts, setAdverts] = useState([]);
@@ -120,3 +121,6 @@ export default function MyAdverts(props) {
         </div>
     );
 }
+
+const Myadverts = injectIntl(MyAdverts);
+export { Myadverts };

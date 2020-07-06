@@ -4,10 +4,11 @@ import { Button, Accordion, Card } from "react-bootstrap";
 import { useParams, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contexts/authContext';
 import Swal from 'sweetalert2';
+import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
 const { getUser, editUser, deleteUser } = apiCall();
 
-export default function EditProfile(props) {
+function EditProfile(props) {
     const history = useHistory();
     const { user, setUser } = useContext(AuthContext);
     const username = window.localStorage.getItem('username');
@@ -187,3 +188,6 @@ export default function EditProfile(props) {
         </div>
     )
 }
+
+const Editprofile = injectIntl(EditProfile);
+export {Editprofile};

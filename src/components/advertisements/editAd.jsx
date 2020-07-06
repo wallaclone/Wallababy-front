@@ -3,10 +3,11 @@ import { useHistory } from "react-router-dom";
 import { Form, Col, Button, Image }  from 'react-bootstrap';
 import apiCall from '../api/api';
 import Swal from 'sweetalert2';
+import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
 const { getTags, editAdvert, getAd } = apiCall();
 
-export default function EditAd(props) {
+function EditAd(props) {
     const id = props.match.params.id;
     const advertId = id.replace('id=', '');
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
@@ -210,3 +211,6 @@ export default function EditAd(props) {
         </div>
     )
 }
+
+const Editad = injectIntl(EditAd);
+export { Editad };

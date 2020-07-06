@@ -22,9 +22,9 @@ import {createAD as CreateAd} from './components/advertisements/createAd';
 import {dashboard as Dashboard} from './components/advertisements/dashboard';
 // import SeeAd from './components/advertisements/seeAd';
 import {seeAd as SeeAd} from './components/advertisements/seeAd';
-import EditAd from './components/advertisements/editAd';
-import MyAdverts from './components/advertisements/myAdverts';
-import EditProfile from './components/user/editProfile';
+import { Editad as EditAd } from './components/advertisements/editAd';
+import { Myadverts as MyAdverts } from './components/advertisements/myAdverts';
+import { Editprofile as EditProfile } from './components/user/editProfile';
 import apiCall from './components/api/api';
 const { getAds } = apiCall();
 
