@@ -4,22 +4,28 @@ import { Link } from 'react-router-dom';
 import apiCall from '../api/api';
 
 import { Button } from "react-bootstrap";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const {getFavorites } = apiCall();
 
-export default function MyFavs(props) {
+const {getFavorites, deleteFavorite } = apiCall();
+
+export default function MyFavs() {
   const [favs, setFavs] = useState([]);
   const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
 
+  const handleClick = async (id) => {
+    await deleteFavorite(id)
+  }
 
   useEffect(() => {
     const getFavAds = async () => {
         const userFavs = await getFavorites();
-        console.log(userFavs.length)
         setFavs(userFavs);
     }
     getFavAds();
-}, [])
+}, [ setFavs])
+
 
 
 
@@ -59,8 +65,8 @@ export default function MyFavs(props) {
                                     See full Advertisement
                                 </Button>
                             </Link>
-
-                          
+                            <Button onClick={() => handleClick(fav._id)} variant='light' size='lg' block>
+                            Remove from fav list <FontAwesomeIcon icon={faHeart} color='red' /> </Button>
                             </div>
                         </div>
                     </div>
