@@ -56,7 +56,6 @@ function Header(props) {
   
   return (
     <>
-    {/* <FormattedMessage id="createAd.title" value={(message) => ({message})} /> */}
     <div className='navbar-wrapper'>
       <Navbar fixed="top" collapseOnSelect expand="lg">
         <Navbar.Brand className='title' href="/dashbnoard">Wallaclone!</Navbar.Brand>
@@ -72,9 +71,6 @@ function Header(props) {
             <Nav.Link> 
               <Link to={`/createAd`}> {props.intl.formatMessage({ id: 'header.createAd' })} </Link> 
             </Nav.Link>
-
-            {/* <Nav.Link href="/dashboard">ad list</Nav.Link>
-            <Nav.Link href="/createAd">create ad</Nav.Link> */}
           </Nav>
 
           <Nav className='right-section'>
@@ -84,7 +80,7 @@ function Header(props) {
               <NavDropdown.Divider />
               <NavDropdown.Item><Link to={'/myprofile'}>{props.intl.formatMessage({ id: 'header.editYourProfile' })}</Link></NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link className='logout' onClick={handleClick} 
+            <Nav.Link className='logout' onClick={handleClick}>
               <Link to={`/logout`}>{props.intl.formatMessage({ id: 'all.logOut' })}</Link>
             </Nav.Link>
           </Nav>

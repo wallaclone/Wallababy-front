@@ -36,7 +36,9 @@ export default function MyAdverts(props) {
             if (result.value) {
                 
                 try {
-                    const adDeleted = await deleteAd (idAd);
+                    const adDeleted = await deleteAd(idAd);
+                    console.log("ad", adDeleted);
+                    console.log("addd", adDeleted.status);
                     if(adDeleted.status === 200) {
                         Swal.fire(
                             'Deleted!',
@@ -47,6 +49,7 @@ export default function MyAdverts(props) {
                         setReloadAdvertisements(true);
                     }
                 } catch (error) {
+                    console.log("error", error);
                     Swal.fire({
                         type: 'error',
                         title: 'Error',

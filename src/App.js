@@ -192,7 +192,7 @@ function App() {
         <Route path="/editAd/:id" component={EditAd} />
         {/* <Route exact path="/seeAd/:_id" component={SeeAd} /> */}
   
-        <Route path='/myads/:username' component={() =>
+        {/*<Route path='/myads/:username' component={() =>
         <>
           <AuthContextProvider>
             <Header />
@@ -201,8 +201,24 @@ function App() {
           setReloadAdvertisements = { setReloadAdvertisements }
           />
         </>
-        } />
-        <Route path='/myprofile' component={() =>
+        } />*/}
+
+        <Route path='/myads/:username'
+          render = { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              <AuthContextProvider>
+                <Header setReloadLanguage = { setReloadLanguage } />
+              </AuthContextProvider>
+ 
+              <MyAdverts 
+                setReloadAdvertisements = { setReloadAdvertisements }
+              />
+            </IntlProvider>
+          ) }  
+        />
+
+
+        {/*<Route path='/myprofile' component={() =>
         <>
           <AuthContextProvider>
             <Header />
@@ -210,7 +226,18 @@ function App() {
           </AuthContextProvider>
           
         </>
-        } />
+        } />*/}
+
+        <Route path='/myprofile'
+        render = { () => (
+          <IntlProvider locale={currentLocale} messages={messages}>
+            <AuthContextProvider>
+              <Header setReloadLanguage = { setReloadLanguage } />
+              <EditProfile />
+            </AuthContextProvider>            
+          </IntlProvider>
+        ) }  
+      />
 
         <Route exact path="/seeAd/:_id/:name"
           render = { () => (
