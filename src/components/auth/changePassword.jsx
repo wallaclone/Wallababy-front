@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { Card, Form, Button }  from 'react-bootstrap';
-
+import { useParams, useHistory, Link } from "react-router-dom";
 import apiCall from '../api/api';
 import Swal from 'sweetalert2';
 
+import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
+
 const { changePassword } = apiCall();
 
-export default function ChangePassword(props) {
-    const userId = props.match.params.id;
+function ChangePassword(props) {
+    const history = useHistory();
+    const { id } = useParams();
+    //const userId = props.match.params.id;
+    const userId = id;
+
     const [ objectForm, setObjectForm ] = useState ({
         password : '',
         confirm_password: ''
@@ -53,7 +59,8 @@ export default function ChangePassword(props) {
                 timer: 5000,
                 confirmButtonColor:  '#E29578',
             });
-            props.history.push('/login');
+            // props.history.push('/login');
+            history.push('/login');
         }
 
     };
@@ -61,19 +68,19 @@ export default function ChangePassword(props) {
     return (
         <div className='card-border'>
             <Card className='mycard'>
-                <h2 className='auth-title'>Password recovery</h2>
+                <h2 className='auth-title'>{props.intl.formatMessage({ id: 'passwordRecovery.title' })}</h2>
                 <Form className='myform' onSubmit={changePasswordSubmit}>
                     <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Enter the same password in both fields</Form.Label>
+                    <Form.Label>{props.intl.formatMessage({ id: 'changePassword.phrasePassword' })}</Form.Label>
                     <Form.Control type='password' className='mb-2'
-                        placeholder='Enter Password'
+                        placeholder={props.intl.formatMessage({ id: 'changePassword.passwordPlaceholder' })}
                         name='password'
                         onChange={handleChange}
                         value={objectForm.password}
                         required
                     />
                     <Form.Control type='password' className='mb-2'
-                        placeholder='Confirm Password'
+                        placeholder={props.intl.formatMessage({ id: 'changePassword.confirmPasswordPlaceholder' })}
                         name='confirm_password'
                         onChange={handleChange}
                         value={objectForm.confirm_password}
@@ -91,11 +98,11 @@ export default function ChangePassword(props) {
                 </Form.Group>
                 
                 <Button className='mybutton' variant="primary" type="submit">
-                    Password updated
+                    {props.intl.formatMessage({ id: 'changePassword.passwordUpdated' })}
                 </Button>
 
                 <Button variant='warning' onClick={handleClearButton} className='mb-4' block>
-                    Clear
+                    {props.intl.formatMessage({ id: 'all.clear' })}
                 </Button>
             </Form>
             {/* <Card.Footer><span className='text-muted'>New to Wallaclone?</span> <Link to='/signup'>Sign Up</Link></Card.Footer> */}
@@ -103,3 +110,6 @@ export default function ChangePassword(props) {
         </div>
     );
 }
+const Changepassword = injectIntl(ChangePassword);
+export { Changepassword };
+// export default ChangePassword;
