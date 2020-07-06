@@ -88,9 +88,9 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
     
-     currentUser: async () => {  
+     currentUser: async () => { 
       const loggedUserEndPoint = `${API}/currentuser?token=${window.localStorage.getItem('token')}`;
-      const response = await fetch(loggedUserEndPoint, {
+      const response = await fetch(loggedUserEndPoint,  {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -339,8 +339,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           }),
           credentials: 'include',
         })
-          
-    
         const data = await response;
         return data;
       } catch (err) {
@@ -351,17 +349,17 @@ const apiCall = (API = 'http://localhost:3000/api') => {
     
     deleteFavorite: async (adId) => {
         try {
-        const response = await fetch(`{$favoritesEndPoint/${adId}`, {
+        const response = await fetch(favoritesEndPoint, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `${ window.localStorage.getItem('token') }`,
           },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
           credentials: 'include',
-
         })
-          
-      
         const data = await response;
         return data;
       } catch (err) {
@@ -387,11 +385,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         throw err;
       }
     },
-
-
-
-
-
 
   } //Close Return
 }; //Close const apiCall
