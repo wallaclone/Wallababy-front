@@ -6,11 +6,12 @@ import apiCall from '../api/api';
 import { Button } from "react-bootstrap";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
 
 const {getFavorites, deleteFavorite } = apiCall();
 
-export default function MyFavs() {
+function MyFavs(props) {
   const [favs, setFavs] = useState([]);
   const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
 
@@ -32,9 +33,9 @@ export default function MyFavs() {
     return (
       <>
       <div className="m-3">
-      <h2 className='favs'>Your favorited ads:</h2>
+      <h2 className='favs'> {props.intl.formatMessage({ id: 'favorites.title' })}</h2>
       {
-      (favs.length === 0) ? <div>You don't have any fav yet</div> :
+      (favs.length === 0) ? <div> {props.intl.formatMessage({ id: 'favorites.empty' })}</div> :
       <div className="row row-cols-1 row-cols-md-3">
       {favs.map(fav => {
                 return(
@@ -48,25 +49,25 @@ export default function MyFavs() {
                                     {fav.name}
                                 </Link>
                             </h5>
-                            <p className="card-text"><strong>Price:</strong> {fav.price} &euro;</p>
-                            <p className="card-text"><strong>Type:</strong> {fav.status ? 'Buy' : 'Sell'}</p>
-                            <p className="card-text"><strong>Tags:</strong> {fav.tags}</p>
-                            <p className="card-text">
-                                <strong>owner:</strong>&nbsp;
-                                <Link className='forgot-pass' to={`/adsOwner/${fav.owner}`}>
-                                    {fav.owner}
-                                </Link>
-                            </p>
+                            <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong> {fav.price} &euro;</p>
+                    <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong> {fav.status ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}</p>
+                    <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {fav.tags}</p>
+                    <p className="card-text">
+                        <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
+                        <Link className='forgot-pass' to={`/adsOwner/${fav.owner}`}>
+                            {fav.owner}
+                        </Link>
+                    </p>
                         </div>
 
                         <div className="card-footer text-center">
                             <Link to={`/seeAd/${fav._id}`}> 
-                                <Button variant='success' size='lg' className='mt-2 button' block>
-                                    See full Advertisement
-                                </Button>
+                            <Button variant='success' size='lg' className='mt-2 button' block>
+                            {props.intl.formatMessage({ id: 'advertisement.seeFullAd' })}
+                            </Button>
                             </Link>
                             <Button onClick={() => handleClick(fav._id)} variant='light' size='lg' block>
-                            Remove from fav list <FontAwesomeIcon icon={faHeart} color='red' /> </Button>
+                            {props.intl.formatMessage({ id: 'favorites.remove' })} <FontAwesomeIcon icon={faHeart} color='red' /> </Button>
                             </div>
                         </div>
                     </div>
@@ -77,3 +78,6 @@ export default function MyFavs() {
       </>
     );
 }
+
+const myFavs = injectIntl(MyFavs);
+export { myFavs };

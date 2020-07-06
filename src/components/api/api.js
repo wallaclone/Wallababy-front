@@ -385,7 +385,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       } catch (error) {
         throw(error);
       }
-    }
+    },
 
 
     addFavorite: async (adId) => {
