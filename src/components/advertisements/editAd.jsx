@@ -1,30 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-//import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import { Form, Col, Button, Image }  from 'react-bootstrap';
 import apiCall from '../api/api';
 import Swal from 'sweetalert2';
+import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
 const { getTags, editAdvert, getAd } = apiCall();
 
-export default function EditAd(props) {
-    //let advert = props.location.query;
+function EditAd(props) {
     const id = props.match.params.id;
     const advertId = id.replace('id=', '');
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
     const [advertForm, setAdvert] = useState({tags: ['undefined']});
-    //console.log("advertReq", advertReq);
-    
-    /*const advert2 = await getAd(_id);
-    console.log("el anuncio",advert2);*/
-    /*const [objectForm, setObjectForm] = useState ({
-        name: advert.name,
-        description: advert.description,
-        image: advert.image,
-        status: advert.status,
-        price: advert.price,
-        tags: advert.tags
-    });*/
     const [objectForm, setObjectForm] = useState ({
         name: '',
         description: '',
@@ -74,16 +61,34 @@ export default function EditAd(props) {
         event.preventDefault();
         const id = props.match.params.id;
         const advertId = id.replace('id=', '');
-        const advert = advertForm;
+        const advert = objectForm;
+        advert.owner = advertForm.owner;
         const imgAux = document.getElementById('image-file').files[0];
         let myTags = [];
         advert.tags.forEach(tag => {
-            if (advert.tags.includes(tag.name)){
-                if(document.getElementById(tag.name).checked)
-                    myTags.push(document.getElementById(tag.name).value);
+            if(document.getElementById(tag.name).checked){
+                myTags.push(document.getElementById(tag.name).value);
             }
+            /*if (advertForm.tags[0].includes(tag.name)){
+                console.log("primero");
+                
+            }*/
         });
+        advert.image = advertForm.image;
+        console.log("myTags", myTags);
         advert.tags = myTags;
+        if(!advert.price) {
+            advert.price = advertForm.price;
+        }
+        if(!advert.name) {
+            advert.name = advertForm.name;
+        }
+        if(!advert.description) {
+            advert.description = advertForm.description;
+        }
+        if (!advert.status) {
+            advert.status = advertForm.status;
+        }
         if(imgAux) {
             advert.image = imgAux;
         }
@@ -131,11 +136,9 @@ export default function EditAd(props) {
                 <Form.Group controlId='formBasicCheckbox'> 
                     <Form.Label className='label'>Tags of the ad:</Form.Label>
                     {objectForm.tags.map(item => {
-                        console.log("advertForn", advertForm);
-                        console.log("advertForm.tags", advertForm.tags);
                         if (advertForm.tags[0].includes(item.name)){
                             return (
-                                <Form.Check type="switch" name={item.name} id={item.name} key={item.name} value={item.name} label={item.name} onChange={handleChange} checked />
+                                <Form.Check type="switch" name={item.name} id={item.name} key={item.name} value={item.name} label={item.name} onChange={handleChange} defaultChecked/>
                             )
                         }else{
                             return (
@@ -208,3 +211,6 @@ export default function EditAd(props) {
         </div>
     )
 }
+
+const Editad = injectIntl(EditAd);
+export { Editad };

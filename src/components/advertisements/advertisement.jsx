@@ -99,32 +99,11 @@ function Advertisement (props) {
                 </div>
 
                 <div className="card-footer text-center">
-                    <Link to={`/seeAd/${_id}`}> 
+                    <Link to={`/seeAd/${_id}/${name}`}> 
                         <Button variant='success' size='lg' className='mt-2 button' block>
                             {props.intl.formatMessage({ id: 'advertisement.seeFullAd' })}
                         </Button>
                     </Link>
-
-                    <Form.Row className='mt-2'> {/* 'ml-1 mr-1' */}
-                        <Form.Group as={Col}  controlId="formGridCreateAd">
-                            <Link to={`/dashboard/${_id}`}>
-                                <Button variant='danger' size='lg' onClick={ ()=> deleteAD(_id) } block>
-                                    {props.intl.formatMessage({ id: 'advertisement.delete' })}
-                                </Button>
-                            </Link>
-                        </Form.Group>
-
-                        <Form.Group as={Col}  controlId="formGridCreateAd">
-                            <Link to={{
-                                pathname: `/editAd/id=${_id}`,
-                                query: advertisement
-                                }}>
-                                <Button variant='info' size='lg' block>
-                                {props.intl.formatMessage({ id: 'advertisement.edit' })}
-                                </Button>
-                            </Link>
-                        </Form.Group>
-                    </Form.Row>
                 </div>
 
                 <div className="card-footer text-center">
