@@ -13,10 +13,13 @@ const {getFavorites, deleteFavorite } = apiCall();
 
 function MyFavs(props) {
   const [favs, setFavs] = useState([]);
+  const [change, setChange] = useState([false])
   const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
 
   const handleClick = async (id) => {
     await deleteFavorite(id)
+    setChange(true)
+
   }
 
   useEffect(() => {
@@ -25,7 +28,7 @@ function MyFavs(props) {
         setFavs(userFavs);
     }
     getFavAds();
-}, [ setFavs])
+}, [setFavs, change])
 
 
 
