@@ -52,6 +52,9 @@ export const messages = {
         'createAd.buttonCreateAd': 'Create advertisement',
         'createAd.buttonReturnAd': 'Return to Ads',
 
+        'seeAd.description': 'Description',
+        'seeAd.buttonReturnAd': 'Return to advertisements',
+
         'passwordRecovery.title': 'Password recovery',
         'passwordRecovery.emailPlaceholder': 'Enter Email',
         'passwordRecovery.phrase': "We'll never share your email with anyone else.",
@@ -131,6 +134,9 @@ export const messages = {
         'createAd.buttonCreateAd': 'Crear anuncio',
         'createAd.buttonReturnAd': 'Volver a anuncios',
         
+        'seeAd.description': 'Descripción',
+        'seeAd.buttonReturnAd': 'Volver a los anuncios',
+
         'passwordRecovery.title': 'Recuperación de contraseña',
         'passwordRecovery.emailPlaceholder': 'Introduzca su Email',
         'passwordRecovery.phrase': "Nunca compartiremos su correo electrónico con nadie más.",

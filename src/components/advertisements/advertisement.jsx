@@ -24,12 +24,12 @@ function Advertisement (props) {
 
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
 
-    // const dateFormatted = new Intl.DateTimeFormat('es-ES', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format( fecha_creacion );
-    const date = new Date(date_creation);
-    const day = date.getDate().toString();
-    const month = date.getMonth().toString();
-    const year = date.getFullYear().toString();
-    let dateFormatted = `${day}-${month}-${year}`.toString();
+    // // const dateFormatted = new Intl.DateTimeFormat('es-ES', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format( fecha_creacion );
+    // const date = new Date(date_creation);
+    // const day = date.getDate().toString();
+    // const month = date.getMonth().toString();
+    // const year = date.getFullYear().toString();
+    // let dateFormatted = `${day}-${month}-${year}`.toString();
     
     const dateOptions = {
         year: 'numeric',
@@ -83,7 +83,7 @@ function Advertisement (props) {
 
                 <div className="card-body">
                     <h5 className="card-title">
-                        <Link to={`/dashboard/${_id}`}>
+                        <Link to={`/seeAd/${_id}`}>
                             {name}
                         </Link>
                     </h5>

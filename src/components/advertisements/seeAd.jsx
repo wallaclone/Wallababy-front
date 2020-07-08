@@ -51,6 +51,12 @@ function SeeAd(props) {
     }
 
 
+    const dateOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: '2-digit',
+    };
+
     useEffect(() => {
         if( reloadAdvertisement ){
             const loadAd = async (id) => {
@@ -66,25 +72,22 @@ function SeeAd(props) {
     return (
         <div className="m-3">
         <Card key={advertisement._id} style={{ marginTop: '6rem' }}>
-
-            {props.intl.formatMessage({ id: 'createAd.titleAdPlaceholder' })}
-
             <Card.Img variant='top' src={`${BACK_IMAGE_PATH}${advertisement.image}`} />
             <Card.Body>
                 <Link to={`/dashboard/${_id}`}>
                     <Card.Title>{advertisement.name}</Card.Title>
                 </Link>
                 <Card.Text>                    
-                    <p><strong>Price:</strong> {advertisement.price}€</p>                    
-                    <p><strong>Type:</strong> {advertisement.status===true ? 'Buy' : 'Sell'}</p>                    
-                    <p><strong>Tags:</strong> {advertisement.tags}</p>                    
+                    <p><strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong> {advertisement.price}€</p>                    
+                    <p><strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong> {advertisement.status===true ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}</p>                    
+                    <p><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {advertisement.tags}</p>                    
                     <p>
-                        <strong>owner:</strong>&nbsp;
+                        <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
                         <Link to={`/adsOwner/${advertisement.owner}`}>
                             <strong>{advertisement.owner}</strong>
                         </Link>
                     </p>
-                    <p><strong>Description:</strong>
+                    <p><strong>{props.intl.formatMessage({ id: 'seeAd.description' })}:</strong>
                     <br />
                     {advertisement.description}</p>
                   
@@ -104,13 +107,13 @@ function SeeAd(props) {
                             {props.intl.formatMessage({ id: 'favorites.add' })} <FontAwesomeIcon icon={faHeart} color='#f7b6a0' id= 'heart' /> </Button> 
                     }
                     <Button variant='primary' size='lg' className='mt-2' block onClick={() => history.goBack()}>
-                        Return to advertisements
+                        {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
                     </Button>
                 </Card.Text>
             </Card.Body>
 
             <Card.Footer>
-                <small className='text-muted'>Date Creation: {advertisement.date_creation}</small>
+                <small className='text-muted'>{props.intl.formatMessage({ id: 'advertisement.createdAt' })}: {props.intl.formatDate(new Date(advertisement.date_creation), dateOptions)}</small>
             </Card.Footer>
         </Card>
         </div>
