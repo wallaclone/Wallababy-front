@@ -72,6 +72,7 @@ export const messages = {
 
         'favorites.title': 'Your favorited ads:',
         'favorites.remove': 'Remove ad from fav list',
+        'favorites.add': 'Add to favorites',
         'favorites.empty': "You don't have any fav yet",
 
         
@@ -150,6 +151,7 @@ export const messages = {
         
         'favorites.title': 'Tus anuncios favoritos:',
         'favorites.remove': 'Quita el anuncio de tu lista de favoritos',
+        'favorites.add': 'Añade a favoritos',
         'favorites.empty': "No tienes ningún anuncio favorito",
 
 
