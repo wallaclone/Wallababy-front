@@ -153,7 +153,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
     changePassword: async (id, password) => {
       try {
         const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
+        const token = urlParams.get('t');
         const response = await fetch(changePasswordEndPoint+id, {
           method: 'POST',
           headers: {
