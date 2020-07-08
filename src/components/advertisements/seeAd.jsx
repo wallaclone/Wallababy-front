@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share';
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import apiCall from '../api/api';
 
 import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
-const { getAd } = apiCall();
+const { getAd, getFavorites, deleteFavorite, addFavorite } = apiCall();
 
 function SeeAd(props) {
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
@@ -15,6 +18,38 @@ function SeeAd(props) {
     const { _id } = useParams();
     const [ advertisement, setAdvertisement ] = useState({});
     //console.log('id:', _id);
+    const [favs, setFavs] = useState([]);
+    const [inList, setInList] = useState([])
+
+
+   
+    
+      useEffect(() => {
+        const getFavAds = async () => {
+            const userFavs = await getFavorites();
+            setFavs(userFavs);
+           
+            if (userFavs.length > 0) {
+            let map = userFavs.map(x => x._id);
+       
+            if (map.includes(_id)) {
+                setInList(true)
+            }    
+  
+        }}
+        getFavAds();
+    }, [ setFavs, _id, inList])
+
+    const deleteFav = async (id) => {
+        await deleteFavorite(id)
+        setInList(false);
+      }
+    
+    const addFav = async (id) => {
+        await addFavorite(id)
+        setInList(true)
+    }
+
 
     useEffect(() => {
         if( reloadAdvertisement ){
@@ -52,7 +87,7 @@ function SeeAd(props) {
                     <p><strong>Description:</strong>
                     <br />
                     {advertisement.description}</p>
-
+                  
                     <FacebookShareButton 
                         url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
                         <FacebookIcon size={32} round={true}></FacebookIcon>
@@ -62,7 +97,12 @@ function SeeAd(props) {
                         url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
                         <TwitterIcon size={32} round={true}></TwitterIcon>
                     </TwitterShareButton>
-
+                    { 
+                        (inList === true) ?  <Button onClick={() => deleteFav(advertisement._id)} variant='light' size='lg' block>
+                            {props.intl.formatMessage({ id: 'favorites.remove' })} <FontAwesomeIcon icon={faHeart} color='red' /> </Button>
+                            : <Button onClick={() => addFav(advertisement._id)} variant='light' size='lg' block>
+                            {props.intl.formatMessage({ id: 'favorites.add' })} <FontAwesomeIcon icon={faHeart} color='#f7b6a0' id= 'heart' /> </Button> 
+                    }
                     <Button variant='primary' size='lg' className='mt-2' block onClick={() => history.goBack()}>
                         Return to advertisements
                     </Button>

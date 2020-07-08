@@ -56,3 +56,10 @@ Navbar, .navbar {
   color: var(--dark-color-title);
   margin-bottom: 20px
 }
+
+#heart:hover {
+  color: red;
+}
+
+
+
