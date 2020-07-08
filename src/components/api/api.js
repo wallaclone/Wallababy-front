@@ -411,7 +411,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
     
     deleteFavorite: async (adId) => {
         try {
-        const response = await fetch(favoritesEndPoint, {
+        const response = await fetch(`${favoritesEndPoint}/${adId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
