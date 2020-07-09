@@ -7,8 +7,15 @@ const apiCall = (API = 'http://localhost:3000/api') => {
   const changePasswordEndPoint = `${passwordRecoveryEndPoint}/forgotpassword/`;
   const advertEndPoint = `${API}/adverts`;
   const tagEndPoint = `${API}/tags`;
+  
+  const LIMIT = 12;
 
   return {
+
+    limit: () => {
+      return LIMIT;
+    },
+
     register: async (username, password, email) => {
       try {
         const response = await fetch(registerEndPoint, {
@@ -173,10 +180,17 @@ const apiCall = (API = 'http://localhost:3000/api') => {
     
     getAds: async (search = '') => {
       try {
-        const DEFAULT_VALUE = '?limit=12&sort=-date_creation';
+        const DEFAULT_VALUE = `?limit=${LIMIT}&sort=-date_creation`;
+
+        //let queryParams = 'true';
+        // let queryParams = '';
+        // if(search)
+        //   queryParams = `${queryParams}&name=${search}`;
+
         console.log("EndPoint getAds:", `${advertEndPoint}${DEFAULT_VALUE}${search}`);
-        // console.log("EndPoint getAds:", `${advertEndPoint}?${search}`);
+        // console.log("EndPoint getAds:", `${advertEndPoint}${DEFAULT_VALUE}${queryParams}`);
         const response = await fetch(`${advertEndPoint}${DEFAULT_VALUE}${search}`, {
+        // const response = await fetch(`${advertEndPoint}${DEFAULT_VALUE}${queryParams}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

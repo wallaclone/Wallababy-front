@@ -12,11 +12,11 @@ function Dashboard(props) {
     return(
         // <CardColumns className='m-2'>
         <div className="m-3">
-            <Link to={`/createAd`} >
+            {/* <Link to={`/createAd`} >
                 <Button variant='primary' size='lg' className='mb-3' style={{ marginTop: '6rem' }} block>
                     {props.intl.formatMessage({ id: 'dashboard.createAd' })}
                 </Button>
-            </Link>
+            </Link> */}
             <div className="row row-cols-1 row-cols-md-3">
                 { advertisements.map( advertisement => (
                     <Advertisement

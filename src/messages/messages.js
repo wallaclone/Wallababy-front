@@ -9,7 +9,6 @@ export const messages = {
         'all.alreadyRegistered': "Already registered?",
         'all.signUp': 'Sign Up',
 
-        
         'sweetalert.areYouSure': 'Are you sure?',
         'sweetalert.noRevert': "You won't be able to revert this!",
         'sweetalert.deleteIt': 'Yes, delete it!',
@@ -73,8 +72,16 @@ export const messages = {
         'signUp.title': 'Sign up to Wallaclone',
         'signUp.logIn': 'LogIn',
 
-        
-        
+        'filter.whatAreYouLookingFor': 'What are you looking for? Use the search engine to find!',
+        'filter.whatAreYouLookingForPlaceholder': 'Enter what you are looking for',
+        'filter.selectTag': 'Select Tag',
+        'filter.selectStatus': 'Select Buy/Sell',
+        'filter.minimalPrice': 'Minimal price',
+        'filter.minimalPricePlaceholder': 'Enter minimal price',
+        'filter.maximumPrice': 'Maximum price',
+        'filter.maximumPricePlaceholder': 'Enter maximum price',
+        'filter.searchAds': 'Search advertisements',
+        'filter.clearFilter': 'Clear filter',
 
     },
     'es-ES': {
@@ -101,7 +108,7 @@ export const messages = {
         'advertisement.type': 'Tipo',
         'advertisement.typeBuy': 'Compra',
         'advertisement.typeSell': 'Venta',
-        'advertisement.tags': 'Tags',
+        'advertisement.tags': 'Etiquetas',
         'advertisement.owner': 'Propietario',
         'advertisement.seeFullAd': 'Ver anuncio completo',
         'advertisement.delete': 'Borrar',
@@ -117,7 +124,7 @@ export const messages = {
         'createAd.title': 'Crear Anuncio',
         'createAd.titleAd': 'Título del anuncio:',
         'createAd.titleAdPlaceholder': 'Añada un título al anuncio',
-        'createAd.tagsAd': 'Tags del anuncio:',
+        'createAd.tagsAd': 'Etiquetas del anuncio:',
         'createAd.typeAd': 'Tipo de anuncio:',
         'createAd.selectTypeAd': 'Selecciona el tipo de anuncio (Compra/Venta)',
         'createAd.buy': 'Compra',
@@ -151,6 +158,16 @@ export const messages = {
         'signUp.title': 'Regístrese en Wallaclone',
         'signUp.logIn': 'Iniciar sesión',
         
+        'filter.whatAreYouLookingFor': '¿Qué estás buscando? Utiliza el buscardor para encontrarlo!',
+        'filter.whatAreYouLookingForPlaceholder': 'Introduzca aquí lo que está buscando',
+        'filter.selectTag': 'Seleccione una etiqueta',
+        'filter.selectStatus': 'Compra/Venta...',
+        'filter.minimalPrice': 'Precio mínimo',
+        'filter.minimalPricePlaceholder': 'Introduzca un precio mínimo',
+        'filter.maximumPrice': 'Precio máximo',
+        'filter.maximumPricePlaceholder': 'Introduzca un precio máximo',
+        'filter.searchAds': 'Buscar anuncios',
+        'filter.clearFilter': 'Limpiar filtro',
 
     },
 

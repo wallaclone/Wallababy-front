@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Form, Col, Button } from "react-bootstrap";
 
 //import { useIntl } from 'react-intl';
 import {IntlProvider} from 'react-intl';
@@ -25,14 +26,20 @@ import {seeAd as SeeAd} from './components/advertisements/seeAd';
 import { Editad as EditAd } from './components/advertisements/editAd';
 import { Myadverts as MyAdverts } from './components/advertisements/myAdverts';
 import { Editprofile as EditProfile } from './components/user/editProfile';
-import apiCall from './components/api/api';
-const { getAds } = apiCall();
+import {filter as Filter} from './components/layout/filter';
 
-function App() {
+import ant from './img/ant.png';
+import sig from './img/sig.png';
+
+import apiCall from './components/api/api';
+const { getAds, getTags, limit } = apiCall();
+
+function App(props) {
 
   const [ advertisements, setAdvertisements ] = useState([]);
   const [ reloadAdvertisements, setReloadAdvertisements ] = useState( true );
 
+  const [busqueda, guardarBusqueda] = useState('');
 
   // const [ reloadLanguage, setReloadLanguage ] = useState('es-ES');
   // const [ messages, setMessages ] = useState(allMessages[reloadLanguage]);
@@ -45,21 +52,13 @@ function App() {
   // console.log('--------messages:', messages);
   const [ reloadLanguage, setReloadLanguage ] = useState(currentLocale);
 
+  const [ tags, setTags ] = useState([]);
+  const [ reloadTags, setReloadTags ] = useState(true);
+
+  const [ paginaActual, guardarPaginaActual ] = useState(1);
+  const [ totalPaginas, guardarTotalPaginas ] = useState(1);
+
   useEffect(() => {
-    
-    if(reloadAdvertisements) {
-      const loadAds = async () => {
-        // realizamos la consulta al API
-        const resultAds = await getAds ();
-        // console.log('resultAds:', resultAds.rows);
-        setAdvertisements( resultAds.rows );
-      }
-      loadAds();
-
-      // We change to false the recharge of articles so that it isn't recharging continuously
-      setReloadAdvertisements( false );
-    }
-
     if(reloadLanguage) {
       const load = () => {
         // console.log('*ENTRO EN useEffect -> reloadLanguage:', reloadLanguage);
@@ -73,7 +72,81 @@ function App() {
       setReloadLanguage( '' );
     }
 
-  }, [ currentLocale, reloadAdvertisements, reloadLanguage, messages ]);
+    //if(busqueda === '') return;
+
+    if(reloadAdvertisements) {
+      const loadAds = async () => {
+        // realizamos la consulta al API
+        const resultAds = await getAds (busqueda);
+        // console.log('resultAds:', resultAds.rows);
+        setAdvertisements( resultAds.rows );
+
+        //console.log('++++advertisements:', advertisements);
+
+      }
+      loadAds();
+
+      // We change to false the recharge of articles so that it isn't recharging continuously
+      setReloadAdvertisements( false );
+
+      // Calculate total pages
+      const totalAds = 32; //COUNT(*) From Advertisements
+      const adsPerPage = limit(); //parseInt(limit()); //12 
+      guardarTotalPaginas(Math.ceil(totalAds / adsPerPage));
+      // console.log("División:", totalAds / adsPerPage)
+      // console.log("TotalPaginas:", Math.ceil(totalAds / adsPerPage))
+    }
+
+  }, [ busqueda, currentLocale, reloadAdvertisements, reloadLanguage, messages ]);
+
+  useEffect(() => {
+    if( reloadTags ){
+    const loadTags = async () => {
+        // realizamos la consulta al API
+        const resultTags = await getTags ();
+        // console.log('resultAds:', resultAds.rows);
+        //setObjectForm.tags( resultTags );
+
+        // guardarTerminoBusqueda( { ...terminoBusqueda, tags : resultTags } );
+
+        //sessionStorage.setItem('tags', resultTags.name);
+        
+        // console.log("resultTags:", resultTags);
+        
+        let tagAux = [];
+        resultTags.forEach(tag => {
+            console.log("Tag:", tag.name);
+            tagAux.push(tag.name);
+        });
+        // console.log("tagAux:", tagAux);
+        setTags(tagAux);
+        // console.log("tags:", tags);
+       
+        //console.log("sessionStorage-Tags:", sessionStorage.getItem('tags'));
+
+        // resultTags.forEach(tag => {
+        //     arrayTags.push({name:tag.name, status:false});
+        // });
+        // console.log("arrayTags:", arrayTags);
+    }
+    loadTags();
+
+    // We change to false the recharge of articles so that it isn't recharging continuously
+    setReloadTags( false );
+    }
+  }, [ reloadTags ]);
+
+  const paginaAnterior = () => {
+    let nuevaPaginaActual = paginaActual - 1;
+    guardarPaginaActual(nuevaPaginaActual);
+  }
+
+  const paginaSiguiente = () => {
+    let nuevaPaginaActual = paginaActual + 1;
+    guardarPaginaActual(nuevaPaginaActual);
+  }
+
+  let disabled = '';
   
   return (
     <Router>
@@ -257,11 +330,43 @@ function App() {
               <AuthContextProvider>
                 <Header setReloadLanguage = { setReloadLanguage } />
               </AuthContextProvider>
+
+              <Filter
+                guardarBusqueda = { guardarBusqueda }
+                setReloadAdvertisements = { setReloadAdvertisements }
+                tags = { tags }
+              />
  
               <Dashboard
                 advertisements = { advertisements }
                 setReloadAdvertisements = { setReloadAdvertisements }
               />
+              
+              <Form.Row className="ml-2 mr-2">
+                <Form.Group as={Col} md="6" >
+                  {(paginaActual === 1) 
+                    ? ( <Button variant="info" size="lg" block onClick={paginaAnterior} disabled> &laquo; <img src={ant} alt='anterior' /> </Button> ) 
+                    : ( <Button variant="info" size="lg" block onClick={paginaAnterior}> &laquo; <img src={ant} alt='anterior' /> </Button> )
+                  }
+                </Form.Group>
+                <Form.Group as={Col} md="6" >
+                  {(paginaActual === totalPaginas) 
+                    ? ( <Button variant="info" size="lg" block onClick={paginaSiguiente} disabled> <img src={sig} alt='siguiente' /> &raquo; </Button> ) 
+                    : ( <Button variant="info" size="lg" block onClick={paginaSiguiente}> <img src={sig} alt='siguiente' /> &raquo; </Button> )
+                  }
+                </Form.Group>
+              </Form.Row>
+              
+              {/* 
+              {(paginaActual === 1) ? null : (
+                <button type="button" onClick={paginaAnterior} className="btn btn-info mr-1">&laquo; Anterior</button>
+              )}
+
+              {(paginaActual === totalPaginas) ? null : (
+                <button type="button" onClick={paginaSiguiente} className="btn btn-info">Siguiente &raquo;</button>
+              )} 
+              */}
+
             </IntlProvider>
           ) }  
         />
