@@ -25,13 +25,14 @@ import {seeAd as SeeAd} from './components/advertisements/seeAd';
 import { Editad as EditAd } from './components/advertisements/editAd';
 import { Myadverts as MyAdverts } from './components/advertisements/myAdverts';
 import { Editprofile as EditProfile } from './components/user/editProfile';
+import { myFavs as MyFavs } from './components/advertisements/favorites';
 import apiCall from './components/api/api';
 const { getAds } = apiCall();
 
 function App() {
 
-  const [ advertisements, setAdvertisements ] = useState([]);
-  const [ reloadAdvertisements, setReloadAdvertisements ] = useState( true );
+  const [advertisements, setAdvertisements] = useState([]);
+  const [reloadAdvertisements, setReloadAdvertisements] = useState(true);
 
 
   // const [ reloadLanguage, setReloadLanguage ] = useState('es-ES');
@@ -50,14 +51,14 @@ function App() {
     if(reloadAdvertisements) {
       const loadAds = async () => {
         // realizamos la consulta al API
-        const resultAds = await getAds ();
+        const resultAds = await getAds();
         // console.log('resultAds:', resultAds.rows);
-        setAdvertisements( resultAds.rows );
+        setAdvertisements(resultAds.rows);
       }
       loadAds();
 
       // We change to false the recharge of articles so that it isn't recharging continuously
-      setReloadAdvertisements( false );
+      setReloadAdvertisements(false);
     }
 
     if(reloadLanguage) {
@@ -141,9 +142,11 @@ function App() {
         />
 
         <Route path="/test" component={() =>
-          <AuthContextProvider>
-            <Header />
-          </AuthContextProvider>
+          <>
+            <AuthContextProvider>
+              <Header />
+            </AuthContextProvider>
+          </>
         } />
         {/* 
        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
@@ -259,12 +262,22 @@ function App() {
               </AuthContextProvider>
  
               <Dashboard
-                advertisements = { advertisements }
-                setReloadAdvertisements = { setReloadAdvertisements }
+                advertisements={advertisements}
+                setReloadAdvertisements={setReloadAdvertisements}
               />
             </IntlProvider>
           ) }  
         />
+
+        <Route path="/favorites" render =
+            { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              <AuthContextProvider>
+                <Header setReloadLanguage = { setReloadLanguage } />
+              </AuthContextProvider>
+              <MyFavs />
+            </IntlProvider>
+            )} />
 
         <Redirect to="/dashboard" />
       </Switch>

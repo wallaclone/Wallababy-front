@@ -7,6 +7,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
   const changePasswordEndPoint = `${passwordRecoveryEndPoint}/forgotpassword/`;
   const advertEndPoint = `${API}/adverts`;
   const tagEndPoint = `${API}/tags`;
+  const favoritesEndPoint = `${API}/favorites`;
 
   return {
     register: async (username, password, email) => {
@@ -87,9 +88,9 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
     
-     currentUser: async () => {  
+     currentUser: async () => { 
       const loggedUserEndPoint = `${API}/currentuser?token=${window.localStorage.getItem('token')}`;
-      const response = await fetch(loggedUserEndPoint, {
+      const response = await fetch(loggedUserEndPoint,  {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -152,7 +153,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
     changePassword: async (id, password) => {
       try {
         const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
+        const token = urlParams.get('t');
         const response = await fetch(changePasswordEndPoint+id, {
           method: 'POST',
           headers: {
@@ -384,8 +385,68 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       } catch (error) {
         throw(error);
       }
-    }
+    },
 
+
+    addFavorite: async (adId) => {
+      try {
+        const response = await fetch(favoritesEndPoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
+      }
+    },
+    
+    deleteFavorite: async (adId) => {
+        try {
+        const response = await fetch(`${favoritesEndPoint}/${adId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
+      }
+    },
+
+    getFavorites: async () => {
+      try {
+        const response = await fetch(favoritesEndPoint, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          credentials: 'include',
+        });
+        const data = await response.json();
+        return data;
+      } catch (err) {
+       console.error(err.message);
+        throw err;
+      }
+    },
 
   } //Close Return
 }; //Close const apiCall

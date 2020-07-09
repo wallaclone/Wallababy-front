@@ -51,3 +51,15 @@ a {
 Navbar, .navbar {
   background-color: var(--bg-color-header) !important
 }
+
+.favs {
+  color: var(--dark-color-title);
+  margin-bottom: 20px
+}
+
+#heart:hover {
+  color: red;
+}
+
+
+
