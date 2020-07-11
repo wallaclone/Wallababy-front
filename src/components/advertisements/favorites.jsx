@@ -65,7 +65,7 @@ function MyFavs(props) {
                         </div>
 
                         <div className="card-footer text-center">
-                            <Link to={`/seeAd/${fav._id}`}> 
+                            <Link to={`/seeAd/${fav._id}/${fav.name}`}> 
                             <Button variant='success' size='lg' className='mt-2 button' block>
                             {props.intl.formatMessage({ id: 'advertisement.seeFullAd' })}
                             </Button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Form, Col, Button, Image }  from 'react-bootstrap';
 import apiCall from '../api/api';
 import Swal from 'sweetalert2';
@@ -7,8 +7,10 @@ import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRel
 
 const { getTags, editAdvert, getAd } = apiCall();
 
-function EditAd(props) {
-    const id = props.match.params.id;
+function EditAd() {
+    //const id = props.match.params.id;
+    const { id } = useParams();
+    console.log("id", id);
     const advertId = id.replace('id=', '');
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
     const [advertForm, setAdvert] = useState({tags: ['undefined']});
@@ -50,7 +52,7 @@ function EditAd(props) {
 
     const returnToLogin = () => {
         localStorage.clear();
-        props.history.push(`/login`);
+        //props.history.push(`/login`);
     };
 
     const returnToDashboard = () => {
@@ -59,8 +61,8 @@ function EditAd(props) {
 
     const sendEditAd = async (event) => {
         event.preventDefault();
-        const id = props.match.params.id;
-        const advertId = id.replace('id=', '');
+        //const id = props.match.params.id;
+        //const advertId = id.replace('id=', '');
         const advert = objectForm;
         advert.owner = advertForm.owner;
         const imgAux = document.getElementById('image-file').files[0];

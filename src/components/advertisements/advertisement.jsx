@@ -37,44 +37,6 @@ function Advertisement (props) {
         day: '2-digit',
     };
 
-    const deleteAD = async (idAd) => {
-        Swal.fire({
-            title: props.intl.formatMessage({ id: 'sweetalert.areYouSure' }),
-            text: props.intl.formatMessage({ id: 'sweetalert.noRevert' }),
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: props.intl.formatMessage({ id: 'sweetalert.deleteIt' }),
-            cancelButtonText: props.intl.formatMessage({ id: 'sweetalert.cancel' }),
-        }).then( async (result) => {
-            if (result.value) {
-                try {
-                    const adDeleted = await deleteAd (idAd);
-                    // console.log("adDeleted", adDeleted);
-                    // console.log("result.value:", result.value);
-                    if(adDeleted.status === 200) {
-                        Swal.fire(
-                            props.intl.formatMessage({ id: 'sweetalert.deleted' }),
-                            props.intl.formatMessage({ id: 'sweetalert.adDeleted' }),
-                            props.intl.formatMessage({ id: 'sweetalert.success' })
-                        )
-
-                        // We reload ads to make the removed ad disappear
-                        setReloadAdvertisements(true);
-                    }
-                } catch (error) {
-                    console.log(error);
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Error',
-                        text: props.intl.formatMessage({ id: 'sweetalert.mistake' })
-                    })
-                }
-            }
-        })
-    }
-
     return (
         <div className="col mb-4" key={_id}>
             <div className="card h-100">

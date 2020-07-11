@@ -38,16 +38,14 @@ function MyAdverts(props) {
                 
                 try {
                     const adDeleted = await deleteAd(idAd);
-                    console.log("ad", adDeleted);
-                    console.log("addd", adDeleted.status);
                     if(adDeleted.status === 200) {
                         Swal.fire(
                             'Deleted!',
                             'Your advertisement has been deleted.',
                             'success'
-                        )
-                        // We reload ads to make the removed ad disappear
-                        setReloadAdvertisements(true);
+                        ).then(
+                            () => { window.location.reload(); setReloadAdvertisements(true); }
+                        )            
                     }
                 } catch (error) {
                     console.log("error", error);

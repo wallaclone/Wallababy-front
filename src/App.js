@@ -26,6 +26,7 @@ import { Editad as EditAd } from './components/advertisements/editAd';
 import { Myadverts as MyAdverts } from './components/advertisements/myAdverts';
 import { Editprofile as EditProfile } from './components/user/editProfile';
 import { myFavs as MyFavs } from './components/advertisements/favorites';
+import { adsOwner as AdsOwner } from './components/advertisements/adsOwner';
 import apiCall from './components/api/api';
 const { getAds } = apiCall();
 
@@ -188,11 +189,32 @@ function App() {
           ) }  
         />
 
+        <Route path="/adsOwner/:owner"
+          render = { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              <AuthContextProvider>
+                <Header setReloadLanguage = { setReloadLanguage } />
+              </AuthContextProvider>
+
+              <AdsOwner />
+            </IntlProvider>
+          ) }  
+        />
+
         {/* <Route path="/dashboard" component={Dashboard} /> */}
 
         {/* <Route exact path="/dashboard/:_id" component={SeeAd} /> */}
 
-        <Route path="/editAd/:id" component={EditAd} />
+        <Route path="/editAd/:id" 
+          render = { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              <AuthContextProvider>
+                <Header setReloadLanguage={setReloadLanguage} />
+              </AuthContextProvider>
+              <EditAd />
+            </IntlProvider>
+          ) }
+        />
         {/* <Route exact path="/seeAd/:_id" component={SeeAd} /> */}
   
         {/*<Route path='/myads/:username' component={() =>
