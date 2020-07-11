@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 import { Form, Col, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime } from 'react-intl';
-import apiCall from '../api/api';
+//import apiCall from '../api/api';
 
-const { getTags } = apiCall();
+//const { getTags } = apiCall();
 
 function Filter(props) {
     const { guardarBusqueda, setReloadAdvertisements, tags } = props;
-    const history = useHistory();
+    //const history = useHistory();
 
     //console.log('*TAGS:', tags);
 

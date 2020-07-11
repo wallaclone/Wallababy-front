@@ -58,6 +58,9 @@ function App(props) {
   const [ paginaActual, guardarPaginaActual ] = useState(1);
   const [ totalPaginas, guardarTotalPaginas ] = useState(1);
 
+  const [ totalAds, setTotalAds ] = useState(0);
+  const [ skip, setSkip ] = useState(0);
+
   useEffect(() => {
     if(reloadLanguage) {
       const load = () => {
@@ -71,18 +74,33 @@ function App(props) {
       load();
       setReloadLanguage( '' );
     }
+  }, [ reloadLanguage ]);
 
-    //if(busqueda === '') return;
-
+  useEffect(() => {
     if(reloadAdvertisements) {
+      
+      // let newSearch = ''
+      // if(paginaActual === 1) {
+      //   newSearch = busqueda + '&skip=0';
+      // }
+      // else {
+
+      //   newSearch = busqueda + `&skip=${ ( (paginaActual-1) * limit() ) }`;
+      // }
+      // console.log('newSearch:', newSearch);
+      // guardarBusqueda(newSearch);
+
+      const adsPerPage = limit(); //En api.js: const LIMIT = 12;
+
       const loadAds = async () => {
         // realizamos la consulta al API
         const resultAds = await getAds (busqueda);
-        // console.log('resultAds:', resultAds.rows);
+        console.log('resultAds.rows:', resultAds.rows);
+        console.log('resultAds.count:', resultAds.count);
         setAdvertisements( resultAds.rows );
-
-        //console.log('++++advertisements:', advertisements);
-
+        setTotalAds( resultAds.count );
+        console.log('++++Advertisements:', advertisements);
+        console.log('++++TotalAds:', totalAds);
       }
       loadAds();
 
@@ -90,14 +108,15 @@ function App(props) {
       setReloadAdvertisements( false );
 
       // Calculate total pages
-      const totalAds = 32; //COUNT(*) From Advertisements
-      const adsPerPage = limit(); //parseInt(limit()); //12 
+      // const totalAds = count; //32; //COUNT(*) From Advertisements
+      // const adsPerPage = limit(); //En api.js: const LIMIT = 12;
       guardarTotalPaginas(Math.ceil(totalAds / adsPerPage));
       // console.log("División:", totalAds / adsPerPage)
-      // console.log("TotalPaginas:", Math.ceil(totalAds / adsPerPage))
+      console.log(`TotalPaginas(${totalAds}/${adsPerPage}):`, Math.ceil(totalAds / adsPerPage))
     }
 
-  }, [ busqueda, currentLocale, reloadAdvertisements, reloadLanguage, messages ]);
+  }, [ totalAds, paginaActual, busqueda, currentLocale, reloadAdvertisements, messages ]);
+  //}, [ totalAds, paginaActual, busqueda, currentLocale, reloadAdvertisements, messages ]);
 
   useEffect(() => {
     if( reloadTags ){
@@ -106,13 +125,9 @@ function App(props) {
         const resultTags = await getTags ();
         // console.log('resultAds:', resultAds.rows);
         //setObjectForm.tags( resultTags );
-
         // guardarTerminoBusqueda( { ...terminoBusqueda, tags : resultTags } );
-
         //sessionStorage.setItem('tags', resultTags.name);
-        
         // console.log("resultTags:", resultTags);
-        
         let tagAux = [];
         resultTags.forEach(tag => {
             console.log("Tag:", tag.name);
@@ -121,9 +136,7 @@ function App(props) {
         // console.log("tagAux:", tagAux);
         setTags(tagAux);
         // console.log("tags:", tags);
-       
         //console.log("sessionStorage-Tags:", sessionStorage.getItem('tags'));
-
         // resultTags.forEach(tag => {
         //     arrayTags.push({name:tag.name, status:false});
         // });
@@ -145,8 +158,6 @@ function App(props) {
     let nuevaPaginaActual = paginaActual + 1;
     guardarPaginaActual(nuevaPaginaActual);
   }
-
-  let disabled = '';
   
   return (
     <Router>
@@ -343,16 +354,16 @@ function App(props) {
               />
               
               <Form.Row className="ml-2 mr-2">
-                <Form.Group as={Col} md="6" >
+                <Form.Group as={Col} md="6"> {/* &laquo; */}
                   {(paginaActual === 1) 
-                    ? ( <Button variant="info" size="lg" block onClick={paginaAnterior} disabled> &laquo; <img src={ant} alt='anterior' /> </Button> ) 
-                    : ( <Button variant="info" size="lg" block onClick={paginaAnterior}> &laquo; <img src={ant} alt='anterior' /> </Button> )
+                    ? ( <Button variant="info" size="lg" block onClick={paginaAnterior} disabled> <img src={ant} alt='anterior' /> </Button> ) 
+                    : ( <Button variant="info" size="lg" block onClick={paginaAnterior}> <img src={ant} alt='anterior' /> </Button> )
                   }
                 </Form.Group>
-                <Form.Group as={Col} md="6" >
+                <Form.Group as={Col} md="6"> {/* &raquo; */}
                   {(paginaActual === totalPaginas) 
-                    ? ( <Button variant="info" size="lg" block onClick={paginaSiguiente} disabled> <img src={sig} alt='siguiente' /> &raquo; </Button> ) 
-                    : ( <Button variant="info" size="lg" block onClick={paginaSiguiente}> <img src={sig} alt='siguiente' /> &raquo; </Button> )
+                    ? ( <Button variant="info" size="lg" block onClick={paginaSiguiente} disabled> <img src={sig} alt='siguiente' /> </Button> ) 
+                    : ( <Button variant="info" size="lg" block onClick={paginaSiguiente}> <img src={sig} alt='siguiente' /> </Button> )
                   }
                 </Form.Group>
               </Form.Row>

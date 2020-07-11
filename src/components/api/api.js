@@ -187,6 +187,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         // if(search)
         //   queryParams = `${queryParams}&name=${search}`;
 
+        console.log("search:", `${search}`);
         console.log("EndPoint getAds:", `${advertEndPoint}${DEFAULT_VALUE}${search}`);
         // console.log("EndPoint getAds:", `${advertEndPoint}${DEFAULT_VALUE}${queryParams}`);
         const response = await fetch(`${advertEndPoint}${DEFAULT_VALUE}${search}`, {
