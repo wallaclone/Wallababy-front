@@ -8,6 +8,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
   const advertEndPoint = `${API}/adverts`;
   const tagEndPoint = `${API}/tags`;
   const favoritesEndPoint = `${API}/favorites`;
+  const statusEndPoint = `${API}/status`;
 
   return {
     register: async (username, password, email) => {
@@ -445,6 +446,69 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       } catch (err) {
        console.error(err.message);
         throw err;
+      }
+    },
+
+    markAsSold: async (adId) => {
+      try {
+        const response = await fetch(`${statusEndPoint}/sold/${adId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
+      }
+    },
+
+    markAsReserved: async (adId) => {
+      try {
+        const response = await fetch(`${statusEndPoint}/reserved/${adId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
+      }
+    },
+
+    markAsUnreserved: async (adId) => {
+      try {
+        const response = await fetch(`${statusEndPoint}/unreserved/${adId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
       }
     },
 

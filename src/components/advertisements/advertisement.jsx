@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Form, Col } from "react-bootstrap";
+import { Button, Badge, Form, Col } from "react-bootstrap";
 import Swal from 'sweetalert2';
 import apiCall from '../api/api';
 
@@ -52,12 +52,18 @@ function Advertisement (props) {
                     <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong> {price} &euro;</p>
                     <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong> {status ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}</p>
                     <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {tags}</p>
+                    
+                    
+
                     <p className="card-text">
                         <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
                         <Link className='forgot-pass' to={`/adsOwner/${owner}`}>
                             {owner}
                         </Link>
                     </p>
+                    {advertisement.reserved===true ? <Badge variant="info">{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}                   
+                    {advertisement.sold===true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}                   
+
                 </div>
 
                 <div className="card-footer text-center">

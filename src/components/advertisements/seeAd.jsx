@@ -1,56 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Badge } from "react-bootstrap";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share';
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { AuthContext } from '../../contexts/authContext';
 import apiCall from '../api/api';
 
-import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
+import { FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime } from 'react-intl';
 
-const { getAd, getFavorites, deleteFavorite, addFavorite } = apiCall();
+const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsReserved, markAsUnreserved } = apiCall();
 
 function SeeAd(props) {
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
-    const [ reloadAdvertisement, setReloadAdvertisement ] = useState(true);
+    const [reloadAdvertisement, setReloadAdvertisement] = useState(true);
     const history = useHistory();
     const { _id } = useParams();
-    const [ advertisement, setAdvertisement ] = useState({});
+    const [advertisement, setAdvertisement] = useState({});
+
     //console.log('id:', _id);
     const [favs, setFavs] = useState([]);
     const [inList, setInList] = useState([])
 
+    const { user, setUser } = useContext(AuthContext);
 
-   
-    
-      useEffect(() => {
+
+
+    useEffect(() => {
         const getFavAds = async () => {
             const userFavs = await getFavorites();
             setFavs(userFavs);
-           
+
             if (userFavs.length > 0) {
-            let map = userFavs.map(x => x._id);
-       
-            if (map.includes(_id)) {
-                setInList(true)
-            }    
-  
-        }}
+                let map = userFavs.map(x => x._id);
+
+                if (map.includes(_id)) {
+                    setInList(true)
+                }
+            }
+        }
         getFavAds();
-    }, [ setFavs, _id, inList])
+    }, [setFavs, _id, inList])
 
     const deleteFav = async (id) => {
         await deleteFavorite(id)
         setInList(false);
-      }
-    
+    }
+
     const addFav = async (id) => {
         await addFavorite(id)
         setInList(true)
     }
 
+    const isSold = async (id) => {
+        await markAsSold(id)
+        setAdvertisement({ ...advertisement, sold: true });
+    }
 
+    const isReserved = async (id) => {
+        await markAsReserved(id)
+        setAdvertisement({ ...advertisement, reserved: true });
+    }
+
+    const notReserved = async (id) => {
+        await markAsUnreserved(id)
+        setAdvertisement({ ...advertisement, reserved: false });
+    }
     const dateOptions = {
         year: 'numeric',
         month: 'long',
@@ -58,64 +74,70 @@ function SeeAd(props) {
     };
 
     useEffect(() => {
-        if( reloadAdvertisement ){
+        if (reloadAdvertisement) {
             const loadAd = async (id) => {
                 const resultAd = await getAd(id);
                 setAdvertisement(resultAd.result);
             };
             //loadAd(props.match.params._id);
             loadAd(_id);
-            setReloadAdvertisement( false );
+            setReloadAdvertisement(false);
         }
-    }, [ reloadAdvertisement, _id ]); //[ reloadAdvertisement, props.match.params._id ]);
-    
+    }, [reloadAdvertisement, _id]); //[ reloadAdvertisement, props.match.params._id ]);
+
     return (
         <div className="m-3">
-        <Card key={advertisement._id} style={{ marginTop: '6rem' }}>
-            <Card.Img variant='top' src={`${BACK_IMAGE_PATH}${advertisement.image}`} />
-            <Card.Body>
-                <Link to={`/dashboard/${_id}`}>
-                    <Card.Title>{advertisement.name}</Card.Title>
-                </Link>
-                <Card.Text>                    
-                    <p><strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong> {advertisement.price}€</p>                    
-                    <p><strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong> {advertisement.status===true ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}</p>                    
-                    <p><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {advertisement.tags}</p>                    
-                    <p>
-                        <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
+            <Card key={advertisement._id} style={{ marginTop: '6rem' }}>
+                <Card.Img variant='top' src={`${BACK_IMAGE_PATH}${advertisement.image}`} />
+                <Card.Body>
+                    <Link to={`/dashboard/${_id}`}>
+                        <Card.Title>{advertisement.name}</Card.Title>
+                    </Link>
+                    <Card.Text>
+                        <p><strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong> {advertisement.price}€</p>
+                        <p><strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong> {advertisement.status === true ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}</p>
+                        <p><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {advertisement.tags}</p>
+
+                        <p>
+                            <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
                         <Link to={`/adsOwner/${advertisement.owner}`}>
-                            <strong>{advertisement.owner}</strong>
-                        </Link>
-                    </p>
-                    <p><strong>{props.intl.formatMessage({ id: 'seeAd.description' })}:</strong>
-                    <br />
-                    {advertisement.description}</p>
-                  
-                    <FacebookShareButton 
-                        url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
-                        <FacebookIcon size={32} round={true}></FacebookIcon>
-                    </FacebookShareButton>
+                                <strong>{advertisement.owner}</strong>
+                            </Link>
+                        </p>
+                        <p><strong>{props.intl.formatMessage({ id: 'seeAd.description' })}:</strong>
+                            <br />
+                            {advertisement.description}</p>
+                        <p>{advertisement.reserved === true ? <Badge variant="info">{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
+                            {advertisement.sold === true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}</p>
+                        <p>{advertisement.owner === user & !advertisement.reserved & !advertisement.status ? <Button className='button' onClick={() => isReserved(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markreserved' })}</Button> : null}</p>
+                        <p>{advertisement.owner === user & advertisement.reserved & !advertisement.sold & !advertisement.status ? <Button className='button' onClick={() => notReserved(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.cancelr' })}</Button> : null}</p>
+
+                        <p>{advertisement.owner === user & !advertisement.sold & !advertisement.status ? <Button className='button' onClick={() => isSold(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.marksold' })}</Button> : null}</p>
+                        <FacebookShareButton
+                            url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
+                            <FacebookIcon size={32} round={true}></FacebookIcon>
+                        </FacebookShareButton>
                     &nbsp;
                     <TwitterShareButton
-                        url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
-                        <TwitterIcon size={32} round={true}></TwitterIcon>
-                    </TwitterShareButton>
-                    { 
-                        (inList === true) ?  <Button onClick={() => deleteFav(advertisement._id)} variant='light' size='lg' block>
-                            {props.intl.formatMessage({ id: 'favorites.remove' })} <FontAwesomeIcon icon={faHeart} color='red' /> </Button>
-                            : <Button onClick={() => addFav(advertisement._id)} variant='light' size='lg' block>
-                            {props.intl.formatMessage({ id: 'favorites.add' })} <FontAwesomeIcon icon={faHeart} color='#f7b6a0' id= 'heart' /> </Button> 
-                    }
-                    <Button variant='primary' size='lg' className='mt-2' block onClick={() => history.goBack()}>
-                        {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
-                    </Button>
-                </Card.Text>
-            </Card.Body>
+                            url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
+                            <TwitterIcon size={32} round={true}></TwitterIcon>
+                        </TwitterShareButton>
+                        {
+                            (inList === true) ? <Button onClick={() => deleteFav(advertisement._id)} variant='light' size='lg' block>
+                                {props.intl.formatMessage({ id: 'favorites.remove' })} <FontAwesomeIcon icon={faHeart} color='red' /> </Button>
+                                : <Button onClick={() => addFav(advertisement._id)} variant='light' size='lg' block>
+                                    {props.intl.formatMessage({ id: 'favorites.add' })} <FontAwesomeIcon icon={faHeart} color='#f7b6a0' id='heart' /> </Button>
+                        }
+                        <Button variant='primary' size='lg' className='mt-2' block onClick={() => history.goBack()}>
+                            {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
+                        </Button>
+                    </Card.Text>
+                </Card.Body>
 
-            <Card.Footer>
-                <small className='text-muted'>{props.intl.formatMessage({ id: 'advertisement.createdAt' })}: {props.intl.formatDate(new Date(advertisement.date_creation), dateOptions)}</small>
-            </Card.Footer>
-        </Card>
+                <Card.Footer>
+                    <small className='text-muted'>{props.intl.formatMessage({ id: 'advertisement.createdAt' })}: {props.intl.formatDate(new Date(advertisement.date_creation), dateOptions)}</small>
+                </Card.Footer>
+            </Card>
         </div>
     );
 };

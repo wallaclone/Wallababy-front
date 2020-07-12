@@ -269,9 +269,10 @@ function App() {
             <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
                 <Header setReloadLanguage = { setReloadLanguage } />
+                <SeeAd />
+
               </AuthContextProvider>
  
-              <SeeAd />
             </IntlProvider>
           ) }  
         />
