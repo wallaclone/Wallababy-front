@@ -87,12 +87,12 @@ export const messages = {
         'login.password': 'Password',
         'login.forgotPassword': 'Forgot password?',
         'sweet.alert': 'Welcome',
-        'sweet.alert.signuperror': 'Username or email already in use',
+        'sweet.alert.signUpError': 'Username or email already in use',
 
         'signUp.title': 'Sign up to Wallaclone',
         'signUp.logIn': 'LogIn',
         'sweet.alertWrongCredentials': 'Ops, wrong credentials!',
-        'sweet.alertWrongCredentialstext': 'Password or username are not correct',
+        'sweet.alertWrongCredentialsText': 'Password or username are not correct',
 
         'filter.whatAreYouLookingFor': 'What are you looking for? Use the search engine to find!',
         'filter.whatAreYouLookingForPlaceholder': 'Enter what you are looking for',
@@ -198,12 +198,12 @@ export const messages = {
         'login.password': 'Contraseña',
         'login.forgotPassword': '¿Olvidó su contraseña?',
         'sweet.alert': 'Bienvenido/a',
-        'sweet.alert.signuperror': 'El nombre de usuario o el email ya están en uso',
+        'sweet.alert.signUpError': 'El nombre de usuario o el email ya están en uso',
 
         'signUp.title': 'Regístrese en Wallaclone',
         'signUp.logIn': 'Iniciar sesión',
         'sweet.alertWrongCredentials': 'Ha habido un error',
-        'sweet.alertWrongCredentialstext': 'La contraseña o el nombre de usuario no son correctos',
+        'sweet.alertWrongCredentialsText': 'La contraseña o el nombre de usuario no son correctos',
         
         'filter.whatAreYouLookingFor': '¿Qué estás buscando? Utiliza el buscardor para encontrarlo!',
         'filter.whatAreYouLookingForPlaceholder': 'Introduzca aquí lo que está buscando',

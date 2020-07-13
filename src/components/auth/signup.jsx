@@ -26,14 +26,14 @@ function Signup(props) {
     if (response.status !== 201) {
       Swal.fire({
         icon: 'error',
-        title: 'Username or email already in use',
+        title: props.intl.formatMessage({ id: 'sweet.alert.signUpError' }),
         timer: 8000,
         confirmButtonColor: '#E29578',
       });
     } else {
       Swal.fire({
         icon: 'success',
-        title: `Welcome ${username}!`,
+        title: `${props.intl.formatMessage({ id: 'sweet.alert' })} ${username}!`,
         text: ``,
         timer: 15000,
         confirmButtonColor: '#E29578',

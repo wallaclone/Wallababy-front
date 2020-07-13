@@ -24,15 +24,15 @@ function Login(props) {
     if (response.status !== 201) {
       Swal.fire({
         icon: 'error',
-        title: 'Ops wrong credentials',
-        text: 'Password or username are not correct',
+        title: props.intl.formatMessage({ id: 'sweet.alertWrongCredentials' }),
+        text: props.intl.formatMessage({ id: 'sweet.alertWrongCredentialsText' }),
         timer: 8000,
         confirmButtonColor: '#E29578',
       });
     } else {
       Swal.fire({
         icon: 'success',
-        title: `Welcome ${username}!`,
+        title: `${props.intl.formatMessage({ id: 'sweet.alert' })} ${username}!`,
         text: ``,
         timer: 15000,
         confirmButtonColor: '#E29578',
