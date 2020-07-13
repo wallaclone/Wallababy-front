@@ -92,6 +92,11 @@ export const messages = {
         'filter.searchAds': 'Search advertisements',
         'filter.clearFilter': 'Clear filter',
 
+        'favorites.title': 'Your favorited ads:',
+        'favorites.remove': 'Remove ad from fav list',
+        'favorites.add': 'Add to favorites',
+        'favorites.empty': "You don't have any fav yet",
+
     },
     'es-ES': {
         'dashboard.createAd': 'Crear anuncio',
@@ -185,6 +190,11 @@ export const messages = {
         'filter.maximumPricePlaceholder': 'Introduzca un precio máximo',
         'filter.searchAds': 'Buscar anuncios',
         'filter.clearFilter': 'Limpiar filtro',
+
+        'favorites.title': 'Tus anuncios favoritos:',
+        'favorites.remove': 'Quita el anuncio de tu lista de favoritos',
+        'favorites.add': 'Añade a favoritos',
+        'favorites.empty': "No tienes ningún anuncio favorito",
 
     },
 

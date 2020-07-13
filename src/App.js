@@ -14,10 +14,12 @@ import {Changepassword as ChangePassword} from './components/auth/changePassword
 import {createAD as CreateAd} from './components/advertisements/createAd';
 import {dashboard as Dashboard} from './components/advertisements/dashboard';
 import {seeAd as SeeAd} from './components/advertisements/seeAd';
-import { Editad as EditAd } from './components/advertisements/editAd';
-import { Myadverts as MyAdverts } from './components/advertisements/myAdverts';
-import { Editprofile as EditProfile } from './components/user/editProfile';
+import {Editad as EditAd} from './components/advertisements/editAd';
+import {Myadverts as MyAdverts} from './components/advertisements/myAdverts';
+import {Editprofile as EditProfile} from './components/user/editProfile';
 import {filter as Filter} from './components/layout/filter';
+import {myFavs as MyFavs} from './components/advertisements/favorites';
+import {adsOwner as AdsOwner} from './components/advertisements/adsOwner';
 
 import ant from './img/ant.png';
 import sig from './img/sig.png';
@@ -27,8 +29,8 @@ const { getAds, getTags, limit } = apiCall();
 
 function App(props) {
 
-  const [ advertisements, setAdvertisements ] = useState([]);
-  const [ reloadAdvertisements, setReloadAdvertisements ] = useState( true );
+  const [advertisements, setAdvertisements] = useState([]);
+  const [reloadAdvertisements, setReloadAdvertisements] = useState(true);
 
   const [ search, setSearch ] = useState('');
   const [ currentLocale, setCurrentLocale ] = useState('es-ES');
@@ -67,9 +69,8 @@ function App(props) {
       }
       loadAds();
       // We change to false the recharge of articles so that it isn't recharging continuously
-      setReloadAdvertisements( false );
+      setReloadAdvertisements(false);
     }
-
   }, [ currentPage, search, reloadAdvertisements ]);
 
   useEffect(() => {
@@ -159,9 +160,11 @@ function App(props) {
         />
 
         <Route path="/test" component={() =>
-          <AuthContextProvider>
-            <Header />
-          </AuthContextProvider>
+          <>
+            <AuthContextProvider>
+              <Header />
+            </AuthContextProvider>
+          </>
         } />
         {/* 
        <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
@@ -203,11 +206,32 @@ function App(props) {
           ) }  
         />
 
+        <Route path="/adsOwner/:owner"
+          render = { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              <AuthContextProvider>
+                <Header setReloadLanguage = { setReloadLanguage } />
+              </AuthContextProvider>
+
+              <AdsOwner />
+            </IntlProvider>
+          ) }  
+        />
+
         {/* <Route path="/dashboard" component={Dashboard} /> */}
 
         {/* <Route exact path="/dashboard/:_id" component={SeeAd} /> */}
 
-        <Route path="/editAd/:id" component={EditAd} />
+        <Route path="/editAd/:id" 
+          render = { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              <AuthContextProvider>
+                <Header setReloadLanguage={setReloadLanguage} />
+              </AuthContextProvider>
+              <EditAd />
+            </IntlProvider>
+          ) }
+        />
         {/* <Route exact path="/seeAd/:_id" component={SeeAd} /> */}
   
         {/*<Route path='/myads/:username' component={() =>
@@ -284,8 +308,8 @@ function App(props) {
               />
  
               <Dashboard
-                advertisements = { advertisements }
-                setReloadAdvertisements = { setReloadAdvertisements }
+                advertisements={advertisements}
+                setReloadAdvertisements={setReloadAdvertisements}
               />
               
               <Form.Row className="ml-2 mr-2">
@@ -316,6 +340,16 @@ function App(props) {
             </IntlProvider>
           ) }  
         />
+
+        <Route path="/favorites" render =
+            { () => (
+            <IntlProvider locale={currentLocale} messages={messages}>
+              <AuthContextProvider>
+                <Header setReloadLanguage = { setReloadLanguage } />
+              </AuthContextProvider>
+              <MyFavs />
+            </IntlProvider>
+            )} />
 
         <Redirect to="/dashboard" />
       </Switch>
