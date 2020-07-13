@@ -8,7 +8,10 @@ export const messages = {
         'all.newAPP': "New to Wallaclone?",
         'all.alreadyRegistered': "Already registered?",
         'all.signUp': 'Sign Up',
+        'all.next': 'Next',
+        'all.previous': 'Previous',
 
+        //SweetAlert Borrar
         'sweetalert.areYouSure': 'Are you sure?',
         'sweetalert.noRevert': "You won't be able to revert this!",
         'sweetalert.deleteIt': 'Yes, delete it!',
@@ -17,6 +20,12 @@ export const messages = {
         'sweetalert.adDeleted': 'Your advertisement has been deleted.',
         'sweetalert.success': 'success',
         'sweetalert.mistake': 'There was a mistake. Try again.',
+
+        //SweetAlert passwordRecovery
+        'sweetalert.incorrectEmail': 'Incorrect email',
+        'sweetalert.emailIncorrect': 'The email is incorrect.',
+        'sweetalert.correctEmail': 'Correct email',
+        'sweetalert.sentEmail': 'We have sent you an email with your password.',
 
         'advertisement.price': 'Price',
         'advertisement.type': 'Type',
@@ -93,6 +102,8 @@ export const messages = {
         'all.newAPP': "¿Nuevo en Wallaclone?",
         'all.alreadyRegistered': "¿Ya estás registrado?",
         'all.signUp': 'Regístrate',
+        'all.next': 'Siguiente',
+        'all.previous': 'Anterior',
 
         //SweetAlert Borrar
         'sweetalert.areYouSure': '¿Estás seguro?',
@@ -103,6 +114,12 @@ export const messages = {
         'sweetalert.adDeleted': 'Su anuncio ha sido borrado.',
         'sweetalert.success': 'Éxito',
         'sweetalert.mistake': 'Hubo un problema. Inténtelo de nuevo.',
+
+        //SweetAlert passwordRecovery
+        'sweetalert.incorrectEmail': 'Email incorrecto',
+        'sweetalert.emailIncorrect': 'El correo electrónico introducido es incorrecto.',
+        'sweetalert.correctEmail': 'Email correcto',
+        'sweetalert.sentEmail': 'Le hemos enviado un correo electrónico con su contraseña.',
 
         'advertisement.price': 'Precio',
         'advertisement.type': 'Tipo',

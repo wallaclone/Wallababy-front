@@ -2,26 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Form, Col, Button } from "react-bootstrap";
 
-//import { useIntl } from 'react-intl';
 import {IntlProvider} from 'react-intl';
 import {messages as allMessages} from './messages/messages';
 
-//import PasswordRecovery from './components/auth/passwordRecovery';
 import {Passwordrecovery as PasswordRecovery} from './components/auth/passwordRecovery';
-// import Signup from './components/auth/signup';
 import {SignUp as Signup} from './components/auth/signup';
-// import Login from './components/auth/login';
 import {LogIn as Login} from './components/auth/login';
-// import Header from './components/layout/header';
 import {header as Header} from './components/layout/header';
 import AuthContextProvider from './contexts/authContext';
-// import ChangePassword from './components/auth/changePassword';
 import {Changepassword as ChangePassword} from './components/auth/changePassword';
-//import CreateAd from './components/advertisements/createAd';
 import {createAD as CreateAd} from './components/advertisements/createAd';
-// import Dashboard from './components/advertisements/dashboard';
 import {dashboard as Dashboard} from './components/advertisements/dashboard';
-// import SeeAd from './components/advertisements/seeAd';
 import {seeAd as SeeAd} from './components/advertisements/seeAd';
 import { Editad as EditAd } from './components/advertisements/editAd';
 import { Myadverts as MyAdverts } from './components/advertisements/myAdverts';
@@ -39,37 +30,23 @@ function App(props) {
   const [ advertisements, setAdvertisements ] = useState([]);
   const [ reloadAdvertisements, setReloadAdvertisements ] = useState( true );
 
-  const [busqueda, guardarBusqueda] = useState('');
-
-  // const [ reloadLanguage, setReloadLanguage ] = useState('es-ES');
-  // const [ messages, setMessages ] = useState(allMessages[reloadLanguage]);
-  // console.log('--------reloadLanguage:', reloadLanguage);
-  // console.log('--------messages:', messages);
-
+  const [ search, setSearch ] = useState('');
   const [ currentLocale, setCurrentLocale ] = useState('es-ES');
+
   const [ messages, setMessages ] = useState(allMessages[currentLocale]);
-  // console.log('--------currentLocale:', currentLocale);
-  // console.log('--------messages:', messages);
   const [ reloadLanguage, setReloadLanguage ] = useState(currentLocale);
 
   const [ tags, setTags ] = useState([]);
   const [ reloadTags, setReloadTags ] = useState(true);
 
-  const [ paginaActual, guardarPaginaActual ] = useState(1);
-  const [ totalPaginas, guardarTotalPaginas ] = useState(1);
-
-  const [ totalAds, setTotalAds ] = useState(0);
-  const [ skip, setSkip ] = useState(0);
+  const [ currentPage, setCurrentPage ] = useState(1);
+  const [ totalPages, setTotalPages ] = useState(1);
 
   useEffect(() => {
     if(reloadLanguage) {
       const load = () => {
-        // console.log('*ENTRO EN useEffect -> reloadLanguage:', reloadLanguage);
         setCurrentLocale(reloadLanguage);
         setMessages(allMessages[reloadLanguage]);
-        // We change to false the recharge of language, so that it isn't recharging continuously
-        // console.log('*currentLocale:', currentLocale);
-        // console.log('*messages:', messages);
       }
       load();
       setReloadLanguage( '' );
@@ -78,98 +55,56 @@ function App(props) {
 
   useEffect(() => {
     if(reloadAdvertisements) {
-      
-      // let newSearch = ''
-      // if(paginaActual === 1) {
-      //   newSearch = busqueda + '&skip=0';
-      // }
-      // else {
-
-      //   newSearch = busqueda + `&skip=${ ( (paginaActual-1) * limit() ) }`;
-      // }
-      // console.log('newSearch:', newSearch);
-      // guardarBusqueda(newSearch);
-
-      const adsPerPage = limit(); //En api.js: const LIMIT = 12;
-
+      const adsPerPage = limit(); //In api.js: const LIMIT = 12;
       const loadAds = async () => {
-        // realizamos la consulta al API
-        const resultAds = await getAds (busqueda);
-        console.log('resultAds.rows:', resultAds.rows);
-        console.log('resultAds.count:', resultAds.count);
+        const newSearch = search.concat(`&skip=${ ( (currentPage-1) * limit() ) }`);
+        const resultAds = await getAds (newSearch);
         setAdvertisements( resultAds.rows );
-        setTotalAds( resultAds.count );
-        console.log('++++Advertisements:', advertisements);
-        console.log('++++TotalAds:', totalAds);
+        setTotalPages(Math.ceil(resultAds.count / adsPerPage)); // Calculate total pages
+        // Move the screen to the top
+        const jumbotron = document.querySelector('.jumbotron');
+        if(jumbotron) jumbotron.scrollIntoView({behavior : 'smooth', block: 'end'});
       }
       loadAds();
-
       // We change to false the recharge of articles so that it isn't recharging continuously
       setReloadAdvertisements( false );
-
-      // Calculate total pages
-      // const totalAds = count; //32; //COUNT(*) From Advertisements
-      // const adsPerPage = limit(); //En api.js: const LIMIT = 12;
-      guardarTotalPaginas(Math.ceil(totalAds / adsPerPage));
-      // console.log("División:", totalAds / adsPerPage)
-      console.log(`TotalPaginas(${totalAds}/${adsPerPage}):`, Math.ceil(totalAds / adsPerPage))
     }
 
-  }, [ totalAds, paginaActual, busqueda, currentLocale, reloadAdvertisements, messages ]);
-  //}, [ totalAds, paginaActual, busqueda, currentLocale, reloadAdvertisements, messages ]);
+  }, [ currentPage, search, reloadAdvertisements ]);
 
   useEffect(() => {
     if( reloadTags ){
     const loadTags = async () => {
-        // realizamos la consulta al API
         const resultTags = await getTags ();
-        // console.log('resultAds:', resultAds.rows);
-        //setObjectForm.tags( resultTags );
-        // guardarTerminoBusqueda( { ...terminoBusqueda, tags : resultTags } );
-        //sessionStorage.setItem('tags', resultTags.name);
-        // console.log("resultTags:", resultTags);
         let tagAux = [];
         resultTags.forEach(tag => {
-            console.log("Tag:", tag.name);
+            //console.log("Tag:", tag.name);
             tagAux.push(tag.name);
         });
         // console.log("tagAux:", tagAux);
         setTags(tagAux);
-        // console.log("tags:", tags);
-        //console.log("sessionStorage-Tags:", sessionStorage.getItem('tags'));
-        // resultTags.forEach(tag => {
-        //     arrayTags.push({name:tag.name, status:false});
-        // });
-        // console.log("arrayTags:", arrayTags);
     }
     loadTags();
-
     // We change to false the recharge of articles so that it isn't recharging continuously
     setReloadTags( false );
     }
   }, [ reloadTags ]);
 
   const paginaAnterior = () => {
-    let nuevaPaginaActual = paginaActual - 1;
-    guardarPaginaActual(nuevaPaginaActual);
+    let newCurrentPage = currentPage - 1;
+    setCurrentPage(newCurrentPage);
+    setReloadAdvertisements (true);
   }
 
   const paginaSiguiente = () => {
-    let nuevaPaginaActual = paginaActual + 1;
-    guardarPaginaActual(nuevaPaginaActual);
+    let newCurrentPage = currentPage + 1;
+    setCurrentPage(newCurrentPage);
+    setReloadAdvertisements (true);
   }
   
   return (
     <Router>
       <Switch>
-        {/* 
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
-        <Route exact path="/editAd/id=:_id" component={EditAd} />
-        <Route exact path="/dashboard/:_id" component={Detail} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/createAd" component={CreateAd} />
-        */}
 
         {/* <Route path="/signup" exact component={Signup} /> */}
         <Route exact path="/signup"
@@ -196,7 +131,6 @@ function App(props) {
             </IntlProvider>
           ) }  
         />
-
         
         {/* <Route path="/changePassword/:id" component={ChangePassword} /> */}
         <Route path="/changePassword/:id"
@@ -343,8 +277,9 @@ function App(props) {
               </AuthContextProvider>
 
               <Filter
-                guardarBusqueda = { guardarBusqueda }
+                setSearch = { setSearch }
                 setReloadAdvertisements = { setReloadAdvertisements }
+                setCurrentPage = { setCurrentPage }
                 tags = { tags }
               />
  
@@ -355,13 +290,13 @@ function App(props) {
               
               <Form.Row className="ml-2 mr-2">
                 <Form.Group as={Col} md="6"> {/* &laquo; */}
-                  {(paginaActual === 1) 
+                  {(currentPage === 1) 
                     ? ( <Button variant="info" size="lg" block onClick={paginaAnterior} disabled> <img src={ant} alt='anterior' /> </Button> ) 
                     : ( <Button variant="info" size="lg" block onClick={paginaAnterior}> <img src={ant} alt='anterior' /> </Button> )
                   }
                 </Form.Group>
                 <Form.Group as={Col} md="6"> {/* &raquo; */}
-                  {(paginaActual === totalPaginas) 
+                  {(currentPage === totalPages) 
                     ? ( <Button variant="info" size="lg" block onClick={paginaSiguiente} disabled> <img src={sig} alt='siguiente' /> </Button> ) 
                     : ( <Button variant="info" size="lg" block onClick={paginaSiguiente}> <img src={sig} alt='siguiente' /> </Button> )
                   }
@@ -369,11 +304,11 @@ function App(props) {
               </Form.Row>
               
               {/* 
-              {(paginaActual === 1) ? null : (
+              {(currentPage === 1) ? null : (
                 <button type="button" onClick={paginaAnterior} className="btn btn-info mr-1">&laquo; Anterior</button>
               )}
 
-              {(paginaActual === totalPaginas) ? null : (
+              {(currentPage === totalPages) ? null : (
                 <button type="button" onClick={paginaSiguiente} className="btn btn-info">Siguiente &raquo;</button>
               )} 
               */}
@@ -387,5 +322,4 @@ function App(props) {
     </Router>
   );
 }
-
 export default App;
