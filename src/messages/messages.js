@@ -8,8 +8,10 @@ export const messages = {
         'all.newAPP': "New to Wallaclone?",
         'all.alreadyRegistered': "Already registered?",
         'all.signUp': 'Sign Up',
+        'all.next': 'Next',
+        'all.previous': 'Previous',
 
-        
+        //SweetAlert Borrar
         'sweetalert.areYouSure': 'Are you sure?',
         'sweetalert.noRevert': "You won't be able to revert this!",
         'sweetalert.deleteIt': 'Yes, delete it!',
@@ -18,6 +20,12 @@ export const messages = {
         'sweetalert.adDeleted': 'Your advertisement has been deleted.',
         'sweetalert.success': 'success',
         'sweetalert.mistake': 'There was a mistake. Try again.',
+
+        //SweetAlert passwordRecovery
+        'sweetalert.incorrectEmail': 'Incorrect email',
+        'sweetalert.emailIncorrect': 'The email is incorrect.',
+        'sweetalert.correctEmail': 'Correct email',
+        'sweetalert.sentEmail': 'We have sent you an email with your password.',
 
         'advertisement.price': 'Price',
         'advertisement.type': 'Type',
@@ -86,12 +94,21 @@ export const messages = {
         'sweet.alertWrongCredentials': 'Ops, wrong credentials!',
         'sweet.alertWrongCredentialstext': 'Password or username are not correct',
 
+        'filter.whatAreYouLookingFor': 'What are you looking for? Use the search engine to find!',
+        'filter.whatAreYouLookingForPlaceholder': 'Enter what you are looking for',
+        'filter.selectTag': 'Select Tag',
+        'filter.selectStatus': 'Select Buy/Sell',
+        'filter.minimalPrice': 'Minimal price',
+        'filter.minimalPricePlaceholder': 'Enter minimal price',
+        'filter.maximumPrice': 'Maximum price',
+        'filter.maximumPricePlaceholder': 'Enter maximum price',
+        'filter.searchAds': 'Search advertisements',
+        'filter.clearFilter': 'Clear filter',
+
         'favorites.title': 'Your favorited ads:',
         'favorites.remove': 'Remove ad from fav list',
         'favorites.add': 'Add to favorites',
         'favorites.empty': "You don't have any fav yet",
-
-        
 
     },
     'es-ES': {
@@ -103,6 +120,8 @@ export const messages = {
         'all.newAPP': "¿Nuevo en Wallaclone?",
         'all.alreadyRegistered': "¿Ya estás registrado?",
         'all.signUp': 'Regístrate',
+        'all.next': 'Siguiente',
+        'all.previous': 'Anterior',
 
         //SweetAlert Borrar
         'sweetalert.areYouSure': '¿Estás seguro?',
@@ -114,6 +133,12 @@ export const messages = {
         'sweetalert.success': 'Éxito',
         'sweetalert.mistake': 'Hubo un problema. Inténtelo de nuevo.',
 
+        //SweetAlert passwordRecovery
+        'sweetalert.incorrectEmail': 'Email incorrecto',
+        'sweetalert.emailIncorrect': 'El correo electrónico introducido es incorrecto.',
+        'sweetalert.correctEmail': 'Email correcto',
+        'sweetalert.sentEmail': 'Le hemos enviado un correo electrónico con su contraseña.',
+
         'advertisement.price': 'Precio',
         'advertisement.type': 'Tipo',
         'advertisement.typeBuy': 'Compra',
@@ -124,7 +149,7 @@ export const messages = {
         'advertisement.marksold': 'Marcar anuncio como vendido',
         'advertisement.markNotSold': 'Marcar anuncio como no vendido',
         'advertisement.sold': '¡Vendido!',
-        'advertisement.tags': 'Tags',
+        'advertisement.tags': 'Etiquetas',
         'advertisement.owner': 'Propietario',
         'advertisement.seeFullAd': 'Ver anuncio completo',
         'advertisement.delete': 'Borrar',
@@ -140,7 +165,7 @@ export const messages = {
         'createAd.title': 'Crear Anuncio',
         'createAd.titleAd': 'Título del anuncio:',
         'createAd.titleAdPlaceholder': 'Añada un título al anuncio',
-        'createAd.tagsAd': 'Tags del anuncio:',
+        'createAd.tagsAd': 'Etiquetas del anuncio:',
         'createAd.typeAd': 'Tipo de anuncio:',
         'createAd.selectTypeAd': 'Selecciona el tipo de anuncio (Compra/Venta)',
         'createAd.buy': 'Compra',
@@ -180,11 +205,21 @@ export const messages = {
         'sweet.alertWrongCredentials': 'Ha habido un error',
         'sweet.alertWrongCredentialstext': 'La contraseña o el nombre de usuario no son correctos',
         
+        'filter.whatAreYouLookingFor': '¿Qué estás buscando? Utiliza el buscardor para encontrarlo!',
+        'filter.whatAreYouLookingForPlaceholder': 'Introduzca aquí lo que está buscando',
+        'filter.selectTag': 'Seleccione una etiqueta',
+        'filter.selectStatus': 'Compra/Venta...',
+        'filter.minimalPrice': 'Precio mínimo',
+        'filter.minimalPricePlaceholder': 'Introduzca un precio mínimo',
+        'filter.maximumPrice': 'Precio máximo',
+        'filter.maximumPricePlaceholder': 'Introduzca un precio máximo',
+        'filter.searchAds': 'Buscar anuncios',
+        'filter.clearFilter': 'Limpiar filtro',
+
         'favorites.title': 'Tus anuncios favoritos:',
         'favorites.remove': 'Quita el anuncio de tu lista de favoritos',
         'favorites.add': 'Añade a favoritos',
         'favorites.empty': "No tienes ningún anuncio favorito",
-
 
     },
 

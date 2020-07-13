@@ -1,93 +1,111 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Form, Col, Button } from "react-bootstrap";
 
-//import { useIntl } from 'react-intl';
 import {IntlProvider} from 'react-intl';
 import {messages as allMessages} from './messages/messages';
 
-//import PasswordRecovery from './components/auth/passwordRecovery';
 import {Passwordrecovery as PasswordRecovery} from './components/auth/passwordRecovery';
-// import Signup from './components/auth/signup';
 import {SignUp as Signup} from './components/auth/signup';
-// import Login from './components/auth/login';
 import {LogIn as Login} from './components/auth/login';
-// import Header from './components/layout/header';
 import {header as Header} from './components/layout/header';
 import AuthContextProvider from './contexts/authContext';
-// import ChangePassword from './components/auth/changePassword';
 import {Changepassword as ChangePassword} from './components/auth/changePassword';
-//import CreateAd from './components/advertisements/createAd';
 import {createAD as CreateAd} from './components/advertisements/createAd';
-// import Dashboard from './components/advertisements/dashboard';
 import {dashboard as Dashboard} from './components/advertisements/dashboard';
-// import SeeAd from './components/advertisements/seeAd';
 import {seeAd as SeeAd} from './components/advertisements/seeAd';
-import { Editad as EditAd } from './components/advertisements/editAd';
-import { Myadverts as MyAdverts } from './components/advertisements/myAdverts';
-import { Editprofile as EditProfile } from './components/user/editProfile';
-import { myFavs as MyFavs } from './components/advertisements/favorites';
-import { adsOwner as AdsOwner } from './components/advertisements/adsOwner';
-import apiCall from './components/api/api';
-const { getAds } = apiCall();
+import {Editad as EditAd} from './components/advertisements/editAd';
+import {Myadverts as MyAdverts} from './components/advertisements/myAdverts';
+import {Editprofile as EditProfile} from './components/user/editProfile';
+import {filter as Filter} from './components/layout/filter';
+import {myFavs as MyFavs} from './components/advertisements/favorites';
+import {adsOwner as AdsOwner} from './components/advertisements/adsOwner';
 
-function App() {
+import ant from './img/ant.png';
+import sig from './img/sig.png';
+
+import apiCall from './components/api/api';
+const { getAds, getTags, limit } = apiCall();
+
+function App(props) {
 
   const [advertisements, setAdvertisements] = useState([]);
   const [reloadAdvertisements, setReloadAdvertisements] = useState(true);
 
-
-  // const [ reloadLanguage, setReloadLanguage ] = useState('es-ES');
-  // const [ messages, setMessages ] = useState(allMessages[reloadLanguage]);
-  // console.log('--------reloadLanguage:', reloadLanguage);
-  // console.log('--------messages:', messages);
-
+  const [ search, setSearch ] = useState('');
   const [ currentLocale, setCurrentLocale ] = useState('es-ES');
+
   const [ messages, setMessages ] = useState(allMessages[currentLocale]);
-  // console.log('--------currentLocale:', currentLocale);
-  // console.log('--------messages:', messages);
   const [ reloadLanguage, setReloadLanguage ] = useState(currentLocale);
 
+  const [ tags, setTags ] = useState([]);
+  const [ reloadTags, setReloadTags ] = useState(true);
+
+  const [ currentPage, setCurrentPage ] = useState(1);
+  const [ totalPages, setTotalPages ] = useState(1);
+
   useEffect(() => {
-    
-    if(reloadAdvertisements) {
-      const loadAds = async () => {
-        // realizamos la consulta al API
-        const resultAds = await getAds();
-        // console.log('resultAds:', resultAds.rows);
-        setAdvertisements(resultAds.rows);
-      }
-      loadAds();
-
-      // We change to false the recharge of articles so that it isn't recharging continuously
-      setReloadAdvertisements(false);
-    }
-
     if(reloadLanguage) {
       const load = () => {
-        // console.log('*ENTRO EN useEffect -> reloadLanguage:', reloadLanguage);
         setCurrentLocale(reloadLanguage);
         setMessages(allMessages[reloadLanguage]);
-        // We change to false the recharge of language, so that it isn't recharging continuously
-        // console.log('*currentLocale:', currentLocale);
-        // console.log('*messages:', messages);
       }
       load();
       setReloadLanguage( '' );
     }
+  }, [ reloadLanguage ]);
 
-  }, [ currentLocale, reloadAdvertisements, reloadLanguage, messages ]);
+  useEffect(() => {
+    if(reloadAdvertisements) {
+      const adsPerPage = limit(); //In api.js: const LIMIT = 12;
+      const loadAds = async () => {
+        const newSearch = search.concat(`&skip=${ ( (currentPage-1) * limit() ) }`);
+        const resultAds = await getAds (newSearch);
+        setAdvertisements( resultAds.rows );
+        setTotalPages(Math.ceil(resultAds.count / adsPerPage)); // Calculate total pages
+        // Move the screen to the top
+        const jumbotron = document.querySelector('.jumbotron');
+        if(jumbotron) jumbotron.scrollIntoView({behavior : 'smooth', block: 'end'});
+      }
+      loadAds();
+      // We change to false the recharge of articles so that it isn't recharging continuously
+      setReloadAdvertisements(false);
+    }
+  }, [ currentPage, search, reloadAdvertisements ]);
+
+  useEffect(() => {
+    if( reloadTags ){
+    const loadTags = async () => {
+        const resultTags = await getTags ();
+        let tagAux = [];
+        resultTags.forEach(tag => {
+            //console.log("Tag:", tag.name);
+            tagAux.push(tag.name);
+        });
+        // console.log("tagAux:", tagAux);
+        setTags(tagAux);
+    }
+    loadTags();
+    // We change to false the recharge of articles so that it isn't recharging continuously
+    setReloadTags( false );
+    }
+  }, [ reloadTags ]);
+
+  const paginaAnterior = () => {
+    let newCurrentPage = currentPage - 1;
+    setCurrentPage(newCurrentPage);
+    setReloadAdvertisements (true);
+  }
+
+  const paginaSiguiente = () => {
+    let newCurrentPage = currentPage + 1;
+    setCurrentPage(newCurrentPage);
+    setReloadAdvertisements (true);
+  }
   
   return (
     <Router>
       <Switch>
-        {/* 
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
-        <Route exact path="/editAd/id=:_id" component={EditAd} />
-        <Route exact path="/dashboard/:_id" component={Detail} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/createAd" component={CreateAd} />
-        */}
 
         {/* <Route path="/signup" exact component={Signup} /> */}
         <Route exact path="/signup"
@@ -114,7 +132,6 @@ function App() {
             </IntlProvider>
           ) }  
         />
-
         
         {/* <Route path="/changePassword/:id" component={ChangePassword} /> */}
         <Route path="/changePassword/:id"
@@ -283,11 +300,44 @@ function App() {
               <AuthContextProvider>
                 <Header setReloadLanguage = { setReloadLanguage } />
               </AuthContextProvider>
+
+              <Filter
+                setSearch = { setSearch }
+                setReloadAdvertisements = { setReloadAdvertisements }
+                setCurrentPage = { setCurrentPage }
+                tags = { tags }
+              />
  
               <Dashboard
                 advertisements={advertisements}
                 setReloadAdvertisements={setReloadAdvertisements}
               />
+              
+              <Form.Row className="ml-2 mr-2">
+                <Form.Group as={Col} md="6"> {/* &laquo; */}
+                  {(currentPage === 1) 
+                    ? ( <Button variant="info" size="lg" block onClick={paginaAnterior} disabled> <img src={ant} alt='anterior' /> </Button> ) 
+                    : ( <Button variant="info" size="lg" block onClick={paginaAnterior}> <img src={ant} alt='anterior' /> </Button> )
+                  }
+                </Form.Group>
+                <Form.Group as={Col} md="6"> {/* &raquo; */}
+                  {(currentPage === totalPages) 
+                    ? ( <Button variant="info" size="lg" block onClick={paginaSiguiente} disabled> <img src={sig} alt='siguiente' /> </Button> ) 
+                    : ( <Button variant="info" size="lg" block onClick={paginaSiguiente}> <img src={sig} alt='siguiente' /> </Button> )
+                  }
+                </Form.Group>
+              </Form.Row>
+              
+              {/* 
+              {(currentPage === 1) ? null : (
+                <button type="button" onClick={paginaAnterior} className="btn btn-info mr-1">&laquo; Anterior</button>
+              )}
+
+              {(currentPage === totalPages) ? null : (
+                <button type="button" onClick={paginaSiguiente} className="btn btn-info">Siguiente &raquo;</button>
+              )} 
+              */}
+
             </IntlProvider>
           ) }  
         />
@@ -307,5 +357,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
