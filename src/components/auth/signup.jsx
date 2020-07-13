@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Button, Form, Card } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+
 import apiCall from '../api/api';
 
 import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
@@ -21,6 +23,22 @@ function Signup(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await register(username, password, email);
+    if (response.status !== 201) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Username or email already in use',
+        timer: 8000,
+        confirmButtonColor: '#E29578',
+      });
+    } else {
+      Swal.fire({
+        icon: 'success',
+        title: `Welcome ${username}!`,
+        text: ``,
+        timer: 15000,
+        confirmButtonColor: '#E29578',
+      });
+    }
     // (response.status !== 201) ? props.history.push('/signup') : props.history.push('/login')
     (response.status !== 201) ? history.push('/signup') : history.push('/login')
   }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Card, Form, Button }  from 'react-bootstrap';
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import apiCall from '../api/api';
 
 import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
@@ -33,6 +33,24 @@ function PasswordRecovery(props) {
         event.preventDefault();
 
         const response = await passwordRecovery(objectForm.email.toString());
+        if (response.status !== 201) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Incorrect email',
+              text: `The email is incorrect. `,
+              timer: 5000,
+              confirmButtonColor:  '#E29578',
+            });
+          } else {
+            Swal.fire({
+              icon: 'success',
+              title: `Correct email`,
+              text: `We have sent you an email with your password`,
+             
+              timer: 10000,
+              confirmButtonColor:  '#E29578',
+            });
+          }
         
         // const url = `http://localhost:4000/api/recoverpassword`;
         // const response = await fetch (url, {
