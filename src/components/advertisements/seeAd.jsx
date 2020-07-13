@@ -10,7 +10,7 @@ import apiCall from '../api/api';
 
 import { FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime } from 'react-intl';
 
-const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsReserved, markAsUnreserved } = apiCall();
+const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsNotSold, markAsReserved, markAsUnreserved } = apiCall();
 
 function SeeAd(props) {
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
@@ -53,17 +53,22 @@ function SeeAd(props) {
         setInList(true)
     }
 
-    const isSold = async (id) => {
+    const sell = async (id) => {
         await markAsSold(id)
         setAdvertisement({ ...advertisement, sold: true });
     }
 
-    const isReserved = async (id) => {
+    const dontSell = async (id) => {
+        await markAsNotSold(id)
+        setAdvertisement({ ...advertisement, sold: false });
+    }
+
+    const reserve = async (id) => {
         await markAsReserved(id)
         setAdvertisement({ ...advertisement, reserved: true });
     }
 
-    const notReserved = async (id) => {
+    const dontReserve = async (id) => {
         await markAsUnreserved(id)
         setAdvertisement({ ...advertisement, reserved: false });
     }
@@ -109,10 +114,12 @@ function SeeAd(props) {
                             {advertisement.description}</p>
                         <p>{advertisement.reserved === true ? <Badge variant="info">{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
                             {advertisement.sold === true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}</p>
-                        <p>{advertisement.owner === user & !advertisement.reserved & !advertisement.status ? <Button className='button' onClick={() => isReserved(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markreserved' })}</Button> : null}</p>
-                        <p>{advertisement.owner === user & advertisement.reserved & !advertisement.sold & !advertisement.status ? <Button className='button' onClick={() => notReserved(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.cancelr' })}</Button> : null}</p>
+                        <p>{advertisement.owner === user && !advertisement.reserved && !advertisement.sold && !advertisement.status ? <Button className="button" onClick={() => reserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markreserved' })}</Button> : null}</p>
+                        <p>{advertisement.owner === user && advertisement.reserved && !advertisement.sold && !advertisement.status ? <Button className="button" onClick={() => dontReserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.cancelr' })}</Button> : null}</p>
 
-                        <p>{advertisement.owner === user & !advertisement.sold & !advertisement.status ? <Button className='button' onClick={() => isSold(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.marksold' })}</Button> : null}</p>
+                        <p>{advertisement.owner === user && !advertisement.sold && !advertisement.status ? <Button className='button' onClick={() => sell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.marksold' })}</Button> : null}</p>
+                        <p>{advertisement.owner === user && advertisement.sold && !advertisement.status ? <Button className='button' onClick={() => dontSell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markNotSold' })}</Button> : null}</p>
+
                         <FacebookShareButton
                             url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
                             <FacebookIcon size={32} round={true}></FacebookIcon>

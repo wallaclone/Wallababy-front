@@ -410,6 +410,27 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
+    markAsNotSold: async (adId) => {
+      try {
+        const response = await fetch(`${statusEndPoint}/sold/${adId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
+      }
+    },
+
     markAsReserved: async (adId) => {
       try {
         const response = await fetch(`${statusEndPoint}/reserved/${adId}`, {
