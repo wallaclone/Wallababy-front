@@ -63,6 +63,9 @@ export const messages = {
         'passwordRecovery.title': 'Password recovery',
         'passwordRecovery.emailPlaceholder': 'Enter Email',
         'passwordRecovery.phrase': "We'll never share your email with anyone else.",
+        'sweetalert.wrongmail': 'Wrong email',
+        'sweetalert.correctmail': 'Email found!',
+        'sweetalert.messagesend': 'We have sent you an email to recover your password',
         
         'changePassword.phrasePassword': 'Enter the same password in both fields',
         'changePassword.passwordPlaceholder': 'Enter Password',
@@ -74,9 +77,13 @@ export const messages = {
         'login.userNamePlaceholder': 'Enter Username',
         'login.password': 'Password',
         'login.forgotPassword': 'Forgot password?',
+        'sweet.alert': 'Welcome',
+        'sweet.alert.signuperror': 'Username or email already in use',
 
         'signUp.title': 'Sign up to Wallaclone',
         'signUp.logIn': 'LogIn',
+        'sweet.alertWrongCredentials': 'Ops, wrong credentials!',
+        'sweet.alertWrongCredentialstext': 'Password or username are not correct',
 
         'favorites.title': 'Your favorited ads:',
         'favorites.remove': 'Remove ad from fav list',
@@ -99,9 +106,9 @@ export const messages = {
         //SweetAlert Borrar
         'sweetalert.areYouSure': '¿Estás seguro?',
         'sweetalert.noRevert': "Tú no podrás revertir esto!",
-        'sweetalert.deleteIt': 'Sí, bórralo!',
+        'sweetalert.deleteIt': 'Sí, ¡bórralo!',
         'sweetalert.cancel': 'Cancelar',
-        'sweetalert.deleted': 'Borrado!',
+        'sweetalert.deleted': '¡Borrado!',
         'sweetalert.adDeleted': 'Su anuncio ha sido borrado.',
         'sweetalert.success': 'Éxito',
         'sweetalert.mistake': 'Hubo un problema. Inténtelo de nuevo.',
@@ -149,21 +156,27 @@ export const messages = {
 
         'passwordRecovery.title': 'Recuperación de contraseña',
         'passwordRecovery.emailPlaceholder': 'Introduzca su Email',
-        'passwordRecovery.phrase': "Nunca compartiremos su correo electrónico con nadie más.",
-
+        'passwordRecovery.phrase': "No compartiremos su correo con nadie",
         'changePassword.phrasePassword': 'Introduzca la misma contraseña en ambos campos',
         'changePassword.passwordPlaceholder': 'Introduzca la contraseña',
         'changePassword.confirmPasswordPlaceholder': 'Confirme la contraseña',
         'changePassword.passwordUpdated': 'Actualizar la contraseña',
+        'sweetalert.wrongmail': 'El email no es correcto',
+        'sweetalert.correctmail': 'El email es correcto',
+        'sweetalert.messagesend': 'Le hemos enviado un email para recuperar su contraseña',
         
         'login.title': 'Inicia sesión en Wallaclone!',
         'login.userName': 'Nombre de usuario',
         'login.userNamePlaceholder': 'Introduzca el nombre de usuario',
         'login.password': 'Contraseña',
         'login.forgotPassword': '¿Olvidó su contraseña?',
+        'sweet.alert': 'Bienvenido/a',
+        'sweet.alert.signuperror': 'El nombre de usuario o el email ya están en uso',
 
         'signUp.title': 'Regístrese en Wallaclone',
         'signUp.logIn': 'Iniciar sesión',
+        'sweet.alertWrongCredentials': 'Ha habido un error',
+        'sweet.alertWrongCredentialstext': 'La contraseña o el nombre de usuario no son correctos',
         
         'favorites.title': 'Tus anuncios favoritos:',
         'favorites.remove': 'Quita el anuncio de tu lista de favoritos',
