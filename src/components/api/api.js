@@ -9,6 +9,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
   const tagEndPoint = `${API}/tags`;
   const LIMIT = 12;
   const favoritesEndPoint = `${API}/favorites`;
+  const statusEndPoint = `${API}/status`;
 
   return {
 
@@ -28,23 +29,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           'password': password,
           'email': email }),
         })
-          
-        if (response.status !== 201) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Username or email already in use',
-            timer: 8000,
-            confirmButtonColor:  '#E29578',
-          });
-        } else {
-          Swal.fire({
-            icon: 'success',
-            title: `Welcome ${username}!`,
-            text: ``,
-            timer: 15000,
-            confirmButtonColor:  '#E29578',
-          });
-        }
+    
         const data = await response;
         return data;
       } catch (err) {
@@ -66,28 +51,12 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           }),
         })
           
-        if (response.status !== 201) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Ops. Wrong credentials',
-            timer: 8000,
-            confirmButtonColor:  '#E29578'
-          });
-        } else {
-          Swal.fire({
-            icon: 'success',
-            title: `Welcome ${username}!`,
-            text: ``,
-            timer: 15000,
-            confirmButtonColor:  '#E29578',
-          });
+        if (response.status === 201) {
           const data = await response.json();
           window.localStorage.setItem('token', data.token);
         }
         return response;
-        // const data = await response.json();
-        // window.localStorage.setItem('token', data.token);
-        // return data;
+
       } catch (err) {
         console.error(err.message);
         throw err;
@@ -119,7 +88,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           body: JSON.stringify({  
             'email' : email,
           }),
-          // credentials: 'include',
         });
         return response;
       } catch (err) {
@@ -402,6 +370,90 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       } catch (err) {
        console.error(err.message);
         throw err;
+      }
+    },
+
+    markAsSold: async (adId) => {
+      try {
+        const response = await fetch(`${statusEndPoint}/sold/${adId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
+      }
+    },
+
+    markAsNotSold: async (adId) => {
+      try {
+        const response = await fetch(`${statusEndPoint}/sold/${adId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
+      }
+    },
+
+    markAsReserved: async (adId) => {
+      try {
+        const response = await fetch(`${statusEndPoint}/reserved/${adId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
+      }
+    },
+
+    markAsUnreserved: async (adId) => {
+      try {
+        const response = await fetch(`${statusEndPoint}/unreserved/${adId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${ window.localStorage.getItem('token') }`,
+          },
+          body: JSON.stringify({  
+            'advert_id': adId
+          }),
+          credentials: 'include',
+        })
+        const data = await response;
+        return data;
+      } catch (err) {
+          console.error(err.message);
+          throw err;
       }
     },
 
