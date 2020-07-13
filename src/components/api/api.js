@@ -7,9 +7,15 @@ const apiCall = (API = 'http://localhost:3000/api') => {
   const changePasswordEndPoint = `${passwordRecoveryEndPoint}/forgotpassword/`;
   const advertEndPoint = `${API}/adverts`;
   const tagEndPoint = `${API}/tags`;
+  const LIMIT = 12;
   const favoritesEndPoint = `${API}/favorites`;
 
   return {
+
+    limit: () => {
+      return LIMIT;
+    },
+
     register: async (username, password, email) => {
       try {
         const response = await fetch(registerEndPoint, {
@@ -88,7 +94,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
     
-     currentUser: async () => { 
+    currentUser: async () => {  
       const loggedUserEndPoint = `${API}/currentuser?token=${window.localStorage.getItem('token')}`;
       const response = await fetch(loggedUserEndPoint,  {
         method: 'GET',
@@ -105,9 +111,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     passwordRecovery: async (email) => {
       try {
-
-        console.log("ENTRO EN passwordRecovery");
-
         const response = await fetch(passwordRecoveryEndPoint, {
           method: 'POST',
           headers: {
@@ -118,31 +121,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           }),
           // credentials: 'include',
         });
-
-        console.log('response:', response);
-        console.log('response.status:', response.status);
-
-        if (response.status !== 201) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Incorrect email',
-            text: `The email is incorrect. `,
-            timer: 5000,
-            confirmButtonColor:  '#E29578',
-          });
-        } else {
-          Swal.fire({
-            //position: 'top-end',
-            icon: 'success',
-            title: `Correct email`,
-            text: `We have sent you an email with your password`,
-            //footer: '<a href>Why do I have this issue?</a>',
-            //showConfirmButton: false,
-            timer: 10000,
-            confirmButtonColor:  '#E29578',
-          });
-          // props.history.push('/login');
-        }
         return response;
       } catch (err) {
         console.error(err.message);
@@ -165,7 +143,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           })
         });
         await response.json();
-
         return response;
       } catch (error) {
         throw error;
@@ -174,9 +151,8 @@ const apiCall = (API = 'http://localhost:3000/api') => {
     
     getAds: async (search = '') => {
       try {
-        const DEFAULT_VALUE = '?limit=12&sort=-date_creation';
-        console.log("EndPoint getAds:", `${advertEndPoint}${DEFAULT_VALUE}${search}`);
-        // console.log("EndPoint getAds:", `${advertEndPoint}?${search}`);
+        const DEFAULT_VALUE = `?limit=${LIMIT}&sort=-date_creation`;
+        // console.log("EndPoint getAds:", `${advertEndPoint}${DEFAULT_VALUE}${search}`);
         const response = await fetch(`${advertEndPoint}${DEFAULT_VALUE}${search}`, {
           method: 'GET',
           headers: {
@@ -231,22 +207,9 @@ const apiCall = (API = 'http://localhost:3000/api') => {
             'Authorization': `${ window.localStorage.getItem('token') }`,
           },
           body: fd,
-          // body: JSON.stringify({
-          //   'name' : name,
-          //   'description' : description,
-          //   'image' : image,
-          //   'status' : status,
-          //   'price' : parseInt(price),
-          //   'owner' : owner,
-          //   'tags' : tags,
-          //   //'token' : window.localStorage.getItem('token'),
-          // }),
           credentials: 'include',
         });
         const data = await response.json();
-
-        console.log("data:", data);
-
         return data;
       } catch (err) {
         console.error(err.message);
@@ -274,7 +237,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           credentials: 'include',
         });
         await response.json();
-        
         return response;
       } catch (error) {
         Swal.fire({
@@ -289,9 +251,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     deleteAd: async (idAd) => {
       try {
-        
-        console.log("EndPoint:", `${advertEndPoint}/${idAd}`);
-
+        // console.log("EndPoint:", `${advertEndPoint}/${idAd}`);
         const response = await fetch(`${advertEndPoint}/${idAd}`, {
           method: 'DELETE',
           headers: {
@@ -300,10 +260,8 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           },
           credentials: 'include',
         });
-
-        console.log("response:", response);
+        // console.log("response:", response);
         return response;
-
         //const data = await response.json();
         //return data;
       } catch (err) {
@@ -331,6 +289,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         throw err;
       }
     },
+
     /* You can get the user by Id or name */
     getUser: async (id) => {
       try {
@@ -379,14 +338,12 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           },
           credentials: 'include'
         });
-
         await response.json();
         return response;
       } catch (error) {
         throw(error);
       }
     },
-
 
     addFavorite: async (adId) => {
       try {
