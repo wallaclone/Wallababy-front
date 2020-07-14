@@ -162,7 +162,7 @@ export const messages = {
         'header.yourAds': 'Tus anuncios',
         'header.editYourProfile': 'Edita tu perfil',
 
-        'createAd.title': 'Crear Anuncio',
+        'createAd.title': 'Crear anuncio:',
         'createAd.titleAd': 'Título del anuncio:',
         'createAd.titleAdPlaceholder': 'Añada un título al anuncio',
         'createAd.tagsAd': 'Etiquetas del anuncio:',
@@ -205,7 +205,7 @@ export const messages = {
         'sweet.alertWrongCredentials': 'Ha habido un error',
         'sweet.alertWrongCredentialsText': 'La contraseña o el nombre de usuario no son correctos',
         
-        'filter.whatAreYouLookingFor': '¿Qué estás buscando? Utiliza el buscardor para encontrarlo!',
+        'filter.whatAreYouLookingFor': '¿Qué estás buscando? ¡Utiliza el buscador para encontrarlo!',
         'filter.whatAreYouLookingForPlaceholder': 'Introduzca aquí lo que está buscando',
         'filter.selectTag': 'Seleccione una etiqueta',
         'filter.selectStatus': 'Compra/Venta...',
