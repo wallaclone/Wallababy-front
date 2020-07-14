@@ -98,7 +98,7 @@ function CreateAd(props) {
                 title: 'Not logged in',
                 text: `You are not logged in, or your session has been expired. We redirect you to Log In to do it again.`,
                 timer: 5000,
-                confirmButtonColor:  '#E29578',
+                confirmButtonColor:  '#1768ac',
             });
             history.push('/login');
         } else if (adCreated.error) {
@@ -108,7 +108,7 @@ function CreateAd(props) {
                 title: 'Problems creating the advertisement',
                 text: `The advertisement could not be created (try again or later).`,
                 timer: 5000,
-                confirmButtonColor:  '#E29578',
+                confirmButtonColor:  '#1768ac',
             });
         } else {
             Swal.fire({
@@ -119,7 +119,7 @@ function CreateAd(props) {
                 //footer: '<a href>Why do I have this issue?</a>',
                 //showConfirmButton: false,
                 timer: 10000,
-                confirmButtonColor:  '#E29578',
+                confirmButtonColor:  '#1768ac',
             });
             // Redirect to dashboard (List of Advertisements)
             // this.props.history.push('/dashboard');
@@ -196,7 +196,7 @@ function CreateAd(props) {
 
                 <Form.Row>
                     <Form.Group as={Col} md="8" controlId="formGridCreateAd">
-                        <Button type="submit" variant="primary" size="lg" block>
+                        <Button className='button' type="submit" variant="primary" size="lg" block>
                             <FormattedMessage id="createAd.buttonCreateAd" value={(message) => ({message})}/>
                         </Button>
                     </Form.Group>

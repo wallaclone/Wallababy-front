@@ -112,13 +112,13 @@ function SeeAd(props) {
                         <p><strong>{props.intl.formatMessage({ id: 'seeAd.description' })}:</strong>
                             <br />
                             {advertisement.description}</p>
-                        <p>{advertisement.reserved === true ? <Badge variant="info">{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
+                        <p>{advertisement.reserved === true ? <Badge className='badge-reserved'>{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
                             {advertisement.sold === true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}</p>
-                        <p>{advertisement.owner === user && !advertisement.reserved && !advertisement.sold && !advertisement.status ? <Button className="button" onClick={() => reserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markreserved' })}</Button> : null}</p>
-                        <p>{advertisement.owner === user && advertisement.reserved && !advertisement.sold && !advertisement.status ? <Button className="button" onClick={() => dontReserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.cancelr' })}</Button> : null}</p>
+                        <p>{advertisement.owner === user && !advertisement.reserved && !advertisement.sold && !advertisement.status ? <Button className="button2" onClick={() => reserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markreserved' })}</Button> : null}</p>
+                        <p>{advertisement.owner === user && advertisement.reserved && !advertisement.sold && !advertisement.status ? <Button className="button2" onClick={() => dontReserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.cancelr' })}</Button> : null}</p>
 
-                        <p>{advertisement.owner === user && !advertisement.sold && !advertisement.status ? <Button className='button' onClick={() => sell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.marksold' })}</Button> : null}</p>
-                        <p>{advertisement.owner === user && advertisement.sold && !advertisement.status ? <Button className='button' onClick={() => dontSell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markNotSold' })}</Button> : null}</p>
+                        <p>{advertisement.owner === user && !advertisement.sold && !advertisement.status ? <Button className='button2' onClick={() => sell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.marksold' })}</Button> : null}</p>
+                        <p>{advertisement.owner === user && advertisement.sold && !advertisement.status ? <Button className='button2' onClick={() => dontSell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markNotSold' })}</Button> : null}</p>
 
                         <FacebookShareButton
                             url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
@@ -135,7 +135,7 @@ function SeeAd(props) {
                                 : <Button onClick={() => addFav(advertisement._id)} variant='light' size='lg' block>
                                     {props.intl.formatMessage({ id: 'favorites.add' })} <FontAwesomeIcon icon={faHeart} color='#f7b6a0' id='heart' /> </Button>
                         }
-                        <Button variant='primary' size='lg' className='mt-2' block onClick={() => history.goBack()}>
+                        <Button variant='primary' size='lg' className='button' block onClick={() => history.goBack()}>
                             {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
                         </Button>
                     </Card.Text>

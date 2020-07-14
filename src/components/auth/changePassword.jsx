@@ -44,7 +44,7 @@ function ChangePassword(props) {
                 title: 'Error',
                 text: `The passwords dont match`,
                 timer: 5000,
-                confirmButtonColor:  '#E29578',
+                confirmButtonColor:  '#1768ac',
             });
             setObjectForm({ password: '', confirm_password: ''});
             return;
@@ -57,7 +57,7 @@ function ChangePassword(props) {
                 title: 'Password updated',
                 text: `Your password has been updated correctly`,
                 timer: 5000,
-                confirmButtonColor:  '#E29578',
+                confirmButtonColor:  '#1768ac',
             });
             // props.history.push('/login');
             history.push('/login');

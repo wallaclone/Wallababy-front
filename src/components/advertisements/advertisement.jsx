@@ -61,7 +61,7 @@ function Advertisement (props) {
                             {owner}
                         </Link>
                     </p>
-                    {advertisement.reserved===true ? <Badge variant="info">{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}                   
+                    {advertisement.reserved===true ? <Badge className='badge-reserved'>{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}                   
                     {advertisement.sold===true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}                   
 
                 </div>

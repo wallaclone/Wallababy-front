@@ -37,7 +37,7 @@ function MyFavs(props) {
     return (
       <>
       <div className="m-3">
-      <h2 className='favs'> {props.intl.formatMessage({ id: 'favorites.title' })}</h2>
+      <h2 className='titles'> {props.intl.formatMessage({ id: 'favorites.title' })}</h2>
       {
       (favs.length === 0) ? <div> {props.intl.formatMessage({ id: 'favorites.empty' })}</div> :
       <div className="row row-cols-1 row-cols-md-3">

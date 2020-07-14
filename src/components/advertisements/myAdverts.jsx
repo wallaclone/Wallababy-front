@@ -29,7 +29,7 @@ function MyAdverts(props) {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
+            confirmButtonColor: '#1768ac',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'Cancel',
@@ -105,7 +105,7 @@ function MyAdverts(props) {
                                         pathname: `/editAd/id=${advert._id}`,
                                         query: advert
                                         }}>
-                                        <Button variant='info' size='lg' block>
+                                        <Button className='button2' size='lg' block>
                                             Edit
                                         </Button>
                                     </Link>

@@ -13,6 +13,18 @@
   border: 1px solid !important;
 }
 
+.button2 {
+  background-color: var(--button-color-2) !important;
+  color: #ffffff !important;
+  border: 1px solid !important;
+}
+
+.button2:hover {
+  background-color: var(--button-color-2-hover) !important;
+  color: #ffffff !important;
+  border: 1px solid !important;
+}
+
 .mybutton {
   width: 100%;
   padding: 10px !important;
@@ -75,11 +87,11 @@
 }
 
 .form-control {
-  border: 1px solid #83C5BE !important;
+  border: 1px solid #2541B2 !important;
 }
 
 .forgot-pass {
-  color: #83C5BE;
+  color: #2541B2;
   font-weight: 500;
   text-align: end;
   padding: 1px;
@@ -92,7 +104,7 @@
 
 .titleName {
   text-align: center;
-  color: white;
+  color:var(--dark-color-title);
   /* margin-bottom: 18px;  */
 }
 
