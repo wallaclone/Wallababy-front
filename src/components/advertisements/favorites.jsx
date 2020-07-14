@@ -40,7 +40,7 @@ function MyFavs(props) {
       <h2 className='titles'> {props.intl.formatMessage({ id: 'favorites.title' })}</h2>
       {
       (favs.length === 0) ? <div> {props.intl.formatMessage({ id: 'favorites.empty' })}</div> :
-      <div className="row row-cols-1 row-cols-md-3">
+      <div>
       {favs.map(fav => {
                 return(
                     <div className="col mb-4" key={fav._id}>
