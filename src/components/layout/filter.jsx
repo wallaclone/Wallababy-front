@@ -70,12 +70,6 @@ function Filter(props) {
         <form onSubmit={buscarAnuncio}>  
         <Form.Group className='ml-3 mr-3'>
 
-            <Link to={`/createAd`} >
-                <Button variant='primary' size='lg' className='mb-3' style={{ marginTop: '6rem' }} block>
-                    {props.intl.formatMessage({ id: 'dashboard.createAd' })}
-                </Button>
-            </Link>
-
             <Form.Row>
                 <Form.Group as={Col} md="12" >
                     <Form.Label className='label'>{props.intl.formatMessage({ id: 'filter.whatAreYouLookingFor' })}</Form.Label>
@@ -153,7 +147,7 @@ function Filter(props) {
 
             <Form.Row>
                 <Form.Group as={Col} md="8" >
-                    <Button type="submit" variant="primary" size="lg" block>
+                    <Button className='button' type="submit" variant="primary" size="lg" block>
                         {props.intl.formatMessage({ id: 'filter.searchAds' })}
                     </Button>
                 </Form.Group>
