@@ -6,7 +6,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { AuthContext } from '../../contexts/authContext';
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 
 import { FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime } from 'react-intl';
 
@@ -112,7 +112,7 @@ function SeeAd(props) {
                         <p><strong>{props.intl.formatMessage({ id: 'seeAd.description' })}:</strong>
                             <br />
                             {advertisement.description}</p>
-                        <p>{advertisement.reserved === true ? <Badge className='badge-reserved'>{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
+                        <p>{advertisement.reserved === true  && !advertisement.sold ? <Badge className='badge-reserved'>{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
                             {advertisement.sold === true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}</p>
                         <p>{advertisement.owner === user && !advertisement.reserved && !advertisement.sold && !advertisement.status ? <Button className="button2" onClick={() => reserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markreserved' })}</Button> : null}</p>
                         <p>{advertisement.owner === user && advertisement.reserved && !advertisement.sold && !advertisement.status ? <Button className="button2" onClick={() => dontReserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.cancelr' })}</Button> : null}</p>
