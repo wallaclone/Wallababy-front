@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { AuthContext } from '../../contexts/authContext';
+import { Form }  from 'react-bootstrap';
+import apiCall from '../../api/api';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import { FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime } from 'react-intl';
 
@@ -31,34 +33,34 @@ function Header(props) {
         <Navbar.Collapse id="responsive-navbar-nav">
           {
           // (user === 'guest') ? <Nav className='end-section'> <Nav.Link href="/login">{props.intl.formatMessage({ id: 'all.logIn' })}!</Nav.Link></Nav> :
-          (user === 'guest') ? <Nav className='end-section'> <Nav.Link><Link to={`/login`}>{props.intl.formatMessage({ id: 'all.logIn' })}!</Link></Nav.Link></Nav> :
+          (user === 'guest') ? <Nav className='end-section'> <Nav.Link><Link to={`/login`} className='navbar-link'>{props.intl.formatMessage({ id: 'all.logIn' })}!</Link></Nav.Link></Nav> :
           <>
           <Nav className="mr-auto"> 
             <Nav.Link> 
-              <Link to={`/dashboard`}> {props.intl.formatMessage({ id: 'header.adList' })} </Link>
+              <Link to={`/dashboard`} className='navbar-link'> {props.intl.formatMessage({ id: 'header.adList' })} </Link>
             </Nav.Link>
             <Nav.Link> 
-              <Link to={`/createAd`}> {props.intl.formatMessage({ id: 'header.createAd' })} </Link> 
+              <Link to={`/createAd`} className='navbar-link'> {props.intl.formatMessage({ id: 'header.createAd' })} </Link> 
             </Nav.Link>
           </Nav>
 
           <Nav className='right-section'>
           <NavDropdown title={user} id="collasible-nav-dropdown">
-              <NavDropdown.Item><Link to={'/favorites'}>{props.intl.formatMessage({ id: 'header.yourFavorites' })}</Link></NavDropdown.Item>
-              <NavDropdown.Item><Link to={'/myads/'+user}>{props.intl.formatMessage({ id: 'header.yourAds' })}</Link></NavDropdown.Item>
+              <NavDropdown.Item><Link to={'/favorites'} className='dropdown-link'>{props.intl.formatMessage({ id: 'header.yourFavorites' })}</Link></NavDropdown.Item>
+              <NavDropdown.Item><Link to={'/myads/'+user} className='dropdown-link'>{props.intl.formatMessage({ id: 'header.yourAds' })}</Link></NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item><Link to={'/myprofile'}>{props.intl.formatMessage({ id: 'header.editYourProfile' })}</Link></NavDropdown.Item>
+              <NavDropdown.Item><Link to={'/myprofile'} className='dropdown-link'>{props.intl.formatMessage({ id: 'header.editYourProfile' })}</Link></NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link className='logout' onClick={handleClick}>
-              <Link to={`/logout`}>{props.intl.formatMessage({ id: 'all.logOut' })}</Link>
+            <Nav.Link  onClick={handleClick} className='navbar-link'>
+              <Link to={`/logout`} className='navbar-link'>{props.intl.formatMessage({ id: 'all.logOut' })}</Link>
             </Nav.Link>
           </Nav>
           </>
           }
           
-          <Nav.Link> 
-            <Link onClick={()=> changeLanguage('es-ES')}> ES </Link>/
-            <Link onClick={()=> changeLanguage('en-US')}> EN </Link>
+          <Nav.Link className='navbar-link'> 
+            <Link className='navbar-link' onClick={()=> changeLanguage('es-ES')}> ES </Link>/
+            <Link className='navbar-link' onClick={()=> changeLanguage('en-US')}> EN </Link>
           </Nav.Link>
 
           {/* <FormattedMessage id="app.title" value={(message) => ({message})} /> */}

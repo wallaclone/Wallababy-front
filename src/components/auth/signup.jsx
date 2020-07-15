@@ -28,7 +28,7 @@ function Signup(props) {
         icon: 'error',
         title: props.intl.formatMessage({ id: 'sweet.alert.signUpError' }),
         timer: 8000,
-        confirmButtonColor: '#E29578',
+        confirmButtonColor: '#1768ac',
       });
     } else {
       Swal.fire({
@@ -36,7 +36,7 @@ function Signup(props) {
         title: `${props.intl.formatMessage({ id: 'sweet.alert' })} ${username}!`,
         text: ``,
         timer: 15000,
-        confirmButtonColor: '#E29578',
+        confirmButtonColor: '#1768ac',
       });
     }
     // (response.status !== 201) ? props.history.push('/signup') : props.history.push('/login')

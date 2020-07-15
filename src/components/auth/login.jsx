@@ -27,7 +27,7 @@ function Login(props) {
         title: props.intl.formatMessage({ id: 'sweet.alertWrongCredentials' }),
         text: props.intl.formatMessage({ id: 'sweet.alertWrongCredentialsText' }),
         timer: 8000,
-        confirmButtonColor: '#E29578',
+        confirmButtonColor: '#1768ac',
       });
     } else {
       Swal.fire({
@@ -35,7 +35,7 @@ function Login(props) {
         title: `${props.intl.formatMessage({ id: 'sweet.alert' })} ${username}!`,
         text: ``,
         timer: 15000,
-        confirmButtonColor: '#E29578',
+        confirmButtonColor: '#1768ac',
       });
     }
     // (response.status !== 201) ? props.history.push('/login') : props.history.push('/dashboard');

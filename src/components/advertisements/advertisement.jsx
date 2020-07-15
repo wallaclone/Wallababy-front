@@ -45,7 +45,7 @@ function Advertisement (props) {
 
                 <div className="card-body">
                     <h5 className="card-title">
-                        <Link to={`/seeAd/${_id}`}>
+                        <Link to={`/seeAd/${_id}`} className='ad-name'>
                             {name}
                         </Link>
                     </h5>
@@ -61,7 +61,7 @@ function Advertisement (props) {
                             {owner}
                         </Link>
                     </p>
-                    {advertisement.reserved===true ? <Badge variant="info">{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}                   
+                    {advertisement.reserved===true && !advertisement.sold ? <Badge className='badge-reserved'>{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}                   
                     {advertisement.sold===true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}                   
 
                 </div>

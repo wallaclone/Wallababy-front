@@ -212,7 +212,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           title: `Error`,
           text: `There has been an error updating the advert, please try again.`,
           timer: 10000,
-          confirmButtonColor:  '#E29578',
+          confirmButtonColor:  '#1768ac',
         });
       }
     },
@@ -396,7 +396,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     markAsNotSold: async (adId) => {
       try {
-        const response = await fetch(`${statusEndPoint}/sold/${adId}`, {
+        const response = await fetch(`${statusEndPoint}/notsold/${adId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

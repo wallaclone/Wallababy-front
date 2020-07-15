@@ -6,6 +6,21 @@ Navbar, .navbar {
   margin-bottom: 30px !important;
 }
 
+.navbar-link, #collasible-nav-dropdown {
+  color: var(--links-header) !important;
+}
+
+.navbar-link:hover {
+  color: var(--links-header-hover) !important;
+}
+
+.dropdown-link {
+  color: var(--boton-color) !important;
+}
+
+.dropdown-link:hover {
+  color: var(--boton-color-hover) !important;
+}
 
 .title {
   font-size: 2rem !important;

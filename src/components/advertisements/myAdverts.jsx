@@ -29,7 +29,7 @@ function MyAdverts(props) {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
+            confirmButtonColor: '#1768ac',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'Cancel',
@@ -60,8 +60,10 @@ function MyAdverts(props) {
     }
 
     return (
-        <div>
-            {adverts.map(advert => {
+        <>
+        <div className= 'm-3'>
+        <h2 className='titles'> {props.intl.formatMessage({ id: 'yourads.title' })}</h2>
+            { (adverts.length === 0) ? <div> {props.intl.formatMessage({ id: 'yourads.empty' })}</div> :adverts.map(advert => {
                 return(
                     <div className="col mb-4" key={advert._id}>
                     <div className="card h-100">
@@ -69,7 +71,7 @@ function MyAdverts(props) {
 
                         <div className="card-body">
                             <h5 className="card-title">
-                                <Link to={`/dashboard/${advert._id}`}>
+                                <Link to={`/dashboard/${advert._id}`}  className='ad-name'>
                                     {advert.name}
                                 </Link>
                             </h5>
@@ -105,7 +107,7 @@ function MyAdverts(props) {
                                         pathname: `/editAd/id=${advert._id}`,
                                         query: advert
                                         }}>
-                                        <Button variant='info' size='lg' block>
+                                        <Button className='button2' size='lg' block>
                                             Edit
                                         </Button>
                                     </Link>
@@ -117,6 +119,7 @@ function MyAdverts(props) {
                 )
             })}
         </div>
+        </>
     );
 }
 

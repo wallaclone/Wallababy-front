@@ -37,7 +37,7 @@ function PasswordRecovery(props) {
                 title: props.intl.formatMessage({ id: 'sweetalert.incorrectEmail' }),
                 text: props.intl.formatMessage({ id: 'sweetalert.emailIncorrect' }),
                 timer: 5000,
-                confirmButtonColor:  '#E29578',
+                confirmButtonColor:  '#1768ac',
             });
         } else {
             Swal.fire({
@@ -48,7 +48,7 @@ function PasswordRecovery(props) {
                 //footer: '<a href>Why do I have this issue?</a>',
                 //showConfirmButton: false,
                 timer: 10000,
-                confirmButtonColor:  '#E29578',
+                confirmButtonColor:  '#1768ac',
             });
             history.push('/login');
         }
