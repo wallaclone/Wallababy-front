@@ -105,7 +105,7 @@ function ChangePassword(props) {
                     {props.intl.formatMessage({ id: 'all.clear' })}
                 </Button>
             </Form>
-            {/* <Card.Footer><span className='text-muted'>New to Wallaclone?</span> <Link to='/signup'>Sign Up</Link></Card.Footer> */}
+            {/* <Card.Footer><span className='text-muted'>New to WallaBaby?</span> <Link to='/signup'>Sign Up</Link></Card.Footer> */}
             </Card>
         </div>
     );

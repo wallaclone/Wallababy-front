@@ -28,7 +28,7 @@ function Header(props) {
     <>
     <div className='navbar-wrapper'>
       <Navbar fixed="top" collapseOnSelect expand="lg">
-        <Navbar.Brand className='title'>Wallaclone!</Navbar.Brand>
+        <Navbar.Brand className='title' href="/dashboard">WallaBaby!</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           {
