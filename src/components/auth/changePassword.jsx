@@ -105,14 +105,14 @@ function ChangePassword(props) {
             {props.intl.formatMessage({ id: 'changePassword.passwordUpdated' })}
           </Button>
 
-          <Button variant="warning" onClick={handleClearButton} className="mb-4" block>
-            {props.intl.formatMessage({ id: 'all.clear' })}
-          </Button>
-        </Form>
-        {/* <Card.Footer><span className='text-muted'>New to Wallaclone?</span> <Link to='/signup'>Sign Up</Link></Card.Footer> */}
-      </Card>
-    </div>
-  );
+                <Button variant='warning' onClick={handleClearButton} className='mb-4' block>
+                    {props.intl.formatMessage({ id: 'all.clear' })}
+                </Button>
+            </Form>
+            {/* <Card.Footer><span className='text-muted'>New to WallaBaby?</span> <Link to='/signup'>Sign Up</Link></Card.Footer> */}
+            </Card>
+        </div>
+    );
 }
 const Changepassword = injectIntl(ChangePassword);
 export { Changepassword };

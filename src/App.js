@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Form, Col, Button } from 'react-bootstrap';
 import { IntlProvider } from 'react-intl';
-import {
-  BrowserRouter as Router, Route, Switch, Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import apiCall from './api/api';
 import { adsOwner as AdsOwner } from './components/advertisements/adsOwner';
@@ -34,11 +32,9 @@ function App(props) {
 
   if (!(localStorage.getItem('initCurrentLocale'))) { localStorage.setItem('initCurrentLocale', 'es-ES'); }
 
-  const [search, setSearch] = useState('');
+  const [ search, setSearch ] = useState('');
+  const [ currentLocale, setCurrentLocale ] = useState(localStorage.getItem('initCurrentLocale'));
   // const [ currentLocale, setCurrentLocale ] = useState('es-ES');
-  const [currentLocale, setCurrentLocale] = useState(localStorage.getItem('initCurrentLocale'));
-
-  console.log("localStorage.getItem('initCurrentLocale'):", localStorage.getItem('initCurrentLocale'));
 
   const [messages, setMessages] = useState(allMessages[currentLocale]);
   const [reloadLanguage, setReloadLanguage] = useState(currentLocale);

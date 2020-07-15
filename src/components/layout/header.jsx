@@ -26,12 +26,12 @@ function Header(props) {
 
   return (
     <>
-      <div className="navbar-wrapper">
-        <Navbar fixed="top" collapseOnSelect expand="lg">
-          <Navbar.Brand className="title">Wallaclone!</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            {
+    <div className='navbar-wrapper'>
+      <Navbar fixed="top" collapseOnSelect expand="lg">
+        <Navbar.Brand className='title'><Link className='title' to='/dashboard'>WallaBaby!</Link></Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          {
           // (user === 'guest') ? <Nav className='end-section'> <Nav.Link href="/login">{props.intl.formatMessage({ id: 'all.logIn' })}!</Nav.Link></Nav> :
           (user === 'guest') ? (
             <Nav className="end-section">
