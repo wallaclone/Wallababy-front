@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 
 import { Button } from "react-bootstrap";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -49,7 +49,7 @@ function MyFavs(props) {
 
                         <div className="card-body">
                             <h5 className="card-title">
-                                <Link to={`/dashboard/${fav._id}`}>
+                                <Link to={`/dashboard/${fav._id}`} className='ad-name'>
                                     {fav.name}
                                 </Link>
                             </h5>

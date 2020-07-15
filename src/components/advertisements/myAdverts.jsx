@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useParams } from 'react-router-dom';
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 import { Button, Form, Col } from "react-bootstrap";
 import Swal from 'sweetalert2';
 import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
@@ -60,8 +60,10 @@ function MyAdverts(props) {
     }
 
     return (
-        <div>
-            {adverts.map(advert => {
+        <>
+        <div className= 'm-3'>
+        <h2 className='titles'> {props.intl.formatMessage({ id: 'yourads.title' })}</h2>
+            { (adverts.length === 0) ? <div> {props.intl.formatMessage({ id: 'yourads.empty' })}</div> :adverts.map(advert => {
                 return(
                     <div className="col mb-4" key={advert._id}>
                     <div className="card h-100">
@@ -69,7 +71,7 @@ function MyAdverts(props) {
 
                         <div className="card-body">
                             <h5 className="card-title">
-                                <Link to={`/dashboard/${advert._id}`}>
+                                <Link to={`/dashboard/${advert._id}`}  className='ad-name'>
                                     {advert.name}
                                 </Link>
                             </h5>
@@ -117,6 +119,7 @@ function MyAdverts(props) {
                 )
             })}
         </div>
+        </>
     );
 }
 
