@@ -5,7 +5,7 @@ export const messages = {
         'all.logOut': 'LogOut',
         'all.logIn': 'LogIn',
         'all.clear': 'Clear',
-        'all.newAPP': "New to Wallaclone?",
+        'all.newAPP': "New to WallaBaby?",
         'all.alreadyRegistered': "Already registered?",
         'all.signUp': 'Sign Up',
         'all.next': 'Next',
@@ -81,7 +81,7 @@ export const messages = {
         'changePassword.confirmPasswordPlaceholder': 'Confirm Password',
         'changePassword.passwordUpdated': 'Password updated',
         
-        'login.title': 'Login to Wallaclone!',
+        'login.title': 'Login to WallaBaby!',
         'login.userName': 'Username',
         'login.userNamePlaceholder': 'Enter Username',
         'login.password': 'Password',
@@ -89,7 +89,7 @@ export const messages = {
         'sweet.alert': 'Welcome',
         'sweet.alert.signUpError': 'Username or email already in use',
 
-        'signUp.title': 'Sign up to Wallaclone',
+        'signUp.title': 'Sign up to WallaBaby',
         'signUp.logIn': 'LogIn',
         'sweet.alertWrongCredentials': 'Ops, wrong credentials!',
         'sweet.alertWrongCredentialsText': 'Password or username are not correct',
@@ -117,7 +117,7 @@ export const messages = {
         'all.logOut': 'Desconectar',
         'all.logIn': 'Conectar',
         'all.clear': 'Limpiar',
-        'all.newAPP': "¿Nuevo en Wallaclone?",
+        'all.newAPP': "¿Nuevo en WallaBaby?",
         'all.alreadyRegistered': "¿Ya estás registrado?",
         'all.signUp': 'Regístrate',
         'all.next': 'Siguiente',
@@ -192,7 +192,7 @@ export const messages = {
         'sweetalert.correctmail': 'El email es correcto',
         'sweetalert.messagesend': 'Le hemos enviado un email para recuperar su contraseña',
         
-        'login.title': 'Inicia sesión en Wallaclone!',
+        'login.title': 'Inicia sesión en WallaBaby!',
         'login.userName': 'Nombre de usuario',
         'login.userNamePlaceholder': 'Introduzca el nombre de usuario',
         'login.password': 'Contraseña',
@@ -200,7 +200,7 @@ export const messages = {
         'sweet.alert': 'Bienvenido/a',
         'sweet.alert.signUpError': 'El nombre de usuario o el email ya están en uso',
 
-        'signUp.title': 'Regístrese en Wallaclone',
+        'signUp.title': 'Regístrese en WallaBaby',
         'signUp.logIn': 'Iniciar sesión',
         'sweet.alertWrongCredentials': 'Ha habido un error',
         'sweet.alertWrongCredentialsText': 'La contraseña o el nombre de usuario no son correctos',

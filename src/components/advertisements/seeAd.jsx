@@ -121,12 +121,12 @@ function SeeAd(props) {
                         <p>{advertisement.owner === user && advertisement.sold && !advertisement.status ? <Button className='button' onClick={() => dontSell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markNotSold' })}</Button> : null}</p>
 
                         <FacebookShareButton
-                            url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
+                            url="https://github.com/wallaclone/wallaclone_back/tree/master">
                             <FacebookIcon size={32} round={true}></FacebookIcon>
                         </FacebookShareButton>
                     &nbsp;
                     <TwitterShareButton
-                            url="https://github.com/wallaclone/wallaclone_back/tree/sprint2">
+                            url="https://github.com/wallaclone/wallaclone_back/tree/master">
                             <TwitterIcon size={32} round={true}></TwitterIcon>
                         </TwitterShareButton>
                         {
