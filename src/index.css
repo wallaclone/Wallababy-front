@@ -63,8 +63,14 @@ Navbar, .navbar {
 }
 
 .badge-reserved {
-  background-color: var(--buton-color-2-hover);
+  background-color: var(--button-color-2-hover);
   color: #ffff;
 }
 
+.ad-name {
+  color: var(--button-color-2) !important;
+}
 
+.ad-name:hover {
+  color: var(--button-color-2-hover) !important;
+}
