@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Form, Button }  from 'react-bootstrap';
 import { useParams, useHistory, Link } from "react-router-dom";
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 import Swal from 'sweetalert2';
 
 import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';

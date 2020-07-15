@@ -24,7 +24,7 @@ import {adsOwner as AdsOwner} from './components/advertisements/adsOwner';
 import ant from './img/ant.png';
 import sig from './img/sig.png';
 
-import apiCall from './components/api/api';
+import apiCall from './api/api';
 const { getAds, getTags, limit } = apiCall();
 
 function App(props) {

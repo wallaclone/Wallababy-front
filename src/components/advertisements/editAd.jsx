@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { Form, Col, Button, Image }  from 'react-bootstrap';
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 import Swal from 'sweetalert2';
 import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
