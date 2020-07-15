@@ -4,7 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { Button, Form, Card } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 
 import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 

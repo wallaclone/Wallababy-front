@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useParams } from 'react-router-dom';
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 import { Button, Form, Col } from "react-bootstrap";
 import Swal from 'sweetalert2';
 import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 import { Button, Accordion, Card } from "react-bootstrap";
 import { useParams, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contexts/authContext';
