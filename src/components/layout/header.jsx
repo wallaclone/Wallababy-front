@@ -12,7 +12,7 @@ function Header(props) {
 
   async function logout() {
     window.localStorage.removeItem('token');
-    setUser('guest');
+    setUser(null);
   }
 
   const handleClick = () => {
