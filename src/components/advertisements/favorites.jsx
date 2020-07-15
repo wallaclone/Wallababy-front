@@ -1,6 +1,8 @@
 import React, {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import apiCall from '../../api/api';
+
 import { Button } from "react-bootstrap";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -35,10 +37,10 @@ function MyFavs(props) {
     return (
       <>
       <div className="m-3">
-      <h2 className='favs'> {props.intl.formatMessage({ id: 'favorites.title' })}</h2>
+      <h2 className='titles'> {props.intl.formatMessage({ id: 'favorites.title' })}</h2>
       {
       (favs.length === 0) ? <div> {props.intl.formatMessage({ id: 'favorites.empty' })}</div> :
-      <div className="row row-cols-1 row-cols-md-3">
+      <div>
       {favs.map(fav => {
                 return(
                     <div className="col mb-4" key={fav._id}>
@@ -47,7 +49,7 @@ function MyFavs(props) {
 
                         <div className="card-body">
                             <h5 className="card-title">
-                                <Link to={`/dashboard/${fav._id}`}>
+                                <Link to={`/dashboard/${fav._id}`} className='ad-name'>
                                     {fav.name}
                                 </Link>
                             </h5>

@@ -46,13 +46,14 @@ a {
   /* color: #00B7FF; */
   /* color: rgb(20, 193, 173); */
   text-decoration: none !important;
+  
 }
 
 Navbar, .navbar {
   background-color: var(--bg-color-header) !important
 }
 
-.favs {
+.titles {
   color: var(--dark-color-title);
   margin-bottom: 20px
 }
@@ -61,5 +62,15 @@ Navbar, .navbar {
   color: red;
 }
 
+.badge-reserved {
+  background-color: var(--button-color-2-hover);
+  color: #ffff;
+}
 
+.ad-name {
+  color: var(--button-color-2) !important;
+}
 
+.ad-name:hover {
+  color: var(--button-color-2-hover) !important;
+}

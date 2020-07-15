@@ -5,9 +5,10 @@ import apiCall from '../../api/api';
 
 import { injectIntl } from 'react-intl';
 
+
 const { getAds } = apiCall();
 
-function AdsOwner () {
+function AdsOwner (props) {
     const { owner } = useParams();
     const [adsOwner, setAdsOwner] = useState([]);
     const [reloadAdsOwner, setReloadAdsOwner] = useState(true);
@@ -24,8 +25,10 @@ function AdsOwner () {
     }, [ reloadAdsOwner ])
     
     return (        
-        <div>
-            {adsOwner.map( ownerAdvert => (
+        <div className='m-3'>
+        <h2 className='titles'> {props.intl.formatMessage({ id: 'ads.owner' })} {owner}:</h2>
+
+            {(adsOwner.length === 0) ? <div>{owner} {props.intl.formatMessage({ id: 'ads.owner.empty' })} </div>: adsOwner.map( ownerAdvert => (
                 <Advertisement 
                     key = { ownerAdvert._id }
                     advertisement = { ownerAdvert }

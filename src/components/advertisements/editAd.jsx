@@ -123,8 +123,7 @@ function EditAd() {
 
     return (
         <div className="m-3">
-            <h2 className='favs' style={{ marginTop: '6rem' }}>Edit Advertisement</h2>
-            {/* <h1 className='titleName' style={{ marginTop: '6rem' }}>Edit Advertisement</h1> */}
+            <h2 className='titleName' style={{ marginTop: '6rem' }}>Edit Advertisement:</h2>
             <form encType="multipart/form-data" onSubmit={sendEditAd}>
                 <Form.Group controlId="formGridTitle">
                     <Form.Label className='label'>Title of the ad:</Form.Label>
@@ -194,21 +193,17 @@ function EditAd() {
                         required />
                 </Form.Group>
                 <Form.Row>
-                    <Form.Group as={Col} md="7" controlId="formGridCreateAd">
-                        <Button type="submit" variant="primary" size="lg" block>
+                    <Form.Group as={Col} controlId="formGridCreateAd">
+                        <Button className='button' type="submit" variant="primary" size="lg" block>
                             Edit advertisement
                         </Button>
                     </Form.Group>
-                    <Form.Group as={Col} md="3" controlId="formGridReturnAds">
+                    <Form.Group as={Col} controlId="formGridReturnAds">
                         <Button variant="warning" size="lg" block onClick={returnToDashboard}>
                             Return to Ads 
                         </Button>
                     </Form.Group>
-                    <Form.Group as={Col} md="2" controlId="formGridLogOut">
-                        <Button variant="danger" size="lg" block onClick={returnToLogin}>
-                            Log Out
-                        </Button>
-                    </Form.Group>
+            
                 </Form.Row>
             </form>
         </div>
