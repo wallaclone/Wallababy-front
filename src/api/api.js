@@ -78,6 +78,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     passwordRecovery: async (email) => {
       try {
+        const language = window.localStorage.getItem('initCurrentLocale')
         const response = await fetch(passwordRecoveryEndPoint, {
           method: 'POST',
           headers: {
@@ -85,6 +86,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           },
           body: JSON.stringify({
             email,
+            language
           }),
         });
         return response;
