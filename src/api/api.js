@@ -13,9 +13,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
   return {
 
-    limit: () => {
-      return LIMIT;
-    },
+    limit: () => LIMIT,
 
     register: async (username, password, email) => {
       try {
@@ -24,17 +22,18 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({  
-          'username': username,
-          'password': password,
-          'email': email }),
-        })
-    
+          body: JSON.stringify({
+            username,
+            password,
+            email,
+          }),
+        });
+
         const data = await response;
         return data;
       } catch (err) {
-          console.error(err.message);
-          throw err;
+        console.error(err.message);
+        throw err;
       }
     },
 
@@ -45,37 +44,36 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({  
-            'username': username,
-            'password': password,
+          body: JSON.stringify({
+            username,
+            password,
           }),
-        })
-          
+        });
+
         if (response.status === 201) {
           const data = await response.json();
           window.localStorage.setItem('token', data.token);
         }
         return response;
-
       } catch (err) {
         console.error(err.message);
         throw err;
       }
     },
-    
-    currentUser: async () => {  
+
+    currentUser: async () => {
       const loggedUserEndPoint = `${API}/currentuser?token=${window.localStorage.getItem('token')}`;
-      const response = await fetch(loggedUserEndPoint,  {
+      const response = await fetch(loggedUserEndPoint, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        }
-      })
+        },
+      });
       if (!response.ok) {
-        throw new Error('Error ')
+        throw new Error('Error ');
       }
       const data = await response.json();
-      return data.user
+      return data.user;
     },
 
     passwordRecovery: async (email) => {
@@ -85,8 +83,8 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({  
-            'email' : email,
+          body: JSON.stringify({
+            email,
           }),
         });
         return response;
@@ -100,15 +98,15 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       try {
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get('t');
-        const response = await fetch(changePasswordEndPoint+id, {
+        const response = await fetch(changePasswordEndPoint + id, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             password,
-            token
-          })
+            token,
+          }),
         });
         await response.json();
         return response;
@@ -116,7 +114,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         throw error;
       }
     },
-    
+
     getAds: async (search = '') => {
       try {
         const DEFAULT_VALUE = `?limit=${LIMIT}&sort=-date_creation`;
@@ -125,9 +123,9 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          //'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
+          // 'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
           credentials: 'include',
         });
         const data = await response.json();
@@ -145,9 +143,9 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          //'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
+          // 'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
           credentials: 'include',
         });
         const data = await response.json();
@@ -160,7 +158,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     createAd: async (name, description, image, status, price, owner, tags) => {
       try {
-        let fd = new FormData();
+        const fd = new FormData();
         fd.append('name', name);
         fd.append('description', description);
         fd.append('image', image);
@@ -171,8 +169,8 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         const response = await fetch(advertEndPoint, {
           method: 'POST',
           headers: {
-            'Accept': 'application/json', //'Content-Type': 'application/json', // 'Content-Type': 'multipart/form-data',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Accept: 'application/json', // 'Content-Type': 'application/json', // 'Content-Type': 'multipart/form-data',
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
           body: fd,
           credentials: 'include',
@@ -187,7 +185,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     editAdvert: async (idAd, advert) => {
       try {
-        let fd = new FormData();
+        const fd = new FormData();
         fd.append('name', advert.name);
         fd.append('description', advert.description);
         fd.append('image', advert.image);
@@ -198,8 +196,8 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         const response = await fetch(`${advertEndPoint}/${idAd}`, {
           method: 'PUT',
           headers: {
-            'Accept': 'application/json',
-            'Authorization': window.localStorage.getItem('token'),
+            Accept: 'application/json',
+            Authorization: window.localStorage.getItem('token'),
           },
           body: fd,
           credentials: 'include',
@@ -209,10 +207,10 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       } catch (error) {
         Swal.fire({
           icon: 'error',
-          title: `Error`,
-          text: `There has been an error updating the advert, please try again.`,
+          title: 'Error',
+          text: 'There has been an error updating the advert, please try again.',
           timer: 10000,
-          confirmButtonColor:  '#1768ac',
+          confirmButtonColor: '#1768ac',
         });
       }
     },
@@ -224,14 +222,14 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
           credentials: 'include',
         });
         // console.log("response:", response);
         return response;
-        //const data = await response.json();
-        //return data;
+        // const data = await response.json();
+        // return data;
       } catch (err) {
         console.error(err.message);
         throw err;
@@ -245,9 +243,9 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          //'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
+          // 'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
           credentials: 'include',
         });
         const data = await response.json();
@@ -265,12 +263,12 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          credentials: 'include'
+          credentials: 'include',
         });
         const data = await response.json();
-        if (!data){
+        if (!data) {
           return new Error('The user does not exist');
         }
         return data.result;
@@ -285,10 +283,10 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          credentials: 'include', 
-          body: JSON.stringify(userData)
+          credentials: 'include',
+          body: JSON.stringify(userData),
         });
         const message = await response.json();
         return { response, message };
@@ -302,14 +300,14 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         const response = await fetch(`${registerEndPoint}/${id}`, {
           method: 'DELETE',
           header: {
-            'Authorization': `${ window.localStorage.getItem('token') }`
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          credentials: 'include'
+          credentials: 'include',
         });
         await response.json();
         return response;
       } catch (error) {
-        throw(error);
+        throw (error);
       }
     },
 
@@ -319,39 +317,39 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          body: JSON.stringify({  
-            'advert_id': adId
+          body: JSON.stringify({
+            advert_id: adId,
           }),
           credentials: 'include',
-        })
+        });
         const data = await response;
         return data;
       } catch (err) {
-          console.error(err.message);
-          throw err;
+        console.error(err.message);
+        throw err;
       }
     },
-    
+
     deleteFavorite: async (adId) => {
-        try {
+      try {
         const response = await fetch(`${favoritesEndPoint}/${adId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          body: JSON.stringify({  
-            'advert_id': adId
+          body: JSON.stringify({
+            advert_id: adId,
           }),
           credentials: 'include',
-        })
+        });
         const data = await response;
         return data;
       } catch (err) {
-          console.error(err.message);
-          throw err;
+        console.error(err.message);
+        throw err;
       }
     },
 
@@ -361,14 +359,14 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
           credentials: 'include',
         });
         const data = await response.json();
         return data;
       } catch (err) {
-       console.error(err.message);
+        console.error(err.message);
         throw err;
       }
     },
@@ -379,18 +377,18 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          body: JSON.stringify({  
-            'advert_id': adId
+          body: JSON.stringify({
+            advert_id: adId,
           }),
           credentials: 'include',
-        })
+        });
         const data = await response;
         return data;
       } catch (err) {
-          console.error(err.message);
-          throw err;
+        console.error(err.message);
+        throw err;
       }
     },
 
@@ -400,18 +398,18 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          body: JSON.stringify({  
-            'advert_id': adId
+          body: JSON.stringify({
+            advert_id: adId,
           }),
           credentials: 'include',
-        })
+        });
         const data = await response;
         return data;
       } catch (err) {
-          console.error(err.message);
-          throw err;
+        console.error(err.message);
+        throw err;
       }
     },
 
@@ -421,18 +419,18 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          body: JSON.stringify({  
-            'advert_id': adId
+          body: JSON.stringify({
+            advert_id: adId,
           }),
           credentials: 'include',
-        })
+        });
         const data = await response;
         return data;
       } catch (err) {
-          console.error(err.message);
-          throw err;
+        console.error(err.message);
+        throw err;
       }
     },
 
@@ -442,21 +440,21 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${ window.localStorage.getItem('token') }`,
+            Authorization: `${window.localStorage.getItem('token')}`,
           },
-          body: JSON.stringify({  
-            'advert_id': adId
+          body: JSON.stringify({
+            advert_id: adId,
           }),
           credentials: 'include',
-        })
+        });
         const data = await response;
         return data;
       } catch (err) {
-          console.error(err.message);
-          throw err;
+        console.error(err.message);
+        throw err;
       }
     },
 
-  } //Close Return
-}; //Close const apiCall
+  }; // Close Return
+}; // Close const apiCall
 export default apiCall;

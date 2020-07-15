@@ -6,7 +6,6 @@ import apiCall from '../api/api';
 
 const { currentUser } = apiCall();
 
-
 export const AuthContext = createContext(); // user context
 
 const AuthContextProvider = ({ children }) => {
@@ -20,12 +19,12 @@ const AuthContextProvider = ({ children }) => {
       } catch (error) {
         setUser('guest');
         console.error(error.message);
-      } 
+      }
     })();
   }, [user]);
 
   return (
-    <AuthContext.Provider value={{ user, setUser}}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>
   );
 };
 
