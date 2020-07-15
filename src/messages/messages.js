@@ -27,6 +27,11 @@ export const messages = {
         "sweetalert.correctEmail": "Correct email",
         "sweetalert.sentEmail": "We have sent you an email with your password.",
 
+        //SweetAlert editAd
+        "sweetalert.correctUpdate": "Correct update",
+        "sweetalert.advertisementUpdated": "The advertisement has been updated correctly.",
+        "sweetalert.errorUpdating": "There has been an error updating the advert, please try again.",
+        
         "advertisement.price": "Price",
         "advertisement.type": "Type",
         "advertisement.typeBuy": "Buy",
@@ -39,7 +44,7 @@ export const messages = {
         "advertisement.markNotSold": "Mark as not sold",
         "advertisement.sold": "Sold!",
         "advertisement.owner": "Owner",
-        "advertisement.seeFullAd": "See full Advertisement",
+        "advertisement.seeFullAd": "See full advertisement",
         "advertisement.delete": "Delete",
         "advertisement.edit": "Edit",
         "advertisement.createdAt": "Created at",
@@ -47,7 +52,7 @@ export const messages = {
         "header.adList": "Ad list",
         "header.createAd": "Create ad",
         "header.yourFavorites": "Your favorites",
-        "header.yourAds": "Your ads",
+        "header.yourAds": "Your advertisements",
         "header.editYourProfile": "Edit your profile",
         
         "createAd.title": "Create Advertisement",
@@ -64,11 +69,20 @@ export const messages = {
         "createAd.descriptionAd": "Description of the ad:",
         "createAd.descriptionAdPlaceholder": "Add the description of the ad",
         "createAd.buttonCreateAd": "Create advertisement",
-        "createAd.buttonReturnAd": "Return to Ads",
+        "createAd.buttonReturnAd": "Return",
+        "createAd.notLoggedIn": "Not logged in",
+        "createAd.youAreNotLoggedIn": "You are not logged in, or your session has been expired. We redirect you to Log In to do it again.",
+        "createAd.problemsCreatingAd": "Problems creating the advertisement",
+        "createAd.tryAgainOrLater": "The advertisement could not be created (try again or later).",
+        "createAd.correctAdvertisement": "Correct advertisement",
+        "createAd.adCreatedSuccessfully": "The advertisement was created successfully.",
 
         "seeAd.description": "Description",
-        "seeAd.buttonReturnAd": "Return to advertisements",
+        "seeAd.buttonReturnAd": "Return",
 
+        "editAd.editAdvertisement": "Edit advertisement",
+        "editAd.currentImage": "Current image",
+        
         "passwordRecovery.title": "Password recovery",
         "passwordRecovery.emailPlaceholder": "Enter Email",
         "passwordRecovery.phrase": "We'll never share your email with anyone else.",
@@ -80,6 +94,9 @@ export const messages = {
         "changePassword.passwordPlaceholder": "Enter Password",
         "changePassword.confirmPasswordPlaceholder": "Confirm Password",
         "changePassword.passwordUpdated": "Password updated",
+        "changePassword.updatedPassword": "Updated password",
+        "changePassword.passwordsDontMatch": "Your passwords don't match",
+        "changePassword.passwordUpdatedCorrectly": "Your password has been updated correctly",
         
         'login.title': 'Login to WallaBaby!',
         'login.userName': 'Username',
@@ -110,8 +127,9 @@ export const messages = {
         'favorites.add': 'Add to favorites',
         'favorites.empty': "You don't have any fav yet",
   
-        "yourads.title": "Your ads:",
-        "yourads.empty": "You don't have any ad yet",
+        "myAdverts.title": "Your ads:",
+        "myAdverts.empty": "You don't have any ad yet",
+
 
         "ads.owner": "The ads of",
         "ads.owner.empty": "hasn't created any ad yet"
@@ -145,6 +163,11 @@ export const messages = {
         "sweetalert.correctEmail": "Email correcto",
         "sweetalert.sentEmail": "Le hemos enviado un correo electrónico con su contraseña.",
 
+        //SweetAlert editAd
+        "sweetalert.correctUpdate": "Actualización correcta",
+        "sweetalert.advertisementUpdated": "El anuncio ha sido actualizado correctamente.",
+        "sweetalert.errorUpdating": "Se produjo un error al actualizar el anuncio. Vuelve a intentarlo.",
+        
         "advertisement.price": "Precio",
         "advertisement.type": "Tipo",
         "advertisement.typeBuy": "Compra",
@@ -182,10 +205,19 @@ export const messages = {
         "createAd.descriptionAd": "Descripción del anuncio:",
         "createAd.descriptionAdPlaceholder": "Añada la descripción del anuncio",
         "createAd.buttonCreateAd": "Crear anuncio",
-        "createAd.buttonReturnAd": "Volver a anuncios",
+        "createAd.buttonReturnAd": "Volver",
+        "createAd.notLoggedIn": "Sin iniciar sesión",
+        "createAd.youAreNotLoggedIn": "No has iniciado sesión o tu sesión ha caducado. Lo redireccionamos a Iniciar sesión para hacerlo nuevamente.",
+        "createAd.problemsCreatingAd": "Problemas al crear el anuncio",
+        "createAd.tryAgainOrLater": "No se pudo crear el anuncio (intente nuevamente o más tarde).",
+        "createAd.correctAdvertisement": "Anuncio correcto",
+        "createAd.adCreatedSuccessfully": "El anuncio fue creado satisfactoriamente.",
         
         "seeAd.description": "Descripción",
-        "seeAd.buttonReturnAd": "Volver a los anuncios",
+        "seeAd.buttonReturnAd": "Volver",
+
+        "editAd.editAdvertisement": "Editar anuncio",
+        "editAd.currentImage": "Imagen actual",
 
         "passwordRecovery.title": "Recuperación de contraseña",
         "passwordRecovery.emailPlaceholder": "Introduzca su Email",
@@ -194,6 +226,10 @@ export const messages = {
         "changePassword.passwordPlaceholder": "Introduzca la contraseña",
         "changePassword.confirmPasswordPlaceholder": "Confirme la contraseña",
         "changePassword.passwordUpdated": "Actualizar la contraseña",
+        "changePassword.updatedPassword": "Contraseña actualizada",
+        "changePassword.passwordsDontMatch": "Sus contraseñas no coinciden",
+        "changePassword.passwordUpdatedCorrectly": "Su contraseña ha sido actualizada correctamente",
+
         "sweetalert.wrongmail": "El email no es correcto",
         "sweetalert.correctmail": "El email es correcto",
         "sweetalert.messagesend": "Le hemos enviado un email para recuperar su contraseña",
@@ -223,12 +259,12 @@ export const messages = {
         "filter.clearFilter": "Limpiar filtro",
 
         "favorites.title": "Tus anuncios favoritos:",
-        "favorites.remove": "Quita el anuncio de tu lista de favoritos",
-        "favorites.add": "Añade a favoritos",
+        "favorites.remove": "Eliminar de favoritos",
+        "favorites.add": "Añadir a favoritos",
         "favorites.empty": "No tienes ningún anuncio favorito",
 
-        "yourads.title": "Tus anuncios:",
-        "yourads.empty": "No tienes ningún anuncio creado aún",
+        "myAdverts.title": "Tus anuncios:",
+        "myAdverts.empty": "No tienes ningún anuncio creado aún",
 
         "ads.owner": "Los anuncios de",
         "ads.owner.empty": "no tiene ningún anuncio creado aún"

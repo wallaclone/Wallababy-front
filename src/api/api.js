@@ -112,8 +112,8 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         });
         await response.json();
         return response;
-      } catch (error) {
-        throw error;
+      } catch (err) {
+        throw err;
       }
     },
     
@@ -206,14 +206,16 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         });
         await response.json();
         return response;
-      } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: `Error`,
-          text: `There has been an error updating the advert, please try again.`,
-          timer: 10000,
-          confirmButtonColor:  '#1768ac',
-        });
+      } catch (err) {
+        // Swal.fire({
+        //   icon: 'error',
+        //   title: `Error`,
+        //   text: `There has been an error updating the advert, please try again.`,
+        //   timer: 10000,
+        //   confirmButtonColor:  '#1768ac',
+        // });
+        console.error(err.message);
+        throw err;
       }
     },
 
@@ -274,8 +276,8 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           return new Error('The user does not exist');
         }
         return data.result;
-      } catch (error) {
-        throw error;
+      } catch (err) {
+        throw err;
       }
     },
 
@@ -292,8 +294,8 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         });
         const message = await response.json();
         return { response, message };
-      } catch (error) {
-        throw error;
+      } catch (err) {
+        throw err;
       }
     },
 
@@ -308,8 +310,8 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         });
         await response.json();
         return response;
-      } catch (error) {
-        throw(error);
+      } catch (err) {
+        throw(err);
       }
     },
 
