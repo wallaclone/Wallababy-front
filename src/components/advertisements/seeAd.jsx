@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
-import { Card, Button, Badge, Form, Col } from "react-bootstrap";
+import React, { useState, useEffect, useContext } from 'react';
+
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Card, Button, Badge, Form, Col } from 'react-bootstrap';
+import { injectIntl } from 'react-intl';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share';
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AuthContext } from '../../contexts/authContext';
+
 import apiCall from '../../api/api';
-import { FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime } from 'react-intl';
+import { AuthContext } from '../../contexts/authContext';
 
 const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsNotSold, markAsReserved, markAsUnreserved } = apiCall();
 
@@ -18,7 +20,8 @@ function SeeAd(props) {
     const [advertisement, setAdvertisement] = useState({});
     const [favs, setFavs] = useState([]);
     const [inList, setInList] = useState([])
-    const { user, setUser } = useContext(AuthContext);
+
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         const getFavAds = async () => {

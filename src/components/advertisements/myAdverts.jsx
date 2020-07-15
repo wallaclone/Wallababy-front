@@ -1,17 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { Button, Form, Col } from 'react-bootstrap';
+import { injectIntl } from 'react-intl';
 import { Link, useParams } from 'react-router-dom';
-import apiCall from '../../api/api';
-import { Button, Form, Col } from "react-bootstrap";
 import Swal from 'sweetalert2';
-import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
+
+import apiCall from '../../api/api';
 
 const { getAds, deleteAd } = apiCall();
 
 function MyAdverts(props) {
-    const { setReloadAdvertisements } = props;
-    const { username } = useParams();
-    const [adverts, setAdverts] = useState([]);
-    const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
+  const { setReloadAdvertisements } = props;
+  const { username } = useParams();
+  const [adverts, setAdverts] = useState([]);
+  const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
 
     useEffect(() => {
         const getUserAdverts = async () => {

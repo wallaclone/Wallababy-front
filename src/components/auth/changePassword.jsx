@@ -1,37 +1,38 @@
 import React, { useState } from 'react';
-import { Card, Form, Button }  from 'react-bootstrap';
-import { useParams, useHistory, Link } from "react-router-dom";
-import apiCall from '../../api/api';
+
+import { Card, Form, Button } from 'react-bootstrap';
+import { injectIntl } from 'react-intl';
+import { useParams, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
+import apiCall from '../../api/api';
 
 const { changePassword } = apiCall();
 
 function ChangePassword(props) {
-    const history = useHistory();
-    const { id } = useParams();
-    //const userId = props.match.params.id;
-    const userId = id;
+  const history = useHistory();
+  const { id } = useParams();
+  // const userId = props.match.params.id;
+  const userId = id;
 
-    const [ objectForm, setObjectForm ] = useState ({
-        password : '',
-        confirm_password: ''
+  const [objectForm, setObjectForm] = useState({
+    password: '',
+    confirm_password: '',
+  });
+
+  const handleChange = (event) => {
+    setObjectForm({
+      ...objectForm,
+      [event.target.name]: event.target.value,
     });
+  };
 
-    const handleChange = (event) => {
-        setObjectForm({
-            ...objectForm,
-            [event.target.name] : event.target.value,
-        });
-    };
-
-    const handleClearButton = () => {
-        setObjectForm({
-            password : '',
-            confirm_password: ''
-        });
-    };
+  const handleClearButton = () => {
+    setObjectForm({
+      password: '',
+      confirm_password: '',
+    });
+  };
 
     const changePasswordSubmit = async (event) => {
         event.preventDefault();
