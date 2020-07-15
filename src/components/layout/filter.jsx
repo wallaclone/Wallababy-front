@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Col, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+// import { Link, useHistory } from "react-router-dom";
 import { FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime } from 'react-intl';
 
 function Filter(props) {
     const { setSearch, setReloadAdvertisements, setCurrentPage, tags } = props;
+    // const history = useHistory();
 
     const initialValues = {
+        name:  '',
+        minPrice:  '',
+        maxPrice:  '',
+        status:  '',
+        tag:  '',
+
         name: sessionStorage.getItem('name') ? sessionStorage.getItem('name') : '',
         minPrice: sessionStorage.getItem('minPrice') ? sessionStorage.getItem('minPrice') : '',
         maxPrice: sessionStorage.getItem('maxPrice') ? sessionStorage.getItem('maxPrice') : '',
@@ -14,11 +22,11 @@ function Filter(props) {
         tag: sessionStorage.getItem('tag') ? sessionStorage.getItem('tag') : '',
     };
 
-    const [ terminoBusqueda, guardarTerminoBusqueda ] = useState (initialValues);
+    const [ valuesSearch, setValuesSearch ] = useState (initialValues);
 
     const handleChange = (event) => {
-        guardarTerminoBusqueda({
-            ...terminoBusqueda,
+        setValuesSearch({
+            ...valuesSearch,
             [event.target.name] : event.target.value,
         });
         sessionStorage.setItem(event.target.name, event.target.value);
@@ -26,7 +34,7 @@ function Filter(props) {
 
     const clearFilter = () => {
         sessionStorage.clear();
-        guardarTerminoBusqueda(initialValues);
+        setValuesSearch(initialValues);
 
         let element = document.getElementById('name');
         element.value = '';
@@ -39,14 +47,18 @@ function Filter(props) {
         element = document.getElementById('maxPrice');
         element.value = '';
 
+        sessionStorage.clear();
+
         setReloadAdvertisements (true);
         setSearch ('');
         setCurrentPage (1);
+
+        // history.push('/dashboard');
     }
 
     const buscarAnuncio = async (event) => {
         event.preventDefault();
-        const { name, minPrice, maxPrice, status, tag } = terminoBusqueda;
+        const { name, minPrice, maxPrice, status, tag } = valuesSearch;
         let queryParams = '';
         queryParams = name !== '' ? queryParams += `&name=${name}` : queryParams += '';
         queryParams = status !== '' ? queryParams += `&status=${status}` : queryParams += '';
@@ -84,7 +96,7 @@ function Filter(props) {
                         name="name"
                         id="name"
                         onChange={handleChange} 
-                        // onChange={(e) => guardarTerminoBusqueda(e.target.value)}
+                        // onChange={(e) => setValuesSearch(e.target.value)}
                         value={sessionStorage.getItem('name')}
                     />
                 </Form.Group>

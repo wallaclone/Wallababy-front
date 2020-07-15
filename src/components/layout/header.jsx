@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { AuthContext } from '../../contexts/authContext';
 import { Form }  from 'react-bootstrap';
@@ -19,31 +19,8 @@ function Header(props) {
     logout();
   }
 
-  // const [ language, setLanguage ] = useState ('');
-  // const changeLanguageBySelect = async (event) => {
-  //   const value = event.target.value;
-  //   // console.log("*****event.target.name:", event.target.name);
-  //   // console.log("*****event.target.value:", event.target.value);
-  //   // console.log("*****event.target.type:", event.target.type);
-  //   setLanguage(value);
-  //   // console.log("*****language:", language, ".");
-  //   setReloadLanguage(value);
-  //   // if(event.target.type !== 'checkbox') {
-  //   //   setObjectForm({
-  //   //     ...objectForm,
-  //   //     [event.target.name] : event.target.value
-  //   //   });
-  //   // } else { //if(event.target.type === 'checkbox') {
-  //   //   setObjectForm({
-  //   //     ...objectForm,
-  //   //     [event.target.name] : event.target.checked,
-  //   //   });
-  //   // }
-  // };
-
   const changeLanguage = (value) => {
-    // setLanguage(value);
-    // console.log("*****language:", language, ".");
+    localStorage.setItem('initCurrentLocale', value);
     setReloadLanguage(value);
   };
   
@@ -81,24 +58,6 @@ function Header(props) {
           </>
           }
           
-          {/* <select name='language' onChange={changeLanguage} value={language} >
-            <option value='' defaultValue>...</option>
-            <option value="es-ES">ES</option>
-            <option value="en-US">EN</option>
-            <option value="de-DE">DE</option>
-          </select> */}
-          
-          {/* <Form.Control as="select" 
-            name="language"
-            id="language"
-            onChange={changeLanguageBySelect}
-            value={language}
-            style={{ width: '72px' }}
-            >
-              <option value="es-ES">ES</option>
-              <option value="en-US">EN</option>
-          </Form.Control> */}
-
           <Nav.Link className='navbar-link'> 
             <Link className='navbar-link' onClick={()=> changeLanguage('es-ES')}> ES </Link>/
             <Link className='navbar-link' onClick={()=> changeLanguage('en-US')}> EN </Link>

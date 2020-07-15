@@ -32,8 +32,14 @@ function App(props) {
   const [advertisements, setAdvertisements] = useState([]);
   const [reloadAdvertisements, setReloadAdvertisements] = useState(true);
 
+  if(!(localStorage.getItem('initCurrentLocale'))) 
+    localStorage.setItem('initCurrentLocale', 'es-ES');
+
   const [ search, setSearch ] = useState('');
-  const [ currentLocale, setCurrentLocale ] = useState('es-ES');
+  // const [ currentLocale, setCurrentLocale ] = useState('es-ES');
+  const [ currentLocale, setCurrentLocale ] = useState(localStorage.getItem('initCurrentLocale'));
+
+  console.log("localStorage.getItem('initCurrentLocale'):", localStorage.getItem('initCurrentLocale'));
 
   const [ messages, setMessages ] = useState(allMessages[currentLocale]);
   const [ reloadLanguage, setReloadLanguage ] = useState(currentLocale);
