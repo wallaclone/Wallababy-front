@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { Form, Col, Button, Image }  from 'react-bootstrap';
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 import Swal from 'sweetalert2';
 import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
@@ -123,7 +123,8 @@ function EditAd() {
 
     return (
         <div className="m-3">
-            <h1 className='titleName' style={{ marginTop: '6rem' }}>Edit Advertisement</h1>
+            <h2 className='favs' style={{ marginTop: '6rem' }}>Edit Advertisement</h2>
+            {/* <h1 className='titleName' style={{ marginTop: '6rem' }}>Edit Advertisement</h1> */}
             <form encType="multipart/form-data" onSubmit={sendEditAd}>
                 <Form.Group controlId="formGridTitle">
                     <Form.Label className='label'>Title of the ad:</Form.Label>

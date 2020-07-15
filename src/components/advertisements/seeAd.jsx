@@ -6,7 +6,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { AuthContext } from '../../contexts/authContext';
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 
 import { FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime } from 'react-intl';
 

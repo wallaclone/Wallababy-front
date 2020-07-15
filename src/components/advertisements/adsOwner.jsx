@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { advertisement as Advertisement } from './advertisement';
 import { useParams } from 'react-router-dom';
-import apiCall from '../api/api';
+import apiCall from '../../api/api';
 
 import { injectIntl } from 'react-intl';
 
