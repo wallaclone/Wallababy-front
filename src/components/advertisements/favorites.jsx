@@ -32,18 +32,10 @@ function MyFavs(props) {
   return (
     <>
       <div className="m-3">
-        <h2 className="titles">
-          {' '}
-          {props.intl.formatMessage({ id: 'favorites.title' })}
-        </h2>
+        <h2 className="titles">{props.intl.formatMessage({ id: 'favorites.title' })}</h2>
         {
-      (favs.length === 0) ? (
-        <div>
-          {' '}
-          {props.intl.formatMessage({ id: 'favorites.empty' })}
-        </div>
-      )
-        : (
+      (favs.length === 0) ? (<div> {props.intl.formatMessage({ id: 'favorites.empty' })}</div>
+      ): (
           <div>
             {favs.map((fav) => (
               <div className="col mb-4" key={fav._id}>
@@ -58,38 +50,21 @@ function MyFavs(props) {
                     </h5>
                     <p className="card-text">
                       <strong>
-                        {props.intl.formatMessage({ id: 'advertisement.price' })}
-                        :
-</strong>
-                      {' '}
-                      {fav.price}
-                      {' '}
-                      &euro;
+                        {props.intl.formatMessage({ id: 'advertisement.price' })}: </strong>{fav.price}&euro;
                     </p>
                     <p className="card-text">
                       <strong>
-                        {props.intl.formatMessage({ id: 'advertisement.type' })}
-                        :
-</strong>
-                      {' '}
+                        {props.intl.formatMessage({ id: 'advertisement.type' })}: </strong>
                       {fav.status ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}
                     </p>
                     <p className="card-text">
                       <strong>
-                        {props.intl.formatMessage({ id: 'advertisement.tags' })}
-                        :
-</strong>
-                      {' '}
-                      {fav.tags}
+                        {props.intl.formatMessage({ id: 'advertisement.tags' })}: </strong>{fav.tags}
                     </p>
                     <p className="card-text">
-                      <strong>
-                        {props.intl.formatMessage({ id: 'advertisement.owner' })}
-                        :
-</strong>
+                      <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}: </strong>
 &nbsp;
-                      <Link className="forgot-pass" to={`/adsOwner/${fav.owner}`}>
-                        {fav.owner}
+                      <Link className="forgot-pass" to={`/adsOwner/${fav.owner}`}>{fav.owner}
                       </Link>
                     </p>
                   </div>
@@ -102,10 +77,7 @@ function MyFavs(props) {
                     </Link>
                     <Button onClick={() => handleClick(fav._id)} variant="light" size="lg" block>
                       {props.intl.formatMessage({ id: 'favorites.remove' })}
-                      {' '}
                       <FontAwesomeIcon icon={faHeart} color="red" />
-                      {' '}
-
                     </Button>
                   </div>
                 </div>

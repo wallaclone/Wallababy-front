@@ -11,11 +11,11 @@ function Filter(props) {
   // const history = useHistory();
 
   const initialValues = {
-    name: '',
+    /* name: '',
     minPrice: '',
     maxPrice: '',
     status: '',
-    tag: '',
+    tag: '', */
 
     name: sessionStorage.getItem('name') ? sessionStorage.getItem('name') : '',
     minPrice: sessionStorage.getItem('minPrice') ? sessionStorage.getItem('minPrice') : '',

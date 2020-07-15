@@ -35,36 +35,27 @@ function Header(props) {
           // (user === 'guest') ? <Nav className='end-section'> <Nav.Link href="/login">{props.intl.formatMessage({ id: 'all.logIn' })}!</Nav.Link></Nav> :
           (user === 'guest') ? (
             <Nav className="end-section">
-              {' '}
               <Nav.Link>
-                <Link to="/login" className="navbar-link">
-                  {props.intl.formatMessage({ id: 'all.logIn' })}
-                  !
-                </Link>
+                <Link to="/login" className="navbar-link">{props.intl.formatMessage({ id: 'all.logIn' })}!</Link>
               </Nav.Link>
             </Nav>
-          )
-            : (
+          ): (
               <>
                 <Nav className="mr-auto">
                   <Nav.Link>
                     <Link to="/dashboard" className="navbar-link">
-                      {' '}
                       {props.intl.formatMessage({ id: 'header.adList' })}
-                      {' '}
                     </Link>
                   </Nav.Link>
                   <Nav.Link>
                     <Link to="/createAd" className="navbar-link">
-                      {' '}
                       {props.intl.formatMessage({ id: 'header.createAd' })}
-                      {' '}
                     </Link>
                   </Nav.Link>
                 </Nav>
 
                 <Nav className="right-section">
-                  <NavDropdown title={user} id="collasible-nav-dropdown">
+                  <NavDropdown title={`${user}`} id="collasible-nav-dropdown">
                     <NavDropdown.Item><Link to="/favorites" className="dropdown-link">{props.intl.formatMessage({ id: 'header.yourFavorites' })}</Link></NavDropdown.Item>
                     <NavDropdown.Item><Link to={`/myads/${user}`} className="dropdown-link">{props.intl.formatMessage({ id: 'header.yourAds' })}</Link></NavDropdown.Item>
                     <NavDropdown.Divider />

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Card, Form, Button } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import apiCall from '../../api/api';

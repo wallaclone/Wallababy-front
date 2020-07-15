@@ -22,24 +22,15 @@ function AdsOwner(props) {
       getAdsOwner();
       setReloadAdsOwner(false);
     }
-  }, [reloadAdsOwner]);
+  }, [reloadAdsOwner, owner]);
 
   return (
     <div className="m-3">
-      <h2 className="titles">
-        {' '}
-        {props.intl.formatMessage({ id: 'ads.owner' })}
-        {' '}
-        {owner}
-        :
-      </h2>
+      <h2 className="titles">{props.intl.formatMessage({ id: 'ads.owner' })} {owner}:</h2>
 
       {(adsOwner.length === 0) ? (
         <div>
-          {owner}
-          {' '}
-          {props.intl.formatMessage({ id: 'ads.owner.empty' })}
-          {' '}
+          {owner} {props.intl.formatMessage({ id: 'ads.owner.empty' })}
         </div>
       ) : adsOwner.map((ownerAdvert) => (
         <Advertisement

@@ -52,11 +52,6 @@ function EditAd() {
     }
   }, [reloadTags, objectForm, reloadAdvert, advertForm, advertId]);
 
-  const returnToLogin = () => {
-    localStorage.clear();
-    // props.history.push(`/login`);
-  };
-
   const returnToDashboard = () => {
     history.goBack();
   };

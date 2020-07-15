@@ -27,7 +27,7 @@ function SeeAd(props) {
   const [favs, setFavs] = useState([]);
   const [inList, setInList] = useState([]);
 
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const getFavAds = async () => {
@@ -106,7 +106,6 @@ function SeeAd(props) {
                 {props.intl.formatMessage({ id: 'advertisement.price' })}
                 :
               </strong>
-              {' '}
               {advertisement.price}
               €
             </p>
@@ -115,7 +114,6 @@ function SeeAd(props) {
                 {props.intl.formatMessage({ id: 'advertisement.type' })}
                 :
               </strong>
-              {' '}
               {advertisement.status === true ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}
             </p>
             <p>
@@ -123,7 +121,6 @@ function SeeAd(props) {
                 {props.intl.formatMessage({ id: 'advertisement.tags' })}
                 :
               </strong>
-              {' '}
               {advertisement.tags}
             </p>
 
@@ -170,19 +167,15 @@ function SeeAd(props) {
                             (inList === true) ? (
                               <Button onClick={() => deleteFav(advertisement._id)} variant="light" size="lg" block>
                                 {props.intl.formatMessage({ id: 'favorites.remove' })}
-                                {' '}
-                                <FontAwesomeIcon icon={faHeart} color="red" />
-                                {' '}
-
+                                                  <FontAwesomeIcon icon={faHeart} color="red" />
+                  
                               </Button>
                             )
                               : (
                                 <Button onClick={() => addFav(advertisement._id)} variant="light" size="lg" block>
                                   {props.intl.formatMessage({ id: 'favorites.add' })}
-                                  {' '}
-                                  <FontAwesomeIcon icon={faHeart} color="#f7b6a0" id="heart" />
-                                  {' '}
-
+                                                      <FontAwesomeIcon icon={faHeart} color="#f7b6a0" id="heart" />
+                    
                                 </Button>
                               )
                         }
@@ -196,7 +189,6 @@ function SeeAd(props) {
           <small className="text-muted">
             {props.intl.formatMessage({ id: 'advertisement.createdAt' })}
             :
-            {' '}
             {props.intl.formatDate(new Date(advertisement.date_creation), dateOptions)}
           </small>
         </Card.Footer>

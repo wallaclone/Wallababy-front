@@ -12,8 +12,8 @@ const { getUser, editUser, deleteUser } = apiCall();
 
 function EditProfile(props) {
   const history = useHistory();
-  const { user, setUser } = useContext(AuthContext);
-  const username = window.localStorage.getItem('username');
+  const { user } = useContext(AuthContext);
+  // const username = window.localStorage.getItem('username');
   const [myUser, setmyUser] = useState({
     username: '',
     email: '',
@@ -139,7 +139,6 @@ function EditProfile(props) {
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="0">
               Username:
-              {' '}
               {user}
             </Accordion.Toggle>
           </Card.Header>
@@ -153,7 +152,6 @@ function EditProfile(props) {
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="1">
               Email:
-              {' '}
               {myUser.email}
             </Accordion.Toggle>
           </Card.Header>

@@ -4,12 +4,8 @@ import { Button, Badge } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 
-import apiCall from '../../api/api';
-
-const { deleteAd } = apiCall();
-
 function Advertisement(props) {
-  const { advertisement, setReloadAdvertisements } = props;
+  const { advertisement } = props;
   const {
     _id,
     name,
@@ -45,50 +41,27 @@ function Advertisement(props) {
 
         <div className="card-body">
           <h5 className="card-title">
-            <Link to={`/seeAd/${_id}`} className="ad-name">
-              {name}
-            </Link>
+            <Link to={`/seeAd/${_id}`} className="ad-name">{name}</Link>
           </h5>
           <p className="card-text">
-            <strong>
-              {props.intl.formatMessage({ id: 'advertisement.price' })}
-              :
-            </strong>
-            {' '}
-            {price}
-            {' '}
-            &euro;
+            <strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong>{price}&euro;
           </p>
           <p className="card-text">
-            <strong>
-              {props.intl.formatMessage({ id: 'advertisement.type' })}
-              :
-            </strong>
-            {' '}
+            <strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong>
             {status ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}
           </p>
           <p className="card-text">
-            <strong>
-              {props.intl.formatMessage({ id: 'advertisement.tags' })}
-              :
-            </strong>
-            {' '}
-            {tags}
+            <strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong>{tags}
           </p>
 
           <p className="card-text">
             <strong>
-              {props.intl.formatMessage({ id: 'advertisement.owner' })}
-              :
-            </strong>
+              {props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>
 &nbsp;
-            <Link className="forgot-pass" to={`/adsOwner/${owner}`}>
-              {owner}
-            </Link>
+            <Link className="forgot-pass" to={`/adsOwner/${owner}`}>{owner}</Link>
           </p>
           {advertisement.reserved === true && !advertisement.sold ? <Badge className="badge-reserved">{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
           {advertisement.sold === true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}
-
         </div>
 
         <div className="card-footer text-center">
@@ -102,10 +75,7 @@ function Advertisement(props) {
         <div className="card-footer text-center">
 
           <small className="text-muted">
-            {props.intl.formatMessage({ id: 'advertisement.createdAt' })}
-            :
-            {' '}
-            {props.intl.formatDate(new Date(date_creation), dateOptions)}
+            {props.intl.formatMessage({ id: 'advertisement.createdAt' })}: {props.intl.formatDate(new Date(date_creation), dateOptions)}
           </small>
           {/* <small className="text-muted">( {props.intl.formatMessage({ id: 'advertisement.createdAt' })}: {dateFormatted} )</small> */}
         </div>

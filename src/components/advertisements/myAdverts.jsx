@@ -22,7 +22,7 @@ function MyAdverts(props) {
       setAdverts(userAdverts.rows);
     };
     getUserAdverts();
-  }, []);
+  }, [username]);
 
   const deleteAD = async (e, idAd) => {
     e.preventDefault();
@@ -64,12 +64,10 @@ function MyAdverts(props) {
     <>
       <div className="m-3">
         <h2 className="titles">
-          {' '}
           {props.intl.formatMessage({ id: 'yourads.title' })}
         </h2>
         { (adverts.length === 0) ? (
           <div>
-            {' '}
             {props.intl.formatMessage({ id: 'yourads.empty' })}
           </div>
         ) : adverts.map((advert) => (
@@ -79,33 +77,25 @@ function MyAdverts(props) {
 
               <div className="card-body">
                 <h5 className="card-title">
-                  <Link to={`/dashboard/${advert._id}`} className="ad-name">
-                      {advert.name}
-                    </Link>
+                  <Link to={`/dashboard/${advert._id}`} className="ad-name">{advert.name}</Link>
                 </h5>
                 <p className="card-text">
                   <strong>Price:</strong>
-                  {' '}
                   {advert.price}
-                  {' '}
                   &euro;
-        </p>
+               </p>
                 <p className="card-text">
                   <strong>Type:</strong>
-                  {' '}
                   {advert.status ? 'Buy' : 'Sell'}
                 </p>
                 <p className="card-text">
                   <strong>Tags:</strong>
-                  {' '}
                   {advert.tags}
                 </p>
                 <p className="card-text">
                   <strong>owner:</strong>
 &nbsp;
-                  <Link className="forgot-pass" to={`/adsOwner/${advert.owner}`}>
-                      {advert.owner}
-                    </Link>
+                  <Link className="forgot-pass" to={`/adsOwner/${advert.owner}`}>{advert.owner}</Link>
                 </p>
               </div>
 

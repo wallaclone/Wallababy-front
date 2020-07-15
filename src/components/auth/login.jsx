@@ -76,7 +76,6 @@ function Login(props) {
           <Card.Footer>
             <span className="text-muted">
               {props.intl.formatMessage({ id: 'all.newAPP' })}
-              {' '}
             </span>
         &nbsp;
             <Link to="/signup">
