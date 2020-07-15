@@ -42,9 +42,9 @@ function ChangePassword(props) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: `The passwords dont match`,
+                text: props.intl.formatMessage({ id: 'changePassword.passwordsDontMatch' }),
                 timer: 5000,
-                confirmButtonColor:  '#1768ac',
+                confirmButtonColor: '#1768ac',
             });
             setObjectForm({ password: '', confirm_password: ''});
             return;
@@ -54,15 +54,14 @@ function ChangePassword(props) {
         if (response.status === 201) {
             Swal.fire({
                 icon: 'success',
-                title: 'Password updated',
-                text: `Your password has been updated correctly`,
+                title: props.intl.formatMessage({ id: 'changePassword.updatedPassword' }),
+                text: props.intl.formatMessage({ id: 'changePassword.passwordUpdatedCorrectly' }),
                 timer: 5000,
-                confirmButtonColor:  '#1768ac',
+                confirmButtonColor: '#1768ac',
             });
             // props.history.push('/login');
             history.push('/login');
         }
-
     };
     
     return (
@@ -86,15 +85,6 @@ function ChangePassword(props) {
                         value={objectForm.confirm_password}
                         required
                     />
-                    {/* <Form.Control required type="email" 
-                        placeholder='Enter Email'
-                        name='email'
-                        value={objectForm.email}
-                        onChange={handleChange} 
-                    />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text> */}
                 </Form.Group>
                 
                 <Button className='mybutton' variant="primary" type="submit">

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-//import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import { Form, Col, Button }  from 'react-bootstrap';
 import apiCall from '../../api/api';
 import Swal from 'sweetalert2';
-
 import {FormattedMessage, injectIntl, FormattedDate, FormattedTime, FormattedRelativeTime} from 'react-intl';
 
 const { getTags, createAd } = apiCall();
@@ -17,7 +15,6 @@ function CreateAd(props) {
     const initialValues = {
         name: '',
         description: '',
-        // image: '',
         image: null,
         status: '',
         price: 0,
@@ -27,25 +24,14 @@ function CreateAd(props) {
 
     const [ objectForm, setObjectForm ] = useState (initialValues);
     const [ reloadTags, setReloadTags ] = useState( true );
-    // let arrayTags = [];
 
     useEffect(() => {
         if( reloadTags ){
         const loadTags = async () => {
-            // realizamos la consulta al API
             const resultTags = await getTags ();
-            // console.log('resultAds:', resultAds.rows);
-            //setObjectForm.tags( resultTags );
-
             setObjectForm( { ...objectForm, tags : resultTags } );
-
-            // resultTags.forEach(tag => {
-            //     arrayTags.push({name:tag.name, status:false});
-            // });
-            // console.log("arrayTags:", arrayTags);
         }
         loadTags();
-
         // We change to false the recharge of articles so that it isn't recharging continuously
         setReloadTags( false );
         }
@@ -68,12 +54,6 @@ function CreateAd(props) {
     const returnToDashboard = () => {
         history.goBack();
     };
-    
-    // const returnToLogin = () => {
-    //     //sessionStorage.clear();
-    //     localStorage.clear();
-    //     props.history.push(`/login`);
-    // };
 
     const sendCreateAd = async (event) => {
         event.preventDefault();
@@ -82,21 +62,18 @@ function CreateAd(props) {
         let myTags = [];
 
         tags.forEach(tag => {
-            // console.log(document.getElementById(tag.name).value, "->", document.getElementById(tag.name).checked)
             if(document.getElementById(tag.name).checked)
                 myTags.push(document.getElementById(tag.name).value);
         });
-        // console.log("myTags:", myTags);
         
         //const adCreated = await createAd (name, description, image, status, price, owner, myTags);
         const adCreated = await createAd (name, description, imgAux, status, price, owner, myTags);
-        // console.log("adCreated.error", adCreated.error);
 
         if (adCreated.error === 'Error: Not logged in' || adCreated.error === 'Error: No token provided' || adCreated === 'No token provided') {
             Swal.fire({
                 icon: 'error',
-                title: 'Not logged in',
-                text: `You are not logged in, or your session has been expired. We redirect you to Log In to do it again.`,
+                title: props.intl.formatMessage({ id: 'createAd.notLoggedIn' }),
+                text: props.intl.formatMessage({ id: 'createAd.youAreNotLoggedIn' }),
                 timer: 5000,
                 confirmButtonColor:  '#1768ac',
             });
@@ -105,8 +82,8 @@ function CreateAd(props) {
             console.error("adCreated.error:", adCreated.error);
             Swal.fire({
                 icon: 'error',
-                title: 'Problems creating the advertisement',
-                text: `The advertisement could not be created (try again or later).`,
+                title: props.intl.formatMessage({ id: 'createAd.problemsCreatingAd' }),
+                text: props.intl.formatMessage({ id: 'createAd.tryAgainOrLater' }),
                 timer: 5000,
                 confirmButtonColor:  '#1768ac',
             });
@@ -114,15 +91,14 @@ function CreateAd(props) {
             Swal.fire({
                 //position: 'top-end',
                 icon: 'success',
-                title: `Correct advertisement`,
-                text: `The advertisement was created successfully.`,
+                title: props.intl.formatMessage({ id: 'createAd.correctAdvertisement' }),
+                text: props.intl.formatMessage({ id: 'createAd.adCreatedSuccessfully' }),
                 //footer: '<a href>Why do I have this issue?</a>',
                 //showConfirmButton: false,
                 timer: 10000,
                 confirmButtonColor:  '#1768ac',
             });
             // Redirect to dashboard (List of Advertisements)
-            // this.props.history.push('/dashboard');
             setReloadAdvertisements(true);
             history.push('/dashboard');
         }
@@ -209,12 +185,6 @@ function CreateAd(props) {
                             <FormattedMessage id="createAd.buttonReturnAd" value={(message) => ({message})}/>
                         </Button>
                     </Form.Group>
-
-                    {/* <Form.Group as={Col} md="2" controlId="formGridLogOut">
-                        <Button variant="danger" size="lg" block onClick={returnToLogin}>
-                            Log Out
-                        </Button>
-                    </Form.Group> */}
                 </Form.Row>
             </form>
         </div>

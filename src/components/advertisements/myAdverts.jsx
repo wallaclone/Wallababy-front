@@ -16,7 +16,6 @@ function MyAdverts(props) {
     useEffect(() => {
         const getUserAdverts = async () => {
             const userAdverts = await getAds(`&owner=${username}`);
-        
             setAdverts(userAdverts.rows);
         }
         getUserAdverts();
@@ -25,14 +24,14 @@ function MyAdverts(props) {
     const deleteAD = async (e, idAd) => {
         e.preventDefault();
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: props.intl.formatMessage({ id: 'sweetalert.areYouSure' }),
+            text: props.intl.formatMessage({ id: 'sweetalert.noRevert' }),
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#1768ac',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'Cancel',
+            confirmButtonText: props.intl.formatMessage({ id: 'sweetalert.deleteIt' }),
+            cancelButtonText: props.intl.formatMessage({ id: 'sweetalert.cancel' }),
         }).then( async (result) => {
             if (result.value) {
                 
@@ -40,9 +39,9 @@ function MyAdverts(props) {
                     const adDeleted = await deleteAd(idAd);
                     if(adDeleted.status === 200) {
                         Swal.fire(
-                            'Deleted!',
-                            'Your advertisement has been deleted.',
-                            'success'
+                            props.intl.formatMessage({ id: 'sweetalert.deleted' }),
+                            props.intl.formatMessage({ id: 'sweetalert.adDeleted' }),
+                            props.intl.formatMessage({ id: 'sweetalert.success' })
                         ).then(
                             () => { window.location.reload(); setReloadAdvertisements(true); }
                         )            
@@ -52,7 +51,7 @@ function MyAdverts(props) {
                     Swal.fire({
                         type: 'error',
                         title: 'Error',
-                        text: 'There was a mistake. Try again.'
+                        text: props.intl.formatMessage({ id: 'sweetalert.mistake' })
                     })
                 }
             }
@@ -62,8 +61,8 @@ function MyAdverts(props) {
     return (
         <>
         <div className= 'm-3'>
-        <h2 className='titles'> {props.intl.formatMessage({ id: 'yourads.title' })}</h2>
-            { (adverts.length === 0) ? <div> {props.intl.formatMessage({ id: 'yourads.empty' })}</div> :adverts.map(advert => {
+        <h2 className='titles'> {props.intl.formatMessage({ id: 'myAdverts.title' })}</h2>
+            { (adverts.length === 0) ? <div> {props.intl.formatMessage({ id: 'myAdverts.empty' })}</div> :adverts.map(advert => {
                 return(
                     <div className="col mb-4" key={advert._id}>
                     <div className="card h-100">
@@ -71,15 +70,16 @@ function MyAdverts(props) {
 
                         <div className="card-body">
                             <h5 className="card-title">
-                                <Link to={`/dashboard/${advert._id}`}  className='ad-name'>
+                                <Link to={`/seeAd/${advert._id}/${advert.name}`} className='ad-name'>
+                                {/* <Link to={`/dashboard/${advert._id}`}  className='ad-name'> */}
                                     {advert.name}
                                 </Link>
                             </h5>
-                            <p className="card-text"><strong>Price:</strong> {advert.price} &euro;</p>
-                            <p className="card-text"><strong>Type:</strong> {advert.status ? 'Buy' : 'Sell'}</p>
-                            <p className="card-text"><strong>Tags:</strong> {advert.tags}</p>
+                            <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong> {advert.price} &euro;</p>
+                            <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong> { advert.status ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' }) }</p>
+                            <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {advert.tags}</p>
                             <p className="card-text">
-                                <strong>owner:</strong>&nbsp;
+                                <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
                                 <Link className='forgot-pass' to={`/adsOwner/${advert.owner}`}>
                                     {advert.owner}
                                 </Link>
@@ -89,26 +89,25 @@ function MyAdverts(props) {
                         <div className="card-footer text-center">
                             <Link to={`/seeAd/${advert._id}/${advert.name}`}>
                                 <Button variant='success' size='lg' className='mt-2 button' block>
-                                    See full Advertisement
+                                    {props.intl.formatMessage({ id: 'advertisement.seeFullAd' })}
                                 </Button>
                             </Link>
 
                             <Form.Row className='mt-2'>
-                                <Form.Group as={Col}  controlId="formGridCreateAd">
-                                    <Link to={`/dashboard/${advert._id}`}>
-                                        <Button variant='danger' size='lg' onClick={ event=> deleteAD(event, advert._id) } block>
-                                            Delete
-                                        </Button>
-                                    </Link>
-                                </Form.Group>
-
                                 <Form.Group as={Col}  controlId="formGridCreateAd">
                                     <Link to={{
                                         pathname: `/editAd/id=${advert._id}`,
                                         query: advert
                                         }}>
                                         <Button className='button2' size='lg' block>
-                                            Edit
+                                            {props.intl.formatMessage({ id: 'advertisement.edit' })}
+                                        </Button>
+                                    </Link>
+                                </Form.Group>
+                                <Form.Group as={Col}  controlId="formGridCreateAd">
+                                    <Link to={`/dashboard/${advert._id}`}>
+                                        <Button variant='danger' size='lg' onClick={ event=> deleteAD(event, advert._id) } block>
+                                            {props.intl.formatMessage({ id: 'advertisement.delete' })}
                                         </Button>
                                     </Link>
                                 </Form.Group>
