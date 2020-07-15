@@ -23,7 +23,7 @@ function SeeAd(props) {
     const [favs, setFavs] = useState([]);
     const [inList, setInList] = useState([])
 
-    const { user, setUser } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
 
 
