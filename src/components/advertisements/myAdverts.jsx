@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Button, Form, Col } from 'react-bootstrap';
+import { Button, Form, Col, Badge } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -85,6 +85,10 @@ function MyAdverts(props) {
                                 <Link className='forgot-pass' to={`/adsOwner/${advert.owner}`}>
                                     {advert.owner}
                                 </Link>
+                            </p>
+                            <p>
+                            {advert.reserved === true  && !advert.sold ? <Badge className='badge-reserved'>{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
+                            {advert.sold === true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}
                             </p>
                         </div>
 
