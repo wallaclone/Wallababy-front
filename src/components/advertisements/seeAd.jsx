@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, Button, Badge, Form, Col } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { useParams, useHistory, Link } from 'react-router-dom';
-import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share';
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, EmailIcon } from 'react-share';
 
 import apiCall from '../../api/api';
 import { AuthContext } from '../../contexts/authContext';
 
-const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsNotSold, markAsReserved, markAsUnreserved } = apiCall();
+const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsNotSold, markAsReserved, markAsUnreserved, getEmail } = apiCall();
 
 function SeeAd(props) {
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
@@ -19,7 +19,8 @@ function SeeAd(props) {
     const { _id } = useParams();
     const [advertisement, setAdvertisement] = useState({});
     const [favs, setFavs] = useState([]);
-    const [inList, setInList] = useState([])
+    const [inList, setInList] = useState([]);
+    const [email, setEmail] = useState([]);
 
     const { user } = useContext(AuthContext);
 
@@ -79,10 +80,14 @@ function SeeAd(props) {
             const loadAd = async (id) => {
                 const resultAd = await getAd(id);
                 setAdvertisement(resultAd.result);
+                return resultAd.result;
             };
             //loadAd(props.match.params._id);
-            loadAd(_id);
-            setReloadAdvertisement(false);
+            loadAd(_id).then(async (advertisement) => {
+                const userMail = await getEmail(advertisement.owner);
+                setEmail(userMail);
+            });
+            setReloadAdvertisement(false)
         }
     }, [reloadAdvertisement, _id]); //[ reloadAdvertisement, props.match.params._id ]);
 
