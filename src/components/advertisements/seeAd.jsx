@@ -127,16 +127,17 @@ function SeeAd(props) {
                             <TwitterIcon size={32} round={true}></TwitterIcon>
                         </TwitterShareButton>
                     </Card.Text>
+                    {(user != advertisement.owner) ?
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridFavorite">
-                            {
+                            { 
                             (inList === true) 
                                 ? <Button onClick={() => deleteFav(advertisement._id)} variant='secondary' size='lg' block>
                                     {props.intl.formatMessage({ id: 'favorites.remove' })} <FontAwesomeIcon icon={faHeart} color='red' /> 
                                   </Button>
                                 : <Button onClick={() => addFav(advertisement._id)} variant='secondary' size='lg' block>
                                     {props.intl.formatMessage({ id: 'favorites.add' })} <FontAwesomeIcon icon={faHeart} color='#f7b6a0' id='heart' /> 
-                                  </Button>
+                                  </Button> 
                             }
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridReturn">
@@ -144,7 +145,10 @@ function SeeAd(props) {
                                 {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
                             </Button>
                         </Form.Group>
-                    </Form.Row>
+                    </Form.Row> :  <Button variant='secondary' size='lg' className='button' block onClick={() => history.goBack()}>
+                                {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
+                            </Button>
+                    }
                 </Card.Body>
                 <Card.Footer>
                     <small className='text-muted'>{props.intl.formatMessage({ id: 'advertisement.createdAt' })}: {props.intl.formatDate(new Date(advertisement.date_creation), dateOptions)}</small>
