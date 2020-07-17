@@ -113,7 +113,7 @@ function SeeAd(props) {
                             {advertisement.description}
                         </p>
                         <p>
-                            {advertisement.reserved === true  && !advertisement.sold ? <Badge className='badge-reserved'>{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
+                            {advertisement.reserved === true && !advertisement.sold ? <Badge className='badge-reserved'>{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
                             {advertisement.sold === true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}
                         </p>
 
@@ -130,45 +130,43 @@ function SeeAd(props) {
                         </TwitterShareButton>
                     </Card.Text>
                     <Form.Row className='mt-2'>
-                                <Form.Group as={Col}  controlId="formGridCreateAd">
-                                {advertisement.owner === user && !advertisement.sold && !advertisement.status ? <Button className='button3' size='lg' block onClick={() => sell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.marksold' })}</Button> : null}
-                                {advertisement.owner === user && advertisement.sold && !advertisement.status ? <Button className='button2' size='lg' block onClick={() => dontSell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markNotSold' })}</Button> : null}
-                                </Form.Group>
-                                <Form.Group as={Col}  controlId="formGridCreateAd">
-                                {advertisement.owner === user && !advertisement.sold && !advertisement.reserved && !advertisement.status ? <Button className="button3" size='lg' block onClick={() => reserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markreserved' })}</Button> : null}
-                                {advertisement.owner === user && !advertisement.sold && advertisement.reserved && !advertisement.status ? <Button className="button2" size='lg' block onClick={() => dontReserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.cancelr' })}</Button> : null}
-                                {advertisement.owner === user && advertisement.sold && !advertisement.status ? <Button className='button2' size='lg' block disabled>{props.intl.formatMessage({ id: 'advertisement.cancelsell' })}</Button> : null}
-                                </Form.Group>
-                            </Form.Row>
+                        <Form.Group as={Col} controlId="formGridCreateAd">
+                            {advertisement.owner === user && !advertisement.sold && !advertisement.status ? <Button className='button3' size='lg' block onClick={() => sell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.marksold' })}</Button> : null}
+                            {advertisement.owner === user && advertisement.sold && !advertisement.status ? <Button className='button2' size='lg' block onClick={() => dontSell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markNotSold' })}</Button> : null}
+                        </Form.Group>
+                        <Form.Group as={Col} controlId="formGridCreateAd">
+                            {advertisement.owner === user && !advertisement.sold && !advertisement.reserved && !advertisement.status ? <Button className="button3" size='lg' block onClick={() => reserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markreserved' })}</Button> : null}
+                            {advertisement.owner === user && !advertisement.sold && advertisement.reserved && !advertisement.status ? <Button className="button2" size='lg' block onClick={() => dontReserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.cancelr' })}</Button> : null}
+                            {advertisement.owner === user && advertisement.sold && !advertisement.status ? <Button className='button2' size='lg' block disabled>{props.intl.formatMessage({ id: 'advertisement.cancelsell' })}</Button> : null}
+                        </Form.Group>
+                    </Form.Row>
                     {(user !== advertisement.owner) ?
-                    <Form.Row>
-                        <Form.Group as={Col} controlId="formGridFavorite">
-                            {
-                            (!user || user.toLowerCase() === 'guest') 
-                            ?
-                            <>
-                            <Button  variant='secondary' size='lg' block disabled >
-                            {props.intl.formatMessage({ id: 'favorites.add' })}  
-                                </Button>       
-                        </>    
-                            :
-                                (inList === true) 
-                                ? <Button onClick={() => deleteFav(advertisement._id)} variant='secondary' size='lg' block>
-                                    {props.intl.formatMessage({ id: 'favorites.remove' })} <FontAwesomeIcon icon={faHeart} color='red' /> 
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formGridFavorite">
+                                {
+                                    (!user || user.toLowerCase() === 'guest')
+                                        ?
+                                        <Link to='/login'><Button variant='secondary' size='lg' block>
+                                            {props.intl.formatMessage({ id: 'favorites.add' })}
+                                        </Button></Link>
+                                        :
+                                        (inList === true)
+                                            ? <Button onClick={() => deleteFav(advertisement._id)} variant='secondary' size='lg' block>
+                                                {props.intl.formatMessage({ id: 'favorites.remove' })} <FontAwesomeIcon icon={faHeart} color='red' />
+                                            </Button>
+                                            : <Button onClick={() => addFav(advertisement._id)} variant='secondary' size='lg' block>
+                                                {props.intl.formatMessage({ id: 'favorites.add' })} <FontAwesomeIcon icon={faHeart} color='#f7b6a0' id='heart' />
+                                            </Button>
+                                }
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="formGridReturn">
+                                <Button variant='secondary' size='lg' className='button' block onClick={() => history.goBack()}>
+                                    {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
                                 </Button>
-                                : <Button onClick={() => addFav(advertisement._id)} variant='secondary' size='lg' block>
-                                    {props.intl.formatMessage({ id: 'favorites.add' })} <FontAwesomeIcon icon={faHeart} color='#f7b6a0' id='heart' /> 
-                                </Button>
-                            }
-                        </Form.Group>
-                        <Form.Group as={Col} controlId="formGridReturn">
-                            <Button variant='secondary' size='lg' className='button' block onClick={() => history.goBack()}>
-                                {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
-                            </Button>
-                        </Form.Group>
-                    </Form.Row> :  <Button variant='secondary' size='lg' className='button' block onClick={() => history.goBack()}>
-                                {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
-                            </Button>
+                            </Form.Group>
+                        </Form.Row> : <Button variant='secondary' size='lg' className='button' block onClick={() => history.goBack()}>
+                            {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
+                        </Button>
                     }
                 </Card.Body>
                 <Card.Footer>
