@@ -10,7 +10,6 @@ import Swal from 'sweetalert2';
 
 import apiCall from '../../api/api';
 import { AuthContext } from '../../contexts/authContext';
-import AblyContext from '../../contexts/ablyContext';
 
 const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsNotSold, markAsReserved, markAsUnreserved, getEmail, sendEmail} = apiCall();
 
@@ -22,7 +21,8 @@ function SeeAd(props) {
     const [advertisement, setAdvertisement] = useState({});
     const [favs, setFavs] = useState([]);
     const [inList, setInList] = useState([]);
-
+    const [email, setEmail] = useState([]);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         const getFavAds = async () => {
