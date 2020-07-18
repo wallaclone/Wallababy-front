@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import apiCall from '../../api/api';
 import { AuthContext } from '../../contexts/authContext';
 
-const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsNotSold, markAsReserved, markAsUnreserved, getEmail, sendEmail} = apiCall();
+const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsNotSold, markAsReserved, markAsUnreserved, getEmail, sendEmail } = apiCall();
 
 function SeeAd(props) {
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
@@ -97,23 +97,23 @@ function SeeAd(props) {
         const response = await sendEmail(adId, advertisement.owner, user)
         if (response.status !== 201) {
             Swal.fire({
-              icon: 'error',
-              title: props.intl.formatMessage({ id: 'sweet.emailSent.Text' }),
-              text: props.intl.formatMessage({ id: 'sweet.emailSent.Text' }),
-              timer: 15000,
-              confirmButtonColor: '#1768ac',
+                icon: 'error',
+                title: props.intl.formatMessage({ id: 'sweetalert.emailSentError' }),
+                text: props.intl.formatMessage({ id: 'sweetalert.emailSent.TextError' }),
+                timer: 15000,
+                confirmButtonColor: '#1768ac',
             });
-          } else {
+        } else {
             Swal.fire({
-              title: `${props.intl.formatMessage({ id: 'sweet.emailSent' })} ${advertisement.owner}!`,
-              text: props.intl.formatMessage({ id: 'sweet.emailSent.Text' }),
-              timer: 25000,
-              confirmButtonColor: '#1768ac',
+                title: `${props.intl.formatMessage({ id: 'sweetalert.emailSent' })} ${advertisement.owner}!`,
+                text: props.intl.formatMessage({ id: 'sweetalert.emailSent.Text' }),
+                timer: 25000,
+                confirmButtonColor: '#1768ac',
             });
+        }
     }
-}
 
-    
+
     return (
         <div className="m-3">
             <Card key={advertisement._id} style={{ marginTop: '6rem' }}>
@@ -152,6 +152,19 @@ function SeeAd(props) {
                             <TwitterIcon size={32} round={true}></TwitterIcon>
                         </TwitterShareButton>
                     </Card.Text>
+
+             
+
+                    { (user !== advertisement.owner && user && user !== 'guest') ?
+                        <><Button className="button" size='lg' data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">{props.intl.formatMessage({ id: 'advertisement.interestedButton' })}</Button>
+                    <div className="collapse" id="collapseExample">
+                        <div className="card card-body">
+                            {props.intl.formatMessage({ id: 'advertisement.contactText' })}
+                                <Button className='button2' onClick={contactOwner}>{props.intl.formatMessage({ id: 'advertisement.contactButton' })}</Button>
+                        </div>
+                    </div></> : null
+                    }
+
                     <Form.Row className='mt-2'>
                         <Form.Group as={Col} controlId="formGridCreateAd">
                             {advertisement.owner === user && !advertisement.sold && !advertisement.status ? <Button className='button3' size='lg' block onClick={() => sell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.marksold' })}</Button> : null}
@@ -160,19 +173,13 @@ function SeeAd(props) {
                         <Form.Group as={Col} controlId="formGridCreateAd">
                             {advertisement.owner === user && !advertisement.sold && !advertisement.reserved && !advertisement.status ? <Button className="button3" size='lg' block onClick={() => reserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markreserved' })}</Button> : null}
                             {advertisement.owner === user && !advertisement.sold && advertisement.reserved && !advertisement.status ? <Button className="button2" size='lg' block onClick={() => dontReserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.cancelr' })}</Button> : null}
-                            {advertisement.owner === user && advertisement.sold && !advertisement.status ?  <Button className='button2' size='lg' block onClick={() => dontSell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markNotSold' })}</Button> : null}
+                            {advertisement.owner === user && advertisement.sold && !advertisement.status ? <Button className='button2' size='lg' block onClick={() => dontSell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markNotSold' })}</Button> : null}
                         </Form.Group>
                     </Form.Row>
-                    {(user !== advertisement.owner) ?
+                    {(user !== advertisement.owner && user && user !== 'guest') ?
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridFavorite">
                                 {
-                                    (!user || user.toLowerCase() === 'guest')
-                                        ?
-                                        <Link to='/login'><Button variant='secondary' size='lg' block>
-                                            {props.intl.formatMessage({ id: 'favorites.add' })}
-                                        </Button></Link>
-                                        :
                                         (inList === true)
                                             ? <Button onClick={() => deleteFav(advertisement._id)} variant='secondary' size='lg' block>
                                                 {props.intl.formatMessage({ id: 'favorites.remove' })} <FontAwesomeIcon icon={faHeart} color='red' />
@@ -197,7 +204,6 @@ function SeeAd(props) {
                 </Card.Footer>
             </Card>
 
-            <Button onClick={contactOwner}>Contacta!</Button>
         </div>
     );
 };
