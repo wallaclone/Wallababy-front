@@ -6,11 +6,13 @@ import { Card, Button, Badge, Form, Col } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, EmailIcon } from 'react-share';
+import Swal from 'sweetalert2';
 
 import apiCall from '../../api/api';
 import { AuthContext } from '../../contexts/authContext';
+import AblyContext from '../../contexts/ablyContext';
 
-const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsNotSold, markAsReserved, markAsUnreserved, getEmail } = apiCall();
+const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsNotSold, markAsReserved, markAsUnreserved, getEmail, sendEmail} = apiCall();
 
 function SeeAd(props) {
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
@@ -20,9 +22,7 @@ function SeeAd(props) {
     const [advertisement, setAdvertisement] = useState({});
     const [favs, setFavs] = useState([]);
     const [inList, setInList] = useState([]);
-    const [email, setEmail] = useState([]);
 
-    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         const getFavAds = async () => {
@@ -91,6 +91,29 @@ function SeeAd(props) {
         }
     }, [reloadAdvertisement, _id]); //[ reloadAdvertisement, props.match.params._id ]);
 
+
+    const contactOwner = async () => {
+        const adId = advertisement._id;
+        const response = await sendEmail(adId, advertisement.owner, user)
+        if (response.status !== 201) {
+            Swal.fire({
+              icon: 'error',
+              title: props.intl.formatMessage({ id: 'sweet.emailSent.Text' }),
+              text: props.intl.formatMessage({ id: 'sweet.emailSent.Text' }),
+              timer: 15000,
+              confirmButtonColor: '#1768ac',
+            });
+          } else {
+            Swal.fire({
+              title: `${props.intl.formatMessage({ id: 'sweet.emailSent' })} ${advertisement.owner}!`,
+              text: props.intl.formatMessage({ id: 'sweet.emailSent.Text' }),
+              timer: 25000,
+              confirmButtonColor: '#1768ac',
+            });
+    }
+}
+
+    
     return (
         <div className="m-3">
             <Card key={advertisement._id} style={{ marginTop: '6rem' }}>
@@ -137,7 +160,7 @@ function SeeAd(props) {
                         <Form.Group as={Col} controlId="formGridCreateAd">
                             {advertisement.owner === user && !advertisement.sold && !advertisement.reserved && !advertisement.status ? <Button className="button3" size='lg' block onClick={() => reserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markreserved' })}</Button> : null}
                             {advertisement.owner === user && !advertisement.sold && advertisement.reserved && !advertisement.status ? <Button className="button2" size='lg' block onClick={() => dontReserve(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.cancelr' })}</Button> : null}
-                            {advertisement.owner === user && advertisement.sold && !advertisement.status ? <Button className='button2' size='lg' block disabled>{props.intl.formatMessage({ id: 'advertisement.cancelsell' })}</Button> : null}
+                            {advertisement.owner === user && advertisement.sold && !advertisement.status ?  <Button className='button2' size='lg' block onClick={() => dontSell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.markNotSold' })}</Button> : null}
                         </Form.Group>
                     </Form.Row>
                     {(user !== advertisement.owner) ?
@@ -173,6 +196,8 @@ function SeeAd(props) {
                     <small className='text-muted'>{props.intl.formatMessage({ id: 'advertisement.createdAt' })}: {props.intl.formatDate(new Date(advertisement.date_creation), dateOptions)}</small>
                 </Card.Footer>
             </Card>
+
+            <Button onClick={contactOwner}>Contacta!</Button>
         </div>
     );
 };
