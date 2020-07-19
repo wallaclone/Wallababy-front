@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useContext } from 'react';
 import { Form, Col, Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 // import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import Swal from 'sweetalert2';
-
 import apiCall from '../../api/api';
+import { AuthContext } from '../../contexts/authContext';
 
-const { getTags, createAd } = apiCall();
+const { isNotLogin, getTags, createAd } = apiCall();
 
 function CreateAd(props) {
 
     const { setReloadAdvertisements } = props;
     const history = useHistory();
+    const { user } = useContext(AuthContext);
+
+    if( isNotLogin( user, props.intl.formatMessage({ id: 'createAd.notLoggedIn' }), props.intl.formatMessage({ id: 'createAd.youAreNotLoggedIn' }) ) ) { history.push('/login'); }
 
     const initialValues = {
         name: '',
@@ -107,6 +109,42 @@ function CreateAd(props) {
         }
     };
 
+    const formatTag = (tag) => {
+        if(tag !== undefined && tag !== null && tag !== '') {
+          switch (tag) {
+            case 'Comfort':
+              return props.intl.formatMessage({ id: 'tag.comfort' });
+            case 'Educational':
+              return props.intl.formatMessage({ id: 'tag.educational' });
+            case 'Accessories':
+              return props.intl.formatMessage({ id: 'tag.accessories' });
+            case 'Promotions':
+              return props.intl.formatMessage({ id: 'tag.promotions' });
+            case 'Food':
+              return props.intl.formatMessage({ id: 'tag.food' });
+            case 'Furniture':
+              return props.intl.formatMessage({ id: 'tag.furniture' });
+            case 'Security':
+              return props.intl.formatMessage({ id: 'tag.security' });
+            case 'Entertainment':
+              return props.intl.formatMessage({ id: 'tag.entertainment' });
+            case 'Toys':
+              return props.intl.formatMessage({ id: 'tag.toys' });
+            case 'Costume':
+              return props.intl.formatMessage({ id: 'tag.costume' });
+            case 'Hobby':
+              return props.intl.formatMessage({ id: 'tag.hobby' });
+            case 'Clothes':
+              return props.intl.formatMessage({ id: 'tag.clothes' });
+            case 'Footwear':
+              return props.intl.formatMessage({ id: 'tag.footwear' });
+            default:
+              return tag;
+          }
+        }
+        return '';
+    };
+
     return (
         <div className="m-3">
 
@@ -130,7 +168,7 @@ function CreateAd(props) {
                     <Form.Label className='label'><FormattedMessage id="createAd.tagsAd" value={(message) => ({message})}/></Form.Label>
                     {objectForm.tags.map(item => {
                         return (
-                            <Form.Check type="switch" name={item.name} id={item.name} key={item.name} value={item.name} label={item.name} onChange={handleChange} />
+                            <Form.Check type="switch" name={item.name} id={item.name} key={item.name} value={item.name} label={formatTag(item.name)} onChange={handleChange} />
                         )
                     })}
                 </Form.Group>

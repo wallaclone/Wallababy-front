@@ -173,7 +173,6 @@ function SeeAd(props) {
                         </div>
                     </div></> : null
                     }
-
                     <Form.Row className='mt-2'>
                         <Form.Group as={Col} controlId="formGridCreateAd">
                             {advertisement.owner === user && !advertisement.sold && !advertisement.status ? <Button className='button3' size='lg' block onClick={() => sell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.marksold' })}</Button> : null}

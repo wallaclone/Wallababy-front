@@ -51,6 +51,7 @@ function App(props) {
         setCurrentLocale(reloadLanguage);
         setMessages(allMessages[reloadLanguage]);
       };
+      // setReloadTags(true); // Para cambiar el idioma de los TAGs
       load();
       setReloadLanguage('');
     }
@@ -63,7 +64,11 @@ function App(props) {
         const newSearch = search.concat(`&skip=${((currentPage - 1) * limit())}`);
         const resultAds = await getAds(newSearch);
         setAdvertisements(resultAds.rows);
-        setTotalPages(Math.ceil(resultAds.count / adsPerPage)); // Calculate total pages
+        // setTotalPages(Math.ceil(resultAds.count / adsPerPage)); // Calculate total pages
+
+        const totPages = (Math.ceil(resultAds.count / adsPerPage)) === 0 ? 1 : (Math.ceil(resultAds.count / adsPerPage));
+        setTotalPages(totPages); // Calculate total pages
+
         // Move the screen to the top
         const jumbotron = document.querySelector('.jumbotron');
         if (jumbotron) jumbotron.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -77,6 +82,9 @@ function App(props) {
   useEffect(() => {
     if (reloadTags) {
       const loadTags = async () => {
+
+        // alert("Entro en useEffect de TAGs")
+
         const resultTags = await getTags();
         const tagAux = [];
         resultTags.forEach((tag) => {
@@ -209,11 +217,11 @@ function App(props) {
             <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
                 <Header setReloadLanguage={setReloadLanguage} />
+              
+                <CreateAd
+                  setReloadAdvertisements={setReloadAdvertisements}
+                />
               </AuthContextProvider>
-
-              <CreateAd
-                setReloadAdvertisements={setReloadAdvertisements}
-              />
             </IntlProvider>
           )}
         />
@@ -241,8 +249,9 @@ function App(props) {
             <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
                 <Header setReloadLanguage={setReloadLanguage} />
+              
+                <EditAd />
               </AuthContextProvider>
-              <EditAd />
             </IntlProvider>
           )}
         />
@@ -265,11 +274,8 @@ function App(props) {
             <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
                 <Header setReloadLanguage={setReloadLanguage} />
+                <MyAdverts setReloadAdvertisements={setReloadAdvertisements} />
               </AuthContextProvider>
-
-              <MyAdverts
-                setReloadAdvertisements={setReloadAdvertisements}
-              />
             </IntlProvider>
           )}
         />
@@ -338,14 +344,14 @@ function App(props) {
                   {/* &laquo; */}
                   {(currentPage === 1)
                     ? (
-                      <Button variant="info" size="lg" block onClick={paginaAnterior} disabled>
+                      <Button variant="warning" size="lg" block onClick={paginaAnterior} disabled>
                         {' '}
                         <img src={ant} alt="anterior" />
                         {' '}
                       </Button>
                     )
                     : (
-                      <Button variant="info" size="lg" block onClick={paginaAnterior}>
+                      <Button variant="warning" size="lg" block onClick={paginaAnterior}>
                         {' '}
                         <img src={ant} alt="anterior" />
                         {' '}
@@ -357,14 +363,14 @@ function App(props) {
                   {/* &raquo; */}
                   {(currentPage === totalPages)
                     ? (
-                      <Button variant="info" size="lg" block onClick={paginaSiguiente} disabled>
+                      <Button variant="warning" size="lg" block onClick={paginaSiguiente} disabled>
                         {' '}
                         <img src={sig} alt="siguiente" />
                         {' '}
                       </Button>
                     )
                     : (
-                      <Button variant="info" size="lg" block onClick={paginaSiguiente}>
+                      <Button variant="warning" size="lg" block onClick={paginaSiguiente}>
                         {' '}
                         <img src={sig} alt="siguiente" />
                         {' '}
@@ -393,8 +399,9 @@ function App(props) {
             <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
                 <Header setReloadLanguage={setReloadLanguage} />
+              
+                <MyFavs />
               </AuthContextProvider>
-              <MyFavs />
             </IntlProvider>
           )}
         />
