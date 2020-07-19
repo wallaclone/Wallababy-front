@@ -43,24 +43,31 @@ export const messages = {
         "advertisement.typeBuy": "Buy",
         "advertisement.typeSell": "Sell",
         "advertisement.tags": "Tags",
-        "advertisement.reserved" : "Reserved",
+        "advertisement.reserved": "Reserved",
         "advertisement.markreserved": "Mark as reserved",
-        "advertisement.cancelr": "Cancel reservation",
         "advertisement.marksold": "Mark as sold",
         "advertisement.markNotSold": "Mark as not sold",
         "advertisement.sold": "Sold!",
+        "advertisement.cancelsell": "Mark ad as not sold to change reservation",
         "advertisement.owner": "Owner",
         "advertisement.seeFullAd": "See full advertisement",
         "advertisement.delete": "Delete",
         "advertisement.edit": "Edit",
         "advertisement.createdAt": "Created at",
-        
+        "sweetalert.emailSent": "Email sent to",
+        "sweetalert.emailSent.Text": "We just sent an email to the owner of the ad with your contact info!",
+        "sweetalert.emailSentError": "Something went wrong",
+        "sweetalert.emailSent.TextError": "We could not send the email. Please, try again",
+        "advertisement.interestedButton": "I'm interested!",
+        "advertisement.contactText": "If you are interested in this ad, please click the contact! button. We'll send a message to the owner with your email address so they can get in touch with you.",
+        "advertisement.contactButton": "Contact!",
+
         "header.adList": "Ad list",
         "header.createAd": "Create ad",
         "header.yourFavorites": "Your favorites",
         "header.yourAds": "Your advertisements",
         "header.editYourProfile": "Edit your profile",
-        
+
         "createAd.title": "Create Advertisement",
         "createAd.titleAd": "Title of the ad:",
         "createAd.titleAdPlaceholder": "Add the title of the ad",
@@ -88,14 +95,14 @@ export const messages = {
 
         "editAd.editAdvertisement": "Edit advertisement",
         "editAd.currentImage": "Current image",
-        
+
         "passwordRecovery.title": "Password recovery",
         "passwordRecovery.emailPlaceholder": "Enter Email",
         "passwordRecovery.phrase": "We'll never share your email with anyone else.",
         "sweetalert.wrongmail": "Wrong email",
         "sweetalert.correctmail": "Email found!",
         "sweetalert.messagesend": "We have sent you an email to recover your password",
-        
+
         "changePassword.phrasePassword": "Enter the same password in both fields",
         "changePassword.passwordPlaceholder": "Enter Password",
         "changePassword.confirmPasswordPlaceholder": "Confirm Password",
@@ -103,7 +110,7 @@ export const messages = {
         "changePassword.updatedPassword": "Updated password",
         "changePassword.passwordsDontMatch": "Your passwords don't match",
         "changePassword.passwordUpdatedCorrectly": "Your password has been updated correctly",
-        
+
         "login.title": "Login to WallaBaby!",
         "login.userName": "Username",
         "login.userNamePlaceholder": "Enter Username",
@@ -132,7 +139,7 @@ export const messages = {
         "favorites.remove": "Remove ad from fav list",
         "favorites.add": "Add to favorites",
         "favorites.empty": "You don't have any fav yet",
-  
+
         "myAdverts.title": "Your ads:",
         "myAdverts.empty": "You don't have any ad yet",
 
@@ -208,7 +215,7 @@ export const messages = {
         "advertisement.type": "Tipo",
         "advertisement.typeBuy": "Compra",
         "advertisement.typeSell": "Venta",
-        "advertisement.reserved" : "Reservado",
+        "advertisement.reserved": "Reservado",
         "advertisement.markreserved": "Reserva el anuncio",
         "advertisement.cancelr": "Cancela la reserva",
         "advertisement.marksold": "Marcar anuncio como vendido",
@@ -220,7 +227,14 @@ export const messages = {
         "advertisement.delete": "Borrar",
         "advertisement.edit": "Editar",
         "advertisement.createdAt": "Creado el",
-        
+        "sweetalert.emailSent": "Email enviado a",
+        "sweetalert.emailSent.Text": "Acabamos de enviar un email al propietario/a del anuncio con tus datos de contacto",
+        "sweetalert.emailSentError": "Ha habido un error",
+        "sweetalert.emailSent.TextError": "No hemos podido enviar el email. Por favor, inténtalo de nuevo",
+        "advertisement.interestedButton": "¡Me interesa!",
+        "advertisement.contactText": "Si te interesa este anuncio, haz click en el botón ¡contactar! e informaremos al propietario/a. Le enviaremos un email con tu dirección de correo para que pueda ponerse en contacto contigo.",
+        "advertisement.contactButton": "¡Contactar!",
+
         "header.adList": "Listar anuncios",
         "header.createAd": "Crear anuncio",
         "header.yourFavorites": "Tus favoritos",
@@ -248,7 +262,7 @@ export const messages = {
         "createAd.tryAgainOrLater": "No se pudo crear el anuncio (intente nuevamente o más tarde).",
         "createAd.correctAdvertisement": "Anuncio correcto",
         "createAd.adCreatedSuccessfully": "El anuncio fue creado satisfactoriamente.",
-        
+
         "seeAd.description": "Descripción",
         "seeAd.buttonReturnAd": "Volver",
 
@@ -269,7 +283,7 @@ export const messages = {
         "sweetalert.wrongmail": "El email no es correcto",
         "sweetalert.correctmail": "El email es correcto",
         "sweetalert.messagesend": "Le hemos enviado un email para recuperar su contraseña",
-        
+
         "login.title": "Inicia sesión en WallaBaby!",
         "login.userName": "Nombre de usuario",
         "login.userNamePlaceholder": "Introduzca el nombre de usuario",
@@ -282,7 +296,7 @@ export const messages = {
         "signUp.logIn": "Iniciar sesión",
         "sweet.alertWrongCredentials": "Ha habido un error",
         "sweet.alertWrongCredentialsText": "La contraseña o el nombre de usuario no son correctos",
-        
+
         "filter.whatAreYouLookingFor": "¿Qué estás buscando? ¡Utiliza el buscador para encontrarlo!",
         "filter.whatAreYouLookingForPlaceholder": "Introduzca aquí lo que está buscando",
         "filter.selectTag": "Seleccione una etiqueta",

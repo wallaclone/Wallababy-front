@@ -472,6 +472,53 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
+  
+    sendEmail: async (adId, owner, sender) => {
+      try {
+        const getEmailEndPoint = `${API}/email?owner=${owner}`
+        const language = window.localStorage.getItem('initCurrentLocale')
+        const response = await fetch(getEmailEndPoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${window.localStorage.getItem('token')}`,
+
+          },
+          body: JSON.stringify({
+            id: adId,
+            language,
+            sender: sender
+          }),
+        });
+        return response;
+      } catch (err) {
+        console.error(err.message);
+        throw err;
+      }
+    },
+
+    getEmail: async (owner) => {
+      try {
+        const getEmailEndPoint = `${API}/email?owner=${owner}`
+        const response = await fetch(getEmailEndPoint, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${window.localStorage.getItem('token')}`,
+          },
+          credentials: 'include',
+        });
+        const data = await response.json();
+        if (!data) {
+          return new Error('Error retrieving email');
+        }
+        return data.email;
+      } catch (err) {
+        throw err;
+      }
+    },
+
+
   }; // Close Return
 }; // Close const apiCall
 export default apiCall;

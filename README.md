@@ -1,68 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+(**todo**)
 
-## Available Scripts
+# WallaBaby 
 
-In the project directory, you can run:
+> Buy or sell second hand items for your children on WallaBaby! 
 
-### `yarn start`
+(description + pics/gifs)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Live version 🚀🚀
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Getting started 
 
-### `yarn test`
+To run this project locally do the following:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- First clone the backend project and follow the instructions there (link)
+- Clone this project
+- Run ```npm install``` to install all the dependencies
+- Run ```npm start``` and start server on http://localhost:3001/ 
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Future improvements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## API documentation  📖
+(backend readme link)
 
-### `yarn eject`
+## Built with 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- React & React Bootstrap
+- NodeJS & Express
+- MongoDB & Mongoose
+- Deployed with AWS
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Authors 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This app was made as a final project during the **Keepcoding Fullstack Web Development Bootcamp** (VIII Edition) by Gonzalo Liaño, Sergio Pérez and Gema Segarra.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<table>
+<tr><td align="center"><a href="https://github.com/Gon99"><img src="https://avatars0.githubusercontent.com/u/43567070?v=4" width="100px;" alt="Gonzalo avatar"/><br/><sub><b>Gonzalo</b></sub></a><br/><a href="https://github.com/Gon99"></a>
+<td align="center"><a href="https://github.com/SergyPC"><img src="https://avatars2.githubusercontent.com/u/57828810?v=4" width="100px;" alt="Sergio avatar"/><br/><sub><b>Sergio</b></sub></a><br/><a href="https://github.com/SergyPC">
+<td align="center"><a href="https://github.com/gemasegarra"><img src="https://avatars2.githubusercontent.com/u/40056297?v=4" width="100px;" alt="Gema avatar"/><br/><sub><b>Gema</b></sub></a><br/><a href="https://github.com/gemasegarra"></a>
+</a>
+</table>
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+---

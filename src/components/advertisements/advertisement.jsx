@@ -95,14 +95,14 @@ function Advertisement(props) {
             <Link to={`/seeAd/${_id}/${name}`} className="ad-name">{name}</Link>
           </h5>
           <p className="card-text">
-            <strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong>&nbsp;{price}&euro;
+            <strong>{props.intl.formatMessage({ id: 'advertisement.price' })}: </strong>{price}&euro;
           </p>
           <p className="card-text">
-            <strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong>&nbsp;
+            <strong>{props.intl.formatMessage({ id: 'advertisement.type' })}: </strong>
             {status ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}
           </p>
           <p className="card-text">
-            <strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong>&nbsp;{formatTags(tags)}
+            <strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}: </strong>{tags}
           </p>
 
           <p className="card-text">

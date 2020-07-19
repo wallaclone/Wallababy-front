@@ -8,23 +8,16 @@ function Filter(props) {
   const {
     setSearch, setReloadAdvertisements, setCurrentPage, tags,
   } = props;
-  // const history = useHistory();
 
-  const initialValues = {
-    name: '',
-    minPrice: '',
-    maxPrice: '',
-    status: '',
-    tag: '',
-
+  const initialValues = () => ({
     name: sessionStorage.getItem('name') ? sessionStorage.getItem('name') : '',
     minPrice: sessionStorage.getItem('minPrice') ? sessionStorage.getItem('minPrice') : '',
     maxPrice: sessionStorage.getItem('maxPrice') ? sessionStorage.getItem('maxPrice') : '',
     status: sessionStorage.getItem('status') ? sessionStorage.getItem('status') : '',
     tag: sessionStorage.getItem('tag') ? sessionStorage.getItem('tag') : '',
-  };
+  });
 
-  const [valuesSearch, setValuesSearch] = useState(initialValues);
+  const [valuesSearch, setValuesSearch] = useState(initialValues());
 
   const handleChange = (event) => {
     setValuesSearch({
@@ -37,36 +30,12 @@ function Filter(props) {
   const clearFilter = () => {
     sessionStorage.clear();
 
-    // sessionStorage.setItem('name', '');
-    // sessionStorage.setItem('minPrice', '');
-    // sessionStorage.setItem('maxPrice', '');
-    // sessionStorage.setItem('status', '');
-    // sessionStorage.setItem('tag', '');
-
-    setValuesSearch(initialValues);
-
-    let element = document.getElementById('name');
-    element.value = '';
-    element = document.getElementById('tag');
-    element.value = '';
-    element = document.getElementById('status');
-    element.value = '';
-    element = document.getElementById('minPrice');
-    element.value = '';
-    element = document.getElementById('maxPrice');
-    element.value = '';
-
-    setValuesSearch({
-      name: '',
-      minPrice: '',
-      maxPrice: '',
-      status: '',
-      tag: '',
-    });
-
     setReloadAdvertisements(true);
     setSearch('');
     setCurrentPage(1);
+    setValuesSearch(initialValues());
+
+    // history.push('/dashboard');
   };
 
   const buscarAnuncio = async (event) => {
@@ -145,8 +114,8 @@ function Filter(props) {
               name="name"
               id="name"
               onChange={handleChange}
-                        // onChange={(e) => setValuesSearch(e.target.value)}
-              value={sessionStorage.getItem('name')}
+              // onChange={(e) => setValuesSearch(e.target.value)}
+              value={valuesSearch.name}
             />
           </Form.Group>
 
@@ -157,7 +126,7 @@ function Filter(props) {
               name="tag"
               id="tag"
               onChange={handleChange}
-              value={sessionStorage.getItem('tag')}
+              value={valuesSearch.tag}
             >
               <option value="" defaultValue>{props.intl.formatMessage({ id: 'filter.selectTag' })}</option>
               {tags.map((itemTag) => (
@@ -173,7 +142,7 @@ function Filter(props) {
               name="status"
               id="status"
               onChange={handleChange}
-              value={sessionStorage.getItem('status')}
+              value={valuesSearch.status}
             >
               <option value="" defaultValue>{props.intl.formatMessage({ id: 'filter.selectStatus' })}</option>
               <option value="true">{props.intl.formatMessage({ id: 'createAd.buy' })}</option>
@@ -191,7 +160,7 @@ function Filter(props) {
               onChange={handleChange}
               name="minPrice"
               id="minPrice"
-              value={sessionStorage.getItem('minPrice')}
+              value={valuesSearch.minPrice}
             />
           </Form.Group>
 
@@ -203,7 +172,7 @@ function Filter(props) {
               onChange={handleChange}
               name="maxPrice"
               id="maxPrice"
-              value={sessionStorage.getItem('maxPrice')}
+              value={valuesSearch.maxPrice}
             />
           </Form.Group>
         </Form.Row>
