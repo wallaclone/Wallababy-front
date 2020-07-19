@@ -33,6 +33,57 @@ function Advertisement(props) {
     day: '2-digit',
   };
 
+  const formatTag = (tag) => {
+    if(tag !== undefined && tag !== null && tag !== '') {
+      switch (tag) {
+        case 'Comfort':
+          return props.intl.formatMessage({ id: 'tag.comfort' });
+        case 'Educational':
+          return props.intl.formatMessage({ id: 'tag.educational' });
+        case 'Accessories':
+          return props.intl.formatMessage({ id: 'tag.accessories' });
+        case 'Promotions':
+          return props.intl.formatMessage({ id: 'tag.promotions' });
+        case 'Food':
+          return props.intl.formatMessage({ id: 'tag.food' });
+        case 'Furniture':
+          return props.intl.formatMessage({ id: 'tag.furniture' });
+        case 'Security':
+          return props.intl.formatMessage({ id: 'tag.security' });
+        case 'Entertainment':
+          return props.intl.formatMessage({ id: 'tag.entertainment' });
+        case 'Toys':
+          return props.intl.formatMessage({ id: 'tag.toys' });
+        case 'Costume':
+          return props.intl.formatMessage({ id: 'tag.costume' });
+        case 'Hobby':
+          return props.intl.formatMessage({ id: 'tag.hobby' });
+        case 'Clothes':
+          return props.intl.formatMessage({ id: 'tag.clothes' });
+        case 'Footwear':
+          return props.intl.formatMessage({ id: 'tag.footwear' });
+        default:
+          return tag;
+      }
+    }
+    return '';
+  };
+
+  const formatTags = (tags) => {
+    let formatedTags = '';
+    if(tags) {
+        for(let i=0; i<tags.length; i++) {
+            if((i+1)<tags.length){
+                formatedTags += formatTag(tags[i]) + ', ';
+            }
+            else {
+                formatedTags += formatTag(tags[i]) + '.';
+            }
+        }
+    }
+    return formatedTags;
+  };
+
   return (
     <div className="col mb-4" key={_id}>
       <div className="card h-100">
@@ -41,24 +92,23 @@ function Advertisement(props) {
 
         <div className="card-body">
           <h5 className="card-title">
-            <Link to={`/seeAd/${_id}`} className="ad-name">{name}</Link>
+            <Link to={`/seeAd/${_id}/${name}`} className="ad-name">{name}</Link>
           </h5>
           <p className="card-text">
-            <strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong>{price}&euro;
+            <strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong>&nbsp;{price}&euro;
           </p>
           <p className="card-text">
-            <strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong>
+            <strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong>&nbsp;
             {status ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}
           </p>
           <p className="card-text">
-            <strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong>{tags}
+            <strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong>&nbsp;{formatTags(tags)}
           </p>
 
           <p className="card-text">
             <strong>
-              {props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>
-&nbsp;
-            <Link className="forgot-pass" to={`/adsOwner/${owner}`}>{owner}</Link>
+              {props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
+              <Link className="forgot-pass" to={`/adsOwner/${owner}`}>{owner}</Link>
           </p>
           {advertisement.reserved === true && !advertisement.sold ? <Badge className="badge-reserved">{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
           {advertisement.sold === true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}
