@@ -1,0 +1,23 @@
+:root {
+  /* --navbar-main-bg-color: goldenrod; */
+  /* --navbar-main-bg-color: rgb(240, 28, 92); */
+
+  /* --navbar-main-bg-color: rgb(209, 0, 63); */
+  /* --main-bg-color: rgb(99, 153, 252); */
+
+  --navbar-main-bg-color: rgb(209, 0, 63);
+  --main-bg-color: #edf6f9;
+
+
+  --bg-color-header: #03256c;
+  --links-header: #f5f5f5;
+  --links-header-hover: #ADADAD;
+  --dark-color-title: #1768AC; 
+  
+  --button-color: #1768ac;
+  --button-color-hover: #1E55AF;
+
+  --button-color-2: #12A1DC;;
+  --button-color-2-hover: #1D84D7
+
+}

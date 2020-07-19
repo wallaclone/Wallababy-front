@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Delius+Unicase:wght@700&display=swap');
+
+
+Navbar, .navbar {
+  background-color: var(--bg-color-header) !important;
+  margin-bottom: 30px !important;
+}
+
+.navbar-link, #collasible-nav-dropdown {
+  color: var(--links-header) !important;
+}
+
+.navbar-link:hover {
+  color: var(--links-header-hover) !important;
+}
+
+.dropdown-link {
+  color: var(--boton-color) !important;
+}
+
+.dropdown-link:hover {
+  color: var(--boton-color-hover) !important;
+}
+
+.title {
+  font-size: 2rem !important;
+  color: var(--main-bg-color) !important }
+
+.mr-auto {
+    margin-left: 50px !important;
+  }
+  
+
+.right-section {
+  margin-right: 20px !important;
+}
+
+.logout {
+  margin-left: 20px !important;
+}
+
+.end-section {
+  margin-left: auto !important;
+  margin-right: 20px !important;
+}
+
+.navbar-wrapper {
+  margin-bottom: 100px;
+}
