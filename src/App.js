@@ -303,7 +303,7 @@ function App(props) {
             <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
                 <Header setReloadLanguage={setReloadLanguage} />
-                <SeeAd />
+                <SeeAd setReloadAdvertisements={setReloadAdvertisements} />
 
               </AuthContextProvider>
 

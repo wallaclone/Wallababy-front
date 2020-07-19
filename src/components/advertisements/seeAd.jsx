@@ -14,6 +14,7 @@ import { AuthContext } from '../../contexts/authContext';
 const { getAd, getFavorites, deleteFavorite, addFavorite, markAsSold, markAsNotSold, markAsReserved, markAsUnreserved, getEmail, sendEmail } = apiCall();
 
 function SeeAd(props) {
+    const { setReloadAdvertisements } = props;
     const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
     const [reloadAdvertisement, setReloadAdvertisement] = useState(true);
     const history = useHistory();
@@ -23,6 +24,7 @@ function SeeAd(props) {
     const [inList, setInList] = useState([]);
     const [email, setEmail] = useState([]);
     const { user } = useContext(AuthContext);
+
 
     useEffect(() => {
         const getFavAds = async () => {
@@ -53,21 +55,28 @@ function SeeAd(props) {
     const sell = async (id) => {
         await markAsSold(id)
         setAdvertisement({ ...advertisement, sold: true });
+        setReloadAdvertisements(true)
     }
 
     const dontSell = async (id) => {
         await markAsNotSold(id)
         setAdvertisement({ ...advertisement, sold: false });
+        setReloadAdvertisements(true)
+
     }
 
     const reserve = async (id) => {
         await markAsReserved(id)
         setAdvertisement({ ...advertisement, reserved: true });
+        setReloadAdvertisements(true)
+
     }
 
     const dontReserve = async (id) => {
         await markAsUnreserved(id)
         setAdvertisement({ ...advertisement, reserved: false });
+        setReloadAdvertisements(true)
+
     }
     const dateOptions = {
         year: 'numeric',
