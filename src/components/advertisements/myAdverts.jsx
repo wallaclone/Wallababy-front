@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { Button, Form, Col } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../contexts/authContext';
 
 import apiCall from '../../api/api';
 
-const { getAds, deleteAd } = apiCall();
+const { isNotLogin, getAds, deleteAd } = apiCall();
 
 function MyAdverts(props) {
-  const { setReloadAdvertisements } = props;
-  const { username } = useParams();
-  const [adverts, setAdverts] = useState([]);
-  const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
+    const { setReloadAdvertisements } = props;
+    const { username } = useParams();
+    const [adverts, setAdverts] = useState([]);
+    const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
+    const history = useHistory();
+    const { user } = useContext(AuthContext);
+  
+    if( isNotLogin( user, props.intl.formatMessage({ id: 'createAd.notLoggedIn' }), props.intl.formatMessage({ id: 'createAd.youAreNotLoggedIn' }) ) ) { history.push('/login'); }
 
     useEffect(() => {
         const getUserAdverts = async () => {

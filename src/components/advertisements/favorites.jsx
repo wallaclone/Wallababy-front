@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { AuthContext } from '../../contexts/authContext';
 
 import apiCall from '../../api/api';
 
-const { getFavorites, deleteFavorite } = apiCall();
+const { isNotLogin, getFavorites, deleteFavorite } = apiCall();
 
 function MyFavs(props) {
   const [favs, setFavs] = useState([]);
   const [change, setChange] = useState([]);
   const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
+  const history = useHistory();
+  const { user } = useContext(AuthContext);
+  
+  if( isNotLogin( user, props.intl.formatMessage({ id: 'createAd.notLoggedIn' }), props.intl.formatMessage({ id: 'createAd.youAreNotLoggedIn' }) ) ) { history.push('/login'); }
 
   const handleClick = async (id) => {
     await deleteFavorite(id);
@@ -63,7 +68,7 @@ function MyFavs(props) {
                     </p>
                     <p className="card-text">
                       <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}: </strong>
-&nbsp;
+                      &nbsp;
                       <Link className="forgot-pass" to={`/adsOwner/${fav.owner}`}>{fav.owner}
                       </Link>
                     </p>
@@ -90,6 +95,5 @@ function MyFavs(props) {
     </>
   );
 }
-
 const myFavs = injectIntl(MyFavs);
 export { myFavs };

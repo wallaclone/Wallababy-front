@@ -11,11 +11,11 @@ function Filter(props) {
   // const history = useHistory();
 
   const initialValues = {
-    /* name: '',
+    name: '',
     minPrice: '',
     maxPrice: '',
     status: '',
-    tag: '', */
+    tag: '',
 
     name: sessionStorage.getItem('name') ? sessionStorage.getItem('name') : '',
     minPrice: sessionStorage.getItem('minPrice') ? sessionStorage.getItem('minPrice') : '',
@@ -36,6 +36,13 @@ function Filter(props) {
 
   const clearFilter = () => {
     sessionStorage.clear();
+
+    // sessionStorage.setItem('name', '');
+    // sessionStorage.setItem('minPrice', '');
+    // sessionStorage.setItem('maxPrice', '');
+    // sessionStorage.setItem('status', '');
+    // sessionStorage.setItem('tag', '');
+
     setValuesSearch(initialValues);
 
     let element = document.getElementById('name');
@@ -49,13 +56,17 @@ function Filter(props) {
     element = document.getElementById('maxPrice');
     element.value = '';
 
-    sessionStorage.clear();
+    setValuesSearch({
+      name: '',
+      minPrice: '',
+      maxPrice: '',
+      status: '',
+      tag: '',
+    });
 
     setReloadAdvertisements(true);
     setSearch('');
     setCurrentPage(1);
-
-    // history.push('/dashboard');
   };
 
   const buscarAnuncio = async (event) => {
@@ -77,6 +88,42 @@ function Filter(props) {
     setCurrentPage(1);
     setReloadAdvertisements(true);
     setSearch(queryParams);
+  };
+
+  const formatTag = (tag) => {
+    if(tag !== undefined && tag !== null && tag !== '') {
+      switch (tag) {
+        case 'Comfort':
+          return props.intl.formatMessage({ id: 'tag.comfort' });
+        case 'Educational':
+          return props.intl.formatMessage({ id: 'tag.educational' });
+        case 'Accessories':
+          return props.intl.formatMessage({ id: 'tag.accessories' });
+        case 'Promotions':
+          return props.intl.formatMessage({ id: 'tag.promotions' });
+        case 'Food':
+          return props.intl.formatMessage({ id: 'tag.food' });
+        case 'Furniture':
+          return props.intl.formatMessage({ id: 'tag.furniture' });
+        case 'Security':
+          return props.intl.formatMessage({ id: 'tag.security' });
+        case 'Entertainment':
+          return props.intl.formatMessage({ id: 'tag.entertainment' });
+        case 'Toys':
+          return props.intl.formatMessage({ id: 'tag.toys' });
+        case 'Costume':
+          return props.intl.formatMessage({ id: 'tag.costume' });
+        case 'Hobby':
+          return props.intl.formatMessage({ id: 'tag.hobby' });
+        case 'Clothes':
+          return props.intl.formatMessage({ id: 'tag.clothes' });
+        case 'Footwear':
+          return props.intl.formatMessage({ id: 'tag.footwear' });
+        default:
+          return tag;
+      }
+    }
+    return '';
   };
 
   return (
@@ -114,7 +161,7 @@ function Filter(props) {
             >
               <option value="" defaultValue>{props.intl.formatMessage({ id: 'filter.selectTag' })}</option>
               {tags.map((itemTag) => (
-                <option key={itemTag} value={itemTag}>{itemTag}</option>
+                <option key={itemTag} value={itemTag}>{formatTag(itemTag)}</option>
               ))}
             </Form.Control>
           </Form.Group>
@@ -169,7 +216,8 @@ function Filter(props) {
           </Form.Group>
 
           <Form.Group as={Col} md="4">
-            <Button variant="warning" size="lg" block onClick={clearFilter}>
+            {/* <Button variant="warning" size="lg" block onClick={clearFilter}> */}
+            <Button variant='secondary' size='lg' block onClick={clearFilter}>
               {props.intl.formatMessage({ id: 'filter.clearFilter' })}
             </Button>
           </Form.Group>

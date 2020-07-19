@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faKissWinkHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, Button, Badge, Form, Col } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
@@ -27,10 +27,8 @@ function SeeAd(props) {
         const getFavAds = async () => {
             const userFavs = await getFavorites();
             setFavs(userFavs);
-
             if (userFavs.length > 0) {
                 let map = userFavs.map(x => x._id);
-
                 if (map.includes(_id)) {
                     setInList(true)
                 }
@@ -42,32 +40,33 @@ function SeeAd(props) {
     const deleteFav = async (id) => {
         await deleteFavorite(id)
         setInList(false);
-    }
+    };
 
     const addFav = async (id) => {
         await addFavorite(id)
         setInList(true)
-    }
+    };
 
     const sell = async (id) => {
         await markAsSold(id)
         setAdvertisement({ ...advertisement, sold: true });
-    }
+    };
 
     const dontSell = async (id) => {
         await markAsNotSold(id)
         setAdvertisement({ ...advertisement, sold: false });
-    }
+    };
 
     const reserve = async (id) => {
         await markAsReserved(id)
         setAdvertisement({ ...advertisement, reserved: true });
-    }
+    };
 
     const dontReserve = async (id) => {
         await markAsUnreserved(id)
         setAdvertisement({ ...advertisement, reserved: false });
-    }
+    };
+
     const dateOptions = {
         year: 'numeric',
         month: 'long',
@@ -84,10 +83,62 @@ function SeeAd(props) {
             loadAd(_id);
             setReloadAdvertisement(false);
         }
-    }, [reloadAdvertisement, _id]); //[ reloadAdvertisement, props.match.params._id ]);
+    }, [reloadAdvertisement, _id]); //[ reloadAdvertisement, props.match.params._id ]);   
+
+    const formatTag = (tag) => {
+        if(tag !== undefined && tag !== null && tag !== '') {
+          switch (tag) {
+            case 'Comfort':
+              return props.intl.formatMessage({ id: 'tag.comfort' });
+            case 'Educational':
+              return props.intl.formatMessage({ id: 'tag.educational' });
+            case 'Accessories':
+              return props.intl.formatMessage({ id: 'tag.accessories' });
+            case 'Promotions':
+              return props.intl.formatMessage({ id: 'tag.promotions' });
+            case 'Food':
+              return props.intl.formatMessage({ id: 'tag.food' });
+            case 'Furniture':
+              return props.intl.formatMessage({ id: 'tag.furniture' });
+            case 'Security':
+              return props.intl.formatMessage({ id: 'tag.security' });
+            case 'Entertainment':
+              return props.intl.formatMessage({ id: 'tag.entertainment' });
+            case 'Toys':
+              return props.intl.formatMessage({ id: 'tag.toys' });
+            case 'Costume':
+              return props.intl.formatMessage({ id: 'tag.costume' });
+            case 'Hobby':
+              return props.intl.formatMessage({ id: 'tag.hobby' });
+            case 'Clothes':
+              return props.intl.formatMessage({ id: 'tag.clothes' });
+            case 'Footwear':
+              return props.intl.formatMessage({ id: 'tag.footwear' });
+            default:
+              return tag;
+          }
+        }
+        return '';
+    };
+
+    const formatTags = (tags) => {
+        let formatedTags = '';
+        if(tags) {
+            for(let i=0; i<tags.length; i++) {
+                if((i+1)<tags.length){
+                    formatedTags += formatTag(tags[i]) + ', ';
+                }
+                else {
+                    formatedTags += formatTag(tags[i]) + '.';
+                }
+            }
+        }
+        return formatedTags;
+    };
 
     return (
         <div className="m-3">
+            
             <Card key={advertisement._id} style={{ marginTop: '6rem' }}>
                 <Card.Img variant='top' src={`${BACK_IMAGE_PATH}${advertisement.image}`} />
                 <Card.Body>
@@ -95,7 +146,7 @@ function SeeAd(props) {
                     <Card.Text>
                         <p><strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong> {advertisement.price}€</p>
                         <p><strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong> {advertisement.status === true ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}</p>
-                        <p><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {advertisement.tags}</p>
+                        <p><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {formatTags(advertisement.tags)} </p>
                         <p>
                             <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
                             <Link to={`/adsOwner/${advertisement.owner}`}>
@@ -127,16 +178,52 @@ function SeeAd(props) {
                             <TwitterIcon size={32} round={true}></TwitterIcon>
                         </TwitterShareButton>
                     </Card.Text>
-                    <Form.Row>
+
+
+                    {( user && user.toLowerCase() !== 'guest' && user !== advertisement.owner ) 
+                    ?
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formGridFavorite">
+                                { 
+                                (inList === true) 
+                                    ? <Button onClick={() => deleteFav(advertisement._id)} variant='secondary' size='lg' block>
+                                        {props.intl.formatMessage({ id: 'favorites.remove' })} <FontAwesomeIcon icon={faHeart} color='red' /> 
+                                    </Button>
+                                    : <Button onClick={() => addFav(advertisement._id)} variant='secondary' size='lg' block>
+                                        {props.intl.formatMessage({ id: 'favorites.add' })} <FontAwesomeIcon icon={faHeart} color='#f7b6a0' id='heart' /> 
+                                    </Button> 
+                                }
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="formGridReturn">
+                                <Button variant='secondary' size='lg' className='button' block onClick={() => history.goBack()}>
+                                    {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
+                                </Button>
+                            </Form.Group>
+                        </Form.Row> 
+                    :  
+                        <Button variant='secondary' size='lg' className='button' block onClick={() => history.goBack()}>
+                            {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
+                        </Button>
+                    }
+
+
+
+                    {/* <Form.Row>
                         <Form.Group as={Col} controlId="formGridFavorite">
                             {
-                            (inList === true) 
+                            (!user || user.toLowerCase() === 'guest') 
+                            ?
+                                <Button variant='secondary' size='lg' block disabled>
+                                    {props.intl.formatMessage({ id: 'favorites.add' })} 
+                                </Button>
+                            :
+                                (inList === true) 
                                 ? <Button onClick={() => deleteFav(advertisement._id)} variant='secondary' size='lg' block>
                                     {props.intl.formatMessage({ id: 'favorites.remove' })} <FontAwesomeIcon icon={faHeart} color='red' /> 
-                                  </Button>
+                                </Button>
                                 : <Button onClick={() => addFav(advertisement._id)} variant='secondary' size='lg' block>
                                     {props.intl.formatMessage({ id: 'favorites.add' })} <FontAwesomeIcon icon={faHeart} color='#f7b6a0' id='heart' /> 
-                                  </Button>
+                                </Button>
                             }
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridReturn">
@@ -144,7 +231,8 @@ function SeeAd(props) {
                                 {props.intl.formatMessage({ id: 'seeAd.buttonReturnAd' })}
                             </Button>
                         </Form.Group>
-                    </Form.Row>
+                    </Form.Row> */}
+
                 </Card.Body>
                 <Card.Footer>
                     <small className='text-muted'>{props.intl.formatMessage({ id: 'advertisement.createdAt' })}: {props.intl.formatDate(new Date(advertisement.date_creation), dateOptions)}</small>
