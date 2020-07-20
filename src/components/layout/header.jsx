@@ -64,16 +64,17 @@ function Header(props) {
                   <Nav.Link onClick={handleClick} className="navbar-link">
                     <Link to="/logout" className="navbar-link">{props.intl.formatMessage({ id: 'all.logOut' })}</Link>
                   </Nav.Link>
+                  <Nav.Link className="navbar-link">
+                    <Link className="navbar-link" onClick={() => changeLanguage('es-ES')} to='#'> ES </Link>
+                    /
+                    <Link className="navbar-link" onClick={() => changeLanguage('en-US')} to='#'> EN </Link>
+                  </Nav.Link>
                 </Nav>
               </>
             )
           }
 
-            <Nav.Link className="navbar-link">
-              <Link className="navbar-link" onClick={() => changeLanguage('es-ES')}> ES </Link>
-              /
-              <Link className="navbar-link" onClick={() => changeLanguage('en-US')}> EN </Link>
-            </Nav.Link>
+            
 
             {/* <FormattedMessage id="app.title" value={(message) => ({message})} /> */}
           </Navbar.Collapse>
