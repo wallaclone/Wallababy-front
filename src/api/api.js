@@ -15,6 +15,19 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     limit: () => LIMIT,
 
+    isNotLogin: (user, title, text) => {
+      if(user === 'guest') {
+        Swal.fire({
+            icon: 'error',
+            title: title,
+            text: text,
+            timer: 5000,
+            confirmButtonColor:  '#1768ac',
+        });
+        return true;
+      }
+    },
+
     register: async (username, password, email) => {
       try {
         const response = await fetch(registerEndPoint, {

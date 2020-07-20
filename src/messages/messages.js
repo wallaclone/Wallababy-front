@@ -31,6 +31,12 @@ export const messages = {
         "sweetalert.correctUpdate": "Correct update",
         "sweetalert.advertisementUpdated": "The advertisement has been updated correctly.",
         "sweetalert.errorUpdating": "There has been an error updating the advert, please try again.",
+        
+        //SweetAlert editProfile
+        "sweetalert.introduceValidEmail": "Introduce a valid email please.",
+        "sweetalert.passwordsAreNotTheSame": "The password and confirm password are not the same.",
+        "sweetalert.updateSuccesfully": "Update succesfully",
+        "sweetalert.profileUpdated": "Your profile has been updated successfully.",
 
         "advertisement.price": "Price",
         "advertisement.type": "Type",
@@ -137,9 +143,33 @@ export const messages = {
         "myAdverts.title": "Your ads:",
         "myAdverts.empty": "You don't have any ad yet",
 
+        "editProfile.username": "Username",
+        "editProfile.usernamePlaceholder": "Write your new username",
+        "editProfile.email": "Email",
+        "editProfile.emailPlaceholder": "Write your new email",
+        "editProfile.password": "Password",
+        "editProfile.passwordPlaceholder": "Write your new password",
+        "editProfile.confirmPassword": "Password",
+        "editProfile.confirmPasswordPlaceholder": "Confirm your new password",
+        "editProfile.updateMyProfile": "Update my profile",
+        "editProfile.removeMyAccount": "Remove my account",
 
         "ads.owner": "The ads of",
-        "ads.owner.empty": "hasn't created any ad yet"
+        "ads.owner.empty": "hasn't created any ad yet",
+
+        "tag.comfort": "Comfort",
+        "tag.educational": "Educational",
+        "tag.accessories": "Accessories",
+        "tag.promotions": "Promotions",
+        "tag.food": "Food",
+        "tag.furniture": "Furniture",
+        "tag.security": "Security",
+        "tag.entertainment": "Entertainment",
+        "tag.toys": "Toys",
+        "tag.costume": "Costume",
+        "tag.hobby": "Hobby",
+        "tag.clothes": "Clothes",
+        "tag.footwear": "Footwear",
 
     },
     "es-ES": {
@@ -174,6 +204,12 @@ export const messages = {
         "sweetalert.correctUpdate": "Actualización correcta",
         "sweetalert.advertisementUpdated": "El anuncio ha sido actualizado correctamente.",
         "sweetalert.errorUpdating": "Se produjo un error al actualizar el anuncio. Vuelve a intentarlo.",
+        
+        //SweetAlert editProfile
+        "sweetalert.introduceValidEmail": "Introduzca un correo electrónico válido.",
+        "sweetalert.passwordsAreNotTheSame": "Las contraseñas introducidas (Contraseña y confirmación de contraseña) no son iguales.",
+        "sweetalert.updateSuccesfully": "Actualización satisfactoria",
+        "sweetalert.profileUpdated": "Su perfil ha sido actualizado satisfactoriamente.",
 
         "advertisement.price": "Precio",
         "advertisement.type": "Tipo",
@@ -220,7 +256,7 @@ export const messages = {
         "createAd.descriptionAdPlaceholder": "Añada la descripción del anuncio",
         "createAd.buttonCreateAd": "Crear anuncio",
         "createAd.buttonReturnAd": "Volver",
-        "createAd.notLoggedIn": "Sin iniciar sesión",
+        "createAd.notLoggedIn": "No ha iniciado sesión",
         "createAd.youAreNotLoggedIn": "No has iniciado sesión o tu sesión ha caducado. Lo redireccionamos a Iniciar sesión para hacerlo nuevamente.",
         "createAd.problemsCreatingAd": "Problemas al crear el anuncio",
         "createAd.tryAgainOrLater": "No se pudo crear el anuncio (intente nuevamente o más tarde).",
@@ -280,13 +316,32 @@ export const messages = {
         "myAdverts.title": "Tus anuncios:",
         "myAdverts.empty": "No tienes ningún anuncio creado aún",
 
+        "editProfile.username": "Nombre de usuario",
+        "editProfile.usernamePlaceholder": "Escriba su nuevo nombre de usuario",
+        "editProfile.email": "Correo electrónico",
+        "editProfile.emailPlaceholder": "Escriba su nuevo correo electrónico",
+        "editProfile.password": "Contraseña",
+        "editProfile.passwordPlaceholder": "Escriba su nueva contraseña",
+        "editProfile.confirmPassword": "Confirme contraseña",
+        "editProfile.confirmPasswordPlaceholder": "Confirme su nueva contraseña",
+        "editProfile.updateMyProfile": "Actualizar mi perfil",
+        "editProfile.removeMyAccount": "Borrar mi cuenta",
+
         "ads.owner": "Los anuncios de",
-        "ads.owner.empty": "no tiene ningún anuncio creado aún"
+        "ads.owner.empty": "no tiene ningún anuncio creado aún",
 
+        "tag.accessories": "Accesorios",
+        "tag.comfort": "Comodidad",
+        "tag.educational": "Educativo",
+        "tag.entertainment": "Entretenimiento",
+        "tag.food": "Comida",
+        "tag.furniture": "Mobiliario",
+        "tag.promotions": "Promociones",
+        "tag.security": "Seguridad",
+        "tag.toys": "Juguetes",
+        "tag.costume": "Disfraz",
+        "tag.hobby": "Pasatiempo",
+        "tag.clothes": "Ropa",
+        "tag.footwear": "Calzado",
     },
-
 };
-
-// "de-DE": {
-//     "createAd.title": "Anzeige erstellen",
-// },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faKissWinkHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, Button, Badge, Form, Col } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
@@ -30,10 +30,8 @@ function SeeAd(props) {
         const getFavAds = async () => {
             const userFavs = await getFavorites();
             setFavs(userFavs);
-
             if (userFavs.length > 0) {
                 let map = userFavs.map(x => x._id);
-
                 if (map.includes(_id)) {
                     setInList(true)
                 }
@@ -45,12 +43,12 @@ function SeeAd(props) {
     const deleteFav = async (id) => {
         await deleteFavorite(id)
         setInList(false);
-    }
+    };
 
     const addFav = async (id) => {
         await addFavorite(id)
         setInList(true)
-    }
+    };
 
     const sell = async (id) => {
         await markAsSold(id)
@@ -98,7 +96,58 @@ function SeeAd(props) {
             });
             setReloadAdvertisement(false)
         }
-    }, [reloadAdvertisement, _id]); //[ reloadAdvertisement, props.match.params._id ]);
+    }, [reloadAdvertisement, _id]); //[ reloadAdvertisement, props.match.params._id ]);   
+
+    const formatTag = (tag) => {
+        if(tag !== undefined && tag !== null && tag !== '') {
+          switch (tag) {
+            case 'Comfort':
+              return props.intl.formatMessage({ id: 'tag.comfort' });
+            case 'Educational':
+              return props.intl.formatMessage({ id: 'tag.educational' });
+            case 'Accessories':
+              return props.intl.formatMessage({ id: 'tag.accessories' });
+            case 'Promotions':
+              return props.intl.formatMessage({ id: 'tag.promotions' });
+            case 'Food':
+              return props.intl.formatMessage({ id: 'tag.food' });
+            case 'Furniture':
+              return props.intl.formatMessage({ id: 'tag.furniture' });
+            case 'Security':
+              return props.intl.formatMessage({ id: 'tag.security' });
+            case 'Entertainment':
+              return props.intl.formatMessage({ id: 'tag.entertainment' });
+            case 'Toys':
+              return props.intl.formatMessage({ id: 'tag.toys' });
+            case 'Costume':
+              return props.intl.formatMessage({ id: 'tag.costume' });
+            case 'Hobby':
+              return props.intl.formatMessage({ id: 'tag.hobby' });
+            case 'Clothes':
+              return props.intl.formatMessage({ id: 'tag.clothes' });
+            case 'Footwear':
+              return props.intl.formatMessage({ id: 'tag.footwear' });
+            default:
+              return tag;
+          }
+        }
+        return '';
+    };
+
+    const formatTags = (tags) => {
+        let formatedTags = '';
+        if(tags) {
+            for(let i=0; i<tags.length; i++) {
+                if((i+1)<tags.length){
+                    formatedTags += formatTag(tags[i]) + ', ';
+                }
+                else {
+                    formatedTags += formatTag(tags[i]) + '.';
+                }
+            }
+        }
+        return formatedTags;
+    };
 
 
     const contactOwner = async () => {
@@ -125,6 +174,7 @@ function SeeAd(props) {
 
     return (
         <div className="m-3">
+            
             <Card key={advertisement._id} style={{ marginTop: '6rem' }}>
                 <Card.Img variant='top' src={`${BACK_IMAGE_PATH}${advertisement.image}`} />
                 <Card.Body>
@@ -132,7 +182,7 @@ function SeeAd(props) {
                     <Card.Text>
                         <p><strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong> {advertisement.price}€</p>
                         <p><strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong> {advertisement.status === true ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}</p>
-                        <p><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {advertisement.tags}</p>
+                        <p><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {formatTags(advertisement.tags)} </p>
                         <p>
                             <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
                             <Link to={`/adsOwner/${advertisement.owner}`}>

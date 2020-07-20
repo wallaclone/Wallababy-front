@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { Button, Form, Col, Badge } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../contexts/authContext';
 
 import apiCall from '../../api/api';
 
-const { getAds, deleteAd } = apiCall();
+const { isNotLogin, getAds, deleteAd } = apiCall();
 
 function MyAdverts(props) {
-  const { setReloadAdvertisements } = props;
-  const { username } = useParams();
-  const [adverts, setAdverts] = useState([]);
-  const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
+    const { setReloadAdvertisements } = props;
+    const { username } = useParams();
+    const [adverts, setAdverts] = useState([]);
+    const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
+    const history = useHistory();
+    const { user } = useContext(AuthContext);
+  
+    if( isNotLogin( user, props.intl.formatMessage({ id: 'createAd.notLoggedIn' }), props.intl.formatMessage({ id: 'createAd.youAreNotLoggedIn' }) ) ) { history.push('/login'); }
 
     useEffect(() => {
         const getUserAdverts = async () => {
@@ -60,6 +65,57 @@ function MyAdverts(props) {
         })
     }
 
+    const formatTag = (tag) => {
+        if(tag !== undefined && tag !== null && tag !== '') {
+          switch (tag) {
+            case 'Comfort':
+              return props.intl.formatMessage({ id: 'tag.comfort' });
+            case 'Educational':
+              return props.intl.formatMessage({ id: 'tag.educational' });
+            case 'Accessories':
+              return props.intl.formatMessage({ id: 'tag.accessories' });
+            case 'Promotions':
+              return props.intl.formatMessage({ id: 'tag.promotions' });
+            case 'Food':
+              return props.intl.formatMessage({ id: 'tag.food' });
+            case 'Furniture':
+              return props.intl.formatMessage({ id: 'tag.furniture' });
+            case 'Security':
+              return props.intl.formatMessage({ id: 'tag.security' });
+            case 'Entertainment':
+              return props.intl.formatMessage({ id: 'tag.entertainment' });
+            case 'Toys':
+              return props.intl.formatMessage({ id: 'tag.toys' });
+            case 'Costume':
+              return props.intl.formatMessage({ id: 'tag.costume' });
+            case 'Hobby':
+              return props.intl.formatMessage({ id: 'tag.hobby' });
+            case 'Clothes':
+              return props.intl.formatMessage({ id: 'tag.clothes' });
+            case 'Footwear':
+              return props.intl.formatMessage({ id: 'tag.footwear' });
+            default:
+              return tag;
+          }
+        }
+        return '';
+      };
+    
+      const formatTags = (tags) => {
+        let formatedTags = '';
+        if(tags) {
+            for(let i=0; i<tags.length; i++) {
+                if((i+1)<tags.length){
+                    formatedTags += formatTag(tags[i]) + ', ';
+                }
+                else {
+                    formatedTags += formatTag(tags[i]) + '.';
+                }
+            }
+        }
+        return formatedTags;
+      };
+
     return (
         <>
         <div className= 'm-3'>
@@ -79,7 +135,7 @@ function MyAdverts(props) {
                             </h5>
                             <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong> {advert.price} &euro;</p>
                             <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong> { advert.status ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' }) }</p>
-                            <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {advert.tags}</p>
+                            <p className="card-text"><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {formatTags(advert.tags)}</p>
                             <p className="card-text">
                                 <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
                                 <Link className='forgot-pass' to={`/adsOwner/${advert.owner}`}>

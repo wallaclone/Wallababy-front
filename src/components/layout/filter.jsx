@@ -59,6 +59,42 @@ function Filter(props) {
     setSearch(queryParams);
   };
 
+  const formatTag = (tag) => {
+    if(tag !== undefined && tag !== null && tag !== '') {
+      switch (tag) {
+        case 'Comfort':
+          return props.intl.formatMessage({ id: 'tag.comfort' });
+        case 'Educational':
+          return props.intl.formatMessage({ id: 'tag.educational' });
+        case 'Accessories':
+          return props.intl.formatMessage({ id: 'tag.accessories' });
+        case 'Promotions':
+          return props.intl.formatMessage({ id: 'tag.promotions' });
+        case 'Food':
+          return props.intl.formatMessage({ id: 'tag.food' });
+        case 'Furniture':
+          return props.intl.formatMessage({ id: 'tag.furniture' });
+        case 'Security':
+          return props.intl.formatMessage({ id: 'tag.security' });
+        case 'Entertainment':
+          return props.intl.formatMessage({ id: 'tag.entertainment' });
+        case 'Toys':
+          return props.intl.formatMessage({ id: 'tag.toys' });
+        case 'Costume':
+          return props.intl.formatMessage({ id: 'tag.costume' });
+        case 'Hobby':
+          return props.intl.formatMessage({ id: 'tag.hobby' });
+        case 'Clothes':
+          return props.intl.formatMessage({ id: 'tag.clothes' });
+        case 'Footwear':
+          return props.intl.formatMessage({ id: 'tag.footwear' });
+        default:
+          return tag;
+      }
+    }
+    return '';
+  };
+
   return (
     <form onSubmit={buscarAnuncio}>
       <Form.Group className="ml-3 mr-3">
@@ -94,7 +130,7 @@ function Filter(props) {
             >
               <option value="" defaultValue>{props.intl.formatMessage({ id: 'filter.selectTag' })}</option>
               {tags.map((itemTag) => (
-                <option key={itemTag} value={itemTag}>{itemTag}</option>
+                <option key={itemTag} value={itemTag}>{formatTag(itemTag)}</option>
               ))}
             </Form.Control>
           </Form.Group>
@@ -149,7 +185,8 @@ function Filter(props) {
           </Form.Group>
 
           <Form.Group as={Col} md="4">
-            <Button variant="warning" size="lg" block onClick={clearFilter}>
+            {/* <Button variant="warning" size="lg" block onClick={clearFilter}> */}
+            <Button variant='secondary' size='lg' block onClick={clearFilter}>
               {props.intl.formatMessage({ id: 'filter.clearFilter' })}
             </Button>
           </Form.Group>
