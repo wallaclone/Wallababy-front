@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { faHeart, faKissWinkHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, Button, Badge, Form, Col } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
@@ -30,8 +30,10 @@ function SeeAd(props) {
         const getFavAds = async () => {
             const userFavs = await getFavorites();
             setFavs(userFavs);
+
             if (userFavs.length > 0) {
                 let map = userFavs.map(x => x._id);
+
                 if (map.includes(_id)) {
                     setInList(true)
                 }
@@ -43,12 +45,12 @@ function SeeAd(props) {
     const deleteFav = async (id) => {
         await deleteFavorite(id)
         setInList(false);
-    };
+    }
 
     const addFav = async (id) => {
         await addFavorite(id)
         setInList(true)
-    };
+    }
 
     const sell = async (id) => {
         await markAsSold(id)
@@ -96,7 +98,29 @@ function SeeAd(props) {
             });
             setReloadAdvertisement(false)
         }
-    }, [reloadAdvertisement, _id]); //[ reloadAdvertisement, props.match.params._id ]);   
+    }, [reloadAdvertisement, _id]); //[ reloadAdvertisement, props.match.params._id ]);
+
+
+    const contactOwner = async () => {
+        const adId = advertisement._id;
+        const response = await sendEmail(adId, advertisement.owner, user)
+        if (response.status !== 201) {
+            Swal.fire({
+                icon: 'error',
+                title: props.intl.formatMessage({ id: 'sweetalert.emailSentError' }),
+                text: props.intl.formatMessage({ id: 'sweetalert.emailSent.TextError' }),
+                timer: 15000,
+                confirmButtonColor: '#1768ac',
+            });
+        } else {
+            Swal.fire({
+                title: `${props.intl.formatMessage({ id: 'sweetalert.emailSent' })} ${advertisement.owner}!`,
+                text: props.intl.formatMessage({ id: 'sweetalert.emailSent.Text' }),
+                timer: 25000,
+                confirmButtonColor: '#1768ac',
+            });
+        }
+    }
 
     const formatTag = (tag) => {
         if(tag !== undefined && tag !== null && tag !== '') {
@@ -150,31 +174,9 @@ function SeeAd(props) {
     };
 
 
-    const contactOwner = async () => {
-        const adId = advertisement._id;
-        const response = await sendEmail(adId, advertisement.owner, user)
-        if (response.status !== 201) {
-            Swal.fire({
-                icon: 'error',
-                title: props.intl.formatMessage({ id: 'sweetalert.emailSentError' }),
-                text: props.intl.formatMessage({ id: 'sweetalert.emailSent.TextError' }),
-                timer: 15000,
-                confirmButtonColor: '#1768ac',
-            });
-        } else {
-            Swal.fire({
-                title: `${props.intl.formatMessage({ id: 'sweetalert.emailSent' })} ${advertisement.owner}!`,
-                text: props.intl.formatMessage({ id: 'sweetalert.emailSent.Text' }),
-                timer: 25000,
-                confirmButtonColor: '#1768ac',
-            });
-        }
-    }
-
 
     return (
         <div className="m-3">
-            
             <Card key={advertisement._id} style={{ marginTop: '6rem' }}>
                 <Card.Img variant='top' src={`${BACK_IMAGE_PATH}${advertisement.image}`} />
                 <Card.Body>
@@ -223,7 +225,6 @@ function SeeAd(props) {
                         </div>
                     </div></> : null
                     }
-
                     <Form.Row className='mt-2'>
                         <Form.Group as={Col} controlId="formGridCreateAd">
                             {advertisement.owner === user && !advertisement.sold && !advertisement.status ? <Button className='button3' size='lg' block onClick={() => sell(advertisement._id)}>{props.intl.formatMessage({ id: 'advertisement.marksold' })}</Button> : null}
