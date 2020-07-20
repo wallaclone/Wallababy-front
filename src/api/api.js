@@ -132,7 +132,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     getAds: async (search = '') => {
       try {
-        const DEFAULT_VALUE = `?limit=${LIMIT}&sort=-date_creation`;
+        const DEFAULT_VALUE = `?limit=${LIMIT}&sort=-date_creation&sold=false`;
         // console.log("EndPoint getAds:", `${advertEndPoint}${DEFAULT_VALUE}${search}`);
         const response = await fetch(`${advertEndPoint}${DEFAULT_VALUE}${search}`, {
           method: 'GET',
