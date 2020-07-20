@@ -122,6 +122,58 @@ function SeeAd(props) {
         }
     }
 
+    const formatTag = (tag) => {
+        if(tag !== undefined && tag !== null && tag !== '') {
+          switch (tag) {
+            case 'Comfort':
+              return props.intl.formatMessage({ id: 'tag.comfort' });
+            case 'Educational':
+              return props.intl.formatMessage({ id: 'tag.educational' });
+            case 'Accessories':
+              return props.intl.formatMessage({ id: 'tag.accessories' });
+            case 'Promotions':
+              return props.intl.formatMessage({ id: 'tag.promotions' });
+            case 'Food':
+              return props.intl.formatMessage({ id: 'tag.food' });
+            case 'Furniture':
+              return props.intl.formatMessage({ id: 'tag.furniture' });
+            case 'Security':
+              return props.intl.formatMessage({ id: 'tag.security' });
+            case 'Entertainment':
+              return props.intl.formatMessage({ id: 'tag.entertainment' });
+            case 'Toys':
+              return props.intl.formatMessage({ id: 'tag.toys' });
+            case 'Costume':
+              return props.intl.formatMessage({ id: 'tag.costume' });
+            case 'Hobby':
+              return props.intl.formatMessage({ id: 'tag.hobby' });
+            case 'Clothes':
+              return props.intl.formatMessage({ id: 'tag.clothes' });
+            case 'Footwear':
+              return props.intl.formatMessage({ id: 'tag.footwear' });
+            default:
+              return tag;
+          }
+        }
+        return '';
+    };
+
+    const formatTags = (tags) => {
+        let formatedTags = '';
+        if(tags) {
+            for(let i=0; i<tags.length; i++) {
+                if((i+1)<tags.length){
+                    formatedTags += formatTag(tags[i]) + ', ';
+                }
+                else {
+                    formatedTags += formatTag(tags[i]) + '.';
+                }
+            }
+        }
+        return formatedTags;
+    };
+
+
 
     return (
         <div className="m-3">
@@ -132,7 +184,7 @@ function SeeAd(props) {
                     <Card.Text>
                         <p><strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong> {advertisement.price}€</p>
                         <p><strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong> {advertisement.status === true ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}</p>
-                        <p><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {advertisement.tags}</p>
+                        <p><strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong> {formatTags(advertisement.tags)} </p>
                         <p>
                             <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
                             <Link to={`/adsOwner/${advertisement.owner}`}>

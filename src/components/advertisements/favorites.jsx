@@ -34,6 +34,57 @@ function MyFavs(props) {
     getFavAds();
   }, [setFavs, change]);
 
+  const formatTag = (tag) => {
+    if(tag !== undefined && tag !== null && tag !== '') {
+      switch (tag) {
+        case 'Comfort':
+          return props.intl.formatMessage({ id: 'tag.comfort' });
+        case 'Educational':
+          return props.intl.formatMessage({ id: 'tag.educational' });
+        case 'Accessories':
+          return props.intl.formatMessage({ id: 'tag.accessories' });
+        case 'Promotions':
+          return props.intl.formatMessage({ id: 'tag.promotions' });
+        case 'Food':
+          return props.intl.formatMessage({ id: 'tag.food' });
+        case 'Furniture':
+          return props.intl.formatMessage({ id: 'tag.furniture' });
+        case 'Security':
+          return props.intl.formatMessage({ id: 'tag.security' });
+        case 'Entertainment':
+          return props.intl.formatMessage({ id: 'tag.entertainment' });
+        case 'Toys':
+          return props.intl.formatMessage({ id: 'tag.toys' });
+        case 'Costume':
+          return props.intl.formatMessage({ id: 'tag.costume' });
+        case 'Hobby':
+          return props.intl.formatMessage({ id: 'tag.hobby' });
+        case 'Clothes':
+          return props.intl.formatMessage({ id: 'tag.clothes' });
+        case 'Footwear':
+          return props.intl.formatMessage({ id: 'tag.footwear' });
+        default:
+          return tag;
+      }
+    }
+    return '';
+  };
+
+  const formatTags = (tags) => {
+    let formatedTags = '';
+    if(tags) {
+        for(let i=0; i<tags.length; i++) {
+            if((i+1)<tags.length){
+                formatedTags += formatTag(tags[i]) + ', ';
+            }
+            else {
+                formatedTags += formatTag(tags[i]) + '.';
+            }
+        }
+    }
+    return formatedTags;
+  };
+
   return (
     <>
       <div className="m-3">
@@ -64,7 +115,7 @@ function MyFavs(props) {
                     </p>
                     <p className="card-text">
                       <strong>
-                        {props.intl.formatMessage({ id: 'advertisement.tags' })}: </strong>{fav.tags}
+                        {props.intl.formatMessage({ id: 'advertisement.tags' })}: </strong>{formatTags(fav.tags)}
                     </p>
                     <p className="card-text">
                       <strong>{props.intl.formatMessage({ id: 'advertisement.owner' })}: </strong>
