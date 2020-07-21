@@ -1,8 +1,9 @@
 # WallaBaby 
 
+> Buy or sell second hand items for your children on WallaBaby! 
+
 ![dashboard](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/dashboard.png)
 
-> Buy or sell second hand items for your children on WallaBaby! 
 
 WallaBaby is a full stack application that displays a list of ads handled via RESTful API. It lets registered users create, edit and delete their own ads among other features. 
 
