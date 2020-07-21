@@ -42,8 +42,9 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           }),
         });
 
-        const data = await response;
-        return data;
+        const data = await response.json();
+        window.localStorage.setItem('token', data.token);
+        return response;
       } catch (err) {
         console.error(err.message);
         throw err;

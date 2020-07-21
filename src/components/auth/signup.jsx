@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Button, Form, Card } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { useHistory, Link } from 'react-router-dom';
+import { subscribeUser } from '../../subscription';
 import Swal from 'sweetalert2';
 
 import apiCall from '../../api/api';
@@ -31,6 +32,7 @@ function Signup(props) {
         confirmButtonColor: '#1768ac',
       });
     } else {
+      subscribeUser();
       Swal.fire({
         icon: 'success',
         title: `${props.intl.formatMessage({ id: 'sweet.alert' })} ${username}!`,

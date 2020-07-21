@@ -72,6 +72,7 @@ function EditAd(props) {
       advert.owner = advertForm.owner;
       const imgAux = document.getElementById('image-file').files[0];
       let myTags = [];
+      console.log("advert.tags", advert.tags);
       advert.tags.forEach(tag => {
         if(document.getElementById(tag.name).checked){
             myTags.push(document.getElementById(tag.name).value);
