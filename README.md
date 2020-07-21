@@ -1,5 +1,7 @@
 # WallaBaby 
 
+![dashboard](ttps://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/dashboard.png)
+
 > Buy or sell second hand items for your children on WallaBaby! 
 
 WallaBaby is a full stack application that displays a list of ads handled via RESTful API. It lets registered users create, edit and delete their own ads among other features. 
@@ -19,22 +21,33 @@ To run this project locally do the following:
 
 ## Features
 
+![features-gif](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/use-example.gif)
 
 - Anonymous users will be able to see the main page of the application, that shows a paginated list of the ads loaded from the API, and the detailed page of each ad. Searching and filtering is also possible when not logged in
 
 - Users can create an acount and log in. A token will be generated when logging in allowing the user access to the private sections of the app
 
 - If an user forgets their password they'll be able to change it 
+![password-recovery](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/password-recoverypage.png)
+![password-recoverymail](ttps://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/password-recoverymail.png)
 
 - Logged in users can create ads, edit and delete their ads. They can also mark their ads for sale as reserved or sold
+![ad-edition](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/edit-ad.gif)
+
+![reserved-sold](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/reserved-sold2.png)
+![reserved-sold](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/reserved-sold.png)
 
 - Users can fav the ads created by other users 
 
 - If an user is interested in an ad they can ask to get in touch with the owner and an email with their contact info will be sent to them
+![get-contact](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/contact.png)
+![email](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/contactmail.png)
 
 - App is fully available in both English and Spanish thanks to [react-intl](https://formatjs.io/docs/react-intl/components/)
+![languagechange](ttps://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/language.gif)
 
 - Responsive design
+![mobile-capture](ttps://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/responsive.png)
 
 ## Future improvements
 
