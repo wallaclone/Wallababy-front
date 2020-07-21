@@ -56,7 +56,7 @@ To run this project locally do the following:
 
 - App is fully available in both English and Spanish thanks to [react-intl](https://formatjs.io/docs/react-intl/components/)
 
-![languagechange](ttps://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/language.gif)
+![languagechange](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/language.gif)
 
 
 - Responsive design
