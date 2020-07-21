@@ -13,7 +13,6 @@ const { isNotLogin, getTags, editAdvert, getAd } = apiCall();
 function EditAd(props) {
   // const id = props.match.params.id;
   const { id } = useParams();
-  // console.log("id", id);
   const advertId = id.replace('id=', '');
   const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
   const [advertForm, setAdvert] = useState({tags: ['undefined']});
@@ -37,8 +36,7 @@ function EditAd(props) {
           const loadAdvert = async () => {
               const resultAdvert = await getAd(advertId);
               if (resultAdvert.result.tags.length < 1){
-                  console.log("entro");
-                  resultAdvert.result.tags = ['undefined'];
+                resultAdvert.result.tags = ['undefined'];
               }
               setAdvert(resultAdvert.result);
           }
@@ -47,8 +45,9 @@ function EditAd(props) {
       }
       if (reloadTags) {
           const loadTags = async () => {
-              const resultTags = await getTags ();
-              setObjectForm( { ...objectForm, tags : resultTags } );
+            const resultTags = await getTags ();
+            console.log('resultTags:', resultTags);
+            setObjectForm( { ...objectForm, tags : resultTags } );
           }
           loadTags();
           // We change to false the recharge of articles so that it isn't recharging continuously
@@ -57,7 +56,12 @@ function EditAd(props) {
   }, [ reloadTags, objectForm, reloadAdvert, advertForm, advertId ]);
 
   const returnToDashboard = () => {
-      history.goBack();
+    history.goBack(); //history.push('/dashboard');
+  };
+
+  const returnToSeeAd = (advertName) => {
+    const splitID = id.split('='); //id: "id=5f15bc96980ea33e809e5fc2"
+    history.push(`/seeAd/${splitID[1]}/${advertName}`); // http://localhost:3001/seeAd/5f15bc96980ea33e809e5fc2/Aston
   };
 
   const sendEditAd = async (event) => {
@@ -69,50 +73,49 @@ function EditAd(props) {
       const imgAux = document.getElementById('image-file').files[0];
       let myTags = [];
       advert.tags.forEach(tag => {
-          if(document.getElementById(tag.name).checked){
-              myTags.push(document.getElementById(tag.name).value);
-          }
-          /*if (advertForm.tags[0].includes(tag.name)){
-              console.log("primero");
-              
-          }*/
+        if(document.getElementById(tag.name).checked){
+            myTags.push(document.getElementById(tag.name).value);
+        }
+        /*if (advertForm.tags[0].includes(tag.name)){
+            console.log("primero");  
+        }*/
       });
       advert.image = advertForm.image;
-      console.log("myTags", myTags);
+      console.log("myTags:", myTags);
       advert.tags = myTags;
       if(!advert.price) {
-          advert.price = advertForm.price;
+        advert.price = advertForm.price;
       }
       if(!advert.name) {
-          advert.name = advertForm.name;
+        advert.name = advertForm.name;
       }
       if(!advert.description) {
-          advert.description = advertForm.description;
+        advert.description = advertForm.description;
       }
       if (!advert.status) {
-          advert.status = advertForm.status;
+        advert.status = advertForm.status;
       }
       if(imgAux) {
-          advert.image = imgAux;
+        advert.image = imgAux;
       }
       const response = await editAdvert(advertId, advert);
       if (response.status === 200) {
-          Swal.fire({
-              icon: 'success',
-              title: props.intl.formatMessage({ id: 'sweetalert.correctUpdate' }),
-              text: props.intl.formatMessage({ id: 'sweetalert.advertisementUpdated' }),
-              timer: 10000,
-              confirmButtonColor:  '#E29578',
-          });
-          returnToDashboard();
+        Swal.fire({
+          icon: 'success',
+          title: props.intl.formatMessage({ id: 'sweetalert.correctUpdate' }),
+          text: props.intl.formatMessage({ id: 'sweetalert.advertisementUpdated' }),
+          timer: 10000,
+          confirmButtonColor:  '#E29578',
+        });
+        returnToSeeAd(advert.name);
       } else {
-          Swal.fire({
-              icon: 'error',
-              title: `Error`,
-              text: props.intl.formatMessage({ id: 'sweetalert.errorUpdating' }),
-              timer: 10000,
-              confirmButtonColor:  '#1768ac',
-          });
+        Swal.fire({
+          icon: 'error',
+          title: `Error`,
+          text: props.intl.formatMessage({ id: 'sweetalert.errorUpdating' }),
+          timer: 10000,
+          confirmButtonColor:  '#1768ac',
+        });
       }
   }
 
@@ -168,7 +171,7 @@ function EditAd(props) {
 
   return (
       <div className="m-3">
-          <h2 className='titleName' style={{ marginTop: '6rem' }}>{props.intl.formatMessage({ id: 'editAd.editAdvertisement' })}</h2>
+          <h2 className='titles' >{props.intl.formatMessage({ id: 'editAd.editAdvertisement' })}</h2>
           <form encType="multipart/form-data" onSubmit={sendEditAd}>
               <Form.Group controlId="formGridTitle">
                   <Form.Label className='label'>{props.intl.formatMessage({ id: 'createAd.titleAd' })}</Form.Label>
@@ -181,9 +184,16 @@ function EditAd(props) {
                       required />
               </Form.Group>
               <Form.Group controlId='formBasicCheckbox'> 
+              {console.log('advertForm.tags:',advertForm.tags)}
                   <Form.Label className='label'>{props.intl.formatMessage({ id: 'createAd.tagsAd' })}</Form.Label>
                   {objectForm.tags.map(item => {
-                      if (advertForm.tags[0].includes(item.name)){
+                      let isChecked = false;
+                      for (let index = 0; index < advertForm.tags.length; index++) {
+                        if (advertForm.tags[index].includes(item.name)) {
+                            isChecked = true;
+                        }
+                      }
+                      if (isChecked) { //if (advertForm.tags[0].includes(item.name)){
                           return (
                               <Form.Check type="switch" name={item.name} id={item.name} key={item.name} value={item.name} label={formatTag(item.name)} onChange={handleChange} defaultChecked/>
                           )

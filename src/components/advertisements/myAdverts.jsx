@@ -120,7 +120,7 @@ function MyAdverts(props) {
         <>
         <div className= 'm-3'>
         <h2 className='titles'> {props.intl.formatMessage({ id: 'myAdverts.title' })}</h2>
-            { (adverts.length === 0) ? <div> {props.intl.formatMessage({ id: 'myAdverts.empty' })}</div> :adverts.map(advert => {
+            { (adverts.length === 0) ? <div>{props.intl.formatMessage({ id: 'myAdverts.empty' })}</div> : adverts.map(advert => {
                 return(
                     <div className="col mb-4" key={advert._id}>
                     <div className="card h-100">

@@ -28,7 +28,14 @@ function Header(props) {
     <>
     <div className='navbar-wrapper'>
       <Navbar fixed="top" collapseOnSelect expand="lg">
-        <Navbar.Brand className='title'><Link className='title' to='/dashboard'>WallaBaby!</Link></Navbar.Brand>
+        <Navbar.Brand className='title'><Link className='title' to='/dashboard'>
+          <img
+            alt=""
+            src="/ico.png"
+            width="40"
+            height="40"
+            className="d-inline-block align-center"
+          />{' '}WallaBaby!</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           {
