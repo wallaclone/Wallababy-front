@@ -140,12 +140,12 @@ function EditProfile(props) {
 
   return (
     <div className="m-3">
+      <h2 className='titles'>{props.intl.formatMessage({ id: 'header.editYourProfile' })}</h2>
       <Accordion>
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-              {props.intl.formatMessage({ id: 'editProfile.username' })}
-              &nbsp;({user})
+            <Accordion.Toggle as={Button} variant="link" eventKey="0" className="mt-3">
+              <h6>{props.intl.formatMessage({ id: 'editProfile.username' })}&nbsp;({user})</h6>
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
@@ -162,9 +162,8 @@ function EditProfile(props) {
         </Card>
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              {props.intl.formatMessage({ id: 'editProfile.email' })}
-              &nbsp;({myUser.email})
+            <Accordion.Toggle as={Button} variant="link" eventKey="1" className="mt-3">
+              <h6>{props.intl.formatMessage({ id: 'editProfile.email' })}&nbsp;({myUser.email})</h6>
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">
@@ -183,9 +182,8 @@ function EditProfile(props) {
         </Card>
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="2">
-              {props.intl.formatMessage({ id: 'editProfile.password' })}
-              &nbsp;(*****)
+            <Accordion.Toggle as={Button} variant="link" eventKey="2" className="mt-3">
+              <h6>{props.intl.formatMessage({ id: 'editProfile.password' })}&nbsp;(*****)</h6>
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="2">
@@ -203,9 +201,8 @@ function EditProfile(props) {
         </Card>
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="2">
-              {props.intl.formatMessage({ id: 'editProfile.confirmPassword' })}
-              &nbsp;(*****)
+            <Accordion.Toggle as={Button} variant="link" eventKey="2" className="mt-3">
+              <h6>{props.intl.formatMessage({ id: 'editProfile.confirmPassword' })}&nbsp;(*****)</h6>
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="2">

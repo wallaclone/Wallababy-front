@@ -147,11 +147,7 @@ function CreateAd(props) {
 
     return (
         <div className="m-3">
-
-            <h2 className='favs' style={{ marginTop: '6rem' }}><FormattedMessage id="createAd.title" value={(message) => ({message})} /></h2>
-
-            {/* <h1 className='titleName' style={{ marginTop: '6rem' }}><FormattedMessage id="createAd.title" value={(message) => ({message})} /></h1> */}
-
+            <h2 className='titles'><FormattedMessage id="createAd.title" value={(message) => ({message})} /></h2>
             <form encType="multipart/form-data" onSubmit={sendCreateAd}>
 
                 <Form.Group controlId="formGridTitle">

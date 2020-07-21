@@ -149,7 +149,7 @@ export const messages = {
         "editProfile.emailPlaceholder": "Write your new email",
         "editProfile.password": "Password",
         "editProfile.passwordPlaceholder": "Write your new password",
-        "editProfile.confirmPassword": "Password",
+        "editProfile.confirmPassword": "Confirm Password",
         "editProfile.confirmPasswordPlaceholder": "Confirm your new password",
         "editProfile.updateMyProfile": "Update my profile",
         "editProfile.removeMyAccount": "Remove my account",
