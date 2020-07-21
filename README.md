@@ -45,6 +45,8 @@ To run this project locally do the following:
 - Code refactoring and bug fixing. (Contributions such as bug fixes, pull requests, feature requests will be highly appreciated!)
 
 ## API documentation  📖
+![api-insomnia](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/apidocu.png)
+
 Checkout the API documentation [here](http://instinctive-tub.surge.sh/)
 
 ## Built with 
