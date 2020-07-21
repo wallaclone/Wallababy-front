@@ -32,9 +32,9 @@ function Header(props) {
           <img
             alt=""
             src="/ico.png"
-            width="40"
-            height="40"
-            className="d-inline-block align-center"
+            width="45"
+            height="45"
+            className="d-inline-block align-top"
           />{' '}WallaBaby!</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
