@@ -47,7 +47,6 @@ function EditAd(props) {
     if (reloadTags) {
       const loadTags = async () => {
         const resultTags = await getTags();
-        console.log('resultTags:', resultTags);
         setObjectForm({ ...objectForm, tags: resultTags });
       };
       loadTags();
@@ -71,14 +70,12 @@ function EditAd(props) {
     advert.owner = advertForm.owner;
     const imgAux = document.getElementById('image-file').files[0];
     const myTags = [];
-    console.log('advert.tags', advert.tags);
     advert.tags.forEach((tag) => {
       if (document.getElementById(tag.name).checked) {
         myTags.push(document.getElementById(tag.name).value);
       }
     });
     advert.image = advertForm.image;
-    console.log('myTags:', myTags);
     advert.tags = myTags;
     if (!advert.price) {
       advert.price = advertForm.price;
