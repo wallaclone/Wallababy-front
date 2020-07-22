@@ -7,7 +7,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
   const changePasswordEndPoint = `${passwordRecoveryEndPoint}/forgotpassword/`;
   const advertEndPoint = `${API}/adverts`;
   const tagEndPoint = `${API}/tags`;
-  const LIMIT = 12;
+  const LIMIT = 6;
   const favoritesEndPoint = `${API}/favorites`;
   const statusEndPoint = `${API}/status`;
 
