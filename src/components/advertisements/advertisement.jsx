@@ -9,7 +9,6 @@ function Advertisement(props) {
   const {
     _id,
     name,
-    // description,
     image,
     status,
     price,
@@ -20,13 +19,6 @@ function Advertisement(props) {
 
   const BACK_IMAGE_PATH = 'http://localhost:3000/images/';
 
-  // // const dateFormatted = new Intl.DateTimeFormat('es-ES', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format( fecha_creacion );
-  // const date = new Date(date_creation);
-  // const day = date.getDate().toString();
-  // const month = date.getMonth().toString();
-  // const year = date.getFullYear().toString();
-  // let dateFormatted = `${day}-${month}-${year}`.toString();
-
   const dateOptions = {
     year: 'numeric',
     month: 'long',
@@ -34,7 +26,7 @@ function Advertisement(props) {
   };
 
   const formatTag = (tag) => {
-    if(tag !== undefined && tag !== null && tag !== '') {
+    if (tag !== undefined && tag !== null && tag !== '') {
       switch (tag) {
         case 'Comfort':
           return props.intl.formatMessage({ id: 'tag.comfort' });
@@ -71,15 +63,14 @@ function Advertisement(props) {
 
   const formatTags = (tags) => {
     let formatedTags = '';
-    if(tags) {
-        for(let i=0; i<tags.length; i++) {
-            if((i+1)<tags.length){
-                formatedTags += formatTag(tags[i]) + ', ';
-            }
-            else {
-                formatedTags += formatTag(tags[i]) + '.';
-            }
+    if (tags) {
+      for (let i = 0; i < tags.length; i++) {
+        if ((i + 1) < tags.length) {
+          formatedTags += `${formatTag(tags[i])}, `;
+        } else {
+          formatedTags += `${formatTag(tags[i])}.`;
         }
+      }
     }
     return formatedTags;
   };
@@ -87,7 +78,6 @@ function Advertisement(props) {
   return (
     <div className="col mb-4" key={_id}>
       <div className="card h-100">
-        {/* <img src={`${BACK_IMAGE_PATH}${image}`} className="card-img-top" alt={name} /> */}
         <img src={`${BACK_IMAGE_PATH}${image}`} className="card-img-top" style={{ objectFit: 'cover', width: '100%', height: '50vh' }} alt={name} />
 
         <div className="card-body">
@@ -95,20 +85,36 @@ function Advertisement(props) {
             <Link to={`/seeAd/${_id}/${name}`} className="ad-name">{name}</Link>
           </h5>
           <p className="card-text">
-            <strong>{props.intl.formatMessage({ id: 'advertisement.price' })}:</strong>&nbsp;{price}&euro;
+            <strong>
+              {props.intl.formatMessage({ id: 'advertisement.price' })}
+              :
+            </strong>
+            {price}
+            &euro;
           </p>
           <p className="card-text">
-            <strong>{props.intl.formatMessage({ id: 'advertisement.type' })}:</strong>&nbsp;
+            <strong>
+              {props.intl.formatMessage({ id: 'advertisement.type' })}
+              :
+            </strong>
+&nbsp;
             {status ? props.intl.formatMessage({ id: 'advertisement.typeBuy' }) : props.intl.formatMessage({ id: 'advertisement.typeSell' })}
           </p>
           <p className="card-text">
-            <strong>{props.intl.formatMessage({ id: 'advertisement.tags' })}:</strong>&nbsp;{formatTags(tags)}
+            <strong>
+              {props.intl.formatMessage({ id: 'advertisement.tags' })}
+              :
+            </strong>
+            {formatTags(tags)}
           </p>
 
           <p className="card-text">
             <strong>
-              {props.intl.formatMessage({ id: 'advertisement.owner' })}:</strong>&nbsp;
-              <Link className="forgot-pass" to={`/adsOwner/${owner}`}>{owner}</Link>
+              {props.intl.formatMessage({ id: 'advertisement.owner' })}
+              :
+            </strong>
+&nbsp;
+            <Link className="forgot-pass" to={`/adsOwner/${owner}`}>{owner}</Link>
           </p>
           {advertisement.reserved === true && !advertisement.sold ? <Badge className="badge-reserved">{props.intl.formatMessage({ id: 'advertisement.reserved' })}</Badge> : null}
           {advertisement.sold === true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}
@@ -125,9 +131,10 @@ function Advertisement(props) {
         <div className="card-footer text-center">
 
           <small className="text-muted">
-            {props.intl.formatMessage({ id: 'advertisement.createdAt' })}: {props.intl.formatDate(new Date(date_creation), dateOptions)}
+            {props.intl.formatMessage({ id: 'advertisement.createdAt' })}
+            :
+            {props.intl.formatDate(new Date(date_creation), dateOptions)}
           </small>
-          {/* <small className="text-muted">( {props.intl.formatMessage({ id: 'advertisement.createdAt' })}: {dateFormatted} )</small> */}
         </div>
       </div>
     </div>
@@ -135,4 +142,3 @@ function Advertisement(props) {
 }
 const advertisement = injectIntl(Advertisement);
 export { advertisement };
-// export default Advertisement;

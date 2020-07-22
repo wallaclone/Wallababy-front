@@ -38,7 +38,6 @@ function Login(props) {
         confirmButtonColor: '#1768ac',
       });
     }
-    // (response.status !== 201) ? props.history.push('/login') : props.history.push('/dashboard');
     (response.status !== 201) ? history.push('/login') : history.push('/dashboard');
   };
 
@@ -90,4 +89,3 @@ function Login(props) {
 }
 const LogIn = injectIntl(Login);
 export { LogIn };
-// export default Login;

@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { Button, Form, Card } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { useHistory, Link } from 'react-router-dom';
-import { subscribeUser } from '../../subscription';
 import Swal from 'sweetalert2';
 
 import apiCall from '../../api/api';
+import { subscribeUser } from '../../subscription';
 
 const { register } = apiCall();
 
@@ -41,7 +41,6 @@ function Signup(props) {
         confirmButtonColor: '#1768ac',
       });
     }
-    // (response.status !== 201) ? props.history.push('/signup') : props.history.push('/login')
     (response.status !== 201) ? history.push('/signup') : history.push('/login');
   };
 
@@ -100,4 +99,3 @@ function Signup(props) {
 }
 const SignUp = injectIntl(Signup);
 export { SignUp };
-// export default Signup;
