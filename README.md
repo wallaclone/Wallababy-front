@@ -57,8 +57,8 @@ To run this project locally do the following:
 
 ![email](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/contactmail.png)
 
-- Push notifications (only available on local)
-
+- Push notifications (only available on local). Users with an active session will recieve an alert when one of their favved ads changes
+![languagechange](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/notifications.gif)
 
 - App is fully available in both English and Spanish thanks to [react-intl](https://formatjs.io/docs/react-intl/components/)
 
@@ -71,7 +71,10 @@ To run this project locally do the following:
 
 ## Future improvements
 
-- Chat implementation
+- Chat implementation. We have some bits of the chat interface already working and we hope to have it done soon!
+
+![chat](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/chat.gif)
+
 
 - Design and accesibility improvements
 
