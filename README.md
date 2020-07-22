@@ -10,6 +10,8 @@ WallaBaby is a full stack application that displays a list of ads handled via RE
 
 ## Live version 🚀🚀
 
+Link to [live version here](http://15.236.20.68/dashboard)
+
 ## Getting started 
 
 To run this project locally do the following:
@@ -17,6 +19,7 @@ To run this project locally do the following:
 - First clone the backend project and follow the instructions there. [Link to repository](https://github.com/wallaclone/wallaclone_back)
 - Clone this project
 - Run ```npm install``` to install all the dependencies
+- Change .example.env file name to .env and include the required environment variables
 - Run ```npm start``` and start server on http://localhost:3001/ 
 
 
@@ -53,6 +56,8 @@ To run this project locally do the following:
 ![get-contact](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/contact.png)
 
 ![email](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/contactmail.png)
+
+- Push notifications (only available on local)
 
 
 - App is fully available in both English and Spanish thanks to [react-intl](https://formatjs.io/docs/react-intl/components/)
