@@ -75,7 +75,7 @@ To run this project locally do the following:
 
 - Design and accesibility improvements
 
-- Code refactoring and bug fixing. (Contributions such as bug fixes, pull requests, feature requests will be highly appreciated!)
+- Code refactoring and bug fixing (i.e fixing validateDOMNesting warnings). (Contributions such as bug fixes, pull requests, feature requests will be highly appreciated!)
 
 ## API documentation  📖
 ![api-insomnia](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/apidocu.png)
