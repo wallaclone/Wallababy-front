@@ -300,7 +300,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       try {
         const response = await fetch(`${registerEndPoint}/${id}`, {
           method: 'DELETE',
-          header: {
+          headers: {
             Authorization: `${window.localStorage.getItem('token')}`,
           },
           credentials: 'include',

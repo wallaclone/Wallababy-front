@@ -229,13 +229,13 @@ function SeeAd(props) {
               {advertisement.sold === true ? <Badge variant="danger">{props.intl.formatMessage({ id: 'advertisement.sold' })}</Badge> : null}
             </p>
             <FacebookShareButton
-              url={`http://localhost:3001/seeAd/${_id}/${advertisement.name}`}
+              url={`http://15.236.20.68/seeAd/${_id}/${advertisement.name}`}
             >
               <FacebookIcon size={32} round />
             </FacebookShareButton>
                         &nbsp;
             <TwitterShareButton
-              url={`http://localhost:3001/seeAd/${_id}/${advertisement.name}`}
+              url={`http://15.236.20.68/seeAd/${_id}/${advertisement.name}`}
             >
               <TwitterIcon size={32} round />
             </TwitterShareButton>
