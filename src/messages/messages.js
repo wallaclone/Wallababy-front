@@ -48,6 +48,7 @@ export const messages = {
         "advertisement.marksold": "Mark as sold",
         "advertisement.markNotSold": "Mark as not sold",
         "advertisement.sold": "Sold!",
+        "advertisement.cancelr": "Cancel reservation",
         "advertisement.cancelsell": "Mark ad as not sold to change reservation",
         "advertisement.owner": "Owner",
         "advertisement.seeFullAd": "See full advertisement",
