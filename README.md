@@ -2,7 +2,7 @@
 
 > Buy or sell second hand items for your children on WallaBaby! 
 
-![dashboard](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/dashboard.png)
+![dashboard](https://github.com/wallaclone/wallababy-front/blob/develop/readme-imgs/dashboard.png)
 
 
 WallaBaby is a full stack application that displays a list of ads handled via RESTful API. It lets registered users create, edit and delete their own ads among other features. 
@@ -16,7 +16,7 @@ Link to [live version here](http://15.236.20.68/dashboard)
 
 To run this project locally do the following:
 
-- First clone the backend project and follow the instructions there. [Link to repository](https://github.com/wallaclone/wallaclone_back)
+- First clone the backend project and follow the instructions there. [Link to repository](https://github.com/wallaclone/Wallaclone-back)
 - Clone this project
 - Run ```npm install``` to install all the dependencies
 - Change .example.env file name to .env and include the required environment variables
@@ -25,7 +25,7 @@ To run this project locally do the following:
 
 ## Features
 
-![features-gif](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/use-example.gif)
+![features-gif](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/use-example.gif)
 
 - Anonymous users will be able to see the main page of the application, that shows a paginated list of the ads loaded from the API, and the detailed page of each ad. Searching and filtering is also possible when not logged in
 
@@ -33,41 +33,41 @@ To run this project locally do the following:
 
 - If an user forgets their password they'll be able to change it 
 
-![password-recovery](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/password-recoverypage.png)
+![password-recovery](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/password-recoverypage.png)
 
-![password-recoverymail](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/password-recoverymail.png)
+![password-recoverymail](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/password-recoverymail.png)
 
 
 - Logged in users can create ads, edit and delete their ads 
 
-![ad-edition](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/edit-ad.gif)
+![ad-edition](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/edit-ad.gif)
 
 
 - Users can also mark their ads for sale as reserved or sold
-![reserved-sold](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/reserved-sold2.png)
+![reserved-sold](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/reserved-sold2.png)
 
-![reserved-sold](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/reserved-sold.png)
+![reserved-sold](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/reserved-sold.png)
 
 
 - Users can fav the ads created by other users 
 
 - If an user is interested in an ad they can ask to get in touch with the owner and an email with their contact info will be sent to them
 
-![get-contact](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/contact.png)
+![get-contact](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/contact.png)
 
-![email](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/contactmail.png)
+![email](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/contactmail.png)
 
 - Push notifications (only available on local)
 
 
 - App is fully available in both English and Spanish thanks to [react-intl](https://formatjs.io/docs/react-intl/components/)
 
-![languagechange](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/language.gif)
+![languagechange](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/language.gif)
 
 
 - Responsive design
 
-![mobile-capture](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/responsive.png)
+![mobile-capture](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/responsive.png)
 
 ## Future improvements
 
@@ -78,7 +78,7 @@ To run this project locally do the following:
 - Code refactoring and bug fixing. (Contributions such as bug fixes, pull requests, feature requests will be highly appreciated!)
 
 ## API documentation  📖
-![api-insomnia](https://github.com/wallaclone/wallaclone-front/blob/readme/readme-imgs/apidocu.png)
+![api-insomnia](https://github.com/wallaclone/Wallababy-front/blob/develop/readme-imgs/apidocu.png)
 
 Checkout the API documentation [here](http://instinctive-tub.surge.sh/)
 
