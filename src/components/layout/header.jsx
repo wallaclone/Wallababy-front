@@ -52,6 +52,11 @@ function Header(props) {
                   !
                 </Link>
               </Nav.Link>
+              <Nav.Link className="navbar-link">
+                  <Link className="navbar-link" onClick={() => changeLanguage('es-ES')} to="#"> ES </Link>
+                  /
+                  <Link className="navbar-link" onClick={() => changeLanguage('en-US')} to="#"> EN </Link>
+                </Nav.Link>
             </Nav>
           ) : (
             <>

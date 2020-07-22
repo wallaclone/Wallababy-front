@@ -63,10 +63,11 @@ function EditProfile(props) {
         try {
           const response = await deleteUser(myUser._id);
           history.push('/login');
+          window.localStorage.setItem('token', null);
           if (response.status === 201) {
             Swal.fire(
               props.intl.formatMessage({ id: 'sweetalert.deleted' }),
-              props.intl.formatMessage({ id: 'sweetalert.adDeleted' }),
+              props.intl.formatMessage({ id: 'sweetalert.userDeleted' }),
               props.intl.formatMessage({ id: 'sweetalert.success' }),
             );
           }

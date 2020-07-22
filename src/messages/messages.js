@@ -18,6 +18,7 @@ export const messages = {
     'sweetalert.cancel': 'Cancel',
     'sweetalert.deleted': 'Deleted!',
     'sweetalert.adDeleted': 'Your advertisement has been deleted.',
+    'sweetalert.userDeleted': 'Your profile has been deleted.',
     'sweetalert.success': 'success',
     'sweetalert.mistake': 'There was a mistake. Try again.',
 
@@ -192,6 +193,7 @@ export const messages = {
     'sweetalert.cancel': 'Cancelar',
     'sweetalert.deleted': '¡Borrado!',
     'sweetalert.adDeleted': 'Su anuncio ha sido borrado.',
+    'sweetalert.userDeleted': 'Su perfil ha sido borrado.',
     'sweetalert.success': 'Éxito',
     'sweetalert.mistake': 'Hubo un problema. Inténtelo de nuevo.',
 
