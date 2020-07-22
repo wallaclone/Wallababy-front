@@ -89,6 +89,7 @@ function Advertisement(props) {
               {props.intl.formatMessage({ id: 'advertisement.price' })}
               :
             </strong>
+            {' '}
             {price}
             &euro;
           </p>
@@ -105,6 +106,7 @@ function Advertisement(props) {
               {props.intl.formatMessage({ id: 'advertisement.tags' })}
               :
             </strong>
+            {' '}
             {formatTags(tags)}
           </p>
 
