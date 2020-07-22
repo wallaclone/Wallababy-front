@@ -32,9 +32,8 @@ function App(props) {
 
   if (!(localStorage.getItem('initCurrentLocale'))) { localStorage.setItem('initCurrentLocale', 'es-ES'); }
 
-  const [ search, setSearch ] = useState('');
-  const [ currentLocale, setCurrentLocale ] = useState(localStorage.getItem('initCurrentLocale'));
-  // const [ currentLocale, setCurrentLocale ] = useState('es-ES');
+  const [search, setSearch] = useState('');
+  const [currentLocale, setCurrentLocale] = useState(localStorage.getItem('initCurrentLocale'));
 
   const [messages, setMessages] = useState(allMessages[currentLocale]);
   const [reloadLanguage, setReloadLanguage] = useState(currentLocale);
@@ -83,15 +82,11 @@ function App(props) {
     if (reloadTags) {
       const loadTags = async () => {
 
-        // alert("Entro en useEffect de TAGs")
-
         const resultTags = await getTags();
         const tagAux = [];
         resultTags.forEach((tag) => {
-          // console.log("Tag:", tag.name);
           tagAux.push(tag.name);
         });
-        // console.log("tagAux:", tagAux);
         setTags(tagAux);
       };
       loadTags();
@@ -116,100 +111,44 @@ function App(props) {
     <Router>
       <Switch>
 
-        {/* <Route path="/signup" exact component={Signup} /> */}
         <Route
           exact
           path="/signup"
           render={() => (
             <IntlProvider locale={currentLocale} messages={messages}>
-              {/* <AuthContextProvider>
-                <Header setReloadLanguage = { setReloadLanguage } />
-              </AuthContextProvider> */}
-
               <Signup />
             </IntlProvider>
           )}
         />
 
-        {/* <Route path="/login" component={Login} /> */}
         <Route
           exact
           path="/login"
           render={() => (
             <IntlProvider locale={currentLocale} messages={messages}>
-              {/* <AuthContextProvider>
-                <Header setReloadLanguage = { setReloadLanguage } />
-              </AuthContextProvider> */}
-
               <Login />
             </IntlProvider>
           )}
         />
 
-        {/* <Route path="/changePassword/:id" component={ChangePassword} /> */}
         <Route
           path="/changePassword/:id"
           render={() => (
             <IntlProvider locale={currentLocale} messages={messages}>
-              {/* <AuthContextProvider>
-                <Header setReloadLanguage = { setReloadLanguage } />
-              </AuthContextProvider> */}
-
               <ChangePassword />
             </IntlProvider>
           )}
         />
 
-        {/* <Route exact path="/passwordRecovery" component={PasswordRecovery} /> */}
         <Route
           exact
           path="/passwordRecovery"
           render={() => (
             <IntlProvider locale={currentLocale} messages={messages}>
-              {/* <AuthContextProvider>
-                <Header setReloadLanguage = { setReloadLanguage } />
-              </AuthContextProvider> */}
-
               <PasswordRecovery />
             </IntlProvider>
           )}
         />
-
-        <Route
-          path="/test"
-          component={() => (
-            <>
-              <AuthContextProvider>
-                <Header />
-              </AuthContextProvider>
-            </>
-          )}
-        />
-        {/*
-       <Route exact path="/changePassword/id=:_id" component={ChangePassword} />
-       <Redirect to="/login" />
-       */}
-
-        {/* <Route path="/createAd" component={() =>
-         <>
-          <AuthContextProvider>
-            <Header />
-          </AuthContextProvider>
-        <CreateAd />
-        </>
-        } /> */}
-
-        {/* <Route path="/createAd" component={() =>
-          <IntlProvider locale={currentLocale} messages={messages}>
-            <AuthContextProvider>
-              <Header setReloadLanguage = { setReloadLanguage } />
-            </AuthContextProvider>
-
-            <CreateAd
-              setReloadAdvertisements = { setReloadAdvertisements }
-            />
-          </IntlProvider>
-        } /> */}
 
         <Route
           path="/createAd"
@@ -217,7 +156,6 @@ function App(props) {
             <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
                 <Header setReloadLanguage={setReloadLanguage} />
-              
                 <CreateAd
                   setReloadAdvertisements={setReloadAdvertisements}
                 />
@@ -233,15 +171,10 @@ function App(props) {
               <AuthContextProvider>
                 <Header setReloadLanguage={setReloadLanguage} />
               </AuthContextProvider>
-
               <AdsOwner />
             </IntlProvider>
           )}
         />
-
-        {/* <Route path="/dashboard" component={Dashboard} /> */}
-
-        {/* <Route exact path="/dashboard/:_id" component={SeeAd} /> */}
 
         <Route
           path="/editAd/:id"
@@ -249,24 +182,12 @@ function App(props) {
             <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
                 <Header setReloadLanguage={setReloadLanguage} />
-              
                 <EditAd />
               </AuthContextProvider>
             </IntlProvider>
           )}
         />
-        {/* <Route exact path="/seeAd/:_id" component={SeeAd} /> */}
 
-        {/* <Route path='/myads/:username' component={() =>
-        <>
-          <AuthContextProvider>
-            <Header />
-          </AuthContextProvider>
-          <MyAdverts
-          setReloadAdvertisements = { setReloadAdvertisements }
-          />
-        </>
-        } /> */}
 
         <Route
           path="/myads/:username"
@@ -279,16 +200,6 @@ function App(props) {
             </IntlProvider>
           )}
         />
-
-        {/* <Route path='/myprofile' component={() =>
-        <>
-          <AuthContextProvider>
-            <Header />
-            <EditProfile />
-          </AuthContextProvider>
-
-        </>
-        } /> */}
 
         <Route
           path="/myprofile"
@@ -310,9 +221,7 @@ function App(props) {
               <AuthContextProvider>
                 <Header setReloadLanguage={setReloadLanguage} />
                 <SeeAd setReloadAdvertisements={setReloadAdvertisements} />
-
               </AuthContextProvider>
-
             </IntlProvider>
           )}
         />
@@ -341,7 +250,6 @@ function App(props) {
               <Form.Row className="ml-2 mr-2">
                 <Form.Group as={Col} md="6">
                   {' '}
-                  {/* &laquo; */}
                   {(currentPage === 1)
                     ? (
                       <Button variant="warning" size="lg" block onClick={paginaAnterior} disabled>
@@ -378,17 +286,6 @@ function App(props) {
                     )}
                 </Form.Group>
               </Form.Row>
-
-              {/*
-              {(currentPage === 1) ? null : (
-                <button type="button" onClick={paginaAnterior} className="btn btn-info mr-1">&laquo; Anterior</button>
-              )}
-
-              {(currentPage === totalPages) ? null : (
-                <button type="button" onClick={paginaSiguiente} className="btn btn-info">Siguiente &raquo;</button>
-              )}
-              */}
-
             </IntlProvider>
           )}
         />
@@ -399,7 +296,7 @@ function App(props) {
             <IntlProvider locale={currentLocale} messages={messages}>
               <AuthContextProvider>
                 <Header setReloadLanguage={setReloadLanguage} />
-              
+
                 <MyFavs />
               </AuthContextProvider>
             </IntlProvider>

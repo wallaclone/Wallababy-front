@@ -42,12 +42,9 @@ function PasswordRecovery(props) {
       });
     } else {
       Swal.fire({
-        // position: 'top-end',
         icon: 'success',
         title: props.intl.formatMessage({ id: 'sweetalert.correctEmail' }),
         text: props.intl.formatMessage({ id: 'sweetalert.sentEmail' }),
-        // footer: '<a href>Why do I have this issue?</a>',
-        // showConfirmButton: false,
         timer: 10000,
         confirmButtonColor: '#1768ac',
       });
@@ -94,4 +91,3 @@ function PasswordRecovery(props) {
 }
 const Passwordrecovery = injectIntl(PasswordRecovery);
 export { Passwordrecovery };
-// export default PasswordRecovery;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { Form, Col, Button } from 'react-bootstrap';
-// import { Link, useHistory } from "react-router-dom";
 import { injectIntl } from 'react-intl';
 
 function Filter(props) {
@@ -34,8 +33,6 @@ function Filter(props) {
     setSearch('');
     setCurrentPage(1);
     setValuesSearch(initialValues());
-
-    // history.push('/dashboard');
   };
 
   const buscarAnuncio = async (event) => {
@@ -50,7 +47,6 @@ function Filter(props) {
     if (minPrice && maxPrice) {
       queryParams = queryParams += `&price=${minPrice}-${maxPrice}`;
     } else if (minPrice || maxPrice) {
-      // queryParams = (!minPrice && maxPrice) ? queryParams += `&price=0-${maxPrice}` : queryParams += `&price=${minPrice}-999999999999999999999999999999999999`;
       queryParams = queryParams += `&price=${minPrice}-${maxPrice}`;
     }
 
@@ -60,7 +56,7 @@ function Filter(props) {
   };
 
   const formatTag = (tag) => {
-    if(tag !== undefined && tag !== null && tag !== '') {
+    if (tag !== undefined && tag !== null && tag !== '') {
       switch (tag) {
         case 'Comfort':
           return props.intl.formatMessage({ id: 'tag.comfort' });
@@ -107,20 +103,17 @@ function Filter(props) {
 
         <Form.Row>
           <Form.Group as={Col} md="6">
-            {/* <Form.Label className='label'>{props.intl.formatMessage({ id: 'filter.whatAreYouLookingFor' })}</Form.Label> */}
             <Form.Control
               type="text"
               placeholder={props.intl.formatMessage({ id: 'filter.whatAreYouLookingForPlaceholder' })}
               name="name"
               id="name"
               onChange={handleChange}
-              // onChange={(e) => setValuesSearch(e.target.value)}
               value={valuesSearch.name}
             />
           </Form.Group>
 
           <Form.Group as={Col} md="3">
-            {/* <Form.Label>&nbsp;</Form.Label> */}
             <Form.Control
               as="select"
               name="tag"
@@ -136,7 +129,6 @@ function Filter(props) {
           </Form.Group>
 
           <Form.Group as={Col} md="3">
-            {/* <Form.Label>&nbsp;</Form.Label> */}
             <Form.Control
               as="select"
               name="status"
@@ -153,7 +145,6 @@ function Filter(props) {
 
         <Form.Row>
           <Form.Group as={Col}>
-            {/* <Form.Label className='label'>{props.intl.formatMessage({ id: 'filter.minimalPrice' })}</Form.Label> */}
             <Form.Control
               type="number"
               placeholder={props.intl.formatMessage({ id: 'filter.minimalPricePlaceholder' })}
@@ -165,7 +156,6 @@ function Filter(props) {
           </Form.Group>
 
           <Form.Group as={Col}>
-            {/* <Form.Label className='label'>{props.intl.formatMessage({ id: 'filter.maximumPrice' })}</Form.Label> */}
             <Form.Control
               type="number"
               placeholder={props.intl.formatMessage({ id: 'filter.maximumPricePlaceholder' })}
@@ -185,8 +175,7 @@ function Filter(props) {
           </Form.Group>
 
           <Form.Group as={Col} md="4">
-            {/* <Button variant="warning" size="lg" block onClick={clearFilter}> */}
-            <Button variant='secondary' size='lg' block onClick={clearFilter}>
+            <Button variant="secondary" size="lg" block onClick={clearFilter}>
               {props.intl.formatMessage({ id: 'filter.clearFilter' })}
             </Button>
           </Form.Group>
@@ -198,4 +187,3 @@ function Filter(props) {
 }
 const filter = injectIntl(Filter);
 export { filter };
-// export default Filter;

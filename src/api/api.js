@@ -16,13 +16,13 @@ const apiCall = (API = 'http://localhost:3000/api') => {
     limit: () => LIMIT,
 
     isNotLogin: (user, title, text) => {
-      if(user === 'guest') {
+      if (user === 'guest') {
         Swal.fire({
-            icon: 'error',
-            title: title,
-            text: text,
-            timer: 5000,
-            confirmButtonColor:  '#1768ac',
+          icon: 'error',
+          title,
+          text,
+          timer: 5000,
+          confirmButtonColor: '#1768ac',
         });
         return true;
       }
@@ -92,7 +92,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     passwordRecovery: async (email) => {
       try {
-        const language = window.localStorage.getItem('initCurrentLocale')
+        const language = window.localStorage.getItem('initCurrentLocale');
         const response = await fetch(passwordRecoveryEndPoint, {
           method: 'POST',
           headers: {
@@ -100,7 +100,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           },
           body: JSON.stringify({
             email,
-            language
+            language,
           }),
         });
         return response;
@@ -134,14 +134,12 @@ const apiCall = (API = 'http://localhost:3000/api') => {
     getAds: async (search = '') => {
       try {
         const DEFAULT_VALUE = `?limit=${LIMIT}&sort=-date_creation&sold=false`;
-        // console.log("EndPoint getAds:", `${advertEndPoint}${DEFAULT_VALUE}${search}`);
         const response = await fetch(`${advertEndPoint}${DEFAULT_VALUE}${search}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `${window.localStorage.getItem('token')}`,
           },
-          // 'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
           credentials: 'include',
         });
         const data = await response.json();
@@ -154,14 +152,12 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     getAd: async (idAd) => {
       try {
-        // console.log("EndPoint:", `${advertEndPoint}/${idAd}`);
         const response = await fetch(`${advertEndPoint}/${idAd}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `${window.localStorage.getItem('token')}`,
           },
-          // 'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
           credentials: 'include',
         });
         const data = await response.json();
@@ -185,7 +181,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         const response = await fetch(advertEndPoint, {
           method: 'POST',
           headers: {
-            Accept: 'application/json', // 'Content-Type': 'application/json', // 'Content-Type': 'multipart/form-data',
+            Accept: 'application/json',
             Authorization: `${window.localStorage.getItem('token')}`,
           },
           body: fd,
@@ -221,13 +217,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         await response.json();
         return response;
       } catch (err) {
-        // Swal.fire({
-        //   icon: 'error',
-        //   title: `Error`,
-        //   text: `There has been an error updating the advert, please try again.`,
-        //   timer: 10000,
-        //   confirmButtonColor:  '#1768ac',
-        // });
         console.error(err.message);
         throw err;
       }
@@ -235,7 +224,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     deleteAd: async (idAd) => {
       try {
-        // console.log("EndPoint:", `${advertEndPoint}/${idAd}`);
         const response = await fetch(`${advertEndPoint}/${idAd}`, {
           method: 'DELETE',
           headers: {
@@ -244,10 +232,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           },
           credentials: 'include',
         });
-        // console.log("response:", response);
         return response;
-        // const data = await response.json();
-        // return data;
       } catch (err) {
         console.error(err.message);
         throw err;
@@ -256,14 +241,12 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     getTags: async () => {
       try {
-        // console.log("EndPoint:", `${tagEndPoint}`);
         const response = await fetch(`${tagEndPoint}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `${window.localStorage.getItem('token')}`,
           },
-          // 'Authorization': `Token ${ usuario.token /*|| JSON.parse( sessionStorage.getItem( 'token' ) ).usrToken*/ }`
           credentials: 'include',
         });
         const data = await response.json();
@@ -325,7 +308,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
         await response.json();
         return response;
       } catch (err) {
-        throw(err);
+        throw (err);
       }
     },
 
@@ -473,11 +456,10 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
-  
     sendEmail: async (adId, owner, sender) => {
       try {
-        const getEmailEndPoint = `${API}/email?owner=${owner}`
-        const language = window.localStorage.getItem('initCurrentLocale')
+        const getEmailEndPoint = `${API}/email?owner=${owner}`;
+        const language = window.localStorage.getItem('initCurrentLocale');
         const response = await fetch(getEmailEndPoint, {
           method: 'POST',
           headers: {
@@ -488,7 +470,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
           body: JSON.stringify({
             id: adId,
             language,
-            sender: sender
+            sender,
           }),
         });
         return response;
@@ -500,7 +482,7 @@ const apiCall = (API = 'http://localhost:3000/api') => {
 
     getEmail: async (owner) => {
       try {
-        const getEmailEndPoint = `${API}/email?owner=${owner}`
+        const getEmailEndPoint = `${API}/email?owner=${owner}`;
         const response = await fetch(getEmailEndPoint, {
           method: 'GET',
           headers: {
@@ -519,7 +501,6 @@ const apiCall = (API = 'http://localhost:3000/api') => {
       }
     },
 
-
-  }; // Close Return
-}; // Close const apiCall
+  };
+};
 export default apiCall;

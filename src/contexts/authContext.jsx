@@ -14,16 +14,14 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        if(window.localStorage.getItem('token')) {
+        if (window.localStorage.getItem('token')) {
           const user = await currentUser();
           setUser(user);
-        }
-        else {
+        } else {
           setUser('guest');
         }
       } catch (error) {
         setUser('guest');
-        console.error(error.message);
       }
     })();
   }, [user]);
